@@ -1,0 +1,38 @@
+[
+  {
+    "skill_name": "ms-office-suite",
+    "total_tasks": 9,
+    "tasks_passed": 7,
+    "task_pass_rate": 0.78,
+    "tasks_by_difficulty": {},
+    "total_selectivity_tests": 5,
+    "selectivity_passed": 4,
+    "selectivity_rate": 0.80,
+    "total_quality_comparisons": 3,
+    "quality_wins": 2,
+    "quality_improvement_rate": 0.67,
+    "overall_score": 76.1,
+    "grade": "C",
+    "avg_tokens_with_skill": 450,
+    "avg_tokens_without_skill": 380,
+    "execution_time": 125.3
+  },
+  {
+    "skill_name": "pdf",
+    "total_tasks": 9,
+    "tasks_passed": 8,
+    "task_pass_rate": 0.89,
+    "tasks_by_difficulty": {},
+    "total_selectivity_tests": 5,
+    "selectivity_passed": 5,
+    "selectivity_rate": 1.00,
+    "total_quality_comparisons": 3,
+    "quality_wins": 3,
+    "quality_improvement_rate": 1.00,
+    "overall_score": 92.3,
+    "grade": "A",
+    "avg_tokens_with_skill": 520,
+    "avg_tokens_without_skill": 420,
+    "execution_time": 98.7
+  }
+]
