@@ -53,6 +53,40 @@ def generate_test_cases(skill_name: str, output_dir: str = "data/test_cases"):
     print(f"  Quality prompts: {len(benchmarks.quality_prompts)}")
 
 
+def load_skill_md_content(skill_name: str) -> Optional[str]:
+    """
+    Load SKILL.md content from discovered skills.
+
+    Args:
+        skill_name: Name of the skill
+
+    Returns:
+        SKILL.md content or None if not found
+    """
+    # Try discovered skills directory
+    skill_dirs = [
+        Path(f"data/discovered/skills/{skill_name}"),
+        Path(f"data/skills/{skill_name}"),
+    ]
+
+    for skill_dir in skill_dirs:
+        skill_md_path = skill_dir / "SKILL.md"
+        if skill_md_path.exists():
+            return skill_md_path.read_text()
+
+    # Try skills.json
+    skills_json = Path("data/discovered/skills.json")
+    if skills_json.exists():
+        with open(skills_json) as f:
+            data = json.load(f)
+            for skill in data.get('skills', []):
+                name = skill.get('name', '').replace('.md', '')
+                if name == skill_name and skill.get('skill_md_content'):
+                    return skill['skill_md_content']
+
+    return None
+
+
 def run_evaluation(skill_name: str, save_results: bool = True):
     """
     Run full evaluation for a skill.
@@ -66,6 +100,13 @@ def run_evaluation(skill_name: str, save_results: bool = True):
     print(f"{'='*60}\n")
 
     start_time = time.time()
+
+    # Load SKILL.md content
+    skill_md_content = load_skill_md_content(skill_name)
+    if skill_md_content:
+        print(f"Loaded SKILL.md: {len(skill_md_content):,} chars")
+    else:
+        print("Warning: No SKILL.md content found for this skill")
 
     # Load benchmarks
     print("Loading benchmarks...")
@@ -89,6 +130,7 @@ def run_evaluation(skill_name: str, save_results: bool = True):
     task_results = task_runner.run_tasks(
         tasks=benchmarks.tasks,
         skill_name=skill_name,
+        skill_md_content=skill_md_content,
         save_output=save_results
     )
 

@@ -1,122 +1,153 @@
 # Kalybrate Development Progress
 
-> Last updated: 2024-12-30 18:00 UTC
-> Current phase: Phase 1 - MVP COMPLETE
-> Status: 🟢 Ready for Testing
+> Last updated: 2025-12-31 22:45 UTC
+> Current phase: Phase 2 - First Evaluations Running
+> Status: 🟢 Evaluator Working
 
-## 🎯 Current Focus
+## Project Goal
 
-MVP implementation complete! Ready for testing and evaluation runs.
+**Rate PUBLIC AI agent skills from SkillsMP.com** - NOT building our own skills.
 
-## ✅ Completed
+Think "G2 for AI tools" - we discover skills, evaluate them objectively, and publish ratings.
 
-### Core Infrastructure
-- [x] PROGRESS.md created
-- [x] Repository cloned
-- [x] Project structure created (discovery/, evaluator/, data/, website/)
-- [x] requirements.txt and .env.example created
-- [x] .gitignore configured
+---
 
-### Evaluator System (Complete)
-- [x] evaluator/models.py - Pydantic data models
-- [x] evaluator/verifiers.py - File validation with openpyxl/python-docx/python-pptx
-- [x] evaluator/benchmarks.py - Task definitions for ms-office-suite and pdf skills
-- [x] evaluator/task_runner.py - Task execution via Anthropic API
-- [x] evaluator/selectivity_tester.py - Selectivity tests
-- [x] evaluator/quality_tester.py - A/B quality testing
-- [x] evaluator/judges.py - LLM judge for comparisons
-- [x] evaluator/scorer.py - Final score calculation
-- [x] evaluator/main.py - CLI orchestration
+## Current Status
 
-### Discovery System (Complete)
-- [x] discovery/skillsmp_scraper.py - Scrape skills from SkillsMP
-- [x] discovery/github_fetcher.py - Fetch SKILL.md from GitHub
-- [x] discovery/skill_parser.py - Parse YAML frontmatter
+### What Works
+- Discovery: 20 skills scraped from SkillsMP, 15 with full SKILL.md content
+- Evaluator: Task-based evaluation with code execution working
+- First evaluation: PDF skill scored 69.4/100 (Grade D)
 
-### Website (Complete)
-- [x] React + Vite + Tailwind CSS setup
-- [x] SkillCard component with progress bars
-- [x] Search/filter/sort functionality
-- [x] Responsive design
-- [x] Build verified (npm run build successful)
+### What's Next
+- Run evaluations on remaining 14 discovered skills
+- Create benchmarks for more skill types
+- Deploy website with real scores
 
-## 🔄 In Progress
+---
 
-- [ ] First evaluation run with test skills
+## Completed
 
-## 📋 Up Next
+### Discovery System
+- [x] SkillsMP Playwright scraper (handles JS-rendered pages)
+- [x] GitHub raw URL fetcher for SKILL.md content
+- [x] 20 skills discovered, 15 with full content
 
-1. Create directory structure (discovery/, evaluator/, data/, website/)
-2. Implement SkillsMP scraper
-3. Implement GitHub fetcher
-4. Build evaluator with task-based verification
-5. Build React website
-6. Run evaluations on 20 skills
+### Evaluator System
+- [x] Task-based evaluation (binary pass/fail)
+- [x] SKILL.md injection into system prompt
+- [x] Python code extraction and execution
+- [x] File verification (PDF, Excel, Word, PowerPoint)
+- [x] Selectivity testing
+- [x] Quality A/B testing with LLM judge
+- [x] Scoring: `(tasks × 50%) + (selectivity × 25%) + (quality × 25%)`
 
-## 🚧 Blockers / Issues
+### Website
+- [x] React + Vite + Tailwind
+- [x] Skill cards, search, filter, sort
+- [x] Build verified
 
-None currently
+---
 
-## 💰 Cost Tracking
+## First Evaluation Results
 
-| Phase | Tokens Used | Cost |
-|-------|-------------|------|
-| Test Gen | - | - |
-| Task Tests | - | - |
-| Selectivity Tests | - | - |
-| Quality A/B Tests | - | - |
-| LLM Judge | - | - |
-| **Total** | - | - |
+### PDF Skill (from anthropics/anthropic-quickstarts)
 
-## 📊 Preliminary Results
+| Metric | Result |
+|--------|--------|
+| Task Completion | 55.6% (5/9) |
+| Selectivity | 100% (5/5) |
+| Quality Improvement | 66.7% (2/3) |
+| **Overall Score** | **69.4/100** |
+| **Grade** | **D** |
 
-| Skill | Task Pass | Selectivity | Quality Δ | Score | Grade |
-|-------|-----------|-------------|-----------|-------|-------|
-| (pending) | | | | | |
+Tasks breakdown:
+- Easy (3/3 PASS): Simple PDF creation
+- Medium (2/3 PASS): Multi-page reports, invoices
+- Hard (0/3 FAIL): Complex PDFs with charts/images
 
-## 📁 Files Created This Session
+---
 
-### Configuration
-- `.gitignore` - Project ignore patterns
-- `requirements.txt` - Python dependencies
-- `.env.example` - Environment variable template
+## Discovered Skills (15 with SKILL.md)
 
-### Evaluator System (9 files)
-- `evaluator/models.py` - Pydantic models (Task, Result, Score, etc.)
-- `evaluator/verifiers.py` - File verification with openpyxl/python-docx/python-pptx
-- `evaluator/benchmarks.py` - Benchmark task definitions (ms-office-suite, pdf)
-- `evaluator/task_runner.py` - Task execution via Anthropic API
-- `evaluator/selectivity_tester.py` - Selectivity testing (negative prompts)
-- `evaluator/quality_tester.py` - A/B quality comparison
-- `evaluator/judges.py` - LLM judge for quality verdicts
-- `evaluator/scorer.py` - Final scoring algorithm
-- `evaluator/main.py` - CLI orchestration
+| Skill | Repository | Stars |
+|-------|------------|-------|
+| pdf | anthropics/anthropic-quickstarts | 11.1k |
+| frontend-design | anthropics/anthropic-quickstarts | 11.1k |
+| skill-writer | anthropics/anthropic-quickstarts | 11.1k |
+| hook-development | anthropics/anthropic-quickstarts | 11.1k |
+| agent-development | anthropics/anthropic-quickstarts | 11.1k |
+| command-development | anthropics/anthropic-quickstarts | 11.1k |
+| mcp-integration | anthropics/anthropic-quickstarts | 11.1k |
+| writing-rules | anthropics/anthropic-quickstarts | 11.1k |
+| docstring | pytorch/pytorch | 87.5k |
+| add-uint-support | pytorch/pytorch | 87.5k |
+| at-dispatch-v2 | pytorch/pytorch | 87.5k |
+| typescript-write | metabase/metabase | 44.7k |
+| typescript-review | metabase/metabase | 44.7k |
+| clojure-write | metabase/metabase | 44.7k |
+| payload | payloadcms/payload | 39.0k |
 
-### Discovery System (3 files)
-- `discovery/skillsmp_scraper.py` - Scrape skills from SkillsMP.com
-- `discovery/github_fetcher.py` - Fetch SKILL.md from GitHub repos
-- `discovery/skill_parser.py` - Parse YAML frontmatter
+---
 
-### Website (6 files)
-- `website/package.json` - React dependencies (Vite, Tailwind)
-- `website/tailwind.config.js` - Tailwind configuration
-- `website/postcss.config.js` - PostCSS configuration
-- `website/src/index.css` - Tailwind directives + base styles
-- `website/src/App.jsx` - Main application with search/filter/sort
-- `website/src/components/SkillCard.jsx` - Skill card component
-- `website/src/data/skills.json` - Sample skill data
+## Not Yet Done
 
-### Documentation
-- `PROGRESS.md` - Progress tracking and session history
-- `README.md` - Updated project documentation
+### High Priority
+- [ ] Create benchmarks for non-file-creating skills (code review, etc.)
+- [ ] Run evaluations on all 15 discovered skills
+- [ ] Fix hard task failures (missing chart/image dependencies)
 
-**Total:** 22 files created/modified
+### Medium Priority
+- [ ] Improve code execution reliability
+- [ ] Add error logging for debugging
+- [ ] Deploy website publicly
+
+### Out of Scope (for now)
+- Building our own skills
+- User authentication
+- Skill submission system
+
+---
+
+## How to Run
+
+```bash
+# Set API key
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# List skills with benchmarks
+python3 -m evaluator.main --list
+
+# Run evaluation
+python3 -m evaluator.main --skill pdf
+
+# Build website
+cd website && npm run build
+```
+
+---
+
+## Key Architecture Decisions
+
+1. **Evaluate PUBLIC skills only** - We rate skills from SkillsMP/GitHub, we don't create skills
+2. **Task-based scoring** - Binary pass/fail on concrete tasks, not subjective quality
+3. **SKILL.md in system prompt** - Include full skill content when testing
+4. **Code execution** - Run Claude's generated code to verify file creation
+5. **GitHub raw URLs** - Fetch SKILL.md directly, don't scrape JS-rendered pages
 
 ---
 
 ## Session History
 
+### 2025-12-31 - Session 2
+- Fixed evaluator code execution (OUTPUT_DIR handling)
+- Fixed file keyword detection (added 'build', 'canvas', etc.)
+- Fixed verify_file returning None for unknown types
+- First successful evaluation: PDF skill = 69.4/100
+- Updated PROGRESS.md
+
 ### 2024-12-30 - Session 1
 - Cloned repository
-- Created PROGRESS.md
-- Starting full implementation
+- Built full MVP (evaluator, discovery, website)
+- Scraped 20 skills from SkillsMP
+- Fetched 15 SKILL.md files from GitHub

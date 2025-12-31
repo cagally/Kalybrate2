@@ -62,10 +62,75 @@ class TaskRunner:
             shutil.rmtree(self.work_dir)
             self.work_dir = None
 
+    def _execute_python_from_response(self, response_text: str, work_dir: str):
+        """
+        Extract and execute Python code from Claude's response.
+
+        This allows us to actually create files from Claude's generated code.
+        """
+        import re
+        import subprocess
+
+        # Find Python code blocks
+        code_blocks = re.findall(r'```python\n(.*?)```', response_text, re.DOTALL)
+
+        if not code_blocks:
+            # Try to find code without explicit python marker
+            code_blocks = re.findall(r'```\n(.*?)```', response_text, re.DOTALL)
+
+        for i, code in enumerate(code_blocks):
+            # Skip if it's just imports or small snippets
+            if len(code.strip()) < 50:
+                continue
+
+            # Check if code looks like file creation code
+            file_keywords = ['save', 'write', 'open(', 'to_excel', 'savefig', 'pdfwriter', '.build(', 'canvas', 'workbook', 'document']
+            if not any(kw in code.lower() for kw in file_keywords):
+                continue
+
+            try:
+                # Create a temporary script file
+                script_path = os.path.join(work_dir, "_temp_script.py")
+
+                # Remove any OUTPUT_DIR redefinitions from the code (various patterns)
+                clean_code = re.sub(r'^OUTPUT_DIR\s*=.*$', '', code, flags=re.MULTILINE)
+                clean_code = re.sub(r'OUTPUT_DIR\s*=\s*os\.environ\.get.*$', '', clean_code, flags=re.MULTILINE)
+
+                # Add work_dir as a variable the code can use
+                full_code = f'''
+import os
+os.chdir("{work_dir}")
+OUTPUT_DIR = "{work_dir}"
+
+{clean_code}
+'''
+
+                with open(script_path, 'w') as f:
+                    f.write(full_code)
+
+                # Execute the script with a timeout
+                result = subprocess.run(
+                    ['python3', script_path],
+                    cwd=work_dir,
+                    capture_output=True,
+                    text=True,
+                    timeout=30
+                )
+
+                # Clean up script
+                if os.path.exists(script_path):
+                    os.remove(script_path)
+
+            except subprocess.TimeoutExpired:
+                pass
+            except Exception as e:
+                pass  # Silently fail - we'll check for files anyway
+
     def run_task(
         self,
         task: Task,
         skill_name: Optional[str] = None,
+        skill_md_content: Optional[str] = None,
         save_output: bool = False
     ) -> TaskResult:
         """
@@ -74,6 +139,7 @@ class TaskRunner:
         Args:
             task: Task to execute
             skill_name: Optional skill name to activate (for WITH skill testing)
+            skill_md_content: The full SKILL.md content to include in system prompt
             save_output: Whether to save output files
 
         Returns:
@@ -85,24 +151,39 @@ class TaskRunner:
         work_dir = self.setup_work_directory()
 
         try:
-            # Construct the prompt
+            # Build system prompt with SKILL.md content
+            system_prompt = None
+            if skill_name and skill_md_content:
+                system_prompt = f"""You have access to a skill: {skill_name}
+
+SKILL.md:
+---
+{skill_md_content}
+---
+
+Follow these instructions when relevant. When creating files, write Python code that saves files to the specified directory."""
+
+            # User prompt - tell Claude to use OUTPUT_DIR variable, not hardcode path
             prompt = task.prompt
-            if skill_name:
-                # Add skill context if needed
-                prompt = f"[Using skill: {skill_name}]\n\n{prompt}"
+            prompt += f"\n\nIMPORTANT: Save any files using the OUTPUT_DIR variable (do NOT redefine it). OUTPUT_DIR = \"{work_dir}\""
+            prompt += "\n\nProvide complete, executable Python code that creates the requested file. Use OUTPUT_DIR for the output path."
 
-            # Add instruction to save files to work directory
-            prompt += f"\n\nPlease save any created files to: {work_dir}"
+            # Call Anthropic API with SKILL.md in system prompt
+            api_params = {
+                "model": self.model,
+                "max_tokens": 4096,
+                "messages": [{"role": "user", "content": prompt}]
+            }
+            if system_prompt:
+                api_params["system"] = system_prompt
 
-            # Call Anthropic API
-            message = self.client.messages.create(
-                model=self.model,
-                max_tokens=4096,
-                messages=[{"role": "user", "content": prompt}]
-            )
+            message = self.client.messages.create(**api_params)
 
             # Extract response
             response_text = message.content[0].text if message.content else ""
+
+            # Execute any Python code in the response to create files
+            self._execute_python_from_response(response_text, work_dir)
 
             # Find created files
             expected_ext = task.expected_file_type
@@ -172,6 +253,7 @@ class TaskRunner:
         self,
         tasks: List[Task],
         skill_name: Optional[str] = None,
+        skill_md_content: Optional[str] = None,
         save_output: bool = False
     ) -> List[TaskResult]:
         """
@@ -180,6 +262,7 @@ class TaskRunner:
         Args:
             tasks: List of tasks to execute
             skill_name: Optional skill name to activate
+            skill_md_content: SKILL.md content to include in system prompt
             save_output: Whether to save output files
 
         Returns:
@@ -190,7 +273,12 @@ class TaskRunner:
         for i, task in enumerate(tasks):
             print(f"Running task {i+1}/{len(tasks)}: {task.id}")
 
-            result = self.run_task(task, skill_name=skill_name, save_output=save_output)
+            result = self.run_task(
+                task,
+                skill_name=skill_name,
+                skill_md_content=skill_md_content,
+                save_output=save_output
+            )
             results.append(result)
 
             # Clean up between tasks
