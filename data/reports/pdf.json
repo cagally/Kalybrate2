@@ -1,0 +1,151 @@
+{
+  "skill_name": "pdf",
+  "skill_description": null,
+  "overall_score": 80.0,
+  "grade": "B",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "pdf_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 20.32,
+        "tokens": 3804
+      },
+      {
+        "id": "pdf_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 18.33,
+        "tokens": 3523
+      },
+      {
+        "id": "pdf_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 22.88,
+        "tokens": 3967
+      },
+      {
+        "id": "pdf_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 45.57,
+        "tokens": 5879
+      },
+      {
+        "id": "pdf_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 47.71,
+        "tokens": 6192
+      },
+      {
+        "id": "pdf_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 45.71,
+        "tokens": 5747
+      },
+      {
+        "id": "pdf_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 49.34,
+        "tokens": 6400
+      },
+      {
+        "id": "pdf_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 49.9,
+        "tokens": 6404
+      },
+      {
+        "id": "pdf_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "response_relevant": true
+        },
+        "execution_time": 49.13,
+        "tokens": 6164
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 0,
+    "wins": 0,
+    "losses": 0,
+    "ties": 0,
+    "win_rate": 50.0,
+    "details": []
+  },
+  "cost": {
+    "avg_input_tokens": 2302,
+    "avg_output_tokens": 3041,
+    "avg_total_tokens": 5342,
+    "estimated_per_use": "$0.05"
+  },
+  "evaluated_at": "2025-12-31T18:08:10.607129",
+  "model_used": "claude-sonnet-4-20250514"
+}

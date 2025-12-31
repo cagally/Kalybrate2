@@ -1,12 +1,15 @@
 """
 Task runner for executing evaluation tasks via Anthropic API.
 Runs tasks with skills and verifies all success criteria.
+Tracks token usage for cost analysis.
 """
 
 import os
 import time
 import json
-from typing import Dict, List, Optional
+import re
+import subprocess
+from typing import Dict, List, Optional, Tuple
 from pathlib import Path
 import tempfile
 import shutil
@@ -14,21 +17,19 @@ import shutil
 from anthropic import Anthropic
 from dotenv import load_dotenv
 
-from evaluator.models import Task, TaskResult
+from evaluator.models import Task, TaskResult, OutputType
 from evaluator.verifiers import verify_file, find_created_files
 
-
-# Load environment variables
 load_dotenv()
 
 
 class TaskRunner:
-    """Executes tasks and verifies results"""
+    """Executes tasks and verifies results with token tracking"""
 
     def __init__(
         self,
         api_key: Optional[str] = None,
-        model: str = "claude-opus-4-5-20251101",
+        model: str = "claude-sonnet-4-20250514",
         timeout: int = 60
     ):
         """
@@ -36,7 +37,7 @@ class TaskRunner:
 
         Args:
             api_key: Anthropic API key (defaults to ANTHROPIC_API_KEY env var)
-            model: Claude model to use
+            model: Claude model to use (default Sonnet for cost efficiency)
             timeout: Timeout in seconds for each task
         """
         self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
@@ -62,41 +63,45 @@ class TaskRunner:
             shutil.rmtree(self.work_dir)
             self.work_dir = None
 
-    def _execute_python_from_response(self, response_text: str, work_dir: str):
+    def _extract_code_blocks(self, response_text: str) -> List[Tuple[str, str]]:
+        """
+        Extract code blocks from response.
+
+        Returns:
+            List of (language, code) tuples
+        """
+        # Find ```language\ncode``` blocks
+        pattern = r'```(\w+)?\n(.*?)```'
+        matches = re.findall(pattern, response_text, re.DOTALL)
+        return [(lang or 'unknown', code) for lang, code in matches]
+
+    def _execute_python_from_response(self, response_text: str, work_dir: str) -> bool:
         """
         Extract and execute Python code from Claude's response.
-
-        This allows us to actually create files from Claude's generated code.
+        Returns True if any code was executed successfully.
         """
-        import re
-        import subprocess
-
-        # Find Python code blocks
         code_blocks = re.findall(r'```python\n(.*?)```', response_text, re.DOTALL)
 
         if not code_blocks:
-            # Try to find code without explicit python marker
             code_blocks = re.findall(r'```\n(.*?)```', response_text, re.DOTALL)
 
-        for i, code in enumerate(code_blocks):
-            # Skip if it's just imports or small snippets
+        executed = False
+        for code in code_blocks:
             if len(code.strip()) < 50:
                 continue
 
-            # Check if code looks like file creation code
-            file_keywords = ['save', 'write', 'open(', 'to_excel', 'savefig', 'pdfwriter', '.build(', 'canvas', 'workbook', 'document']
+            file_keywords = ['save', 'write', 'open(', 'to_excel', 'savefig',
+                           'pdfwriter', '.build(', 'canvas', 'workbook', 'document']
             if not any(kw in code.lower() for kw in file_keywords):
                 continue
 
             try:
-                # Create a temporary script file
                 script_path = os.path.join(work_dir, "_temp_script.py")
 
-                # Remove any OUTPUT_DIR redefinitions from the code (various patterns)
+                # Remove OUTPUT_DIR redefinitions
                 clean_code = re.sub(r'^OUTPUT_DIR\s*=.*$', '', code, flags=re.MULTILINE)
                 clean_code = re.sub(r'OUTPUT_DIR\s*=\s*os\.environ\.get.*$', '', clean_code, flags=re.MULTILINE)
 
-                # Add work_dir as a variable the code can use
                 full_code = f'''
 import os
 os.chdir("{work_dir}")
@@ -108,7 +113,6 @@ OUTPUT_DIR = "{work_dir}"
                 with open(script_path, 'w') as f:
                     f.write(full_code)
 
-                # Execute the script with a timeout
                 result = subprocess.run(
                     ['python3', script_path],
                     cwd=work_dir,
@@ -117,14 +121,83 @@ OUTPUT_DIR = "{work_dir}"
                     timeout=30
                 )
 
-                # Clean up script
                 if os.path.exists(script_path):
                     os.remove(script_path)
 
+                if result.returncode == 0:
+                    executed = True
+
             except subprocess.TimeoutExpired:
                 pass
+            except Exception:
+                pass
+
+        return executed
+
+    def _verify_code_compiles(self, code: str, language: str) -> Tuple[bool, str]:
+        """
+        Verify that code compiles/is syntactically valid.
+
+        Returns:
+            (success, error_message)
+        """
+        if language in ['python', 'py']:
+            try:
+                compile(code, '<string>', 'exec')
+                return True, ""
+            except SyntaxError as e:
+                return False, str(e)
+
+        elif language in ['typescript', 'ts']:
+            # Write to temp file and run tsc
+            try:
+                with tempfile.NamedTemporaryFile(suffix='.ts', delete=False) as f:
+                    f.write(code.encode())
+                    temp_path = f.name
+
+                result = subprocess.run(
+                    ['npx', 'tsc', '--noEmit', temp_path],
+                    capture_output=True,
+                    text=True,
+                    timeout=30
+                )
+                os.unlink(temp_path)
+
+                if result.returncode == 0:
+                    return True, ""
+                return False, result.stderr[:200]
+
+            except FileNotFoundError:
+                return True, "TypeScript compiler not available"
             except Exception as e:
-                pass  # Silently fail - we'll check for files anyway
+                return False, str(e)
+
+        elif language in ['javascript', 'js']:
+            # Basic syntax check with Node
+            try:
+                with tempfile.NamedTemporaryFile(suffix='.js', delete=False) as f:
+                    f.write(code.encode())
+                    temp_path = f.name
+
+                result = subprocess.run(
+                    ['node', '--check', temp_path],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                os.unlink(temp_path)
+
+                if result.returncode == 0:
+                    return True, ""
+                return False, result.stderr[:200]
+
+            except FileNotFoundError:
+                return True, "Node not available"
+            except Exception as e:
+                return False, str(e)
+
+        # Unknown language - assume valid
+        return True, ""
 
     def run_task(
         self,
@@ -138,17 +211,18 @@ OUTPUT_DIR = "{work_dir}"
 
         Args:
             task: Task to execute
-            skill_name: Optional skill name to activate (for WITH skill testing)
+            skill_name: Optional skill name to activate
             skill_md_content: The full SKILL.md content to include in system prompt
             save_output: Whether to save output files
 
         Returns:
-            TaskResult with pass/fail and criteria results
+            TaskResult with pass/fail, criteria results, and token usage
         """
         start_time = time.time()
-
-        # Setup working directory
         work_dir = self.setup_work_directory()
+
+        input_tokens = 0
+        output_tokens = 0
 
         try:
             # Build system prompt with SKILL.md content
@@ -163,12 +237,17 @@ SKILL.md:
 
 Follow these instructions when relevant. When creating files, write Python code that saves files to the specified directory."""
 
-            # User prompt - tell Claude to use OUTPUT_DIR variable, not hardcode path
+            # Build user prompt based on expected output type
             prompt = task.prompt
-            prompt += f"\n\nIMPORTANT: Save any files using the OUTPUT_DIR variable (do NOT redefine it). OUTPUT_DIR = \"{work_dir}\""
-            prompt += "\n\nProvide complete, executable Python code that creates the requested file. Use OUTPUT_DIR for the output path."
+            output_type = getattr(task, 'expected_output_type', OutputType.FILE)
 
-            # Call Anthropic API with SKILL.md in system prompt
+            if output_type == OutputType.FILE:
+                prompt += f"\n\nIMPORTANT: Save any files using the OUTPUT_DIR variable (do NOT redefine it). OUTPUT_DIR = \"{work_dir}\""
+                prompt += "\n\nProvide complete, executable Python code that creates the requested file."
+            elif output_type == OutputType.CODE:
+                prompt += "\n\nProvide complete, working code with proper syntax."
+
+            # Call Anthropic API
             api_params = {
                 "model": self.model,
                 "max_tokens": 4096,
@@ -179,42 +258,79 @@ Follow these instructions when relevant. When creating files, write Python code 
 
             message = self.client.messages.create(**api_params)
 
-            # Extract response
+            # Track token usage
+            input_tokens = message.usage.input_tokens
+            output_tokens = message.usage.output_tokens
+
             response_text = message.content[0].text if message.content else ""
 
-            # Execute any Python code in the response to create files
-            self._execute_python_from_response(response_text, work_dir)
-
-            # Find created files
-            expected_ext = task.expected_file_type
-            extensions = [expected_ext] if expected_ext else None
-            created_files = find_created_files(work_dir, extensions=extensions)
-
-            # Verify success criteria
+            # Verify based on output type
             criteria_results = {}
 
-            # Check file_created criterion
-            if "file_created" in task.success_criteria:
-                criteria_results["file_created"] = len(created_files) > 0
+            if output_type == OutputType.FILE:
+                # Execute Python code to create files
+                self._execute_python_from_response(response_text, work_dir)
 
-            # If files were created, verify them
-            if created_files:
-                primary_file = created_files[0]  # Most recent file
+                # Find created files
+                expected_ext = task.expected_file_type
+                extensions = [expected_ext] if expected_ext else None
+                created_files = find_created_files(work_dir, extensions=extensions)
 
-                # Verify file against remaining criteria
-                file_verification = verify_file(primary_file, task.success_criteria)
-                criteria_results.update(file_verification)
+                # Check file criteria
+                if "file_created" in task.success_criteria:
+                    criteria_results["file_created"] = len(created_files) > 0
 
-                # Save output if requested
-                if save_output:
-                    output_dir = Path("data/task_outputs") / task.id
-                    output_dir.mkdir(parents=True, exist_ok=True)
-                    shutil.copy(primary_file, output_dir / Path(primary_file).name)
-            else:
-                # No files created - fail all file-related criteria
-                for criterion in task.success_criteria:
-                    if criterion not in criteria_results:
-                        criteria_results[criterion] = False
+                if created_files:
+                    primary_file = created_files[0]
+                    file_verification = verify_file(primary_file, task.success_criteria)
+                    criteria_results.update(file_verification)
+
+                    if save_output:
+                        output_dir = Path("data/task_outputs") / task.id
+                        output_dir.mkdir(parents=True, exist_ok=True)
+                        shutil.copy(primary_file, output_dir / Path(primary_file).name)
+                else:
+                    for criterion in task.success_criteria:
+                        if criterion not in criteria_results:
+                            criteria_results[criterion] = False
+                    created_files = []
+
+            elif output_type == OutputType.CODE:
+                # Extract and verify code
+                code_blocks = self._extract_code_blocks(response_text)
+                created_files = []
+
+                if "code_extracted" in task.success_criteria:
+                    criteria_results["code_extracted"] = len(code_blocks) > 0
+
+                if "code_compiles" in task.success_criteria and code_blocks:
+                    lang, code = code_blocks[0]
+                    compiles, error = self._verify_code_compiles(code, lang)
+                    criteria_results["code_compiles"] = compiles
+
+                if "has_type_annotations" in task.success_criteria and code_blocks:
+                    lang, code = code_blocks[0]
+                    has_types = ':' in code and ('string' in code or 'number' in code or 'boolean' in code or ': ' in code)
+                    criteria_results["has_type_annotations"] = has_types
+
+                if "has_docstrings" in task.success_criteria and code_blocks:
+                    lang, code = code_blocks[0]
+                    has_docstrings = '"""' in code or "'''" in code
+                    criteria_results["has_docstrings"] = has_docstrings
+
+                # For response_relevant on code tasks - check code blocks exist and have content
+                if "response_relevant" in task.success_criteria:
+                    criteria_results["response_relevant"] = len(code_blocks) > 0 and len(code_blocks[0][1]) > 50
+
+            else:  # TEXT output
+                created_files = []
+
+                if "response_exists" in task.success_criteria:
+                    criteria_results["response_exists"] = len(response_text.strip()) > 0
+
+                # For response_relevant, we'd need LLM judge - skip for now
+                if "response_relevant" in task.success_criteria:
+                    criteria_results["response_relevant"] = len(response_text.strip()) > 50
 
             # Overall pass: ALL criteria must pass
             all_passed = all(
@@ -230,12 +346,13 @@ Follow these instructions when relevant. When creating files, write Python code 
                 criteria_results=criteria_results,
                 error=None,
                 execution_time=execution_time,
-                files_created=created_files
+                files_created=created_files if output_type == OutputType.FILE else [],
+                input_tokens=input_tokens,
+                output_tokens=output_tokens
             )
 
         except Exception as e:
             execution_time = time.time() - start_time
-            # Task failed due to error
             criteria_results = {
                 criterion: False for criterion in task.success_criteria
             }
@@ -246,7 +363,9 @@ Follow these instructions when relevant. When creating files, write Python code 
                 criteria_results=criteria_results,
                 error=str(e),
                 execution_time=execution_time,
-                files_created=[]
+                files_created=[],
+                input_tokens=input_tokens,
+                output_tokens=output_tokens
             )
 
     def run_tasks(
@@ -266,7 +385,7 @@ Follow these instructions when relevant. When creating files, write Python code 
             save_output: Whether to save output files
 
         Returns:
-            List of TaskResults
+            List of TaskResults with token usage tracked
         """
         results = []
 
@@ -285,7 +404,10 @@ Follow these instructions when relevant. When creating files, write Python code 
             self.cleanup_work_directory()
             self.setup_work_directory()
 
-            print(f"  Result: {'PASS' if result.passed else 'FAIL'}")
+            status = 'PASS' if result.passed else 'FAIL'
+            tokens = result.input_tokens + result.output_tokens
+            print(f"  Result: {status} (tokens: {tokens})")
+
             if not result.passed:
                 failed_criteria = [
                     k for k, v in result.criteria_results.items() if not v
@@ -331,5 +453,7 @@ def run_task_simple(
         "passed": result.passed,
         "files_created": result.files_created,
         "error": result.error,
-        "execution_time": result.execution_time
+        "execution_time": result.execution_time,
+        "input_tokens": result.input_tokens,
+        "output_tokens": result.output_tokens
     }

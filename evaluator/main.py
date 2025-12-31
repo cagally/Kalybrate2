@@ -1,56 +1,25 @@
 """
 Main CLI for Kalybrate evaluator.
-Orchestrates the full evaluation pipeline.
+Orchestrates the full evaluation pipeline:
+1. Load/generate benchmarks from SKILL.md
+2. Run task completion tests
+3. Run quality A/B tests
+4. Calculate scores (60% task + 40% quality)
+5. Generate reports
 """
 
 import argparse
 import json
 import time
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List
 
-from evaluator.benchmarks import get_benchmarks, list_available_skills, create_default_benchmarks
+from evaluator.test_generator import TestGenerator
 from evaluator.task_runner import TaskRunner
-from evaluator.selectivity_tester import SelectivityTester
 from evaluator.quality_tester import QualityTester
 from evaluator.scorer import Scorer
-
-
-def generate_test_cases(skill_name: str, output_dir: str = "data/test_cases"):
-    """
-    Generate and save test cases for a skill.
-
-    Args:
-        skill_name: Name of the skill
-        output_dir: Directory to save test cases
-    """
-    print(f"\nGenerating test cases for: {skill_name}")
-
-    try:
-        benchmarks = get_benchmarks(skill_name)
-    except ValueError as e:
-        print(f"  No predefined benchmarks found. Using default template.")
-        benchmarks = create_default_benchmarks(skill_name)
-
-    output_path = Path(output_dir) / f"{skill_name}.json"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    # Convert to dict for JSON serialization
-    data = {
-        "skill_name": benchmarks.skill_name,
-        "skill_description": benchmarks.skill_description,
-        "tasks": [task.model_dump() for task in benchmarks.tasks],
-        "selectivity_tests": [test.model_dump() for test in benchmarks.selectivity_tests],
-        "quality_prompts": benchmarks.quality_prompts
-    }
-
-    with open(output_path, 'w') as f:
-        json.dump(data, f, indent=2)
-
-    print(f"  Saved test cases to: {output_path}")
-    print(f"  Tasks: {len(benchmarks.tasks)}")
-    print(f"  Selectivity tests: {len(benchmarks.selectivity_tests)}")
-    print(f"  Quality prompts: {len(benchmarks.quality_prompts)}")
+from evaluator.report import ReportGenerator
+from evaluator.models import BenchmarkSuite, Task, SkillScore
 
 
 def load_skill_md_content(skill_name: str) -> Optional[str]:
@@ -87,13 +56,116 @@ def load_skill_md_content(skill_name: str) -> Optional[str]:
     return None
 
 
-def run_evaluation(skill_name: str, save_results: bool = True):
+def load_or_generate_benchmarks(
+    skill_name: str,
+    skill_md_content: Optional[str],
+    force_generate: bool = False
+) -> BenchmarkSuite:
+    """
+    Load existing benchmarks or generate new ones from SKILL.md.
+
+    Args:
+        skill_name: Name of the skill
+        skill_md_content: SKILL.md content
+        force_generate: Force regeneration even if cached
+
+    Returns:
+        BenchmarkSuite ready for evaluation
+    """
+    cache_path = Path(f"data/test_cases/{skill_name}.json")
+
+    # Try to load cached benchmarks
+    if not force_generate and cache_path.exists():
+        print(f"  Loading cached benchmarks from: {cache_path}")
+        with open(cache_path) as f:
+            data = json.load(f)
+
+        tasks = []
+        for task_data in data.get("tasks", []):
+            tasks.append(Task(**task_data))
+
+        return BenchmarkSuite(
+            skill_name=data.get("skill_name", skill_name),
+            skill_claims=data.get("skill_claims", []),
+            tasks=tasks,
+            quality_prompts=data.get("quality_prompts", [])
+        )
+
+    # Generate new benchmarks from SKILL.md
+    if not skill_md_content:
+        print("  Warning: No SKILL.md content available for benchmark generation")
+        # Return minimal benchmarks
+        return BenchmarkSuite(
+            skill_name=skill_name,
+            skill_claims=[],
+            tasks=[],
+            quality_prompts=[]
+        )
+
+    print("  Generating benchmarks from SKILL.md...")
+    generator = TestGenerator()
+    benchmark = generator.generate_benchmarks(
+        skill_name=skill_name,
+        skill_md_content=skill_md_content,
+        save_to_file=True
+    )
+
+    return generator.to_benchmark_suite(benchmark)
+
+
+def list_discovered_skills() -> List[str]:
+    """List all discovered skills with SKILL.md content"""
+    skills = []
+
+    # Check skills.json
+    skills_json = Path("data/discovered/skills.json")
+    if skills_json.exists():
+        with open(skills_json) as f:
+            data = json.load(f)
+            for skill in data.get('skills', []):
+                name = skill.get('name', '').replace('.md', '')
+                if skill.get('skill_md_content'):
+                    skills.append(name)
+
+    # Check skills directories
+    skills_dir = Path("data/discovered/skills")
+    if skills_dir.exists():
+        for skill_dir in skills_dir.iterdir():
+            if skill_dir.is_dir():
+                if (skill_dir / "SKILL.md").exists():
+                    if skill_dir.name not in skills:
+                        skills.append(skill_dir.name)
+
+    return sorted(skills)
+
+
+def list_evaluated_skills() -> List[str]:
+    """List all skills with existing benchmarks"""
+    skills = []
+    benchmarks_dir = Path("data/test_cases")
+    if benchmarks_dir.exists():
+        for json_file in benchmarks_dir.glob("*.json"):
+            skills.append(json_file.stem)
+    return sorted(skills)
+
+
+def run_evaluation(
+    skill_name: str,
+    save_results: bool = True,
+    force_generate: bool = False,
+    skip_quality: bool = False
+) -> SkillScore:
     """
     Run full evaluation for a skill.
 
     Args:
         skill_name: Name of the skill to evaluate
         save_results: Whether to save results to files
+        force_generate: Force regeneration of benchmarks
+        skip_quality: Skip quality A/B tests (faster)
+
+    Returns:
+        SkillScore with final metrics
     """
     print(f"\n{'='*60}")
     print(f"EVALUATING SKILL: {skill_name}")
@@ -102,27 +174,48 @@ def run_evaluation(skill_name: str, save_results: bool = True):
     start_time = time.time()
 
     # Load SKILL.md content
+    print("Loading SKILL.md...")
     skill_md_content = load_skill_md_content(skill_name)
     if skill_md_content:
-        print(f"Loaded SKILL.md: {len(skill_md_content):,} chars")
+        print(f"  Loaded: {len(skill_md_content):,} chars")
     else:
-        print("Warning: No SKILL.md content found for this skill")
+        print("  Warning: No SKILL.md content found")
 
-    # Load benchmarks
-    print("Loading benchmarks...")
-    try:
-        benchmarks = get_benchmarks(skill_name)
-    except ValueError:
-        print(f"  No benchmarks found for '{skill_name}'. Using defaults.")
-        benchmarks = create_default_benchmarks(skill_name)
+    # Load or generate benchmarks
+    print("\nLoading benchmarks...")
+    benchmarks = load_or_generate_benchmarks(
+        skill_name=skill_name,
+        skill_md_content=skill_md_content,
+        force_generate=force_generate
+    )
+
+    if not benchmarks.tasks:
+        print("  Error: No tasks in benchmark suite")
+        # Return empty score
+        return SkillScore(
+            skill_name=skill_name,
+            total_tasks=0,
+            tasks_passed=0,
+            task_pass_rate=0.0,
+            total_quality_comparisons=0,
+            quality_wins=0,
+            quality_win_rate=0.5,
+            overall_score=0.0,
+            grade="F",
+            execution_time=time.time() - start_time
+        )
+
+    print(f"  Tasks: {len(benchmarks.tasks)}")
+    print(f"  Quality prompts: {len(benchmarks.quality_prompts)}")
+    print(f"  Skill claims: {len(benchmarks.skill_claims)}")
 
     # Initialize components
     task_runner = TaskRunner()
-    selectivity_tester = SelectivityTester()
     quality_tester = QualityTester()
     scorer = Scorer()
+    reporter = ReportGenerator()
 
-    # 1. Run task tests
+    # Phase 1: Task Completion Tests
     print(f"\n{'='*60}")
     print("PHASE 1: Task Completion Tests")
     print(f"{'='*60}\n")
@@ -135,49 +228,38 @@ def run_evaluation(skill_name: str, save_results: bool = True):
     )
 
     passed = sum(1 for r in task_results if r.passed)
+    total_task_tokens = sum(r.input_tokens + r.output_tokens for r in task_results)
     print(f"\nTask Results: {passed}/{len(task_results)} passed")
+    print(f"Total tokens: {total_task_tokens:,}")
 
-    # 2. Run selectivity tests
+    # Phase 2: Quality A/B Tests
     print(f"\n{'='*60}")
-    print("PHASE 2: Selectivity Tests")
-    print(f"{'='*60}\n")
-
-    # Determine expected file extensions from tasks
-    expected_extensions = list(set(
-        task.expected_file_type
-        for task in benchmarks.tasks
-        if task.expected_file_type
-    ))
-
-    selectivity_results = selectivity_tester.run_selectivity_tests(
-        tests=benchmarks.selectivity_tests,
-        skill_name=skill_name,
-        expected_file_extensions=expected_extensions or None
-    )
-
-    sel_passed = sum(1 for r in selectivity_results if r.passed)
-    print(f"\nSelectivity Results: {sel_passed}/{len(selectivity_results)} passed")
-
-    # 3. Run quality comparisons
-    print(f"\n{'='*60}")
-    print("PHASE 3: Quality A/B Tests")
+    print("PHASE 2: Quality A/B Tests")
     print(f"{'='*60}\n")
 
     quality_comparisons = []
-    if benchmarks.quality_prompts:
+    if not skip_quality and benchmarks.quality_prompts and skill_md_content:
         quality_comparisons = quality_tester.run_quality_comparisons(
             prompts=benchmarks.quality_prompts,
-            skill_name=skill_name
+            skill_name=skill_name,
+            skill_md_content=skill_md_content
         )
 
         wins = sum(1 for c in quality_comparisons if c.judge_verdict == "with_skill")
-        print(f"\nQuality Results: {wins}/{len(quality_comparisons)} wins for skill")
+        losses = sum(1 for c in quality_comparisons if c.judge_verdict == "without_skill")
+        ties = sum(1 for c in quality_comparisons if c.judge_verdict == "tie")
+        print(f"\nQuality Results: {wins} wins, {losses} losses, {ties} ties")
     else:
-        print("  No quality prompts defined. Skipping quality tests.")
+        if skip_quality:
+            print("  Skipping quality tests (--skip-quality flag)")
+        elif not benchmarks.quality_prompts:
+            print("  No quality prompts defined. Skipping.")
+        else:
+            print("  No SKILL.md content. Skipping quality tests.")
 
-    # 4. Calculate scores
+    # Phase 3: Scoring
     print(f"\n{'='*60}")
-    print("PHASE 4: Scoring")
+    print("PHASE 3: Scoring")
     print(f"{'='*60}\n")
 
     execution_time = time.time() - start_time
@@ -185,9 +267,10 @@ def run_evaluation(skill_name: str, save_results: bool = True):
     skill_score = scorer.create_skill_score(
         skill_name=skill_name,
         task_results=task_results,
-        selectivity_results=selectivity_results,
         quality_comparisons=quality_comparisons,
-        execution_time=execution_time
+        execution_time=execution_time,
+        tasks=benchmarks.tasks,
+        skill_description=benchmarks.skill_description
     )
 
     # Display results
@@ -198,10 +281,14 @@ def run_evaluation(skill_name: str, save_results: bool = True):
     print(f"Grade: {skill_score.grade}")
     print(f"Overall Score: {skill_score.overall_score:.1f}/100")
     print()
-    print(f"Task Completion: {skill_score.task_pass_rate*100:.1f}% ({skill_score.tasks_passed}/{skill_score.total_tasks})")
-    print(f"Selectivity: {skill_score.selectivity_rate*100:.1f}% ({skill_score.selectivity_passed}/{skill_score.total_selectivity_tests})")
-    print(f"Quality Improvement: {skill_score.quality_improvement_rate*100:.1f}% ({skill_score.quality_wins}/{skill_score.total_quality_comparisons})")
+    print(f"Task Completion (60%): {skill_score.task_pass_rate*100:.1f}% ({skill_score.tasks_passed}/{skill_score.total_tasks})")
+    print(f"  By difficulty: {skill_score.tasks_by_difficulty}")
     print()
+    print(f"Quality Improvement (40%): {skill_score.quality_win_rate*100:.1f}%")
+    print(f"  Wins: {skill_score.quality_wins}, Losses: {skill_score.quality_losses}, Ties: {skill_score.quality_ties}")
+    print()
+    print(f"Cost Estimate: {skill_score.estimated_cost_per_use}/use")
+    print(f"Avg Tokens: {skill_score.avg_total_tokens:.0f} (in: {skill_score.avg_input_tokens:.0f}, out: {skill_score.avg_output_tokens:.0f})")
     print(f"Execution Time: {skill_score.execution_time:.1f}s")
 
     # Save results
@@ -213,22 +300,25 @@ def run_evaluation(skill_name: str, save_results: bool = True):
         with open(results_dir / "task_results.json", 'w') as f:
             json.dump([r.model_dump() for r in task_results], f, indent=2)
 
-        with open(results_dir / "selectivity_results.json", 'w') as f:
-            json.dump([r.model_dump() for r in selectivity_results], f, indent=2)
-
         if quality_comparisons:
             with open(results_dir / "quality_comparisons.json", 'w') as f:
                 json.dump([c.model_dump() for c in quality_comparisons], f, indent=2)
 
-        # Save score
-        scores_dir = Path("data/scores")
-        scores_dir.mkdir(parents=True, exist_ok=True)
+        # Generate and save report
+        report = reporter.generate_skill_report(
+            score=skill_score,
+            task_results=task_results,
+            quality_comparisons=quality_comparisons,
+            tasks=benchmarks.tasks
+        )
+        report_path = reporter.save_report(report)
 
-        with open(scores_dir / f"{skill_name}.json", 'w') as f:
-            json.dump(skill_score.model_dump(), f, indent=2)
+        # Also save score summary
+        score_path = reporter.save_score_summary(skill_score)
 
-        print(f"\nResults saved to: data/results/{skill_name}/")
-        print(f"Score saved to: data/scores/{skill_name}.json")
+        print(f"\nResults saved to: {results_dir}/")
+        print(f"Report saved to: {report_path}")
+        print(f"Score saved to: {score_path}")
 
     return skill_score
 
@@ -236,19 +326,31 @@ def run_evaluation(skill_name: str, save_results: bool = True):
 def main():
     """Main CLI entry point"""
     parser = argparse.ArgumentParser(
-        description="Kalybrate - AI Skill Evaluation Platform"
+        description="Kalybrate - AI Skill Evaluation Platform",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # List discovered skills
+  python -m evaluator.main --list
+
+  # Evaluate a specific skill
+  python -m evaluator.main --skill pdf
+
+  # Regenerate benchmarks for a skill
+  python -m evaluator.main --skill pdf --regenerate
+
+  # Generate benchmarks only (no evaluation)
+  python -m evaluator.main --skill pdf --generate-only
+
+  # Evaluate all skills
+  python -m evaluator.main --all
+        """
     )
 
     parser.add_argument(
         "--list",
         action="store_true",
-        help="List all available skills with benchmarks"
-    )
-
-    parser.add_argument(
-        "--generate-only",
-        action="store_true",
-        help="Only generate test cases, don't run evaluation"
+        help="List all discovered skills"
     )
 
     parser.add_argument(
@@ -260,53 +362,105 @@ def main():
     parser.add_argument(
         "--all",
         action="store_true",
-        help="Evaluate all available skills"
+        help="Evaluate all discovered skills"
     )
 
     parser.add_argument(
-        "--output-dir",
-        type=str,
-        default="data/test_cases",
-        help="Directory for test case output (default: data/test_cases)"
+        "--generate-only",
+        action="store_true",
+        help="Only generate benchmarks, don't run evaluation"
+    )
+
+    parser.add_argument(
+        "--regenerate",
+        action="store_true",
+        help="Force regeneration of benchmarks from SKILL.md"
+    )
+
+    parser.add_argument(
+        "--skip-quality",
+        action="store_true",
+        help="Skip quality A/B tests (faster evaluation)"
     )
 
     args = parser.parse_args()
 
     # List available skills
     if args.list:
-        print("\nAvailable skills with predefined benchmarks:")
-        for skill in list_available_skills():
+        print("\nDiscovered skills with SKILL.md:")
+        discovered = list_discovered_skills()
+        for skill in discovered:
+            print(f"  - {skill}")
+
+        print("\nSkills with cached benchmarks:")
+        evaluated = list_evaluated_skills()
+        for skill in evaluated:
             print(f"  - {skill}")
         return
 
-    # Generate test cases only
+    # Generate benchmarks only
     if args.generate_only:
         if args.skill:
-            generate_test_cases(args.skill, args.output_dir)
+            skill_md = load_skill_md_content(args.skill)
+            if skill_md:
+                generator = TestGenerator()
+                generator.generate_benchmarks(args.skill, skill_md)
+            else:
+                print(f"Error: No SKILL.md found for '{args.skill}'")
         elif args.all:
-            for skill in list_available_skills():
-                generate_test_cases(skill, args.output_dir)
+            for skill in list_discovered_skills():
+                print(f"\nGenerating benchmarks for: {skill}")
+                skill_md = load_skill_md_content(skill)
+                if skill_md:
+                    generator = TestGenerator()
+                    generator.generate_benchmarks(skill, skill_md)
+                else:
+                    print(f"  Skipping: No SKILL.md content")
         else:
             print("Error: Specify --skill or --all with --generate-only")
         return
 
     # Run evaluation
     if args.skill:
-        run_evaluation(args.skill)
+        run_evaluation(
+            args.skill,
+            force_generate=args.regenerate,
+            skip_quality=args.skip_quality
+        )
     elif args.all:
         scores = []
-        for skill in list_available_skills():
-            score = run_evaluation(skill)
-            scores.append(score)
+        skills = list_discovered_skills()
 
-        # Save combined scores
-        scores_path = Path("data/scores/all_skills.json")
-        scores_path.parent.mkdir(parents=True, exist_ok=True)
+        if not skills:
+            print("No skills found. Run discovery first or check data/discovered/")
+            return
 
-        with open(scores_path, 'w') as f:
-            json.dump([s.model_dump() for s in scores], f, indent=2)
+        for skill in skills:
+            try:
+                score = run_evaluation(
+                    skill,
+                    force_generate=args.regenerate,
+                    skip_quality=args.skip_quality
+                )
+                scores.append(score)
+            except Exception as e:
+                print(f"\nError evaluating {skill}: {e}")
+                continue
 
-        print(f"\n\nAll scores saved to: {scores_path}")
+        # Generate and save leaderboard
+        if scores:
+            reporter = ReportGenerator()
+            leaderboard_path = reporter.save_leaderboard(scores)
+            print(f"\n\nLeaderboard saved to: {leaderboard_path}")
+
+            # Display leaderboard
+            print("\n" + "="*60)
+            print("LEADERBOARD")
+            print("="*60 + "\n")
+            print(f"{'Rank':<6}{'Skill':<25}{'Score':<10}{'Grade':<8}")
+            print("-"*50)
+            for i, score in enumerate(sorted(scores, key=lambda s: s.overall_score, reverse=True)):
+                print(f"{i+1:<6}{score.skill_name:<25}{score.overall_score:<10.1f}{score.grade:<8}")
     else:
         print("Error: Specify --skill or --all to run evaluation")
         print("Use --help for usage information")
