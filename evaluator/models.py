@@ -142,11 +142,11 @@ class SkillScore(BaseModel):
     quality_wins: int  # skill_better count
     quality_losses: int = 0  # baseline_better count
     quality_ties: int = 0
-    quality_win_rate: float = Field(default=0.0, ge=0.0, le=1.0)
+    quality_win_rate: Optional[float] = Field(default=None, description="None if not tested")
 
     # Overall score
     overall_score: float = Field(..., ge=0.0, le=100.0)
-    grade: str = Field(..., description="Letter grade A-F")
+    grade: str = Field(..., description="Letter grade A-F, with * if incomplete")
 
     # Cost/Token metrics
     avg_input_tokens: float = 0.0
@@ -176,7 +176,7 @@ class SkillScore(BaseModel):
         return 0
 
     @property
-    def quality_improvement_rate(self) -> float:
+    def quality_improvement_rate(self) -> Optional[float]:
         return self.quality_win_rate
 
     def calculate_grade(self) -> str:

@@ -124,7 +124,8 @@ class Scorer:
                 "quality_wins": 0,
                 "quality_losses": 0,
                 "quality_ties": 0,
-                "quality_win_rate": 0.5,  # Default to 0.5 if no comparisons
+                "quality_win_rate": None,  # None = not tested (don't fake 50%)
+                "quality_tested": False,
                 "avg_input_tokens_with_skill": 0.0,
                 "avg_output_tokens_with_skill": 0.0,
                 "avg_input_tokens_without_skill": 0.0,
@@ -154,6 +155,7 @@ class Scorer:
             "quality_losses": losses,
             "quality_ties": ties,
             "quality_win_rate": win_rate,
+            "quality_tested": True,
             "avg_input_tokens_with_skill": avg_input_with,
             "avg_output_tokens_with_skill": avg_output_with,
             "avg_input_tokens_without_skill": avg_input_without,
@@ -163,51 +165,66 @@ class Scorer:
     def calculate_overall_score(
         self,
         task_pass_rate: float,
-        quality_win_rate: float
+        quality_win_rate: Optional[float],
+        quality_tested: bool
     ) -> float:
         """
         Calculate overall score from component rates.
 
         Formula:
-        overall = (task_pass_rate * 60%) + (quality_win_rate * 40%)
+        - If quality tested: overall = (task_pass_rate * 60%) + (quality_win_rate * 40%)
+        - If NOT tested: overall = task_pass_rate * 60% (only the tested portion)
 
         Result is scaled to 0-100.
 
         Args:
             task_pass_rate: Task completion rate (0.0-1.0)
-            quality_win_rate: Quality win rate (0.0-1.0)
+            quality_win_rate: Quality win rate (0.0-1.0) or None if not tested
+            quality_tested: Whether quality tests were run
 
         Returns:
             Overall score (0.0-100.0)
         """
-        score = (
-            task_pass_rate * self.task_weight +
-            quality_win_rate * self.quality_weight
-        )
+        if quality_tested and quality_win_rate is not None:
+            # Full score with both components
+            score = (
+                task_pass_rate * self.task_weight +
+                quality_win_rate * self.quality_weight
+            )
+        else:
+            # Only task completion was tested - score out of 60 possible points
+            score = task_pass_rate * self.task_weight
 
         # Scale to 0-100
         return score * 100.0
 
-    def assign_grade(self, overall_score: float) -> str:
+    def assign_grade(self, overall_score: float, quality_tested: bool) -> str:
         """
         Assign letter grade based on overall score.
 
         Args:
             overall_score: Score from 0-100
+            quality_tested: Whether quality tests were run
 
         Returns:
-            Letter grade A-F
+            Letter grade A-F, with * suffix if incomplete
         """
         if overall_score >= 90:
-            return "A"
+            grade = "A"
         elif overall_score >= 80:
-            return "B"
+            grade = "B"
         elif overall_score >= 70:
-            return "C"
+            grade = "C"
         elif overall_score >= 60:
-            return "D"
+            grade = "D"
         else:
-            return "F"
+            grade = "F"
+
+        # Mark as incomplete if quality not tested
+        if not quality_tested:
+            grade += "*"  # e.g., "B*" means incomplete
+
+        return grade
 
     def estimate_cost(
         self,
@@ -262,14 +279,18 @@ class Scorer:
         task_metrics = self.calculate_task_metrics(task_results, tasks)
         quality_metrics = self.calculate_quality_metrics(quality_comparisons)
 
+        # Check if quality was actually tested
+        quality_tested = quality_metrics.get("quality_tested", False)
+
         # Calculate overall score using 60/40 formula
         overall_score = self.calculate_overall_score(
             task_pass_rate=task_metrics["task_pass_rate"],
-            quality_win_rate=quality_metrics["quality_win_rate"]
+            quality_win_rate=quality_metrics["quality_win_rate"],
+            quality_tested=quality_tested
         )
 
-        # Assign grade
-        grade = self.assign_grade(overall_score)
+        # Assign grade (with * suffix if incomplete)
+        grade = self.assign_grade(overall_score, quality_tested)
 
         # Calculate average tokens across all operations
         total_input = task_metrics["total_input_tokens"]

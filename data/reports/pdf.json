@@ -1,8 +1,8 @@
 {
   "skill_name": "pdf",
   "skill_description": null,
-  "overall_score": 80.0,
-  "grade": "B",
+  "overall_score": 100.0,
+  "grade": "A",
   "task_completion": {
     "total": 9,
     "passed": 9,
@@ -31,8 +31,8 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 20.32,
-        "tokens": 3804
+        "execution_time": 12.82,
+        "tokens": 3077
       },
       {
         "id": "pdf_easy_2",
@@ -43,8 +43,8 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 18.33,
-        "tokens": 3523
+        "execution_time": 15.76,
+        "tokens": 3229
       },
       {
         "id": "pdf_easy_3",
@@ -55,8 +55,8 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 22.88,
-        "tokens": 3967
+        "execution_time": 6.55,
+        "tokens": 2647
       },
       {
         "id": "pdf_medium_1",
@@ -67,8 +67,8 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 45.57,
-        "tokens": 5879
+        "execution_time": 15.26,
+        "tokens": 3290
       },
       {
         "id": "pdf_medium_2",
@@ -79,8 +79,8 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 47.71,
-        "tokens": 6192
+        "execution_time": 14.53,
+        "tokens": 3159
       },
       {
         "id": "pdf_medium_3",
@@ -91,8 +91,8 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 45.71,
-        "tokens": 5747
+        "execution_time": 17.0,
+        "tokens": 3309
       },
       {
         "id": "pdf_hard_1",
@@ -103,8 +103,8 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 49.34,
-        "tokens": 6400
+        "execution_time": 25.18,
+        "tokens": 3943
       },
       {
         "id": "pdf_hard_2",
@@ -115,8 +115,8 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 49.9,
-        "tokens": 6404
+        "execution_time": 21.07,
+        "tokens": 3662
       },
       {
         "id": "pdf_hard_3",
@@ -127,25 +127,61 @@
           "code_compiles": true,
           "response_relevant": true
         },
-        "execution_time": 49.13,
-        "tokens": 6164
+        "execution_time": 20.71,
+        "tokens": 3489
       }
     ]
   },
   "quality_improvement": {
-    "total_comparisons": 0,
-    "wins": 0,
+    "total_comparisons": 5,
+    "wins": 5,
     "losses": 0,
     "ties": 0,
-    "win_rate": 50.0,
-    "details": []
+    "win_rate": 100.0,
+    "details": [
+      {
+        "prompt": "I need to extract data tables from a PDF financial report and convert them to Excel format for analy...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides a complete, working solution with actual Python code that directly addresses the user's need to extract PDF tables and convert to Excel. It includes error handling, data cleaning, and metadata tracking. Response B only provides general guidance and tool suggestions without actually solving the problem or providing implementable code.",
+        "tokens_with_skill": 3425,
+        "tokens_without_skill": 281
+      },
+      {
+        "prompt": "Help me merge 5 different PDF contracts into one master document while preserving all formatting.",
+        "verdict": "with_skill",
+        "reasoning": "Response B provides a complete, actionable solution with working Python code that directly accomplishes the task of merging PDFs while preserving formatting. Response A only offers general suggestions and tool recommendations without actually helping execute the task. Response B is more thorough, includes error handling, clear instructions, and gives the user everything needed to complete their specific request.",
+        "tokens_with_skill": 2749,
+        "tokens_without_skill": 170
+      },
+      {
+        "prompt": "I have a 100-page PDF that needs to be split into individual chapters, with each chapter being 8-12 ...",
+        "verdict": "with_skill",
+        "reasoning": "Response B provides a complete, working solution that directly accomplishes the task with a ready-to-use Python script. It handles the specific requirements (8-12 pages per chapter, 100-page PDF) automatically and includes error handling, directory creation, and clear documentation. Response A only lists general methods without providing actionable implementation, requiring the user to figure out the details themselves.",
+        "tokens_with_skill": 2842,
+        "tokens_without_skill": 214
+      },
+      {
+        "prompt": "Create a professional PDF invoice template with our company logo and customer information fields.",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides actual executable code using Python's reportlab library to create a PDF invoice template, directly addressing the task requirement. While the code appears to be cut off, it demonstrates a concrete implementation with proper structure, styling, and functionality. Response B, while well-structured and informative, explicitly states it cannot create a PDF file and only provides specifications and guidance rather than completing the actual task requested.",
+        "tokens_with_skill": 4558,
+        "tokens_without_skill": 266
+      },
+      {
+        "prompt": "I need to add password protection to sensitive PDF documents before sharing them with external partn...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides a complete, working solution with actual code that directly accomplishes the task of adding password protection to PDFs. It includes detailed implementation with multiple methods, proper error handling considerations, and ready-to-use Python code. Response B only lists various tools and general approaches without providing a concrete implementation, making it less actionable and complete for someone who needs to actually implement password protection programmatically.",
+        "tokens_with_skill": 3629,
+        "tokens_without_skill": 288
+      }
+    ]
   },
   "cost": {
-    "avg_input_tokens": 2302,
-    "avg_output_tokens": 3041,
-    "avg_total_tokens": 5342,
-    "estimated_per_use": "$0.05"
+    "avg_input_tokens": 2288,
+    "avg_output_tokens": 1070,
+    "avg_total_tokens": 3358,
+    "estimated_per_use": "$0.02"
   },
-  "evaluated_at": "2025-12-31T18:08:10.607129",
+  "evaluated_at": "2025-12-31T18:56:35.387517",
   "model_used": "claude-sonnet-4-20250514"
 }

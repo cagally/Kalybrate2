@@ -1,11 +1,11 @@
 {
   "skill_name": "pdf",
   "skill_description": null,
-  "overall_score": 80.0,
-  "grade": "B",
+  "overall_score": 100.0,
+  "grade": "A",
   "task_pass_rate": 100.0,
-  "quality_win_rate": 50.0,
-  "estimated_cost": "$0.05",
-  "evaluated_at": "2025-12-31T18:08:10.607129",
+  "quality_win_rate": 100.0,
+  "estimated_cost": "$0.02",
+  "evaluated_at": "2025-12-31T18:56:35.387517",
   "model_used": "claude-sonnet-4-20250514"
 }

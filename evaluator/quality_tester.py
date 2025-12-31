@@ -23,8 +23,8 @@ class QualityTester:
     def __init__(
         self,
         api_key: Optional[str] = None,
-        model: str = "claude-sonnet-4-20250514",
-        judge_model: str = "claude-sonnet-4-20250514"
+        model: str = "claude-3-5-haiku-20241022",  # Haiku for cost-efficient execution
+        judge_model: str = "claude-sonnet-4-20250514"  # Sonnet for quality judging
     ):
         """
         Initialize quality tester.
