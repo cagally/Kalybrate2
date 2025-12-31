@@ -83,6 +83,8 @@ class TaskResult(BaseModel):
     # Token tracking
     input_tokens: int = 0
     output_tokens: int = 0
+    # Full response for logging
+    response_text: str = Field(default="", description="Full model response")
 
 
 class SelectivityResult(BaseModel):

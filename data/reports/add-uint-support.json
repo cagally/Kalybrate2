@@ -1,0 +1,178 @@
+{
+  "skill_name": "add-uint-support",
+  "skill_description": null,
+  "overall_score": 76.0,
+  "grade": "C",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "add-uint-support_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 6.24,
+        "tokens": 3646
+      },
+      {
+        "id": "add-uint-support_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 10.75,
+        "tokens": 3834
+      },
+      {
+        "id": "add-uint-support_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 5.93,
+        "tokens": 3636
+      },
+      {
+        "id": "add-uint-support_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 7.91,
+        "tokens": 3964
+      },
+      {
+        "id": "add-uint-support_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 7.45,
+        "tokens": 3744
+      },
+      {
+        "id": "add-uint-support_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 5.94,
+        "tokens": 3714
+      },
+      {
+        "id": "add-uint-support_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 11.95,
+        "tokens": 4234
+      },
+      {
+        "id": "add-uint-support_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 10.37,
+        "tokens": 4180
+      },
+      {
+        "id": "add-uint-support_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "response_relevant": true
+        },
+        "execution_time": 22.53,
+        "tokens": 4967
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 2,
+    "losses": 3,
+    "ties": 0,
+    "win_rate": 40.0,
+    "details": [
+      {
+        "prompt": "I need to add uint32 support to this PyTorch dispatch macro: AT_DISPATCH_V2(dtype, \"op\", AT_WRAP([&]...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides the correct PyTorch dispatch macro syntax using AT_EXPAND(AT_BAREBONES_UNSIGNED_TYPES) which is the proper way to add unsigned integer types including uint32. Response B's first suggestion uses incorrect syntax (AT_EXPAND doesn't take multiple arguments like that), and while the second alternative might work, it's unnecessarily verbose and manual. Response A is more accurate, follows PyTorch conventions, and provides a cleaner solution.",
+        "tokens_with_skill": 3570,
+        "tokens_without_skill": 362
+      },
+      {
+        "prompt": "My PyTorch operator fails with unsigned integer tensors. The dispatch currently uses AT_EXPAND(AT_IN...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides multiple correct and practical solutions with accurate PyTorch API usage, while Response B contains inaccurate information about AT_INTEGRAL_TYPES_V2 and AT_DISPATCH_V2 which are not standard PyTorch macros. Response A's solutions are verifiable and implementable, making it significantly more useful and reliable.",
+        "tokens_with_skill": 3656,
+        "tokens_without_skill": 329
+      },
+      {
+        "prompt": "Convert this old PyTorch dispatch to support unsigned types: AT_DISPATCH_ALL_TYPES(dtype, \"my_op\", [...",
+        "verdict": "without_skill",
+        "reasoning": "Response B provides a correct, practical solution using actual PyTorch macros that exist and work. Response A appears to use non-existent macros like AT_DISPATCH_V2 and AT_BAREBONES_UNSIGNED_TYPES, which would cause compilation errors. Response B offers two valid alternatives with clear explanations of what types are included, making it more useful and accurate.",
+        "tokens_with_skill": 3546,
+        "tokens_without_skill": 250
+      },
+      {
+        "prompt": "I have multiple AT_DISPATCH_V2 calls in my PyTorch kernel file that need consistent uint16/uint32/ui...",
+        "verdict": "without_skill",
+        "reasoning": "Response A directly addresses the task by providing a concrete, actionable template for adding uint16/uint32/uint64 support to AT_DISPATCH_V2 calls. It includes working code with proper syntax, explains key implementation points, and gives the user exactly what they asked for. Response B, while thorough in asking clarifying questions, doesn't actually solve the stated problem or provide any code solution. The user specifically asked for help adding consistent uint support, and Response A delivers that immediately while Response B only offers to help after receiving more information.",
+        "tokens_with_skill": 3411,
+        "tokens_without_skill": 316
+      },
+      {
+        "prompt": "What's the difference between AT_BAREBONES_UNSIGNED_TYPES and AT_INTEGRAL_TYPES_V2 for adding unsign...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides more accurate and detailed information. It correctly identifies the specific types in each macro (AT_BAREBONES_UNSIGNED_TYPES contains kUInt16, kUInt32, kUInt64, while AT_INTEGRAL_TYPES_V2 includes all integral types plus unsigned ones). Response A also provides better code examples showing actual PyTorch dispatch patterns, clearer use case guidance, and more comprehensive explanations. Response B contains inaccuracies (claiming AT_BAREBONES_UNSIGNED_TYPES only includes uint8_t) and provides less useful information overall.",
+        "tokens_with_skill": 3843,
+        "tokens_without_skill": 355
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 3373,
+    "avg_output_tokens": 480,
+    "avg_total_tokens": 3853,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2025-12-31T19:00:43.453152",
+  "model_used": "claude-sonnet-4-20250514"
+}

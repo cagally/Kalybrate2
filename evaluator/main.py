@@ -19,6 +19,7 @@ from evaluator.task_runner import TaskRunner
 from evaluator.quality_tester import QualityTester
 from evaluator.scorer import Scorer
 from evaluator.report import ReportGenerator
+from evaluator.data_logger import DataLogger
 from evaluator.models import BenchmarkSuite, Task, SkillScore
 
 
@@ -173,11 +174,17 @@ def run_evaluation(
 
     start_time = time.time()
 
+    # Initialize data logger
+    data_logger = DataLogger()
+
     # Load SKILL.md content
     print("Loading SKILL.md...")
     skill_md_content = load_skill_md_content(skill_name)
     if skill_md_content:
         print(f"  Loaded: {len(skill_md_content):,} chars")
+        # Save SKILL.md copy
+        if save_results:
+            data_logger.save_skill_md(skill_name, skill_md_content)
     else:
         print("  Warning: No SKILL.md content found")
 
@@ -199,15 +206,24 @@ def run_evaluation(
             task_pass_rate=0.0,
             total_quality_comparisons=0,
             quality_wins=0,
-            quality_win_rate=0.5,
+            quality_win_rate=None,
             overall_score=0.0,
-            grade="F",
+            grade="F*",
             execution_time=time.time() - start_time
         )
 
     print(f"  Tasks: {len(benchmarks.tasks)}")
     print(f"  Quality prompts: {len(benchmarks.quality_prompts)}")
     print(f"  Skill claims: {len(benchmarks.skill_claims)}")
+
+    # Save generated tests
+    if save_results:
+        data_logger.save_generated_tests(
+            skill_name=skill_name,
+            skill_claims=benchmarks.skill_claims,
+            tasks=[t.model_dump() for t in benchmarks.tasks],
+            quality_prompts=benchmarks.quality_prompts
+        )
 
     # Initialize components
     task_runner = TaskRunner()
@@ -227,6 +243,26 @@ def run_evaluation(
         save_output=save_results
     )
 
+    # Save individual task results
+    if save_results:
+        task_map = {t.id: t for t in benchmarks.tasks}
+        for result in task_results:
+            task = task_map.get(result.task_id)
+            data_logger.save_task_result(
+                skill_name=skill_name,
+                task_id=result.task_id,
+                prompt=task.prompt if task else "",
+                difficulty=task.difficulty if task else "unknown",
+                model=task_runner.model,
+                response=result.response_text,
+                criteria_results=result.criteria_results,
+                passed=result.passed,
+                input_tokens=result.input_tokens,
+                output_tokens=result.output_tokens,
+                execution_time=result.execution_time,
+                error=result.error
+            )
+
     passed = sum(1 for r in task_results if r.passed)
     total_task_tokens = sum(r.input_tokens + r.output_tokens for r in task_results)
     print(f"\nTask Results: {passed}/{len(task_results)} passed")
@@ -244,6 +280,24 @@ def run_evaluation(
             skill_name=skill_name,
             skill_md_content=skill_md_content
         )
+
+        # Save individual quality comparisons
+        if save_results:
+            for i, comp in enumerate(quality_comparisons):
+                data_logger.save_quality_comparison(
+                    skill_name=skill_name,
+                    comparison_index=i,
+                    prompt=comp.prompt,
+                    baseline_response=comp.without_skill_output,
+                    baseline_input_tokens=comp.without_skill_input_tokens,
+                    baseline_output_tokens=comp.without_skill_output_tokens,
+                    skill_response=comp.with_skill_output,
+                    skill_input_tokens=comp.with_skill_input_tokens,
+                    skill_output_tokens=comp.with_skill_output_tokens,
+                    judge_verdict=comp.judge_verdict or "unknown",
+                    judge_reasoning=comp.judge_reasoning or "",
+                    judge_model=quality_tester.judge_model
+                )
 
         wins = sum(1 for c in quality_comparisons if c.judge_verdict == "with_skill")
         losses = sum(1 for c in quality_comparisons if c.judge_verdict == "without_skill")
@@ -284,7 +338,8 @@ def run_evaluation(
     print(f"Task Completion (60%): {skill_score.task_pass_rate*100:.1f}% ({skill_score.tasks_passed}/{skill_score.total_tasks})")
     print(f"  By difficulty: {skill_score.tasks_by_difficulty}")
     print()
-    print(f"Quality Improvement (40%): {skill_score.quality_win_rate*100:.1f}%")
+    quality_rate = skill_score.quality_win_rate * 100 if skill_score.quality_win_rate is not None else "N/A"
+    print(f"Quality Improvement (40%): {quality_rate}{'%' if isinstance(quality_rate, float) else ''}")
     print(f"  Wins: {skill_score.quality_wins}, Losses: {skill_score.quality_losses}, Ties: {skill_score.quality_ties}")
     print()
     print(f"Cost Estimate: {skill_score.estimated_cost_per_use}/use")
@@ -293,16 +348,32 @@ def run_evaluation(
 
     # Save results
     if save_results:
-        # Save detailed results
+        # Save summary and update leaderboard
+        summary = data_logger.save_summary(
+            skill_name=skill_name,
+            overall_score=skill_score.overall_score,
+            grade=skill_score.grade,
+            tasks_passed=skill_score.tasks_passed,
+            tasks_total=skill_score.total_tasks,
+            task_pass_rate=skill_score.task_pass_rate,
+            quality_wins=skill_score.quality_wins,
+            quality_losses=skill_score.quality_losses,
+            quality_ties=skill_score.quality_ties,
+            quality_win_rate=skill_score.quality_win_rate,
+            avg_tokens=skill_score.avg_total_tokens,
+            estimated_cost=skill_score.estimated_cost_per_use,
+            task_model=task_runner.model,
+            judge_model=quality_tester.judge_model,
+            execution_time=execution_time
+        )
+
+        # Update leaderboard after each skill
+        leaderboard = data_logger.update_leaderboard(summary)
+        print(f"\nLeaderboard updated: {leaderboard['total_skills']} skills ranked")
+
+        # Also save to old locations for compatibility
         results_dir = Path("data/results") / skill_name
         results_dir.mkdir(parents=True, exist_ok=True)
-
-        with open(results_dir / "task_results.json", 'w') as f:
-            json.dump([r.model_dump() for r in task_results], f, indent=2)
-
-        if quality_comparisons:
-            with open(results_dir / "quality_comparisons.json", 'w') as f:
-                json.dump([c.model_dump() for c in quality_comparisons], f, indent=2)
 
         # Generate and save report
         report = reporter.generate_skill_report(
@@ -313,12 +384,8 @@ def run_evaluation(
         )
         report_path = reporter.save_report(report)
 
-        # Also save score summary
-        score_path = reporter.save_score_summary(skill_score)
-
-        print(f"\nResults saved to: {results_dir}/")
+        print(f"\nData saved to: data/evaluations/{skill_name}/")
         print(f"Report saved to: {report_path}")
-        print(f"Score saved to: {score_path}")
 
     return skill_score
 

@@ -267,8 +267,8 @@ Respond with JSON only (no markdown):
 
         return QualityComparison(
             prompt=prompt,
-            with_skill_output=with_skill["output"][:1000],  # Truncate for storage
-            without_skill_output=without_skill["output"][:1000],
+            with_skill_output=with_skill["output"],  # Full response for logging
+            without_skill_output=without_skill["output"],  # Full response for logging
             with_skill_input_tokens=with_skill["input_tokens"],
             with_skill_output_tokens=with_skill["output_tokens"],
             without_skill_input_tokens=without_skill["input_tokens"],

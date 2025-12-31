@@ -348,7 +348,8 @@ Follow these instructions when relevant. When creating files, write Python code 
                 execution_time=execution_time,
                 files_created=created_files if output_type == OutputType.FILE else [],
                 input_tokens=input_tokens,
-                output_tokens=output_tokens
+                output_tokens=output_tokens,
+                response_text=response_text  # Full response for logging
             )
 
         except Exception as e:
@@ -365,7 +366,8 @@ Follow these instructions when relevant. When creating files, write Python code 
                 execution_time=execution_time,
                 files_created=[],
                 input_tokens=input_tokens,
-                output_tokens=output_tokens
+                output_tokens=output_tokens,
+                response_text=""  # Empty on error
             )
 
     def run_tasks(

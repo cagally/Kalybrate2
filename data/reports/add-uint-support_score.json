@@ -1,0 +1,11 @@
+{
+  "skill_name": "add-uint-support",
+  "skill_description": null,
+  "overall_score": 76.0,
+  "grade": "C",
+  "task_pass_rate": 100.0,
+  "quality_win_rate": 40.0,
+  "estimated_cost": "$0.02",
+  "evaluated_at": "2025-12-31T19:00:43.453152",
+  "model_used": "claude-sonnet-4-20250514"
+}
