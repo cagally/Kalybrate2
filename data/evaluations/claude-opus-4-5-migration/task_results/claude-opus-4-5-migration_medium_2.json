@@ -1,0 +1,27 @@
+{
+  "task_id": "claude-opus-4-5-migration_medium_2",
+  "prompt": "I have a multi-file Python project using various Claude models across different platforms. Can you help me migrate all the Sonnet and old Opus references to Opus 4.5? I'm using Anthropic API, AWS Bedrock, and Google Vertex AI in different parts.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you migrate your project's model references to Opus 4.5. I'll walk you through a comprehensive migration process.\n\nFirst, I'll create a migration script to help you update your model references:\n\n```python\nimport os\nimport re\n\ndef migrate_model_references(directory):\n    model_mappings = {\n        # Anthropic API (1P) Mappings\n        'claude-sonnet-4-20250514': 'claude-opus-4-5-20251101',\n        'claude-sonnet-4-5-20250929': 'claude-opus-4-5-20251101',\n        'claude-opus-4-1-20250422': 'claude-opus-4-5-20251101',\n        \n        # AWS Bedrock Mappings\n        'anthropic.claude-sonnet-4-20250514-v1:0': 'anthropic.claude-opus-4-5-20251101-v1:0',\n        'anthropic.claude-sonnet-4-5-20250929-v1:0': 'anthropic.claude-opus-4-5-20251101-v1:0',\n        'anthropic.claude-opus-4-1-20250422-v1:0': 'anthropic.claude-opus-4-5-20251101-v1:0',\n        \n        # Google Vertex AI Mappings\n        'claude-sonnet-4@20250514': 'claude-opus-4-5@20251101',\n        'claude-sonnet-4-5@20250929': 'claude-opus-4-5@20251101',\n        'claude-opus-4-1@20250422': 'claude-opus-4-5@20251101'\n    }\n    \n    def replace_in_file(file_path):\n        with open(file_path, 'r') as f:\n            content = f.read()\n        \n        # Flag to track if any changes were made\n        changes_made = False\n        \n        # Replace model references\n        for old_model, new_model in model_mappings.items():\n            if old_model in content:\n                content = content.replace(old_model, new_model)\n                changes_made = True\n        \n        # Remove unsupported beta headers\n        beta_header_pattern = r'[\\'\"]context-1m-2025-08-07[\\'\"]'\n        if re.search(beta_header_pattern, content):\n            content = re.sub(beta_header_pattern, '# Note: 1M context beta not yet supported with Opus 4.5', content)\n            changes_made = True\n        \n        # Write changes back if any were made\n        if changes_made:\n            with open(file_path, 'w') as f:\n                f.write(content)\n            print(f\"Updated model references in: {file_path}\")\n    \n    # Recursively search for Python files\n    for root, _, files in os.walk(directory):\n        for file in files:\n            if file.endswith('.py'):\n                file_path = os.path.join(root, file)\n                replace_in_file(file_path)\n\n# Example usage\nproject_directory = '.'  # Current directory, adjust as needed\nmigrate_model_references(project_directory)\n```\n\nI'll also create a migration guide for your reference:\n\n```python\n# OPUS 4.5 MIGRATION NOTES\n\n\"\"\"\nMigration Checklist:\n1. Model references updated to Opus 4.5\n2. Removed unsupported beta headers\n3. Recommended: Review prompts for potential overtriggering\n4. Consider adding effort parameter if complex tasks are needed\n\nPotential Areas to Check:\n- API initialization code\n- Model selection logic\n- Any hardcoded model strings\n- Configuration files\n\"\"\"\n\ndef migration_recommendations():\n    \"\"\"Additional migration guidance\"\"\"\n    print(\"Opus 4.5 Migration Recommendations:\")\n    print(\"1. Add 'effort' parameter for complex tasks\")\n    print(\"2. Review system prompts for potential overtriggering\")\n    print(\"3. Soften critical language in prompts\")\n    print(\"4. Check tool usage instructions\")\n\n# Optional: Add effort parameter example\ndef example_effort_usage():\n    \"\"\"Example of adding effort parameter\"\"\"\n    # anthropic.Completions.create(\n    #     model='claude-opus-4-5-20251101',\n    #     messages=[...],\n    #     effort='high'  # Optional parameter for complex tasks\n    # )\n```\n\nRecommendations for your migration:\n\n1. Model String Updates\n   - The script will automatically replace all Sonnet and old Opus model strings\n   - Covers Anthropic API, AWS Bedrock, and Google Vertex AI platforms\n\n2. Beta Header Handling\n   - Removes `context-1m-2025-08-07` beta headers\n   - Adds a comment explaining the removal\n\n3. Prompt Considerations\n   - Review system prompts for potential overtriggering\n   - Soften critical language (e.g., \"MUST\" \u2192 \"should\")\n   - Consider adding the effort parameter for complex tasks\n\nWould you like me to run the migration script on your project directory? If so, please confirm the directory path, and I can help you apply these changes.\n\nAdditional questions:\n1. Do you want me to help you review and adjust any system prompts?\n2. Are you using any platform-specific configuration that might need special handling?\n3. Would you like me to generate a migration report after running the script?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 1522,
+    "output": 1319,
+    "total": 2841
+  },
+  "execution_time": 22.006398916244507,
+  "error": null,
+  "timestamp": "2026-01-01T17:50:54.866387"
+}

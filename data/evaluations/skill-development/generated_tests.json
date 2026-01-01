@@ -1,0 +1,129 @@
+{
+  "skill_claims": [
+    "Provides guidance for creating effective skills for Claude Code plugins",
+    "Helps structure skills with proper YAML frontmatter, descriptions, and organization",
+    "Guides progressive disclosure design with scripts, references, and assets",
+    "Assists with skill development best practices and workflows",
+    "Helps organize skill content and improve skill descriptions"
+  ],
+  "tasks": [
+    {
+      "id": "skill-development_easy_1",
+      "prompt": "I want to create a simple skill for my Claude plugin that helps with basic math calculations. Can you help me set it up?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Provides guidance for creating effective skills for Claude Code plugins"
+    },
+    {
+      "id": "skill-development_easy_2",
+      "prompt": "My skill description is too vague. It just says 'helps with files'. How can I make it better?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Helps organize skill content and improve skill descriptions"
+    },
+    {
+      "id": "skill-development_easy_3",
+      "prompt": "What's the difference between putting something in scripts vs references vs assets in a skill?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Guides progressive disclosure design with scripts, references, and assets"
+    },
+    {
+      "id": "skill-development_medium_1",
+      "prompt": "I'm building a skill to help developers work with our company's REST API. I have API docs, some Python examples, and a logo. How should I organize this into a proper skill structure?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Helps structure skills with proper YAML frontmatter, descriptions, and organization"
+    },
+    {
+      "id": "skill-development_medium_2",
+      "prompt": "I have a skill that keeps loading too much content into context and hitting limits. The skill handles database queries and has lots of schema documentation. How can I fix this?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Guides progressive disclosure design with scripts, references, and assets"
+    },
+    {
+      "id": "skill-development_medium_3",
+      "prompt": "Create a complete SKILL.md file for a skill that helps generate marketing reports. It should include charts, use our brand assets, and reference our style guide.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Provides guidance for creating effective skills for Claude Code plugins"
+    },
+    {
+      "id": "skill-development_hard_1",
+      "prompt": "I'm building a complex skill for financial modeling that needs to handle Excel templates, Python calculation scripts, regulatory documentation, and company-specific formulas. Walk me through the complete skill creation process and create the directory structure.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Assists with skill development best practices and workflows"
+    },
+    {
+      "id": "skill-development_hard_2",
+      "prompt": "My team has three different skills that overlap - one for data analysis, one for reporting, and one for visualization. They're causing conflicts and confusion. Help me redesign them following best practices.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Assists with skill development best practices and workflows"
+    },
+    {
+      "id": "skill-development_hard_3",
+      "prompt": "Design a complete skill architecture for a DevOps automation suite that includes deployment scripts, configuration templates, monitoring dashboards, and troubleshooting guides. The skill needs to work across multiple environments and handle sensitive credentials properly.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Provides guidance for creating effective skills for Claude Code plugins"
+    }
+  ],
+  "quality_prompts": [
+    "I want to add a new capability to my Claude plugin that helps with PDF manipulation. How should I approach this?",
+    "My skill isn't being triggered when users ask for help with spreadsheet analysis. What might be wrong?",
+    "I have a bunch of company documentation and scripts that I want to make available to Claude. What's the best way to organize this?",
+    "Help me create something that will make Claude better at handling our customer support workflows.",
+    "I'm getting context window errors when my skill loads. How can I optimize it?"
+  ],
+  "generated_at": "2026-01-01T19:23:16.918078",
+  "model": "claude-sonnet-4-20250514"
+}

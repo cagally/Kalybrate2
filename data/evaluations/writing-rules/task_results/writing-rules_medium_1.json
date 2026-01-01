@@ -1,0 +1,21 @@
+{
+  "task_id": "writing-rules_medium_1",
+  "prompt": "I need a hookify rule that only triggers when I'm editing TypeScript files AND adding console.log statements. It should warn me but not block the operation.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a Hookify rule for console.log statements in TypeScript files. I'll write a Python script that saves the rule to the specified temporary directory.\n\n```python\nimport os\n\n# Use the provided OUTPUT_DIR\noutput_dir = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task__wgt622g\"\nhookify_dir = os.path.join(output_dir, \".claude\")\n\n# Ensure the .claude directory exists\nos.makedirs(hookify_dir, exist_ok=True)\n\n# Create the hookify rule file\nrule_content = '''---\nname: typescript-console-log-warning\nenabled: true\nevent: file\nconditions:\n  - field: file_path\n    operator: ends_with\n    pattern: .ts\n  - field: new_text\n    operator: contains\n    pattern: console.log(\n---\n\n\u26a0\ufe0f **Console Log in TypeScript File**\n\nYou've added a `console.log()` statement to a TypeScript file. \n\n**Best Practices:**\n- Remove debug logs before committing\n- Use proper logging libraries for production\n- Consider using environment-based logging\n'''\n\n# Write the rule file\nrule_file_path = os.path.join(hookify_dir, \"hookify.typescript-console-log.local.md\")\nwith open(rule_file_path, 'w') as f:\n    f.write(rule_content)\n\nprint(f\"Hookify rule created at: {rule_file_path}\")\n```\n\nThis script does the following:\n1. Uses the provided `OUTPUT_DIR`\n2. Creates a `.claude` subdirectory \n3. Writes a Hookify rule that:\n   - Only triggers on TypeScript files (ending in .ts)\n   - Checks for `console.log(` in the new text\n   - Provides a warning message about console.log best practices\n4. Saves the rule as a local markdown file\n\nThe rule will warn you when you add `console.log()` to a TypeScript file, but won't block the operation. The warning provides guidance on best practices for logging.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2747,
+    "output": 516,
+    "total": 3263
+  },
+  "execution_time": 9.212729930877686,
+  "error": null,
+  "timestamp": "2026-01-01T09:07:00.104642"
+}

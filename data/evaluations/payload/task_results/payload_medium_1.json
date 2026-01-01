@@ -1,0 +1,29 @@
+{
+  "task_id": "payload_medium_1",
+  "prompt": "I need to restrict blog posts so users can only see and edit their own posts, but admins can see everything. How do I implement this access control in Payload?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll provide a comprehensive solution for implementing row-level access control for blog posts with different permissions for admins and regular users. I'll break this down into multiple files:\n\n1. `src/collections/Posts.ts`:\n```typescript\nimport type { CollectionConfig, Access } from 'payload/types'\nimport type { User } from '../payload-types'\n\n// Restrict access so users can only see/edit their own posts\n// Admins can see everything\nexport const ownPostsAccess: Access = ({ req }) => {\n  const user = req.user as User\n\n  // If no user is logged in, deny access\n  if (!user) return false\n\n  // If user is an admin, allow full access\n  if (user.roles?.includes('admin')) return true\n\n  // For non-admin users, allow access only to their own posts\n  return {\n    author: {\n      equals: user.id\n    }\n  }\n}\n\nexport const Posts: CollectionConfig = {\n  slug: 'posts',\n  admin: {\n    useAsTitle: 'title',\n    defaultColumns: ['title', 'author', 'status', 'createdAt']\n  },\n  access: {\n    // Apply row-level access control to all operations\n    read: ownPostsAccess,    // Can only read own posts\n    update: ownPostsAccess,  // Can only update own posts\n    delete: ownPostsAccess,  // Can only delete own posts\n    create: ({ req }) => {\n      // Ensure logged-in users can create posts\n      const user = req.user as User\n      return !!user\n    }\n  },\n  fields: [\n    {\n      name: 'title',\n      type: 'text',\n      required: true\n    },\n    {\n      name: 'content',\n      type: 'richText',\n      required: true\n    },\n    {\n      name: 'author',\n      type: 'relationship',\n      relationTo: 'users',\n      required: true,\n      defaultValue: ({ user }) => user.id,  // Auto-assign current user as author\n      admin: {\n        // Prevent manual author selection for non-admins\n        condition: (data) => data.user?.roles?.includes('admin') || false\n      }\n    },\n    {\n      name: 'status',\n      type: 'select',\n      options: [\n        { label: 'Draft', value: 'draft' },\n        { label: 'Published', value: 'published' }\n      ],\n      defaultValue: 'draft'\n    }\n  ],\n  hooks: {\n    // Automatically set the author when creating a post\n    beforeChange: [\n      ({ data, req }) => {\n        // If no author is set, use the current user\n        if (!data.author) {\n          data.author = req.user.id\n        }\n        return data\n      }\n    ]\n  },\n  timestamps: true\n}\n```\n\n2. Update your `src/collections/Users.ts` to include roles:\n```typescript\nimport type { CollectionConfig } from 'payload/types'\n\nexport const Users: CollectionConfig = {\n  slug: 'users',\n  auth: true,\n  admin: {\n    useAsTitle: 'email'\n  },\n  fields: [\n    {\n      name: 'roles',\n      type: 'select',\n      hasMany: true,\n      options: [\n        { label: 'Admin', value: 'admin' },\n        { label: 'Editor', value: 'editor' },\n        { label: 'User', value: 'user' }\n      ],\n      defaultValue: ['user']\n    }\n  ]\n}\n```\n\n3. In your `payload.config.ts`, ensure these collections are added:\n```typescript\nimport { buildConfig } from 'payload/config'\nimport { Users } from './collections/Users'\nimport { Posts } from './collections/Posts'\n\nexport default buildConfig({\n  collections: [\n    Users,\n    Posts\n  ],\n  // other configurations...\n})\n```\n\n## Key Access Control Features:\n\n1. **Row-Level Access Control**: \n   - Users can only read, update, and delete their own posts\n   - Admins can access all posts\n\n2. **Automatic Author Assignment**:\n   - Posts are automatically assigned to the logged-in user\n   - Prevents users from creating posts for other users\n\n3. **Role-Based Permissions**:\n   - Admin role bypasses all restrictions\n   - Default user role has limited access\n\n## Example Usage Scenarios:\n\n```typescript\n// In an API route or server component\nconst payload = await getPayload()\n\n// Regular user can only fetch their own posts\nconst userPosts = await payload.find({\n  collection: 'posts',\n  user: currentUser, // Important: pass the user context\n  overrideAccess: false // Ensures access control is applied\n})\n\n// Admin can fetch all posts\nconst allPosts = await payload.find({\n  collection: 'posts',\n  user: adminUser,\n  overrideAccess: false\n})\n```\n\n## Security Considerations:\n\n1. Always use `overrideAccess: false` when performing operations on behalf of a user\n2. The access control is enforced at the database query level\n3. Prevents unauthorized access even if someone tries to manipulate request parameters\n\n## Recommendations:\n\n- Implement proper authentication\n- Use strong password policies\n- Enable two-factor authentication\n- Regularly audit user roles and permissions\n\nThis implementation provides a robust, type-safe, and secure way to manage blog post access control in Payload CMS, ensuring users can only interact with their own content while giving administrators full visibility and management capabilities.",
+  "criteria_results": {
+    "code_extracted": true,
+    "has_type_annotations": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "has_type_annotations": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 4279,
+    "output": 1361,
+    "total": 5640
+  },
+  "execution_time": 23.09312629699707,
+  "error": null,
+  "timestamp": "2026-01-01T19:09:08.296444"
+}

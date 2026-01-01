@@ -49,6 +49,7 @@ class Scorer:
     ) -> Dict:
         """
         Calculate task completion metrics.
+        Only counts VERIFIED criteria toward pass rate.
 
         Args:
             task_results: List of TaskResult objects
@@ -64,16 +65,39 @@ class Scorer:
                 "task_pass_rate": 0.0,
                 "tasks_by_difficulty": {},
                 "total_input_tokens": 0,
-                "total_output_tokens": 0
+                "total_output_tokens": 0,
+                "verified_criteria_passed": 0,
+                "verified_criteria_total": 0,
+                "verification_summary": {
+                    "full": 0,
+                    "partial": 0,
+                    "unverified": 0
+                }
             }
 
         total = len(task_results)
         passed = sum(1 for r in task_results if r.passed)
-        pass_rate = passed / total
+
+        # Aggregate verified criteria across all tasks
+        total_verified_passed = sum(r.verified_criteria_passed for r in task_results)
+        total_verified_total = sum(r.verified_criteria_total for r in task_results)
+
+        # Calculate pass rate based on VERIFIED criteria only
+        if total_verified_total > 0:
+            pass_rate = total_verified_passed / total_verified_total
+        else:
+            pass_rate = 0.0  # No verified criteria = 0%
 
         # Track total tokens from task runs
         total_input_tokens = sum(r.input_tokens for r in task_results)
         total_output_tokens = sum(r.output_tokens for r in task_results)
+
+        # Track verification levels
+        verification_summary = {
+            "full": sum(1 for r in task_results if r.verification_level.value == "full"),
+            "partial": sum(1 for r in task_results if r.verification_level.value == "partial"),
+            "unverified": sum(1 for r in task_results if r.verification_level.value == "unverified")
+        }
 
         # Track by difficulty if tasks provided
         by_difficulty = {
@@ -102,7 +126,10 @@ class Scorer:
             "task_pass_rate": pass_rate,
             "tasks_by_difficulty": by_difficulty,
             "total_input_tokens": total_input_tokens,
-            "total_output_tokens": total_output_tokens
+            "total_output_tokens": total_output_tokens,
+            "verified_criteria_passed": total_verified_passed,
+            "verified_criteria_total": total_verified_total,
+            "verification_summary": verification_summary
         }
 
     def calculate_quality_metrics(

@@ -1,0 +1,31 @@
+{
+  "task_id": "command-development_easy_2",
+  "prompt": "Create a command that takes a file path as an argument and analyzes that specific file",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a slash command for analyzing a specific file using the specified OUTPUT_DIR. I'll use Python to create the Markdown file for the command.\n\n```python\nimport os\n\n# Use the provided OUTPUT_DIR\nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_5z7wfoqf\"\n\n# Ensure the directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Define the command content\ncommand_content = '''---\ndescription: Analyze a specific file for code quality and insights\nargument-hint: [file-path]\nallowed-tools: Read, Bash(*)\n---\n\n# Validate file existence\n$IF(!test -f $1,\n  File $1 does not exist. Please provide a valid file path.,\n  Continue with analysis\n)\n\n# Basic file information\nFile Path: $1\nFile Type: !`file $1`\nFile Size: !`du -h $1`\nLine Count: !`wc -l $1`\n\n# Language Detection\nLanguage: !`which highlight && highlight -O ansi $1 | head -n 1 || echo \"Could not detect language\"`\n\n# Content Analysis\n1. Perform initial code scan:\n   - Check for potential code smells\n   - Identify complexity indicators\n   - Look for possible security issues\n\n2. Detailed file insights:\n   - Coding style consistency\n   - Potential performance bottlenecks\n   - Documentation and comment quality\n   - Naming conventions\n   - Structural patterns\n\n3. Recommendations:\n   Provide actionable suggestions for improving the file based on the analysis.\n'''\n\n# Define the file path\nfile_path = os.path.join(OUTPUT_DIR, 'analyze-file.md')\n\n# Write the command file\nwith open(file_path, 'w') as f:\n    f.write(command_content)\n\nprint(f\"Command file created at {file_path}\")\n```\n\nThis command does the following:\n\n1. Uses a YAML frontmatter to define the command's metadata\n2. Adds an argument hint for a file path\n3. Validates file existence\n4. Gathers basic file information using bash commands:\n   - File type\n   - File size\n   - Line count\n   - Language detection\n5. Performs a multi-step analysis with placeholders for code quality checks\n6. Provides recommendations section\n\nThe command can be used like:\n```\n/analyze-file path/to/your/file.py\n```\n\nFeatures:\n- Dynamic file path argument\n- Multiple information gathering steps\n- Flexible analysis framework\n- Error handling for non-existent files\n\nThe file is saved in the specified OUTPUT_DIR as `analyze-file.md`, making it a valid slash command for Claude Code.",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 3,
+    "total": 3
+  },
+  "passed": true,
+  "tokens": {
+    "input": 5050,
+    "output": 661,
+    "total": 5711
+  },
+  "execution_time": 13.02566909790039,
+  "error": null,
+  "timestamp": "2026-01-01T18:01:28.855957"
+}

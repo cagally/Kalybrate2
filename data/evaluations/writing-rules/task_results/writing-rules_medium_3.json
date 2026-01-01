@@ -1,0 +1,21 @@
+{
+  "task_id": "writing-rules_medium_3",
+  "prompt": "I want to prevent myself from accidentally running chmod 777 or any other dangerous permission commands. This should completely block the operation.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a Hookify rule to prevent dangerous chmod commands. I'll save the file in the specified output directory with a descriptive filename.\n\nI'll create the file at `{OUTPUT_DIR}/.claude/hookify.prevent-dangerous-chmod.local.md` with a rule that blocks chmod commands that grant overly permissive access.\n\n```python\nimport os\n\n# Ensure .claude directory exists\nclaude_dir = os.path.join(OUTPUT_DIR, '.claude')\nos.makedirs(claude_dir, exist_ok=True)\n\nrule_content = \"\"\"---\nname: prevent-dangerous-chmod\nenabled: true\nevent: bash\npattern: chmod\\\\s+(777|a\\\\+rwx|666)\naction: block\n---\n\n\u26a0\ufe0f **Dangerous Permission Change Blocked!**\n\nYou attempted to run a chmod command that grants extremely permissive file permissions.\n\n**Why this is dangerous:**\n- `chmod 777` gives read, write, and execute permissions to EVERYONE\n- This can expose sensitive files to all users on the system\n- It's a significant security risk\n\n**Recommended Alternatives:**\n- Use more restrictive permissions like:\n  - `chmod 755` for executable files\n  - `chmod 644` for regular files\n  - `chmod 600` for sensitive configuration files\n- Always follow the principle of least privilege\n- Use `chmod u+rwx,go-w` for more granular control\n\"\"\"\n\n# Write the rule file\nrule_path = os.path.join(claude_dir, 'hookify.prevent-dangerous-chmod.local.md')\nwith open(rule_path, 'w') as f:\n    f.write(rule_content)\n\nprint(f\"Created Hookify rule at {rule_path}\")\n```\n\nThis rule does the following:\n1. Blocks chmod commands that set permissions to 777, a+rwx, or 666\n2. Uses the `block` action to completely prevent the operation\n3. Provides a detailed explanation of why such permissions are dangerous\n4. Suggests safer permission setting practices\n\nThe pattern matches:\n- `chmod 777` (full permissions for all)\n- `chmod a+rwx` (equivalent to 777)\n- `chmod 666` (read/write for all, but no execute)\n\nWhen a user tries to run such a command, the rule will intercept and block it, showing the warning message.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2741,
+    "output": 553,
+    "total": 3294
+  },
+  "execution_time": 11.367204904556274,
+  "error": null,
+  "timestamp": "2026-01-01T09:07:00.105184"
+}

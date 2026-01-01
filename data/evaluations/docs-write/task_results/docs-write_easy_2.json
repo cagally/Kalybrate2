@@ -1,0 +1,33 @@
+{
+  "task_id": "docs-write_easy_2",
+  "prompt": "Can you write a simple installation guide for our dashboard tool? Users just need to know how to install it via npm and run the basic setup command.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll use the Python `docs-write` skill to create a clear, concise installation guide for the dashboard tool. I'll save the file using the `OUTPUT_DIR` variable.\n\n```python\nimport os\n\noutput_path = os.path.join(os.environ.get('OUTPUT_DIR', '/tmp'), 'INSTALL.md')\n\ninstall_content = \"\"\"# Dashboard Tool Installation\n\n## Quick Installation\n\n### Prerequisites\n- Node.js (version 14+ recommended)\n- npm package manager\n\n### Install via npm\n\nRun the following command to install the dashboard tool globally:\n\n```bash\nnpm install -g dashboard-tool\n```\n\n### Basic Setup\n\nAfter installation, initialize your dashboard configuration:\n\n```bash\ndashboard-tool init\n```\n\nThis command will:\n- Create a default configuration\n- Set up your initial project structure\n- Provide basic template files\n\n## Next Steps\n- Configure your dashboard settings in the generated `dashboard.config.json`\n- Run `dashboard-tool start` to launch your dashboard\n\n## Troubleshooting\n- Ensure you have the latest version: `npm update -g dashboard-tool`\n- Check [our documentation](https://example.com/docs) for detailed setup instructions\n\"\"\"\n\nwith open(output_path, 'w') as f:\n    f.write(install_content)\n\nprint(f\"Installation guide written to {output_path}\")\n```\n\nThis script does the following:\n1. Uses the `OUTPUT_DIR` environment variable (or `/tmp` as fallback)\n2. Creates an `INSTALL.md` file\n3. Writes a clear, user-friendly installation guide\n4. Follows Metabase's documentation style guide:\n   - Conversational tone\n   - Clear instructions\n   - Minimal but helpful context\n   - Descriptive headings\n   - Practical code examples\n\nThe guide provides:\n- Prerequisites\n- Installation command\n- Basic setup steps\n- Next steps\n- Troubleshooting hint",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false,
+    "code_extracted": false
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified - no file created",
+    "file_has_content": "verified - no file created",
+    "code_extracted": "verified - no file created"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 0,
+    "total": 1
+  },
+  "passed": false,
+  "tokens": {
+    "input": 927,
+    "output": 444,
+    "total": 1371
+  },
+  "execution_time": 8.363393783569336,
+  "error": null,
+  "timestamp": "2026-01-01T18:37:33.746212"
+}

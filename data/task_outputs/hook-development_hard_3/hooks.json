@@ -1,0 +1,60 @@
+{
+    "description": "Advanced Multi-Layered Security and Quality Hook System",
+    "hooks": {
+        "UserPromptSubmit": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Perform a comprehensive security and intent analysis on the incoming user prompt. Check for potential security risks, inappropriate content, or malicious intent. Provide context-aware warnings or recommendations."
+                    }
+                ]
+            }
+        ],
+        "PreToolUse": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Perform a context-aware validation of the tool call. Analyze the following aspects:\n1. Security risks\n2. Potential unintended consequences\n3. Alignment with project goals\n4. Resource usage implications\n\nProvide a detailed assessment with a recommendation to approve, modify, or deny the tool call."
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Perform a comprehensive post-action analysis:\n1. Validate the tool's output for correctness\n2. Check for potential security vulnerabilities\n3. Assess code quality and best practices\n4. Identify potential improvements or risks\n\nProvide detailed feedback and recommendations."
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "prompt",
+                        "prompt": "Conduct a final comprehensive review before task completion:\n1. Verify all project requirements are met\n2. Check code quality and documentation standards\n3. Validate security and performance considerations\n4. Assess overall task completeness\n\nProvide a detailed assessment with a recommendation to approve or continue working."
+                    }
+                ]
+            }
+        ],
+        "SessionStart": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/load-security-context.sh"
+                    }
+                ]
+            }
+        ]
+    }
+}

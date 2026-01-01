@@ -1,0 +1,187 @@
+{
+  "skill_name": "hook-development",
+  "skill_description": null,
+  "overall_score": 68.0,
+  "grade": "D",
+  "task_completion": {
+    "total": 9,
+    "passed": 3,
+    "pass_rate": 60.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 1
+      },
+      "medium": {
+        "total": 3,
+        "passed": 1
+      },
+      "hard": {
+        "total": 3,
+        "passed": 1
+      }
+    },
+    "details": [
+      {
+        "id": "hook-development_easy_1",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 21.17,
+        "tokens": 6316
+      },
+      {
+        "id": "hook-development_easy_2",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 9.21,
+        "tokens": 5274
+      },
+      {
+        "id": "hook-development_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 11.65,
+        "tokens": 5441
+      },
+      {
+        "id": "hook-development_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 20.63,
+        "tokens": 6090
+      },
+      {
+        "id": "hook-development_medium_2",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 24.27,
+        "tokens": 6438
+      },
+      {
+        "id": "hook-development_medium_3",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 25.59,
+        "tokens": 6439
+      },
+      {
+        "id": "hook-development_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 30.09,
+        "tokens": 6757
+      },
+      {
+        "id": "hook-development_hard_2",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 33.07,
+        "tokens": 7213
+      },
+      {
+        "id": "hook-development_hard_3",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 26.56,
+        "tokens": 6375
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 4,
+    "losses": 1,
+    "ties": 0,
+    "win_rate": 80.0,
+    "details": [
+      {
+        "prompt": "Create a hook that prevents Claude from writing to sensitive system directories",
+        "verdict": "with_skill",
+        "reasoning": "Response A directly addresses the task by providing a comprehensive technical solution with code implementation, configuration details, and security validation logic. Response B misunderstands the task - the user is asking for help creating a hook to prevent Claude from writing to system directories (likely as a security measure), not asking Claude to modify itself. Response A provides practical, useful code that accomplishes exactly what was requested, while Response B doesn't attempt to solve the problem at all.",
+        "tokens_with_skill": 5860,
+        "tokens_without_skill": 104
+      },
+      {
+        "prompt": "Set up automatic project context loading when starting a new session",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a complete, functional Emacs-based solution for automatic project context loading with actual working code that saves/restores buffers, directories, and project settings. Response B appears to be incomplete (cuts off mid-sentence) and focuses on a bash script approach that may not directly address automatic session context loading in the way most users would expect. Response A is more thorough, complete, and directly applicable to the task.",
+        "tokens_with_skill": 6223,
+        "tokens_without_skill": 1559
+      },
+      {
+        "prompt": "Build a validation system that checks code quality before allowing file edits",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides a complete hook-based validation system that actually intercepts file edits before they happen, which directly addresses the task requirement. It includes proper configuration files, shell scripts for validation, and a hook system that triggers on Write/Edit operations. Response B provides a Python class for code quality checking but doesn't implement the crucial 'before allowing file edits' requirement - it's just a standalone validator without integration into the file editing process. Response A is more architecturally complete and task-appropriate.",
+        "tokens_with_skill": 6543,
+        "tokens_without_skill": 2257
+      },
+      {
+        "prompt": "Create hooks that ensure proper testing is done before task completion",
+        "verdict": "with_skill",
+        "reasoning": "Response A directly addresses the task by creating hooks that enforce testing requirements before task completion, using a JSON configuration format that appears designed for a specific hook system. It provides comprehensive validation at both pre-tool-use and task completion stages. Response B creates Python decorators for testing, which is useful but doesn't actually create 'hooks that ensure proper testing is done before task completion' - it's more of a general testing framework. Response A is more targeted, complete, and directly solves the stated problem.",
+        "tokens_with_skill": 6213,
+        "tokens_without_skill": 1649
+      },
+      {
+        "prompt": "Design a security-focused hook system that validates all tool usage with AI reasoning",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides a more complete and practical security hook system design with actual file structure, configuration files, and detailed prompts for AI validation. Response B shows only partial Python code that cuts off mid-implementation and lacks the comprehensive hook system architecture, configuration, and practical implementation details that the task requires.",
+        "tokens_with_skill": 6565,
+        "tokens_without_skill": 1600
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 4803,
+    "avg_output_tokens": 1464,
+    "avg_total_tokens": 6268,
+    "estimated_per_use": "$0.04"
+  },
+  "evaluated_at": "2026-01-01T18:59:04.685506",
+  "model_used": "claude-sonnet-4-20250514"
+}

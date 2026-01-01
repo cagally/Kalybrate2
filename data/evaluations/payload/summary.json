@@ -1,0 +1,36 @@
+{
+  "skill_name": "payload",
+  "overall_score": 68.0,
+  "grade": "D",
+  "task_completion": {
+    "passed": 7,
+    "total": 9,
+    "rate": 86.66666666666667,
+    "verified_criteria": {
+      "passed": 13,
+      "total": 15
+    },
+    "verification_levels": {
+      "full": 9,
+      "partial": 0,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 2,
+    "losses": 3,
+    "ties": 0,
+    "win_rate": 40.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 5784,
+    "estimated_per_use": "$0.04"
+  },
+  "evaluated_at": "2026-01-01T19:13:46.505893",
+  "execution_time": 476.15900802612305,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

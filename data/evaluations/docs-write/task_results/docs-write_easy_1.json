@@ -1,0 +1,33 @@
+{
+  "task_id": "docs-write_easy_1",
+  "prompt": "I need a quick README file for our new API endpoint that lets users get customer data. Just the basics - what it does and how to call it.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a README.md file for the API endpoint following the Metabase documentation style guidelines. Here's the Python code to generate the file:\n\n```python\nimport os\n\nreadme_content = \"\"\"# Customer Data API Endpoint\n\n## Overview\n\nThis API endpoint allows you to retrieve customer data quickly and efficiently.\n\n## Endpoint\n\n`GET /api/v1/customers`\n\n## Parameters\n\n| Parameter | Type | Required | Description |\n|-----------|------|----------|-------------|\n| `customer_id` | String | Optional | Retrieve data for a specific customer |\n| `limit` | Integer | Optional | Maximum number of customer records to return (default: 100) |\n\n## Example Request\n\n```bash\ncurl https://your-domain.com/api/v1/customers?customer_id=ABC123\n```\n\n## Response\n\nReturns a JSON array of customer objects with details like:\n- Customer ID\n- Name\n- Contact Information\n- Recent Purchase History\n\n### Sample Response\n\n```json\n{\n    \"customer_id\": \"ABC123\",\n    \"name\": \"Jane Doe\",\n    \"email\": \"jane.doe@example.com\",\n    \"recent_purchases\": [...]\n}\n```\n\n## Authentication\n\nRequires a valid API key in the request header:\n`Authorization: Bearer YOUR_API_KEY`\n\n## Errors\n\n- 400: Invalid request parameters\n- 401: Authentication failed\n- 404: Customer not found\n\"\"\"\n\n# Ensure output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Write README to specified directory\nwith open(os.path.join(OUTPUT_DIR, \"README.md\"), \"w\") as f:\n    f.write(readme_content)\n\nprint(f\"README.md has been created in {OUTPUT_DIR}\")\n```\n\nThis script:\n- Creates a comprehensive README following Metabase's documentation style\n- Uses clear, concise language\n- Provides practical examples\n- Includes key sections like overview, parameters, example request, and error handling\n- Saves the file in the specified `OUTPUT_DIR`\n\nWhen you run this script, it will generate a README.md file with the customer data API documentation.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false,
+    "min_paragraphs": false
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified - no file created",
+    "file_has_content": "verified - no file created",
+    "min_paragraphs": "verified - no file created"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 0,
+    "total": 1
+  },
+  "passed": false,
+  "tokens": {
+    "input": 928,
+    "output": 496,
+    "total": 1424
+  },
+  "execution_time": 8.521549940109253,
+  "error": null,
+  "timestamp": "2026-01-01T18:37:33.743694"
+}

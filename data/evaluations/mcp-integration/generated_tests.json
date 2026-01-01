@@ -1,0 +1,131 @@
+{
+  "skill_claims": [
+    "Connect to external services (databases, APIs, file systems)",
+    "Provide 10+ related tools from a single service",
+    "Handle OAuth and complex authentication flows",
+    "Bundle MCP servers with plugins for automatic setup",
+    "Configure MCP servers using .mcp.json or plugin.json",
+    "Support multiple MCP server types (stdio, SSE, HTTP, WebSocket)",
+    "Manage environment variable expansion and security",
+    "Integrate MCP tools into commands and agents"
+  ],
+  "tasks": [
+    {
+      "id": "mcp-integration_easy_1",
+      "prompt": "I want to add MCP server support to my plugin so it can connect to a file system. Can you show me how to set this up?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Configure MCP servers using .mcp.json or plugin.json"
+    },
+    {
+      "id": "mcp-integration_easy_2",
+      "prompt": "What's the difference between using .mcp.json versus putting MCP configuration directly in plugin.json?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Configure MCP servers using .mcp.json or plugin.json"
+    },
+    {
+      "id": "mcp-integration_easy_3",
+      "prompt": "I need to integrate MCP into my Claude plugin. Can you explain what MCP server types are available?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Support multiple MCP server types (stdio, SSE, HTTP, WebSocket)"
+    },
+    {
+      "id": "mcp-integration_medium_1",
+      "prompt": "I want to connect my plugin to GitHub's MCP server using OAuth. How do I configure this properly with environment variables?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle OAuth and complex authentication flows"
+    },
+    {
+      "id": "mcp-integration_medium_2",
+      "prompt": "I need to set up a WebSocket MCP server connection for real-time data streaming in my plugin. Can you show me the configuration?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Support multiple MCP server types (stdio, SSE, HTTP, WebSocket)"
+    },
+    {
+      "id": "mcp-integration_medium_3",
+      "prompt": "How do I use MCP tools in my plugin commands? I want to create a command that uses database tools from an MCP server.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Integrate MCP tools into commands and agents"
+    },
+    {
+      "id": "mcp-integration_hard_1",
+      "prompt": "I'm building a plugin that needs to integrate with both Asana and a local database simultaneously. Can you help me set up the complete MCP configuration with proper security practices?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Provide 10+ related tools from a single service"
+    },
+    {
+      "id": "mcp-integration_hard_2",
+      "prompt": "I need to create a multi-step agent that autonomously queries data from multiple MCP servers, processes the results, and generates reports. How should I structure this?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Integrate MCP tools into commands and agents"
+    },
+    {
+      "id": "mcp-integration_hard_3",
+      "prompt": "I want to bundle a custom MCP server with my plugin that handles complex authentication flows and provides 15+ tools for API management. What's the complete setup process?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Bundle MCP servers with plugins for automatic setup"
+    }
+  ],
+  "quality_prompts": [
+    "I want to connect my plugin to external APIs and databases. What's the best way to do this?",
+    "How can I add OAuth authentication to my Claude plugin for connecting to third-party services?",
+    "I need my plugin to access file systems and external tools. What are my options?",
+    "What's the proper way to handle authentication and security when connecting plugins to external services?",
+    "I want to create a plugin that can work with multiple external services simultaneously. How should I approach this?"
+  ],
+  "generated_at": "2026-01-01T18:59:04.691243",
+  "model": "claude-sonnet-4-20250514"
+}

@@ -1,0 +1,31 @@
+{
+  "task_id": "command-development_hard_3",
+  "prompt": "Build a security audit command that dynamically reads multiple config files, checks current git branch and status, and provides different analysis based on the environment argument passed",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a comprehensive security audit command that meets the requirements. I'll save the command as a Markdown file in the specified output directory.\n\n```python\nimport os\n\nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_n5xqn_hq\"\nCOMMAND_PATH = os.path.join(OUTPUT_DIR, \"security-audit.md\")\n\ncommand_content = '''---\nname: security-audit\ndescription: Perform comprehensive security audit with dynamic context\nargument-hint: [environment]\nallowed-tools: Read, Bash(git:*), Bash(*)\n---\n\n# Security Audit Workflow\n\n# Validate environment argument\n$IF(\n  $OR(\n    $EQ($1, \"dev\"),\n    $EQ($1, \"staging\"),\n    $EQ($1, \"production\")\n  ),\n  \"Valid environment selected: $1\",\n  \"Invalid environment. Use: /security-audit [dev|staging|production]\"\n)\n\n# Gather Git Context\nCurrent Branch: !`git rev-parse --abbrev-ref HEAD`\nLast Commit: !`git log -1 --pretty=format:\"%h - %an, %ar : %s\"`\nGit Status: !`git status -s`\n\n# Dynamic Configuration Loading\nDev Config: @config/security-dev.json\nStaging Config: @config/security-staging.json\nProduction Config: @config/security-production.json\n\n# Environment-Specific Security Checks\n$SWITCH($1,\n  \"dev\", {\n    Perform lightweight security scan\n    Check development-specific vulnerabilities\n    Review local environment configurations\n  },\n  \"staging\", {\n    Enhanced security scan\n    Validate pre-production security controls\n    Check configuration drift\n    Review network access rules\n  },\n  \"production\", {\n    Comprehensive security audit\n    Full vulnerability assessment\n    Compliance and regulatory checks\n    Advanced threat detection analysis\n  }\n)\n\n# Common Security Checks Across All Environments\n\n1. Code Repository Security\n   - Check for sensitive data in git history\n   - Validate branch protection rules\n   - Review recent commit authors and changes\n\n2. Dependency Vulnerability Scan\n   - !`npm audit`\n   - !`npm outdated`\n   - Check for known security vulnerabilities in dependencies\n\n3. Configuration Security\n   - Scan configuration files for exposed secrets\n   - Check for hardcoded credentials\n   - Validate encryption settings\n\n4. Access Control Review\n   - Audit user permissions\n   - Check role-based access control (RBAC) settings\n   - Review authentication mechanisms\n\n5. Network and Infrastructure Security\n   - Verify firewall rules\n   - Check open ports\n   - Review network segmentation\n\n# Reporting\nGenerate comprehensive security report with:\n- Identified vulnerabilities\n- Severity ratings\n- Recommended remediation steps\n- Compliance status\n\n# Final Risk Assessment\nCompile risk matrix based on discovered issues\nPrioritize and categorize security findings\n\nProvide actionable insights for security improvement.\n'''\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Write the command file\nwith open(COMMAND_PATH, 'w') as f:\n    f.write(command_content)\n\nprint(f\"Security audit command created at: {COMMAND_PATH}\")\n```\n\nThis command provides a comprehensive security audit workflow with the following features:\n\n1. Dynamic environment-based analysis\n2. Git context gathering\n3. Environment-specific security checks\n4. Common security assessments across environments\n5. Flexible configuration loading\n6. Comprehensive reporting strategy\n\nKey aspects:\n- Uses `$IF` and `$SWITCH` for dynamic logic\n- Leverages bash commands for context gathering\n- Provides different audit depths based on environment\n- Includes multiple security check categories\n- Generates actionable security insights\n\nThe command supports three environments:\n- `/security-audit dev`\n- `/security-audit staging`\n- `/security-audit production`\n\nEach environment triggers a progressively more comprehensive security scan.\n\nWhen you run this command, Claude will dynamically:\n- Validate the environment argument\n- Gather current git context\n- Load environment-specific configurations\n- Perform tailored security checks\n- Generate a comprehensive security report\n\nWould you like me to elaborate on any part of the security audit command?",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 3,
+    "total": 3
+  },
+  "passed": true,
+  "tokens": {
+    "input": 5064,
+    "output": 1017,
+    "total": 6081
+  },
+  "execution_time": 19.750885009765625,
+  "error": null,
+  "timestamp": "2026-01-01T18:01:28.857632"
+}

@@ -1,0 +1,36 @@
+{
+  "skill_name": "docs-write",
+  "overall_score": 41.75,
+  "grade": "F",
+  "task_completion": {
+    "passed": 2,
+    "total": 9,
+    "rate": 56.25,
+    "verified_criteria": {
+      "passed": 9,
+      "total": 16
+    },
+    "verification_levels": {
+      "full": 9,
+      "partial": 0,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 1,
+    "losses": 4,
+    "ties": 0,
+    "win_rate": 20.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 1863,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T18:40:38.825581",
+  "execution_time": 349.9239230155945,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

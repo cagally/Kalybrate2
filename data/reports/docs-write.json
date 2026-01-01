@@ -1,0 +1,205 @@
+{
+  "skill_name": "docs-write",
+  "skill_description": null,
+  "overall_score": 41.8,
+  "grade": "F",
+  "task_completion": {
+    "total": 9,
+    "passed": 2,
+    "pass_rate": 56.2,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 1
+      },
+      "medium": {
+        "total": 3,
+        "passed": 1
+      },
+      "hard": {
+        "total": 3,
+        "passed": 0
+      }
+    },
+    "details": [
+      {
+        "id": "docs-write_easy_1",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false,
+          "min_paragraphs": false
+        },
+        "execution_time": 8.52,
+        "tokens": 1424
+      },
+      {
+        "id": "docs-write_easy_2",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false,
+          "code_extracted": false
+        },
+        "execution_time": 8.36,
+        "tokens": 1371
+      },
+      {
+        "id": "docs-write_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true,
+          "response_relevant": true
+        },
+        "execution_time": 9.96,
+        "tokens": 1407
+      },
+      {
+        "id": "docs-write_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true,
+          "min_paragraphs": true,
+          "code_extracted": true
+        },
+        "execution_time": 20.83,
+        "tokens": 2069
+      },
+      {
+        "id": "docs-write_medium_2",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false,
+          "has_table": false,
+          "code_extracted": false,
+          "min_paragraphs": false
+        },
+        "execution_time": 21.56,
+        "tokens": 2324
+      },
+      {
+        "id": "docs-write_medium_3",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false,
+          "code_extracted": false,
+          "min_paragraphs": false
+        },
+        "execution_time": 19.86,
+        "tokens": 2017
+      },
+      {
+        "id": "docs-write_hard_1",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false,
+          "code_extracted": false,
+          "has_table": false,
+          "min_paragraphs": false
+        },
+        "execution_time": 28.0,
+        "tokens": 2668
+      },
+      {
+        "id": "docs-write_hard_2",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false,
+          "code_extracted": false,
+          "has_table": false,
+          "min_paragraphs": false
+        },
+        "execution_time": 27.62,
+        "tokens": 2761
+      },
+      {
+        "id": "docs-write_hard_3",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false,
+          "has_table": false,
+          "min_paragraphs": false
+        },
+        "execution_time": 20.12,
+        "tokens": 2020
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 1,
+    "losses": 4,
+    "ties": 0,
+    "win_rate": 20.0,
+    "details": [
+      {
+        "prompt": "Write a getting started guide for new users of our dashboard application. Cover account setup, creat...",
+        "verdict": "without_skill",
+        "reasoning": "Response A is more complete and thorough, covering all three required areas (account setup, creating first dashboard, adding basic charts) with detailed steps. It also includes valuable additional sections like customization, sharing, and tips for success. Response B appears incomplete (cuts off mid-sentence) and assumes a specific platform (Metabase) rather than being generic, making it less useful as a template guide.",
+        "tokens_with_skill": 1514,
+        "tokens_without_skill": 792
+      },
+      {
+        "prompt": "Create documentation for our REST API authentication methods. We support API keys, OAuth 2.0, and JW...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides more complete and practical documentation with step-by-step instructions, best practices, and a clear structure. It includes specific implementation details like how to generate API keys and the complete OAuth flow. Response B covers more OAuth grant types but lacks the practical guidance and completeness that makes documentation truly useful for developers trying to implement authentication.",
+        "tokens_with_skill": 1766,
+        "tokens_without_skill": 959
+      },
+      {
+        "prompt": "I need a configuration guide for our email notification system. Include SMTP setup, template customi...",
+        "verdict": "without_skill",
+        "reasoning": "Response B provides a more comprehensive and technically complete configuration guide. It includes proper code examples with YAML configuration, environment variables for security, detailed HTML template structure with inheritance, and actual troubleshooting code. Response A appears incomplete (cuts off mid-sentence) and is specifically focused on Metabase rather than a general email notification system as requested. Response B better addresses all three requirements: SMTP setup, template customization, and delivery troubleshooting with practical, implementable examples.",
+        "tokens_with_skill": 1563,
+        "tokens_without_skill": 967
+      },
+      {
+        "prompt": "Write a user guide for our data export features. Cover different export formats, scheduling exports,...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a more comprehensive and complete user guide that covers all requested topics thoroughly. It includes detailed sections on export formats with clear explanations, comprehensive scheduling options with multiple destinations, and begins addressing large dataset management. Response B appears to be incomplete (cuts off mid-sentence) and seems to be written specifically for Metabase rather than as a general user guide as requested. Response A also has better organization with clear hierarchical structure and more actionable instructions.",
+        "tokens_with_skill": 1563,
+        "tokens_without_skill": 897
+      },
+      {
+        "prompt": "Create documentation for integrating our analytics tool with popular databases like PostgreSQL, MySQ...",
+        "verdict": "without_skill",
+        "reasoning": "Response A is more complete and thorough, providing comprehensive documentation for all three databases with detailed configuration examples, supported features, installation steps, and proper code snippets. Response B appears incomplete (cuts off mid-configuration) and seems to be documenting Metabase specifically rather than a generic analytics tool as requested in the task.",
+        "tokens_with_skill": 1609,
+        "tokens_without_skill": 1074
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 893,
+    "avg_output_tokens": 970,
+    "avg_total_tokens": 1863,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T18:40:38.825150",
+  "model_used": "claude-sonnet-4-20250514"
+}

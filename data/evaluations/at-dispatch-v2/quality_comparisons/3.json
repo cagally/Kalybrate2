@@ -1,0 +1,19 @@
+{
+  "prompt": "My ATen kernel uses AT_DISPATCH_INTEGRAL_TYPES_AND2(kBool, kByte, input.dtype(), \"index_kernel\", [&]() { index_impl<scalar_t>(input, indices); }); and I need to port it to v2",
+  "baseline_response": "In PyTorch v2, the AT_DISPATCH macros have been updated. Here's how you can port the dispatch macro:\n\n```cpp\n// v2 version\nAT_DISPATCH_ALL_TYPES_AND2(at::ScalarType::Bool, at::ScalarType::Byte, input.scalar_type(), \"index_kernel\", [&]() {\n    index_impl<scalar_t>(input, indices);\n});\n```\n\nKey changes:\n- `input.dtype()` is now `input.scalar_type()`\n- The macro name is slightly different\n- Scalar types are now fully qualified with `at::ScalarType::`\n\nIf you're using a more recent version of PyTorch, you might also want to use:\n\n```cpp\nAT_DISPATCH_ALL_TYPES_AND2(at::kBool, at::kByte, input.scalar_type(), \"index_kernel\", [&]() {\n    index_impl<scalar_t>(input, indices);\n});\n```\n\nThe exact syntax can depend on your specific PyTorch version, so you might need to adjust slightly based on your exact version.",
+  "baseline_tokens": {
+    "input": 71,
+    "output": 264,
+    "total": 335
+  },
+  "skill_response": "I'll help you convert this AT_DISPATCH macro to the AT_DISPATCH_V2 format. Here's the transformed version:\n\n```cpp\nAT_DISPATCH_V2(\n    input.dtype(), \n    \"index_kernel\", \n    AT_WRAP([&]() { \n        index_impl<scalar_t>(input, indices); \n    }), \n    AT_EXPAND(AT_INTEGRAL_TYPES), \n    kBool, \n    kByte\n);\n```\n\nKey changes:\n1. Added `AT_WRAP()` around the lambda to handle potential internal commas\n2. Used `AT_EXPAND(AT_INTEGRAL_TYPES)` to explicitly expand the integral type group\n3. Kept the additional individual types (kBool, kByte) as trailing arguments\n4. Maintained the same order of arguments: dtype, name, lambda, type groups, individual types\n\nMake sure to add the include for Dispatch_v2:\n```cpp\n#include <ATen/Dispatch.h>\n#include <ATen/Dispatch_v2.h>\n```\n\nThis conversion follows the AT_DISPATCH_V2 pattern exactly as specified in the skill instructions. The macro will now use the new dispatch API while maintaining the same type dispatch behavior as the original macro.",
+  "skill_tokens": {
+    "input": 3318,
+    "output": 305,
+    "total": 3623
+  },
+  "judge_verdict": "without_skill",
+  "judge_reasoning": "Response B correctly identifies that the user wants to port from AT_DISPATCH_INTEGRAL_TYPES_AND2 to a v2 equivalent, which is AT_DISPATCH_ALL_TYPES_AND2 with updated syntax. Response A incorrectly assumes there's an AT_DISPATCH_V2 macro and provides non-existent syntax like AT_WRAP and AT_EXPAND. Response B provides the actual working solution with proper PyTorch v2 syntax, including the correct change from dtype() to scalar_type() and proper scalar type references.",
+  "judge_model": "claude-sonnet-4-20250514",
+  "timestamp": "2026-01-01T17:49:00.664259"
+}

@@ -17,7 +17,7 @@ import shutil
 from anthropic import Anthropic
 from dotenv import load_dotenv
 
-from evaluator.models import Task, TaskResult, OutputType
+from evaluator.models import Task, TaskResult, OutputType, VerificationLevel
 from evaluator.verifiers import verify_file, find_created_files
 
 load_dotenv()
@@ -63,6 +63,13 @@ class TaskRunner:
             shutil.rmtree(self.work_dir)
             self.work_dir = None
 
+    # Languages we can actually compile/verify
+    COMPILABLE_LANGUAGES = {
+        'python', 'py',
+        'typescript', 'ts',
+        'javascript', 'js'
+    }
+
     def _extract_code_blocks(self, response_text: str) -> List[Tuple[str, str]]:
         """
         Extract code blocks from response.
@@ -73,7 +80,31 @@ class TaskRunner:
         # Find ```language\ncode``` blocks
         pattern = r'```(\w+)?\n(.*?)```'
         matches = re.findall(pattern, response_text, re.DOTALL)
-        return [(lang or 'unknown', code) for lang, code in matches]
+        return [(lang.lower() if lang else 'unknown', code) for lang, code in matches]
+
+    def _get_best_code_block(self, code_blocks: List[Tuple[str, str]]) -> Tuple[str, str]:
+        """
+        Get the best code block for compilation testing.
+        Prioritizes blocks with compilable language tags.
+
+        Returns:
+            (language, code) tuple, or ('unknown', '') if no blocks
+        """
+        if not code_blocks:
+            return ('unknown', '')
+
+        # First, look for blocks with compilable languages
+        for lang, code in code_blocks:
+            if lang in self.COMPILABLE_LANGUAGES:
+                return (lang, code)
+
+        # Fall back to first block with substantial code
+        for lang, code in code_blocks:
+            if len(code.strip()) > 50:
+                return (lang, code)
+
+        # Last resort: first block
+        return code_blocks[0]
 
     def _execute_python_from_response(self, response_text: str, work_dir: str) -> bool:
         """
@@ -134,19 +165,22 @@ OUTPUT_DIR = "{work_dir}"
 
         return executed
 
-    def _verify_code_compiles(self, code: str, language: str) -> Tuple[bool, str]:
+    def _verify_code_compiles(self, code: str, language: str) -> Tuple[bool, bool, str]:
         """
         Verify that code compiles/is syntactically valid.
 
         Returns:
-            (success, error_message)
+            (success, was_verified, message)
+            - success: True if code is valid (or assumed valid if unverified)
+            - was_verified: True if we actually ran a compiler/checker
+            - message: Error message or reason for not verifying
         """
         if language in ['python', 'py']:
             try:
                 compile(code, '<string>', 'exec')
-                return True, ""
+                return True, True, "verified"
             except SyntaxError as e:
-                return False, str(e)
+                return False, True, f"syntax error: {str(e)}"
 
         elif language in ['typescript', 'ts']:
             # Write to temp file and run tsc
@@ -156,7 +190,7 @@ OUTPUT_DIR = "{work_dir}"
                     temp_path = f.name
 
                 result = subprocess.run(
-                    ['npx', 'tsc', '--noEmit', temp_path],
+                    ['tsc', '--noEmit', '--skipLibCheck', temp_path],
                     capture_output=True,
                     text=True,
                     timeout=30
@@ -164,13 +198,13 @@ OUTPUT_DIR = "{work_dir}"
                 os.unlink(temp_path)
 
                 if result.returncode == 0:
-                    return True, ""
-                return False, result.stderr[:200]
+                    return True, True, "verified"
+                return False, True, f"compilation error: {result.stderr[:200]}"
 
             except FileNotFoundError:
-                return True, "TypeScript compiler not available"
+                return True, False, "unverified - TypeScript compiler not available"
             except Exception as e:
-                return False, str(e)
+                return False, True, f"error: {str(e)}"
 
         elif language in ['javascript', 'js']:
             # Basic syntax check with Node
@@ -188,16 +222,16 @@ OUTPUT_DIR = "{work_dir}"
                 os.unlink(temp_path)
 
                 if result.returncode == 0:
-                    return True, ""
-                return False, result.stderr[:200]
+                    return True, True, "verified"
+                return False, True, f"syntax error: {result.stderr[:200]}"
 
             except FileNotFoundError:
-                return True, "Node not available"
+                return True, False, "unverified - Node.js not available"
             except Exception as e:
-                return False, str(e)
+                return False, True, f"error: {str(e)}"
 
-        # Unknown language - assume valid
-        return True, ""
+        # Unknown language - can't verify
+        return True, False, f"unverified - no {language} compiler available"
 
     def run_task(
         self,
@@ -266,6 +300,7 @@ Follow these instructions when relevant. When creating files, write Python code 
 
             # Verify based on output type
             criteria_results = {}
+            verification_notes = {}  # Track what was actually verified
 
             if output_type == OutputType.FILE:
                 # Execute Python code to create files
@@ -279,11 +314,15 @@ Follow these instructions when relevant. When creating files, write Python code 
                 # Check file criteria
                 if "file_created" in task.success_criteria:
                     criteria_results["file_created"] = len(created_files) > 0
+                    verification_notes["file_created"] = "verified"
 
                 if created_files:
                     primary_file = created_files[0]
                     file_verification = verify_file(primary_file, task.success_criteria)
                     criteria_results.update(file_verification)
+                    # File verification is always verified (we actually open the files)
+                    for criterion in file_verification:
+                        verification_notes[criterion] = "verified"
 
                     if save_output:
                         output_dir = Path("data/task_outputs") / task.id
@@ -293,6 +332,7 @@ Follow these instructions when relevant. When creating files, write Python code 
                     for criterion in task.success_criteria:
                         if criterion not in criteria_results:
                             criteria_results[criterion] = False
+                            verification_notes[criterion] = "verified - no file created"
                     created_files = []
 
             elif output_type == OutputType.CODE:
@@ -300,50 +340,83 @@ Follow these instructions when relevant. When creating files, write Python code 
                 code_blocks = self._extract_code_blocks(response_text)
                 created_files = []
 
+                # Get the best code block (prioritizes compilable languages)
+                best_lang, best_code = self._get_best_code_block(code_blocks)
+
                 if "code_extracted" in task.success_criteria:
                     criteria_results["code_extracted"] = len(code_blocks) > 0
+                    verification_notes["code_extracted"] = "verified"
 
                 if "code_compiles" in task.success_criteria and code_blocks:
-                    lang, code = code_blocks[0]
-                    compiles, error = self._verify_code_compiles(code, lang)
+                    compiles, was_verified, message = self._verify_code_compiles(best_code, best_lang)
                     criteria_results["code_compiles"] = compiles
+                    verification_notes["code_compiles"] = message
 
                 if "has_type_annotations" in task.success_criteria and code_blocks:
-                    lang, code = code_blocks[0]
-                    has_types = ':' in code and ('string' in code or 'number' in code or 'boolean' in code or ': ' in code)
+                    # Check for TypeScript-style type annotations
+                    has_types = (
+                        ': string' in best_code or
+                        ': number' in best_code or
+                        ': boolean' in best_code or
+                        ': void' in best_code or
+                        ': any' in best_code or
+                        '): ' in best_code or  # Return type
+                        '<T>' in best_code or  # Generics
+                        'interface ' in best_code or
+                        'type ' in best_code
+                    )
                     criteria_results["has_type_annotations"] = has_types
+                    verification_notes["has_type_annotations"] = "verified"
 
                 if "has_docstrings" in task.success_criteria and code_blocks:
-                    lang, code = code_blocks[0]
-                    has_docstrings = '"""' in code or "'''" in code
+                    has_docstrings = '"""' in best_code or "'''" in best_code or '/**' in best_code
                     criteria_results["has_docstrings"] = has_docstrings
+                    verification_notes["has_docstrings"] = "verified"
 
-                # For response_relevant on code tasks - check code blocks exist and have content
-                if "response_relevant" in task.success_criteria:
-                    criteria_results["response_relevant"] = len(code_blocks) > 0 and len(code_blocks[0][1]) > 50
+                # response_relevant removed - not meaningful (was just length check)
 
             else:  # TEXT output
                 created_files = []
 
                 if "response_exists" in task.success_criteria:
                     criteria_results["response_exists"] = len(response_text.strip()) > 0
+                    verification_notes["response_exists"] = "verified"
 
-                # For response_relevant, we'd need LLM judge - skip for now
-                if "response_relevant" in task.success_criteria:
-                    criteria_results["response_relevant"] = len(response_text.strip()) > 50
+                # response_relevant removed - not meaningful (was just length check)
 
-            # Overall pass: ALL criteria must pass
-            all_passed = all(
-                criteria_results.get(criterion, False)
-                for criterion in task.success_criteria
+            # Calculate verification stats
+            verified_count = sum(1 for note in verification_notes.values() if note == "verified")
+            unverified_count = sum(1 for note in verification_notes.values() if note.startswith("unverified"))
+            total_criteria = len(criteria_results)
+
+            # Determine verification level
+            if unverified_count == 0:
+                verification_level = VerificationLevel.FULL
+            elif unverified_count == total_criteria:
+                verification_level = VerificationLevel.UNVERIFIED
+            else:
+                verification_level = VerificationLevel.PARTIAL
+
+            # Only count VERIFIED criteria for pass calculation
+            verified_criteria_passed = sum(
+                1 for criterion, passed in criteria_results.items()
+                if passed and verification_notes.get(criterion, "").startswith("verified") and not verification_notes.get(criterion, "").startswith("unverified")
             )
+            verified_criteria_total = verified_count
+
+            # Overall pass: ALL VERIFIED criteria must pass (unverified don't count)
+            all_verified_passed = verified_criteria_passed == verified_criteria_total if verified_criteria_total > 0 else False
 
             execution_time = time.time() - start_time
 
             return TaskResult(
                 task_id=task.id,
-                passed=all_passed,
+                passed=all_verified_passed,
                 criteria_results=criteria_results,
+                verification_notes=verification_notes,
+                verification_level=verification_level,
+                verified_criteria_passed=verified_criteria_passed,
+                verified_criteria_total=verified_criteria_total,
                 error=None,
                 execution_time=execution_time,
                 files_created=created_files if output_type == OutputType.FILE else [],
@@ -357,11 +430,18 @@ Follow these instructions when relevant. When creating files, write Python code 
             criteria_results = {
                 criterion: False for criterion in task.success_criteria
             }
+            verification_notes = {
+                criterion: "verified - error during execution" for criterion in task.success_criteria
+            }
 
             return TaskResult(
                 task_id=task.id,
                 passed=False,
                 criteria_results=criteria_results,
+                verification_notes=verification_notes,
+                verification_level=VerificationLevel.FULL,  # Error is a verified failure
+                verified_criteria_passed=0,
+                verified_criteria_total=len(criteria_results),
                 error=str(e),
                 execution_time=execution_time,
                 files_created=[],

@@ -1,0 +1,29 @@
+{
+  "task_id": "pdf_easy_2",
+  "prompt": "I need to create a simple PDF with just a title and a few paragraphs of text for a basic company memo.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll use the `reportlab` library to create a simple PDF memo. Here's a complete script that creates a professional-looking company memo:\n\n```python\nfrom reportlab.lib.pagesizes import letter\nfrom reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle\nfrom reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer\nfrom reportlab.lib.units import inch\nfrom reportlab.lib.colors import gray\n\ndef create_company_memo(filename='Company_Memo.pdf'):\n    # Create a PDF document\n    doc = SimpleDocTemplate(filename, pagesize=letter,\n                            rightMargin=72, leftMargin=72,\n                            topMargin=72, bottomMargin=18)\n    \n    # Get standard styles and create custom styles\n    styles = getSampleStyleSheet()\n    \n    # Custom styles for memo\n    title_style = ParagraphStyle(\n        'Title', \n        parent=styles['Title'],\n        textColor=gray,\n        fontSize=16,\n        spaceAfter=12\n    )\n    \n    heading_style = ParagraphStyle(\n        'Heading', \n        parent=styles['Heading2'],\n        textColor='navy',\n        spaceBefore=12,\n        spaceAfter=6\n    )\n    \n    normal_style = styles['Normal']\n    normal_style.fontSize = 11\n    \n    # Content for the memo\n    story = []\n    \n    # Title\n    story.append(Paragraph(\"Company Memo\", title_style))\n    story.append(Spacer(1, 12))\n    \n    # Heading\n    story.append(Paragraph(\"Quarterly Performance Update\", heading_style))\n    \n    # Paragraphs\n    paragraphs = [\n        \"This memo provides an overview of our company's performance for the most recent quarter. We are pleased to report significant progress across multiple key areas.\",\n        \n        \"Our revenue has increased by 15% compared to the previous quarter, demonstrating strong market engagement and effective strategic initiatives. This growth is attributed to our expanded product line and improved marketing strategies.\",\n        \n        \"We would like to recognize the outstanding efforts of our team members who have contributed to these achievements. Your dedication and hard work are instrumental to our continued success.\",\n        \n        \"A detailed financial report will be distributed to department heads in the coming week. If you have any questions, please contact the finance department.\"\n    ]\n    \n    # Add paragraphs\n    for para in paragraphs:\n        story.append(Paragraph(para, normal_style))\n        story.append(Spacer(1, 6))\n    \n    # Footer\n    story.append(Paragraph(\"Regards,<br/>Executive Management Team\", styles['Normal']))\n    \n    # Build PDF\n    doc.build(story)\n    \n    print(f\"PDF memo created: {filename}\")\n\n# Execute the function\ncreate_company_memo()\n```\n\nThis script does several important things:\n\n1. Uses `reportlab` to create a professional PDF\n2. Defines custom styles for title, headings, and body text\n3. Adds a title, heading, multiple paragraphs, and a signature\n4. Applies formatting like colors, font sizes, and spacing\n5. Saves the PDF with a default filename of 'Company_Memo.pdf'\n\nKey features:\n- Gray title\n- Navy heading\n- Consistent, readable formatting\n- Proper spacing between elements\n- Professional layout\n\nTo run this, make sure you have reportlab installed:\n```bash\npip install reportlab\n```\n\nWhen you run the script, it will generate a PDF memo in the same directory. The memo is clean, professional, and easy to read.\n\nWould you like me to modify anything about the memo's content or design?",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2295,
+    "output": 879,
+    "total": 3174
+  },
+  "execution_time": 14.825756788253784,
+  "error": null,
+  "timestamp": "2026-01-01T19:16:10.590066"
+}

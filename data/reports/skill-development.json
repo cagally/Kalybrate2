@@ -1,0 +1,179 @@
+{
+  "skill_name": "skill-development",
+  "skill_description": null,
+  "overall_score": 84.0,
+  "grade": "B",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "skill-development_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 21.49,
+        "tokens": 6813
+      },
+      {
+        "id": "skill-development_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 10.96,
+        "tokens": 6033
+      },
+      {
+        "id": "skill-development_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 17.4,
+        "tokens": 6410
+      },
+      {
+        "id": "skill-development_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 31.75,
+        "tokens": 7601
+      },
+      {
+        "id": "skill-development_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 20.37,
+        "tokens": 6479
+      },
+      {
+        "id": "skill-development_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 43579.02,
+        "tokens": 7056
+      },
+      {
+        "id": "skill-development_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 30.97,
+        "tokens": 7342
+      },
+      {
+        "id": "skill-development_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 25.18,
+        "tokens": 6992
+      },
+      {
+        "id": "skill-development_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 39.94,
+        "tokens": 8045
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 3,
+    "losses": 2,
+    "ties": 0,
+    "win_rate": 60.0,
+    "details": [
+      {
+        "prompt": "I want to add a new capability to my Claude plugin that helps with PDF manipulation. How should I ap...",
+        "verdict": "without_skill",
+        "reasoning": "Response B is more honest and accurate. Response A fabricates detailed information about a 'skill development guide' and specific plugin structure that doesn't exist for Claude. While A appears more helpful on the surface, it provides misleading information that could waste the user's time. Response B correctly acknowledges limitations and provides genuine, actionable advice by directing the user to real resources like official documentation and actual PDF libraries.",
+        "tokens_with_skill": 7118,
+        "tokens_without_skill": 135
+      },
+      {
+        "prompt": "My skill isn't being triggered when users ask for help with spreadsheet analysis. What might be wron...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides much more specific, actionable guidance with concrete examples of weak vs strong trigger phrases, specific technical steps including bash commands, and demonstrates deep knowledge of skill development best practices. Response B is more generic and vague, offering basic troubleshooting steps without the detailed examples and specific implementation guidance that would actually help solve the problem.",
+        "tokens_with_skill": 5958,
+        "tokens_without_skill": 227
+      },
+      {
+        "prompt": "I have a bunch of company documentation and scripts that I want to make available to Claude. What's ...",
+        "verdict": "without_skill",
+        "reasoning": "Response A correctly addresses the fundamental limitation that Claude cannot store or retain files between conversations, providing practical alternatives. Response B appears to misunderstand the context, providing a detailed file organization structure that isn't applicable to how Claude actually works, making it misleading and unhelpful despite being more elaborate.",
+        "tokens_with_skill": 6227,
+        "tokens_without_skill": 132
+      },
+      {
+        "prompt": "Help me create something that will make Claude better at handling our customer support workflows.",
+        "verdict": "with_skill",
+        "reasoning": "Response B directly addresses the user's request by providing a concrete framework for improving customer support workflows, including specific questions to gather requirements, a proposed skill structure, and actionable next steps. Response A refuses to engage with the task and offers only a vague alternative. While A is more honest about limitations, B provides significantly more value by interpreting the request as creating tools/processes to improve workflows rather than literally modifying the AI system.",
+        "tokens_with_skill": 5968,
+        "tokens_without_skill": 114
+      },
+      {
+        "prompt": "I'm getting context window errors when my skill loads. How can I optimize it?",
+        "verdict": "with_skill",
+        "reasoning": "Response A correctly identifies this as a skill development context window issue and provides specific, actionable solutions for optimizing SKILL.md files and using the references/ directory structure. Response B misinterprets the question as a general programming problem and provides Python code solutions that don't address the actual skill loading context window errors the user is experiencing.",
+        "tokens_with_skill": 6018,
+        "tokens_without_skill": 460
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 5614,
+    "avg_output_tokens": 1105,
+    "avg_total_tokens": 6719,
+    "estimated_per_use": "$0.03"
+  },
+  "evaluated_at": "2026-01-01T08:50:32.096510",
+  "model_used": "claude-sonnet-4-20250514"
+}

@@ -1,0 +1,27 @@
+{
+  "task_id": "rule-identifier_medium_2",
+  "prompt": "I want to create a warning system that shows formatted messages when certain conditions are met. What's the best way to structure these messages?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a robust warning system using the skill-identifier approach. This method allows you to define flexible warning rules that can be applied across different contexts. Here's a comprehensive example structure:\n\n1. Create a SKILL.md file with rule definitions:\n\n```markdown\n---\nname: security-warning\nenabled: true\nevent: all\npattern: (?i)(password|credentials|secret)\n---\n\u26a0\ufe0f **Security Alert** \n- Sensitive information detected\n- Avoid hardcoding credentials\n- Use environment variables or secure secret management\n- Potential security risk identified\n\n---\nname: performance-warning\nenabled: true\nevent: code\npattern: (?i)(inefficient|slow|complexity)\n---\n\ud83d\udea8 **Performance Warning**\n- Potential performance bottleneck detected\n- Consider optimizing algorithm or data structure\n- Analyze time and space complexity\n- Recommend profiling and benchmarking\n\n---\nname: dependency-warning\nenabled: true\nevent: requirements\npattern: (outdated|vulnerable)\n---\n\ud83d\udce6 **Dependency Check**\n- Potential dependency issues detected\n- Check for:\n  - Outdated package versions\n  - Known security vulnerabilities\n  - Compatibility concerns\n- Recommended actions:\n  - Update dependencies\n  - Review security advisories\n```\n\n2. Python implementation to parse and apply warnings:\n\n```python\nimport re\nimport yaml\nimport os\n\nclass WarningSystem:\n    def __init__(self, skills_path='SKILL.md'):\n        self.warnings = self.load_warnings(skills_path)\n    \n    def load_warnings(self, path):\n        warnings = []\n        with open(path, 'r') as file:\n            content = file.read()\n            # Split individual skill blocks\n            skill_blocks = content.split('---')[1:]\n            \n            for block in skill_blocks:\n                if block.strip():\n                    try:\n                        # Parse YAML-like metadata\n                        metadata = yaml.safe_load(block.split('\\n', 1)[0])\n                        warning_text = block.split('\\n', 1)[1].strip()\n                        \n                        warnings.append({\n                            'name': metadata.get('name'),\n                            'enabled': metadata.get('enabled', True),\n                            'event': metadata.get('event', 'all'),\n                            'pattern': metadata.get('pattern'),\n                            'message': warning_text\n                        })\n                    except Exception as e:\n                        print(f\"Error parsing warning: {e}\")\n        return warnings\n    \n    def check_warnings(self, text, event='all'):\n        triggered_warnings = []\n        \n        for warning in self.warnings:\n            if not warning['enabled']:\n                continue\n            \n            # Check event match\n            if warning['event'] not in [event, 'all']:\n                continue\n            \n            # Check regex pattern\n            if re.search(warning['pattern'], text, re.IGNORECASE):\n                triggered_warnings.append(warning['message'])\n        \n        return triggered_warnings\n    \n    def display_warnings(self, text, event='all'):\n        warnings = self.check_warnings(text, event)\n        for warning in warnings:\n            print(warning)\n\n# Example usage\ndef main():\n    warning_system = WarningSystem()\n    \n    # Example checks\n    warning_system.display_warnings(\"Be careful with hardcoded passwords\")\n    warning_system.display_warnings(\"This algorithm has high complexity\", event='code')\n    warning_system.display_warnings(\"Outdated package detected\", event='requirements')\n```\n\n3. Benefits of this approach:\n- Flexible rule configuration\n- Easy to add/modify warning rules\n- Supports different events and patterns\n- Markdown-formatted warnings\n- Regex-based pattern matching\n- Configurable enable/disable\n\n4. Potential Enhancements:\n- Add severity levels\n- Support more complex pattern matching\n- Integrate with logging systems\n- Add custom action handlers\n\nTo use this system:\n1. Install PyYAML: `pip install pyyaml`\n2. Save the code\n3. Customize SKILL.md with your specific warning rules\n\nThis approach provides a highly flexible, extensible warning system that can be easily adapted to various use cases.\n\nWould you like me to elaborate on any part of the implementation or discuss specific warning scenarios you're interested in?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 132,
+    "output": 1028,
+    "total": 1160
+  },
+  "execution_time": 17.93218994140625,
+  "error": null,
+  "timestamp": "2026-01-01T19:20:31.661319"
+}

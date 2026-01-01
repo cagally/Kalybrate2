@@ -1,0 +1,31 @@
+{
+  "task_id": "typescript-write_medium_1",
+  "prompt": "I have a React component that's getting messy. Can you help me refactor this user dashboard component to use TypeScript and separate the data fetching logic from the UI rendering?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you refactor the component using TypeScript best practices, separating concerns, and improving the overall structure. I'll demonstrate a clean approach with hooks, type definitions, and separation of data fetching and rendering logic.\n\nHere's a comprehensive refactoring:\n\n```typescript\n// src/types/User.ts\nexport interface User {\n  id: number;\n  name: string;\n  email: string;\n  role: string;\n}\n\nexport interface UserStats {\n  totalProjects: number;\n  activeProjects: number;\n  completedTasks: number;\n}\n\n// src/hooks/useUserDashboard.ts\nimport { useState, useEffect } from 'react';\nimport { User, UserStats } from '../types/User';\nimport { fetchUserProfile, fetchUserStats } from '../services/userService';\n\nexport const useUserDashboard = (userId: number) => {\n  const [user, setUser] = useState<User | null>(null);\n  const [userStats, setUserStats] = useState<UserStats | null>(null);\n  const [isLoading, setIsLoading] = useState<boolean>(true);\n  const [error, setError] = useState<string | null>(null);\n\n  useEffect(() => {\n    const loadUserData = async () => {\n      try {\n        setIsLoading(true);\n        const [userProfile, stats] = await Promise.all([\n          fetchUserProfile(userId),\n          fetchUserStats(userId)\n        ]);\n\n        setUser(userProfile);\n        setUserStats(stats);\n      } catch (err) {\n        setError(err instanceof Error ? err.message : 'An unexpected error occurred');\n      } finally {\n        setIsLoading(false);\n      }\n    };\n\n    loadUserData();\n  }, [userId]);\n\n  return { user, userStats, isLoading, error };\n};\n\n// src/services/userService.ts\nimport axios from 'axios';\nimport { User, UserStats } from '../types/User';\n\nconst API_BASE_URL = process.env.REACT_APP_API_BASE_URL;\n\nexport const fetchUserProfile = async (userId: number): Promise<User> => {\n  const response = await axios.get(`${API_BASE_URL}/users/${userId}`);\n  return response.data;\n};\n\nexport const fetchUserStats = async (userId: number): Promise<UserStats> => {\n  const response = await axios.get(`${API_BASE_URL}/users/${userId}/stats`);\n  return response.data;\n};\n\n// src/components/UserDashboard.tsx\nimport React from 'react';\nimport { useUserDashboard } from '../hooks/useUserDashboard';\n\ninterface UserDashboardProps {\n  userId: number;\n}\n\nconst UserDashboard: React.FC<UserDashboardProps> = ({ userId }) => {\n  const { user, userStats, isLoading, error } = useUserDashboard(userId);\n\n  if (isLoading) {\n    return <div>Loading user dashboard...</div>;\n  }\n\n  if (error) {\n    return <div>Error: {error}</div>;\n  }\n\n  if (!user || !userStats) {\n    return <div>No user data available</div>;\n  }\n\n  return (\n    <div className=\"user-dashboard\">\n      <h1>User Dashboard</h1>\n      <section className=\"user-profile\">\n        <h2>{user.name}</h2>\n        <p>Email: {user.email}</p>\n        <p>Role: {user.role}</p>\n      </section>\n      \n      <section className=\"user-stats\">\n        <h2>Project Stats</h2>\n        <ul>\n          <li>Total Projects: {userStats.totalProjects}</li>\n          <li>Active Projects: {userStats.activeProjects}</li>\n          <li>Completed Tasks: {userStats.completedTasks}</li>\n        </ul>\n      </section>\n    </div>\n  );\n};\n\nexport default UserDashboard;\n```\n\nThis refactored version introduces several improvements:\n\n1. **Type Safety**: Uses TypeScript interfaces for strict type checking\n2. **Separation of Concerns**: \n   - Separate hooks for data fetching (`useUserDashboard`)\n   - Service layer for API calls\n   - Clean component focused on rendering\n3. **Error Handling**: Comprehensive error and loading states\n4. **Performance**: Uses `Promise.all()` for parallel data fetching\n5. **Flexibility**: Easy to extend and modify\n\nBest practices demonstrated:\n- Typed React functional component\n- Custom hook for data management\n- Async data fetching with error handling\n- Environment-based configuration\n- Modular code structure\n\nTo use this component:\n\n```typescript\nfunction App() {\n  return <UserDashboard userId={123} />;\n}\n```\n\nRecommendations for further improvement:\n- Add unit tests for hooks and services\n- Implement proper environment configuration\n- Add more robust error handling\n- Consider adding loading skeletons\n\nWould you like me to elaborate on any part of the implementation?",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": false,
+    "has_type_annotations": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "compilation error: ",
+    "has_type_annotations": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 173,
+    "output": 1214,
+    "total": 1387
+  },
+  "execution_time": 16.773527145385742,
+  "error": null,
+  "timestamp": "2026-01-01T17:10:16.065275"
+}

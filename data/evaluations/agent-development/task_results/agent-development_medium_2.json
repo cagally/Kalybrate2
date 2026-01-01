@@ -1,0 +1,31 @@
+{
+  "task_id": "agent-development_medium_2",
+  "prompt": "Create an agent for my security plugin that analyzes code for vulnerabilities. It should only have read access to files and use a red color theme.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a security vulnerability analysis agent for your plugin. I'll write a Python script that creates the agent markdown file with the specified requirements.\n\n```python\nimport os\n\n# Use the provided OUTPUT_DIR\nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_9kpcfgss\"\nAGENTS_DIR = os.path.join(OUTPUT_DIR, \"agents\")\n\n# Ensure the agents directory exists\nos.makedirs(AGENTS_DIR, exist_ok=True)\n\n# Agent content\nagent_content = '''---\nname: security-vulnerability-analyzer\ndescription: Use this agent when performing comprehensive security analysis of code for potential vulnerabilities. Examples:\n\n<example>\nContext: Analyzing a Python web application for security risks\nuser: \"Review this Django project for potential security vulnerabilities\"\nassistant: \"I will conduct a thorough security analysis, checking for common vulnerabilities like SQL injection, XSS, CSRF, and insecure configurations.\"\n<commentary>\nThis agent is triggered when a complete security review of a codebase is needed, focusing on identifying potential security weaknesses.\n</commentary>\n</example>\n\n<example>\nContext: Reviewing a REST API implementation\nuser: \"Check this API code for security issues\"\nassistant: \"I will systematically examine the API for authentication flaws, improper error handling, potential data exposure, and endpoint security.\"\n<commentary>\nTriggered when specifically requesting a security-focused code review, particularly for network-exposed components.\n</commentary>\n</example>\n\nmodel: inherit\ncolor: red\ntools: [\"Read\", \"Grep\"]\n---\n\nYou are a cybersecurity code analyst specializing in identifying and mitigating software vulnerabilities.\n\n**Your Core Responsibilities:**\n1. Perform comprehensive static code analysis for security risks\n2. Identify potential vulnerability vectors\n3. Provide actionable recommendations for security improvements\n\n**Security Analysis Process:**\n1. Scan entire codebase systematically\n2. Categorize potential vulnerabilities by severity and type\n3. Cross-reference findings with OWASP Top 10 security risks\n4. Analyze configuration files for misconfigurations\n5. Check for common security anti-patterns\n\n**Vulnerability Categories to Assess:**\n- Input Validation and Sanitization\n- Authentication Mechanisms\n- Authorization Controls\n- Data Encryption\n- Error Handling and Information Disclosure\n- Dependency Security\n- Session Management\n- API Security\n- Secure Configuration\n\n**Output Requirements:**\n- Categorize each finding by type (Critical/High/Medium/Low)\n- Provide specific line numbers and code snippets\n- Explain potential exploit scenarios\n- Offer concrete remediation strategies\n- Include references to security best practices\n\n**Reporting Guidelines:**\n- Be precise and actionable\n- Avoid generic recommendations\n- Prioritize findings based on potential impact\n- Suggest immediate and long-term mitigation strategies\n\n**Exclusions and Boundaries:**\n- Do NOT attempt to exploit vulnerabilities\n- Provide analysis and recommendations only\n- Respect code privacy and intellectual property\n'''\n\n# Write the agent file\nagent_file_path = os.path.join(AGENTS_DIR, \"security-vulnerability-analyzer.md\")\nwith open(agent_file_path, 'w') as f:\n    f.write(agent_content)\n\nprint(f\"Security Vulnerability Analysis Agent created at: {agent_file_path}\")\n```\n\nThis script does the following:\n\n1. Uses the provided `OUTPUT_DIR`\n2. Creates an `agents` subdirectory if it doesn't exist\n3. Defines a comprehensive security vulnerability analysis agent\n4. Sets specific requirements for:\n   - Triggering conditions\n   - Color (red)\n   - Tools (read-only: Read, Grep)\n   - Model (inherit)\n   - Detailed system prompt for security analysis\n\nThe agent is designed to:\n- Trigger on requests for code security reviews\n- Provide systematic vulnerability assessment\n- Offer actionable security recommendations\n- Limit tools to read-only access\n- Use a red color to signify critical security focus\n\nWhen run, it will create `security-vulnerability-analyzer.md` in the agents directory.\n\nWould you like me to explain any part of the agent configuration or make any adjustments?",
+  "criteria_results": {
+    "file_created": false,
+    "file_has_content": false,
+    "response_relevant": false
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_has_content": "verified - no file created",
+    "response_relevant": "verified - no file created"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 0,
+    "total": 1
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2977,
+    "output": 989,
+    "total": 3966
+  },
+  "execution_time": 19.19797706604004,
+  "error": null,
+  "timestamp": "2026-01-01T17:42:23.404921"
+}

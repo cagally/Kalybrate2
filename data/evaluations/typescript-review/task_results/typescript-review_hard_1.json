@@ -1,0 +1,20 @@
+{
+  "task_id": "typescript-review_hard_1",
+  "prompt": "I'm preparing a large pull request that refactors our entire dashboard component system. It includes TypeScript interfaces, React hooks, custom components, and utility functions across 12 files. The changes involve complex state management and API integration. Can you do a comprehensive code review focusing on maintainability, performance, and adherence to our coding standards?",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'd be happy to help you conduct a comprehensive code review of your dashboard component system refactoring. However, I noticed that you haven't actually shared the specific code files yet. To perform a thorough review, I'll need to see the actual code changes.\n\nFor a comprehensive TypeScript/React code review, I would typically:\n\n1. Check TypeScript type safety and interfaces\n2. Evaluate React component and hook implementations\n3. Review state management approach\n4. Assess performance considerations\n5. Verify coding standards compliance\n6. Look for potential refactoring opportunities\n\nCould you please:\n- Share the specific code files you've modified\n- Provide any context about the refactoring goals\n- Explain the key architectural changes you're introducing\n\nI'll then use the typescript-review skill to:\n- Perform a detailed line-by-line analysis\n- Provide specific feedback on code quality\n- Suggest potential improvements\n- Check for any anti-patterns or potential issues\n\nWould you like to proceed by sharing the code files or providing more details about the refactoring?",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 267,
+    "output": 233,
+    "total": 500
+  },
+  "execution_time": 5.321929216384888,
+  "error": null,
+  "timestamp": "2026-01-01T08:57:01.423294"
+}

@@ -1,0 +1,36 @@
+{
+  "skill_name": "agent-development",
+  "overall_score": 40.0,
+  "grade": "F",
+  "task_completion": {
+    "passed": 5,
+    "total": 9,
+    "rate": 66.66666666666666,
+    "verified_criteria": {
+      "passed": 8,
+      "total": 12
+    },
+    "verification_levels": {
+      "full": 9,
+      "partial": 0,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 0,
+    "losses": 5,
+    "ties": 0,
+    "win_rate": 0.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 3928,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T17:46:42.623995",
+  "execution_time": 437.8982939720154,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

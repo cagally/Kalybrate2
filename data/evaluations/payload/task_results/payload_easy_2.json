@@ -1,0 +1,27 @@
+{
+  "task_id": "payload_easy_2",
+  "prompt": "My Payload CMS form keeps showing validation errors for required fields. How do I add proper validation to a text field that must be at least 10 characters long?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll show you how to add custom validation to a text field in Payload CMS with a minimum length requirement. Here's a comprehensive example:\n\n```typescript\nimport { CollectionConfig } from 'payload/types'\n\nexport const Posts: CollectionConfig = {\n  slug: 'posts',\n  fields: [\n    {\n      name: 'title',\n      type: 'text', \n      required: true,\n      validate: (value) => {\n        // Check if value exists and is at least 10 characters long\n        if (!value) {\n          return 'Title is required'\n        }\n        \n        if (value.length < 10) {\n          return 'Title must be at least 10 characters long'\n        }\n        \n        // Return true if validation passes\n        return true\n      },\n      admin: {\n        description: 'Title must be at least 10 characters long'\n      }\n    },\n    // Other fields...\n  ]\n}\n```\n\nKey validation patterns:\n\n1. `validate` function receives the field value\n2. Return `true` for successful validation\n3. Return a string message for validation errors\n4. Optional: Add `admin.description` to show helper text in the admin UI\n\nAdvanced validation example with more checks:\n\n```typescript\n{\n  name: 'title',\n  type: 'text',\n  required: true,\n  validate: (value, options) => {\n    // Destructure additional context if needed\n    const { data, operation, req } = options\n\n    // Multiple validation checks\n    if (!value) {\n      return 'Title is required'\n    }\n\n    if (value.length < 10) {\n      return 'Title must be at least 10 characters long'\n    }\n\n    if (value.length > 100) {\n      return 'Title cannot exceed 100 characters'\n    }\n\n    // Optional: Custom regex validation\n    const titleRegex = /^[a-zA-Z0-9\\s]+$/\n    if (!titleRegex.test(value)) {\n      return 'Title can only contain letters, numbers, and spaces'\n    }\n\n    return true\n  },\n  admin: {\n    description: 'Title must be 10-100 characters, letters and numbers only'\n  }\n}\n```\n\nPro Tips:\n- Always return a descriptive error message\n- Use `validate` for complex, custom validation logic\n- Consider adding helpful descriptions in `admin` config\n- Validation runs on both client and server-side\n\nThis approach ensures robust field validation in your Payload CMS collection, providing clear feedback to users when input doesn't meet requirements.",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 4279,
+    "output": 618,
+    "total": 4897
+  },
+  "execution_time": 11.440110921859741,
+  "error": null,
+  "timestamp": "2026-01-01T19:09:08.293797"
+}

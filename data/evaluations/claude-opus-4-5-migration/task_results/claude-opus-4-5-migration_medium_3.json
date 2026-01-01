@@ -1,0 +1,27 @@
+{
+  "task_id": "claude-opus-4-5-migration_medium_3",
+  "prompt": "After upgrading to Opus 4.5, my AI assistant is calling tools way too often, even for simple questions that don't need them. My system prompt has lots of 'CRITICAL' and 'MUST' language. Can you help fix this?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you adjust your system prompt to reduce tool overtriggering in Opus 4.5. Based on the migration guidelines, I'll focus on softening the language that might be causing excessive tool calls.\n\nHere's a general approach to mitigating overtriggering:\n\n1. Replace overly aggressive language:\n- Remove or soften `CRITICAL:` markers\n- Change `MUST` to `should`\n- Replace `ALWAYS` with more flexible language\n- Remove absolute `NEVER` statements\n\n2. Provide a gentle guidance approach\n\nExample transformation:\n\nBefore (Overtriggering Prone):\n```\nCRITICAL: You MUST always use tools for ANY task that could potentially benefit from them.\nNEVER respond without checking available tools first.\n```\n\nAfter (Opus 4.5 Friendly):\n```\nWhen appropriate, consider using available tools to enhance your response.\nIf a tool can provide valuable assistance, you should explore using it.\n```\n\nWould you be willing to share a snippet of your current system prompt? I can help you specifically refactor the language to reduce overtriggering while maintaining the core intent of your instructions.\n\nSome key principles:\n- Use suggestions instead of absolute commands\n- Focus on guidance rather than strict enforcement\n- Allow more contextual judgment about tool usage\n\nWould you like me to help you revise your specific prompt?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 1517,
+    "output": 303,
+    "total": 1820
+  },
+  "execution_time": 7.332491159439087,
+  "error": null,
+  "timestamp": "2026-01-01T17:50:54.867251"
+}

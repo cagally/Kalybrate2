@@ -1,0 +1,128 @@
+{
+  "skill_claims": [
+    "Add unsigned integer (uint16, uint32, uint64) support to PyTorch operators by updating AT_DISPATCH macros",
+    "Convert old AT_DISPATCH to AT_DISPATCH_V2 format when needed",
+    "Choose appropriate method for adding uint support (explicit AT_BAREBONES_UNSIGNED_TYPES vs AT_INTEGRAL_TYPES_V2 substitution)",
+    "Handle multiple dispatch sites consistently across a file",
+    "Properly format AT_DISPATCH_V2 with correct type groups and syntax"
+  ],
+  "tasks": [
+    {
+      "id": "add-uint-support_easy_1",
+      "prompt": "I have a PyTorch operator that currently only supports signed integers, but I need to add support for uint16, uint32, and uint64 types. Here's the current dispatch macro:\n\nAT_DISPATCH_V2(dtype, \"my_op\", AT_WRAP([&]() {\n  kernel<scalar_t>();\n}), AT_EXPAND(AT_INTEGRAL_TYPES));",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Add unsigned integer (uint16, uint32, uint64) support to PyTorch operators by updating AT_DISPATCH macros"
+    },
+    {
+      "id": "add-uint-support_easy_2",
+      "prompt": "My PyTorch kernel needs to handle unsigned types. The current code uses AT_EXPAND(AT_ALL_TYPES) but I'm getting errors when trying to use uint32 tensors. Can you help me add barebones unsigned type support?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Choose appropriate method for adding uint support (explicit AT_BAREBONES_UNSIGNED_TYPES vs AT_INTEGRAL_TYPES_V2 substitution)"
+    },
+    {
+      "id": "add-uint-support_easy_3",
+      "prompt": "I'm working on a PyTorch operator and need to enable kUInt16, kUInt32, kUInt64 support. The dispatch currently looks like this:\n\nAT_DISPATCH_V2(iter.dtype(), \"reduce_op\", AT_WRAP([&]() {\n  impl<scalar_t>(iter);\n}), AT_EXPAND(AT_ALL_TYPES), kHalf, kBFloat16);",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Add unsigned integer (uint16, uint32, uint64) support to PyTorch operators by updating AT_DISPATCH macros"
+    },
+    {
+      "id": "add-uint-support_medium_1",
+      "prompt": "I have a PyTorch CUDA kernel file with multiple dispatch sites that need unsigned integer support. Here are the current implementations:\n\nvoid kernel_cuda_impl1(TensorIterator& iter) {\n  AT_DISPATCH_V2(iter.dtype(), \"op1\", AT_WRAP([&]() {\n    launch_kernel<scalar_t>(iter);\n  }), AT_EXPAND(AT_INTEGRAL_TYPES), AT_EXPAND(AT_FLOATING_TYPES));\n}\n\nvoid kernel_cuda_impl2(TensorIterator& iter) {\n  AT_DISPATCH_V2(iter.input_dtype(), \"op2\", AT_WRAP([&]() {\n    reduce_kernel<scalar_t>(iter);\n  }), AT_EXPAND(AT_ALL_TYPES), kBFloat16);\n}\n\nI need both functions to support uint types consistently.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle multiple dispatch sites consistently across a file"
+    },
+    {
+      "id": "add-uint-support_medium_2",
+      "prompt": "I'm getting compilation errors in my PyTorch operator because it's using the old AT_DISPATCH format, but I also need to add unsigned integer support. The current code is:\n\nAT_DISPATCH_ALL_TYPES_AND2(kHalf, kBFloat16, dtype, \"conv_op\", [&]() {\n  conv_kernel<scalar_t>(input, weight, output);\n});\n\nCan you help me modernize this and add uint16/uint32/uint64 support?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Convert old AT_DISPATCH to AT_DISPATCH_V2 format when needed"
+    },
+    {
+      "id": "add-uint-support_medium_3",
+      "prompt": "I have a PyTorch operator that works with both integral and floating point types, but users are reporting issues with unsigned tensors. The dispatch uses separate type groups:\n\nAT_DISPATCH_V2(dtype, \"math_op\", AT_WRAP([&]() {\n  compute<scalar_t>(data, result);\n}), AT_EXPAND(AT_INTEGRAL_TYPES), AT_EXPAND(AT_FLOATING_TYPES), AT_EXPAND(AT_COMPLEX_TYPES));\n\nWhat's the best way to add unsigned integer support here?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Choose appropriate method for adding uint support (explicit AT_BAREBONES_UNSIGNED_TYPES vs AT_INTEGRAL_TYPES_V2 substitution)"
+    },
+    {
+      "id": "add-uint-support_hard_1",
+      "prompt": "I'm working on a complex PyTorch operator implementation that has inconsistent dispatch patterns across CPU and CUDA backends. The CPU version uses old-style dispatch, the CUDA version uses AT_DISPATCH_V2 but with different type coverage, and I need to add comprehensive unsigned integer support to both. Here's what I'm working with:\n\n// CPU implementation\nAT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND3(kHalf, kBFloat16, kBool, dtype, \"complex_op_cpu\", [&]() {\n  cpu_kernel<scalar_t>(iter);\n});\n\n// CUDA implementation  \nAT_DISPATCH_V2(dtype, \"complex_op_cuda\", AT_WRAP([&]() {\n  cuda_kernel<scalar_t>(iter);\n}), AT_EXPAND(AT_ALL_TYPES), kHalf, kBFloat16);\n\n// Another CUDA helper\nAT_DISPATCH_V2(input_dtype, \"helper_cuda\", AT_WRAP([&]() {\n  helper_kernel<scalar_t>(data);\n}), AT_EXPAND(AT_INTEGRAL_TYPES));\n\nI need all three to have consistent type support including unsigned integers, complex types, and half precision.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle multiple dispatch sites consistently across a file"
+    },
+    {
+      "id": "add-uint-support_hard_2",
+      "prompt": "I'm maintaining a PyTorch operator that has evolved over time and now has a mix of dispatch styles and inconsistent type support. Some dispatch sites support different type combinations, and I need to standardize everything to AT_DISPATCH_V2 with full unsigned integer support while maintaining backward compatibility. Here's the current mess:\n\n// Main kernel - old style\nAT_DISPATCH_ALL_TYPES(dtype, \"main_op\", [&]() {\n  main_impl<scalar_t>();\n});\n\n// Reduction helper - mixed V2\nAT_DISPATCH_V2(dtype, \"reduce_helper\", AT_WRAP([&]() {\n  reduce_impl<scalar_t>();\n}), AT_EXPAND(AT_ALL_TYPES), AT_EXPAND(AT_COMPLEX_TYPES));\n\n// Index kernel - integral only\nAT_DISPATCH_INTEGRAL_TYPES(idx_dtype, \"index_op\", [&]() {\n  index_impl<scalar_t>();\n});\n\n// Float kernel - newer V2 style\nAT_DISPATCH_V2(float_dtype, \"float_op\", AT_WRAP([&]() {\n  float_impl<scalar_t>();\n}), AT_EXPAND(AT_FLOATING_TYPES), kHalf, kBFloat16);\n\nI need everything converted to consistent AT_DISPATCH_V2 with appropriate unsigned type support where it makes sense.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Properly format AT_DISPATCH_V2 with correct type groups and syntax"
+    },
+    {
+      "id": "add-uint-support_hard_3",
+      "prompt": "I'm implementing a new PyTorch operator from scratch that needs to handle a complex type matrix: it should support all standard numeric types (int8, int16, int32, int64, uint16, uint32, uint64, float16, float32, float64, bfloat16) plus complex types, but with different kernel implementations for different type categories. I need multiple dispatch sites:\n\n1. A main dispatcher that handles all numeric types\n2. A specialized integer-only path for optimization\n3. A floating-point specific implementation\n4. A complex number handler\n\nEach should use proper AT_DISPATCH_V2 format with the most efficient type group selections. The integer path should include both signed and unsigned types, and I want to use the most concise type group specifications possible.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Properly format AT_DISPATCH_V2 with correct type groups and syntax"
+    }
+  ],
+  "quality_prompts": [
+    "I need to add uint32 support to this PyTorch dispatch macro: AT_DISPATCH_V2(dtype, \"op\", AT_WRAP([&]() { kernel<scalar_t>(); }), AT_EXPAND(AT_ALL_TYPES));",
+    "My PyTorch operator fails with unsigned integer tensors. The dispatch currently uses AT_EXPAND(AT_INTEGRAL_TYPES) - how do I fix this?",
+    "Convert this old PyTorch dispatch to support unsigned types: AT_DISPATCH_ALL_TYPES(dtype, \"my_op\", [&]() { impl<scalar_t>(); });",
+    "I have multiple AT_DISPATCH_V2 calls in my PyTorch kernel file that need consistent uint16/uint32/uint64 support added.",
+    "What's the difference between AT_BAREBONES_UNSIGNED_TYPES and AT_INTEGRAL_TYPES_V2 for adding unsigned integer support to PyTorch operators?"
+  ],
+  "generated_at": "2026-01-01T17:36:29.291200",
+  "model": "claude-sonnet-4-20250514"
+}

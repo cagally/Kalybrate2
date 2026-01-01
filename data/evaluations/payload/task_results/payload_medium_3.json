@@ -1,0 +1,29 @@
+{
+  "task_id": "payload_medium_3",
+  "prompt": "I want to automatically set the author field to the current user and update the modifiedBy field whenever a post is saved. How do I create hooks for this?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create hooks to automatically set the author and modifiedBy fields for a Posts collection. I'll provide a comprehensive example with TypeScript that demonstrates best practices for Payload CMS hooks.\n\nCreate a file `src/collections/Posts.ts`:\n\n```typescript\nimport type { CollectionConfig, PayloadRequest } from 'payload/types'\nimport type { User } from '@/payload-types' // Assumes you've generated types\n\nexport const Posts: CollectionConfig = {\n  slug: 'posts',\n  admin: {\n    useAsTitle: 'title',\n  },\n  fields: [\n    {\n      name: 'title',\n      type: 'text',\n      required: true,\n    },\n    {\n      name: 'content',\n      type: 'richText',\n    },\n    {\n      name: 'author',\n      type: 'relationship',\n      relationTo: 'users',\n      required: true,\n    },\n    {\n      name: 'modifiedBy',\n      type: 'relationship',\n      relationTo: 'users',\n      admin: {\n        readOnly: true, // Prevent manual editing\n      },\n    },\n  ],\n  hooks: {\n    beforeChange: [\n      async ({ data, operation, req }) => {\n        // Type-safe user extraction\n        const user = req.user as User | null\n\n        // Only set author on initial create\n        if (operation === 'create' && user) {\n          data.author = user.id\n        }\n\n        // Always update modifiedBy for create and update\n        if (user) {\n          data.modifiedBy = user.id\n        }\n\n        return data\n      },\n    ],\n  },\n}\n```\n\nKey points in this implementation:\n\n1. **Author Field**:\n   - Set only during initial creation\n   - Uses the current user's ID\n   - Only set if a user is authenticated\n\n2. **ModifiedBy Field**:\n   - Updated on both create and update operations\n   - Always sets to the current user's ID\n   - Read-only in the admin UI to prevent manual editing\n\n3. **Type Safety**:\n   - Uses TypeScript to ensure type checking\n   - Assumes you have generated Payload types\n   - Safely handles potential null user scenarios\n\n### Best Practices Demonstrated:\n\n- Uses `beforeChange` hook for field manipulation\n- Differentiates between create and update operations\n- Provides type-safe user access\n- Handles authentication scenarios\n- Prevents manual modification of tracking fields\n\n### Recommendations:\n\n1. Ensure you have generated your Payload types:\n   ```bash\n   pnpm payload generate:types\n   ```\n\n2. Configure your `payload.config.ts` to include this collection:\n```typescript\nimport { buildConfig } from 'payload/config'\nimport { Posts } from './collections/Posts'\n\nexport default buildConfig({\n  collections: [\n    Posts,\n    // other collections...\n  ],\n})\n```\n\n### Advanced Error Handling (Optional)\n\nIf you want more robust error handling, you can enhance the hook:\n\n```typescript\nbeforeChange: [\n  async ({ data, operation, req }) => {\n    const user = req.user as User | null\n\n    // Throw an error if no authenticated user for create/update\n    if (!user && (operation === 'create' || operation === 'update')) {\n      throw new Error('Authentication required to create or modify posts')\n    }\n\n    if (operation === 'create' && user) {\n      data.author = user.id\n    }\n\n    if (user) {\n      data.modifiedBy = user.id\n    }\n\n    return data\n  },\n],\n```\n\nThis version adds an additional layer of security by:\n- Preventing anonymous post creation/modification\n- Explicitly throwing an error if no authenticated user is present\n\n### When to Use\n\n\u2705 Use this pattern when you want to:\n- Automatically track post authorship\n- Log who last modified a document\n- Ensure accountability in content management\n- Implement basic audit trail functionality\n\n\u274c Avoid if:\n- You don't have user authentication\n- You need more complex authorship tracking\n- Your use case requires different tracking mechanisms",
+  "criteria_results": {
+    "code_extracted": true,
+    "has_type_annotations": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "has_type_annotations": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 4277,
+    "output": 981,
+    "total": 5258
+  },
+  "execution_time": 18.302751302719116,
+  "error": null,
+  "timestamp": "2026-01-01T19:09:08.298092"
+}

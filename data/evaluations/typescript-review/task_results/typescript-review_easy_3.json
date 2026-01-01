@@ -1,0 +1,20 @@
+{
+  "task_id": "typescript-review_easy_3",
+  "prompt": "I have a basic TypeScript interface definition. Can you check if I'm using proper TypeScript conventions and type safety?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll be happy to help! Please share the TypeScript interface definition, and I'll review it for:\n- Naming conventions\n- Type safety\n- Best practices\n- Potential improvements\n\nCould you paste the interface definition you'd like me to review?",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 220,
+    "output": 57,
+    "total": 277
+  },
+  "execution_time": 1.8485209941864014,
+  "error": null,
+  "timestamp": "2026-01-01T08:57:01.419976"
+}

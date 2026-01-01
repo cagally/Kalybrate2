@@ -1,0 +1,31 @@
+{
+  "task_id": "command-development_easy_3",
+  "prompt": "I want a slash command that automatically reads my package.json file and suggests dependency updates",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a slash command for automatically reading `package.json` and suggesting dependency updates. I'll write this as a Markdown file in the specified output directory with the appropriate configuration.\n\n```python\nimport os\n\nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_2kk8cit7\"\nCOMMAND_PATH = os.path.join(OUTPUT_DIR, \"update-deps.md\")\n\ncommand_content = '''---\nname: update-deps\ndescription: Check and suggest updates for project dependencies\nargument-hint: [package-manager]\nallowed-tools: Read, Bash(npm:*, yarn:*, pnpm:*)\nmodel: sonnet\n---\n\nCheck dependencies in @package.json for potential updates.\n\n$IF($1,\n  Package Manager: $1,\n  Package Manager: npm (default)\n)\n\nUpdate Strategy:\n1. Identify outdated dependencies\n2. Check latest versions\n3. Evaluate potential breaking changes\n4. Provide update recommendations\n\nDependency Check Process:\n- Run version check: !`$IF($1, $1, npm) outdated`\n- Analyze output for:\n  * Current version\n  * Wanted version\n  * Latest version\n  * Potential impact of update\n\nRecommendations:\n- For minor/patch updates: Direct upgrade suggested\n- For major version updates: Require careful review of changelog\n- Consider project's semantic versioning constraints\n\nUpdate Suggestion Template:\n```\nDependency: [package-name]\nCurrent Version: x.x.x\nLatest Version: y.y.y\nRecommendation: [safe/review/caution]\nChangelog Impact: [minimal/moderate/significant]\n```\n\nWould you like me to generate a detailed update report with specific package recommendations?\n'''\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Write the command file\nwith open(COMMAND_PATH, 'w') as f:\n    f.write(command_content)\n\nprint(f\"Created dependency update command at {COMMAND_PATH}\")\n```\n\nThis slash command will:\n- Read the `package.json` file\n- Check for outdated dependencies\n- Suggest updates with a clear strategy\n- Support different package managers (npm/yarn/pnpm)\n- Provide a thoughtful update recommendation process\n\nKey features:\n- Supports optional package manager argument\n- Uses dynamic bash execution to run package manager commands\n- Provides context-aware update suggestions\n- Highlights potential breaking changes\n- Offers a template for understanding updates\n\nUsage examples:\n- `/update-deps` (uses npm by default)\n- `/update-deps yarn`\n- `/update-deps pnpm`\n\nThe command will guide users through understanding potential dependency updates with nuanced recommendations.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified - no file created",
+    "file_has_content": "verified - no file created"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 0,
+    "total": 1
+  },
+  "passed": false,
+  "tokens": {
+    "input": 5050,
+    "output": 660,
+    "total": 5710
+  },
+  "execution_time": 13.645379066467285,
+  "error": null,
+  "timestamp": "2026-01-01T18:01:28.856178"
+}

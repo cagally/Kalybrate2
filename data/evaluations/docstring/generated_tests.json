@@ -1,0 +1,141 @@
+{
+  "skill_claims": [
+    "Write docstrings for PyTorch functions and methods following PyTorch conventions",
+    "Use raw strings and Sphinx/reStructuredText format",
+    "Include proper function signatures with parameter types and return types",
+    "Document parameters in Args sections with correct formatting",
+    "Include mathematical formulas using Sphinx math directives",
+    "Add cross-references to related PyTorch classes and functions",
+    "Include practical examples with proper formatting",
+    "Handle different function types (native Python, C-bound, in-place variants, aliases)",
+    "Use proper shape documentation with LaTeX math notation"
+  ],
+  "tasks": [
+    {
+      "id": "docstring_easy_1",
+      "prompt": "I wrote a simple PyTorch function that adds two tensors together. Can you write a proper docstring for it? Here's the function: def add_tensors(a, b): return torch.add(a, b)",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Write docstrings for PyTorch functions and methods following PyTorch conventions"
+    },
+    {
+      "id": "docstring_easy_2",
+      "prompt": "I need to document this PyTorch utility function that reshapes a tensor. Can you add a docstring? def reshape_tensor(input_tensor, new_shape): return input_tensor.view(new_shape)",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Include proper function signatures with parameter types and return types"
+    },
+    {
+      "id": "docstring_easy_3",
+      "prompt": "I have a PyTorch function that applies ReLU activation. Could you help me write documentation for it? def my_relu(x, inplace=False): return torch.relu(x, inplace=inplace)",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Document parameters in Args sections with correct formatting"
+    },
+    {
+      "id": "docstring_medium_1",
+      "prompt": "I'm implementing a custom PyTorch layer for matrix multiplication with bias. The function takes input, weight, and optional bias parameters. I need proper documentation that includes mathematical notation and cross-references to related PyTorch functions. Here's my function: def linear_transform(input, weight, bias=None): output = torch.matmul(input, weight.t()); if bias is not None: output += bias; return output",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Include mathematical formulas using Sphinx math directives"
+    },
+    {
+      "id": "docstring_medium_2",
+      "prompt": "I wrote a PyTorch function that performs 1D convolution with custom padding. I need documentation that follows PyTorch standards, including proper tensor shape notation and examples. The function is: def conv1d_custom(input, kernel, stride=1, padding=0): return F.conv1d(input, kernel, stride=stride, padding=padding)",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Use proper shape documentation with LaTeX math notation"
+    },
+    {
+      "id": "docstring_medium_3",
+      "prompt": "I need to document a PyTorch function that implements softmax with temperature scaling. It should include cross-references to the standard softmax function and proper examples. Here's the code: def temperature_softmax(logits, temperature=1.0, dim=-1): return F.softmax(logits / temperature, dim=dim)",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Add cross-references to related PyTorch classes and functions"
+    },
+    {
+      "id": "docstring_hard_1",
+      "prompt": "I'm contributing to PyTorch and need to document a C-bound function using add_docstr. The function performs 2D batch normalization with running statistics. I need complete documentation including mathematical formulas, proper parameter documentation, shape specifications, cross-references, examples, and notes about training vs eval mode. The function signature is: batch_norm2d(input, weight, bias, running_mean, running_var, training=True, momentum=0.1, eps=1e-5)",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle different function types (native Python, C-bound, in-place variants, aliases)"
+    },
+    {
+      "id": "docstring_hard_2",
+      "prompt": "I need to create comprehensive documentation for a complex PyTorch function that implements multi-head attention. It should include the mathematical formulation, detailed parameter descriptions with tensor shapes, cross-references to related attention mechanisms, multiple examples showing different use cases, and performance notes. The function is: def multi_head_attention(query, key, value, num_heads, dropout=0.0, mask=None, scale=None): # complex implementation here",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Include practical examples with proper formatting"
+    },
+    {
+      "id": "docstring_hard_3",
+      "prompt": "I'm documenting a set of related PyTorch functions: the main function, its in-place variant, and an alias. I need proper documentation for all three that follows PyTorch conventions. The functions are: def normalize_tensor(input, p=2, dim=1, eps=1e-12), def normalize_tensor_(input, p=2, dim=1, eps=1e-12) (in-place), and def norm_tensor(input, p=2, dim=1, eps=1e-12) (alias). Each needs appropriate documentation with cross-references between them.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_docstrings": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle different function types (native Python, C-bound, in-place variants, aliases)"
+    }
+  ],
+  "quality_prompts": [
+    "Write documentation for this PyTorch function that computes the mean squared error: def mse_loss(input, target, reduction='mean'): return F.mse_loss(input, target, reduction=reduction)",
+    "I need a docstring for my PyTorch function that applies dropout: def apply_dropout(x, p=0.5, training=True): return F.dropout(x, p=p, training=training)",
+    "Document this PyTorch tensor creation function: def create_tensor(data, dtype=None, device=None, requires_grad=False): return torch.tensor(data, dtype=dtype, device=device, requires_grad=requires_grad)",
+    "Help me write documentation for this PyTorch pooling function: def max_pool2d_custom(input, kernel_size, stride=None, padding=0): return F.max_pool2d(input, kernel_size, stride=stride, padding=padding)",
+    "I need proper documentation for this PyTorch activation function: def gelu_activation(input, approximate='none'): return F.gelu(input, approximate=approximate)"
+  ],
+  "generated_at": "2026-01-01T18:40:38.834543",
+  "model": "claude-sonnet-4-20250514"
+}

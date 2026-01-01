@@ -1,0 +1,17 @@
+{
+  "description": "Block writes to sensitive system directories",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task__sjuimv7/system_directory_write_hook.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

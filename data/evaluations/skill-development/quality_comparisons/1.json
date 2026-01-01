@@ -1,0 +1,19 @@
+{
+  "prompt": "My skill isn't being triggered when users ask for help with spreadsheet analysis. What might be wrong?",
+  "baseline_response": "I apologize, but I cannot see the specific details of your skill or its configuration. However, I can suggest some common troubleshooting steps:\n\n1. Verify trigger phrases:\n- Check that your invocation phrases match exactly\n- Ensure variations of \"spreadsheet analysis\" are included\n- Test case sensitivity and exact wording\n\n2. Intent matching:\n- Review your intent classification rules\n- Confirm the help request matches your defined intent\n- Check if synonyms or related phrases are captured\n\n3. Skill configuration:\n- Validate skill is active and deployed\n- Check any language or context settings\n- Confirm no conflicting intents\n\n4. Test scenarios:\n- Try different phrasings\n- Verify sample user queries\n- Use your development/testing interface\n\nWould you be willing to share more specific details about your skill's setup? That would help me provide more targeted troubleshooting advice.",
+  "baseline_tokens": {
+    "input": 28,
+    "output": 199,
+    "total": 227
+  },
+  "skill_response": "Let me help you diagnose why your spreadsheet analysis skill might not be triggering. I'll review several potential issues based on the Skill Development best practices:\n\n1. Trigger Phrase Analysis\n   - Check your SKILL.md frontmatter description\n   - Are the trigger phrases specific and comprehensive?\n\n**Example of Weak Triggers:**\n```yaml\ndescription: Provides guidance for spreadsheet analysis.\n```\n\n**Example of Strong Triggers:**\n```yaml\ndescription: This skill should be used when the user asks to \"analyze spreadsheet data\", \"perform data analysis on Excel\", \"calculate spreadsheet statistics\", \"clean spreadsheet data\", \"create pivot tables\", \"extract insights from CSV\", or mentions processing large datasets in Excel, Google Sheets, or CSV formats.\n```\n\n2. Phrase Diversity Considerations\nMake sure you've included:\n- Different phrasings (\"spreadsheet analysis\" vs \"data analysis\")\n- Specific tools (Excel, Google Sheets, CSV)\n- Specific actions (calculate, clean, extract, pivot)\n\n3. Progressive Disclosure Check\n- Is your SKILL.md body concise and clear? (1,500-2,000 words)\n- Have you moved detailed content to `references/`?\n- Are supporting files (`references/`, `examples/`, `scripts/`) set up?\n\n4. Verification Steps\n```bash\n# Check skill directory structure\ntree skills/spreadsheet-analysis/\n\n# Verify SKILL.md has proper frontmatter\ncat skills/spreadsheet-analysis/SKILL.md\n```\n\nWould you like me to help you review and potentially improve your skill's trigger phrases and structure?",
+  "skill_tokens": {
+    "input": 5590,
+    "output": 368,
+    "total": 5958
+  },
+  "judge_verdict": "with_skill",
+  "judge_reasoning": "Response A provides much more specific, actionable guidance with concrete examples of weak vs strong trigger phrases, specific technical steps including bash commands, and demonstrates deep knowledge of skill development best practices. Response B is more generic and vague, offering basic troubleshooting steps without the detailed examples and specific implementation guidance that would actually help solve the problem.",
+  "judge_model": "claude-sonnet-4-20250514",
+  "timestamp": "2026-01-01T08:50:32.092579"
+}

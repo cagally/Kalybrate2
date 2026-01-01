@@ -1,0 +1,20 @@
+{
+  "task_id": "typescript-review_hard_3",
+  "prompt": "I've been working on a major feature that adds a new charting library integration to our analytics dashboard. The implementation includes TypeScript decorators, generic constraints, React context providers, and custom hooks. The code also has extensive JSDoc documentation. Can you review everything for code quality, documentation accuracy, and compliance with our project standards?",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you review the code for the new charting library integration. However, I noticed that you haven't actually shared the specific code files yet. To conduct a thorough code review, I'll need to see:\n\n1. The specific TypeScript/JavaScript files\n2. Any new React components or hooks\n3. The implementation details of the decorators and generic constraints\n\nCould you please provide the code snippets or files you'd like me to review? I'll be happy to:\n- Check type safety\n- Validate JSDoc documentation\n- Assess coding standards compliance\n- Review React best practices\n- Evaluate overall code quality and design\n\nSome specific areas I'll focus on include:\n- Proper use of TypeScript features\n- Decorator implementation \n- Generic type constraints\n- React context and hook design\n- Error handling\n- Performance considerations\n\nPlease share the relevant code, and I'll provide a comprehensive review using the typescript-review skill.",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 263,
+    "output": 204,
+    "total": 467
+  },
+  "execution_time": 5.118183135986328,
+  "error": null,
+  "timestamp": "2026-01-01T08:57:01.424617"
+}

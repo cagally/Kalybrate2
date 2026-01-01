@@ -1,0 +1,141 @@
+{
+  "skill_claims": [
+    "Create and implement Claude Code plugin hooks with event-driven automation",
+    "Validate tool calls before execution using PreToolUse hooks",
+    "React to tool results with PostToolUse hooks",
+    "Enforce completion standards with Stop and SubagentStop hooks",
+    "Load project context automatically with SessionStart hooks",
+    "Implement prompt-based hooks for context-aware validation",
+    "Block dangerous commands and enforce security policies",
+    "Set up hooks configuration in proper JSON formats",
+    "Use environment variables like ${CLAUDE_PLUGIN_ROOT} for portable paths"
+  ],
+  "tasks": [
+    {
+      "id": "hook-development_easy_1",
+      "prompt": "I want to automatically load my project's README file whenever I start a Claude session. Can you help me set this up?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "Load project context automatically with SessionStart hooks"
+    },
+    {
+      "id": "hook-development_easy_2",
+      "prompt": "Create a simple hook that shows a message whenever Claude finishes using any tool.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "React to tool results with PostToolUse hooks"
+    },
+    {
+      "id": "hook-development_easy_3",
+      "prompt": "I need a basic hook configuration that prevents Claude from stopping until I explicitly say the task is complete.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "Enforce completion standards with Stop and SubagentStop hooks"
+    },
+    {
+      "id": "hook-development_medium_1",
+      "prompt": "Set up a security hook that blocks any file writes to system directories like /etc, /usr, or /var. It should ask me for permission before allowing writes to these locations.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "Block dangerous commands and enforce security policies"
+    },
+    {
+      "id": "hook-development_medium_2",
+      "prompt": "Create a hook system that automatically runs code quality checks after any file edit and provides feedback to Claude about potential issues.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "Implement prompt-based hooks for context-aware validation"
+    },
+    {
+      "id": "hook-development_medium_3",
+      "prompt": "I want to validate that Claude has properly tested any code changes before considering a task complete. Set up hooks that check for test execution and build success.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "Validate tool calls before execution using PreToolUse hooks"
+    },
+    {
+      "id": "hook-development_hard_1",
+      "prompt": "Build a comprehensive plugin hook system that loads project context on session start, validates all file operations for security, provides intelligent feedback on code changes, and ensures proper task completion with testing requirements.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "Create and implement Claude Code plugin hooks with event-driven automation"
+    },
+    {
+      "id": "hook-development_hard_2",
+      "prompt": "Create a plugin with hooks that automatically detects the project type (Node.js, Python, etc.) on session start, sets appropriate environment variables, validates tool usage based on project conventions, and blocks completion until proper documentation and tests are in place.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "Use environment variables like ${CLAUDE_PLUGIN_ROOT} for portable paths"
+    },
+    {
+      "id": "hook-development_hard_3",
+      "prompt": "Design a multi-layered hook system that intercepts user prompts to add security warnings, validates all tool calls with context-aware AI reasoning, provides intelligent post-action feedback, and implements a sophisticated completion gate that ensures code quality, security, and documentation standards are met.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".json",
+      "tests_claim": "Set up hooks configuration in proper JSON formats"
+    }
+  ],
+  "quality_prompts": [
+    "Create a hook that prevents Claude from writing to sensitive system directories",
+    "Set up automatic project context loading when starting a new session",
+    "Build a validation system that checks code quality before allowing file edits",
+    "Create hooks that ensure proper testing is done before task completion",
+    "Design a security-focused hook system that validates all tool usage with AI reasoning"
+  ],
+  "generated_at": "2026-01-01T18:51:15.917792",
+  "model": "claude-sonnet-4-20250514"
+}

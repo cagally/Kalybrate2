@@ -1,0 +1,33 @@
+{
+  "task_id": "clojure-write_medium_2",
+  "prompt": "Create a Clojure namespace for handling user authentication with functions for password hashing, validation, and session management. I want to make sure it follows proper conventions.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a Clojure namespace for user authentication that follows Clojure conventions and best practices. I'll break this down into multiple files and use Python to save them.\n\nHere's the Python code to create the authentication namespace:\n\n```python\nimport os\n\nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_epn52zun\"\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Create the authentication namespace\nauth_namespace = '''(ns metabase.auth.core\n  \"User authentication and session management namespace.\n   Provides functions for secure password handling, validation, and session control.\"\n  (:require\n    [buddy.core.hash :as hash]\n    [buddy.core.codecs :as codecs]\n    [buddy.hashers :as hashers]\n    [clojure.spec.alpha :as s]\n    [clojure.spec.alpha :as spec]\n    [ring.middleware.session :as session]))\n\n;; Specs for validating user inputs\n(s/def ::username (s/and string? #(re-matches #\"[a-zA-Z0-9_]{3,20}\" %)))\n(s/def ::password (s/and string? #(>= (count %) 8)))\n\n(defn hash-password\n  \"Securely hash a user's password using bcrypt.\"\n  [password]\n  {:pre [(s/valid? ::password password)]}\n  (hashers/derive password {:alg :bcrypt+sha512}))\n\n(defn verify-password\n  \"Verify a password against a stored hash.\"\n  [plain-password hashed-password]\n  {:pre [(s/valid? ::password plain-password)]}\n  (hashers/verify plain-password hashed-password))\n\n(defn create-user\n  \"Create a new user with a securely hashed password.\"\n  [username password]\n  {:pre [(s/valid? ::username username)\n         (s/valid? ::password password)]}\n  {:username username\n   :password (hash-password password)})\n\n(defn generate-session-token\n  \"Generate a secure session token.\"\n  []\n  (codecs/bytes->hex (hash/sha256 (str (System/currentTimeMillis)))))\n\n(defn create-session\n  \"Create a new user session with a unique token.\"\n  [user-id]\n  {:session-token (generate-session-token)\n   :user-id user-id\n   :created-at (System/currentTimeMillis)})\n\n(defn validate-session\n  \"Check if a session is valid based on token and timeout.\"\n  [session max-age-ms]\n  (let [current-time (System/currentTimeMillis)]\n    (and session\n         (< (- current-time (:created-at session))\n            max-age-ms))))\n\n(defn invalidate-session\n  \"Invalidate a user session.\"\n  [session]\n  (assoc session :invalidated-at (System/currentTimeMillis)))\n'''\n\n# Write the authentication namespace to a file\nwith open(os.path.join(OUTPUT_DIR, 'core.clj'), 'w') as f:\n    f.write(auth_namespace)\n\n# Create a deps.edn file for dependencies\ndeps_edn = '''{:deps {buddy/buddy-core {:mvn/version \"1.10.413\"}\n               buddy/buddy-hashers {:mvn/version \"1.8.123\"}\n               ring/ring-core {:mvn/version \"1.9.4\"}\n               org.clojure/spec.alpha {:mvn/version \"0.3.218\"}}}'''\n\nwith open(os.path.join(OUTPUT_DIR, 'deps.edn'), 'w') as f:\n    f.write(deps_edn)\n\nprint(\"Authentication namespace created successfully.\")\n```\n\nThis code creates two files:\n\n1. `core.clj`: Contains the authentication namespace with functions for:\n   - Password hashing and verification\n   - User creation\n   - Session management\n   - Input validation using clojure.spec\n\n2. `deps.edn`: Specifies the project dependencies for the authentication namespace\n\nKey Features:\n- Uses `buddy` library for secure password hashing and token generation\n- Implements input validation with `clojure.spec`\n- Provides functions for creating, validating, and invalidating sessions\n- Follows Clojure naming and structural conventions\n- Includes docstrings explaining function purposes\n\nDependencies:\n- `buddy/buddy-core`: For cryptographic operations\n- `buddy/buddy-hashers`: For secure password hashing\n- `ring/ring-core`: For session middleware support\n- `org.clojure/spec.alpha`: For input validation\n\nTo use this namespace, you would typically:\n1. Create a user with `create-user`\n2. Verify passwords with `verify-password`\n3. Generate and manage sessions with `create-session` and `validate-session`\n\nThe code provides a robust, secure foundation for user authentication in a Clojure application.",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 4,
+    "total": 4
+  },
+  "passed": true,
+  "tokens": {
+    "input": 997,
+    "output": 1233,
+    "total": 2230
+  },
+  "execution_time": 18.695024967193604,
+  "error": null,
+  "timestamp": "2026-01-01T17:54:44.674913"
+}

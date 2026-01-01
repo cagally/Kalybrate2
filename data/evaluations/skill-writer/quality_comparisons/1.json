@@ -1,0 +1,19 @@
+{
+  "prompt": "My skill for processing Excel files isn't being used automatically. What could be wrong with my description?",
+  "baseline_response": "I apologize, but I noticed that you didn't actually include the description you're referring to. Without seeing the specific skill description or context, I can't diagnose why it might not be triggering automatically. \n\nCould you share:\n1. The skill description you've written\n2. What specific Excel processing you're trying to accomplish\n3. The context in which you're expecting the skill to be used\n\nThis will help me provide more targeted advice about why the skill might not be activating as you expect.",
+  "baseline_tokens": {
+    "input": 27,
+    "output": 110,
+    "total": 137
+  },
+  "skill_response": "Let me help you diagnose and improve your Excel file processing Skill description. Could you share the current description from your SKILL.md file? Without seeing the exact text, I can provide some common issues and improvements:\n\nPotential Problems with Excel Skill Descriptions:\n1. Too generic or vague wording\n2. Missing specific trigger phrases\n3. Not mentioning file types explicitly\n4. Lacking context about when to use the Skill\n\nHere are some improved description templates:\n\n\u2705 **Excellent Description Example**:\n```yaml\ndescription: Analyze, process, and transform Excel (.xlsx, .xls) spreadsheets using powerful data manipulation techniques. Use when working with financial data, creating pivot tables, extracting insights, merging sheets, or performing complex spreadsheet operations. Supports operations like data cleaning, statistical analysis, and chart generation.\n```\n\nKey Improvements to Make:\n- Explicitly list file extensions (.xlsx, .xls)\n- Include specific action verbs (analyze, process, transform)\n- Mention concrete use cases (financial data, pivot tables)\n- Add trigger phrases (\"working with\", \"performing\")\n- Show range of possible operations\n\nCommon Reasons a Skill Might Not Activate:\n1. Description doesn't match user's language\n2. Missing key terms Claude looks for\n3. Overly broad or too narrow scope\n4. Syntax issues in YAML frontmatter\n\nWould you like to share your current description so I can provide more specific guidance?",
+  "skill_tokens": {
+    "input": 2594,
+    "output": 329,
+    "total": 2923
+  },
+  "judge_verdict": "with_skill",
+  "judge_reasoning": "Response B is significantly more useful and complete. While both responses ask for the actual description, Response B goes much further by providing concrete examples, specific improvement suggestions, common issues to check, and actionable templates. Response A only asks for information without offering any immediate help or guidance that the user could apply right away.",
+  "judge_model": "claude-sonnet-4-20250514",
+  "timestamp": "2026-01-01T08:55:51.054851"
+}

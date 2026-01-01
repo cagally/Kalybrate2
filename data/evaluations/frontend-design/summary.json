@@ -1,0 +1,36 @@
+{
+  "skill_name": "frontend-design",
+  "overall_score": 84.0,
+  "grade": "B",
+  "task_completion": {
+    "passed": 9,
+    "total": 9,
+    "rate": 100.0,
+    "verified_criteria": {
+      "passed": 15,
+      "total": 15
+    },
+    "verification_levels": {
+      "full": 7,
+      "partial": 2,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 3,
+    "losses": 2,
+    "ties": 0,
+    "win_rate": 60.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 2588,
+    "estimated_per_use": "$0.03"
+  },
+  "evaluated_at": "2026-01-01T18:51:15.912087",
+  "execution_time": 394.9376199245453,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

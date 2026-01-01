@@ -1,0 +1,29 @@
+{
+  "task_id": "docstring_easy_2",
+  "prompt": "I need to document this PyTorch utility function that reshapes a tensor. Can you add a docstring? def reshape_tensor(input_tensor, new_shape): return input_tensor.view(new_shape)",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll add a comprehensive docstring following the PyTorch docstring conventions:\n\n```python\ndef reshape_tensor(input_tensor, new_shape):\n    r\"\"\"Reshape a tensor to a specified shape without changing its data.\n\n    This function is a wrapper around PyTorch's :meth:`~Tensor.view` method, \n    which returns a tensor with the same data but a different shape.\n\n    Args:\n        input_tensor (torch.Tensor): The input tensor to be reshaped\n        new_shape (tuple or int): The desired shape for the output tensor. \n            Can be a tuple of integers or a single integer.\n\n    Returns:\n        torch.Tensor: A tensor with the same data as the input, \n        but reshaped to the specified dimensions.\n\n    Examples::\n        >>> x = torch.randn(4, 4)\n        >>> reshaped_x = reshape_tensor(x, (16,))\n        >>> reshaped_x.shape\n        torch.Size([16])\n\n        >>> # Using a single integer\n        >>> y = torch.randn(2, 8)\n        >>> reshaped_y = reshape_tensor(y, 16)\n        >>> reshaped_y.shape\n        torch.Size([16])\n\n    .. note::\n        The total number of elements must remain the same between \n        the input and output tensor.\n\n    Raises:\n        RuntimeError: If the new shape is incompatible with the \n        total number of elements in the input tensor.\n    \"\"\"\n    return input_tensor.view(new_shape)\n```\n\nThis docstring follows the PyTorch documentation conventions by:\n- Using a raw string (`r\"\"\"`)\n- Providing a brief description\n- Documenting parameters with types\n- Including examples\n- Adding a note about element count\n- Mentioning potential exceptions\n- Using Sphinx cross-references\n\nThe function itself remains unchanged, simply wrapping `view()` to provide a more descriptive utility function for reshaping tensors.\n\nA few key points about the implementation:\n- It uses `view()` which is memory-efficient as it doesn't copy data\n- It allows both tuple and integer inputs for flexibility\n- It will raise an error if the reshape is impossible (total elements don't match)",
+  "criteria_results": {
+    "code_extracted": true,
+    "has_docstrings": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "has_docstrings": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3097,
+    "output": 523,
+    "total": 3620
+  },
+  "execution_time": 10.006919860839844,
+  "error": null,
+  "timestamp": "2026-01-01T18:42:48.551286"
+}

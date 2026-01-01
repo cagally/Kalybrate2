@@ -1,0 +1,178 @@
+{
+  "skill_name": "typescript-review",
+  "skill_description": null,
+  "overall_score": 90.0,
+  "grade": "A",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "typescript-review_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 2.85,
+        "tokens": 321
+      },
+      {
+        "id": "typescript-review_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 2.55,
+        "tokens": 311
+      },
+      {
+        "id": "typescript-review_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 1.85,
+        "tokens": 277
+      },
+      {
+        "id": "typescript-review_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 5.33,
+        "tokens": 468
+      },
+      {
+        "id": "typescript-review_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 3.88,
+        "tokens": 397
+      },
+      {
+        "id": "typescript-review_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 5.12,
+        "tokens": 440
+      },
+      {
+        "id": "typescript-review_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 5.32,
+        "tokens": 500
+      },
+      {
+        "id": "typescript-review_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 12.6,
+        "tokens": 1000
+      },
+      {
+        "id": "typescript-review_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 5.12,
+        "tokens": 467
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 3,
+    "losses": 1,
+    "ties": 1,
+    "win_rate": 75.0,
+    "details": [
+      {
+        "prompt": "Review this TypeScript React component for coding standards compliance and suggest improvements for ...",
+        "verdict": "without_skill",
+        "reasoning": "Response B is more thorough and useful. While both correctly identify that no code was provided, Response B goes significantly further by outlining a comprehensive framework for TypeScript React component review, covering 6 detailed categories including type safety, performance, accessibility, and error handling. It also offers to provide an example component, making it more helpful and actionable for the user. Response A is more concise but less informative.",
+        "tokens_with_skill": 318,
+        "tokens_without_skill": 293
+      },
+      {
+        "prompt": "I have a pull request with TypeScript changes to our data layer. Can you identify any style violatio...",
+        "verdict": "tie",
+        "reasoning": "Both responses correctly identify that no code was provided and cannot complete the actual review task. They both appropriately ask for the necessary information and outline what they can help with once code is shared. Response A is slightly more organized in its bullet points, while Response B mentions a 'typescript-review skill' which may not exist. However, the core quality and usefulness are essentially equivalent - both fail to complete the task for the same valid reason and provide similar guidance on next steps.",
+        "tokens_with_skill": 345,
+        "tokens_without_skill": 159
+      },
+      {
+        "prompt": "Check this JavaScript utility module for proper JSDoc documentation and adherence to best practices.",
+        "verdict": "with_skill",
+        "reasoning": "Response A correctly identifies that no code was provided and asks for the specific code to review, which is the appropriate response to the task. Response B assumes code exists and provides generic examples instead of actually reviewing a module as requested. Response A is more accurate to the task requirements and would lead to a proper code review once the code is provided.",
+        "tokens_with_skill": 302,
+        "tokens_without_skill": 888
+      },
+      {
+        "prompt": "Review these TypeScript interface definitions and tell me if they follow proper naming conventions a...",
+        "verdict": "with_skill",
+        "reasoning": "Response A is more thorough and useful. While both correctly identify that no code was provided, Response A goes further by listing specific TypeScript best practices it would check for (PascalCase naming, descriptive names, proper type annotations, optional vs required properties, avoiding 'any' types). This gives the user concrete guidance on what constitutes good TypeScript interface design, making it more educational and valuable even without the actual code to review.",
+        "tokens_with_skill": 332,
+        "tokens_without_skill": 119
+      },
+      {
+        "prompt": "I need feedback on this React hook implementation written in TypeScript - are there any code quality...",
+        "verdict": "with_skill",
+        "reasoning": "Response B is more thorough and useful. While both correctly identify that no code was provided, Response B goes further by explicitly outlining what the reviewer will be looking for (type safety, React hook usage, performance, best practices, readability). This gives the user a clear preview of the review criteria and demonstrates the reviewer's expertise, making it more valuable and actionable.",
+        "tokens_with_skill": 350,
+        "tokens_without_skill": 144
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 228,
+    "avg_output_tokens": 188,
+    "avg_total_tokens": 416,
+    "estimated_per_use": "$0.0035"
+  },
+  "evaluated_at": "2026-01-01T08:58:14.836245",
+  "model_used": "claude-sonnet-4-20250514"
+}

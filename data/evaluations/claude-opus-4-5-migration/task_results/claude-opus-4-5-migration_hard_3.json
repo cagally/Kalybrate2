@@ -1,0 +1,27 @@
+{
+  "task_id": "claude-opus-4-5-migration_hard_3",
+  "prompt": "I have a microservices architecture with different Claude models across services - some use Sonnet 4.0 on Anthropic API, others use Opus 4.1 on Bedrock, and one uses Sonnet 4.5 on Vertex AI. I need to standardize everything on Opus 4.5 while keeping platform-specific configurations. Also need to add the effort parameter and handle any behavioral changes.",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you migrate your microservices architecture to Opus 4.5 across different platforms. I'll provide a comprehensive migration strategy that updates model strings, adds the effort parameter, and addresses potential behavioral changes.\n\nHere's a step-by-step migration approach:\n\n1. Platform-Specific Model String Updates\n```python\n# Anthropic API (1P) - Sonnet 4.0 to Opus 4.5\nOLD_MODEL = 'claude-sonnet-4-20250514'\nNEW_MODEL = 'claude-opus-4-5-20251101'\n\n# AWS Bedrock - Opus 4.1 to Opus 4.5\nOLD_BEDROCK_MODEL = 'anthropic.claude-opus-4-1-20250422-v1:0'\nNEW_BEDROCK_MODEL = 'anthropic.claude-opus-4-5-20251101-v1:0'\n\n# Google Vertex AI - Sonnet 4.5 to Opus 4.5\nOLD_VERTEX_MODEL = 'claude-sonnet-4-5@20250929'\nNEW_VERTEX_MODEL = 'claude-opus-4-5@20251101'\n```\n\n2. Add Effort Parameter Example\n```python\n# Generic API call template with effort parameter\ndef create_claude_request(messages, model):\n    return {\n        'model': model,\n        'messages': messages,\n        'max_tokens': 4096,\n        'temperature': 0.7,\n        'system': 'You are a helpful AI assistant.',\n        'effort': 'high'  # Added effort parameter\n    }\n```\n\n3. Prompt Adjustment Utility\n```python\ndef adjust_prompt_for_opus_4_5(system_prompt):\n    \"\"\"\n    Adjust system prompt to mitigate Opus 4.5 behavioral quirks\n    \"\"\"\n    # Soften aggressive language\n    adjustments = [\n        ('CRITICAL:', ''),\n        ('You MUST', 'You should'),\n        ('ALWAYS', ''),\n        ('NEVER', 'Try not to'),\n        ('REQUIRED', '')\n    ]\n    \n    for old, new in adjustments:\n        system_prompt = system_prompt.replace(old, new)\n    \n    # Add context exploration guidance\n    system_prompt += \"\\n<code_exploration_guidelines>\" \\\n        \"Always thoroughly inspect existing code before proposing solutions. \" \\\n        \"Avoid generating code without direct context.\" \\\n        \"</code_exploration_guidelines>\"\n    \n    # Add over-engineering prevention\n    system_prompt += \"\\n<design_guidelines>\" \\\n        \"Prioritize simplicity. Do not create unnecessary abstractions or files. \" \\\n        \"Implement only what is explicitly requested.\" \\\n        \"</design_guidelines>\"\n    \n    return system_prompt\n```\n\n4. Migration Script\n```python\nimport os\n\ndef migrate_microservices(services_directory):\n    \"\"\"\n    Migrate all services to Opus 4.5\n    \"\"\"\n    migration_report = []\n    \n    for root, dirs, files in os.walk(services_directory):\n        for file in files:\n            if file.endswith('.py') or file.endswith('.js'):\n                filepath = os.path.join(root, file)\n                \n                with open(filepath, 'r') as f:\n                    content = f.read()\n                \n                # Replace model strings\n                replacements = {\n                    'claude-sonnet-4-20250514': 'claude-opus-4-5-20251101',\n                    'anthropic.claude-opus-4-1-20250422-v1:0': 'anthropic.claude-opus-4-5-20251101-v1:0',\n                    'claude-sonnet-4-5@20250929': 'claude-opus-4-5@20251101'\n                }\n                \n                for old_model, new_model in replacements.items():\n                    content = content.replace(old_model, new_model)\n                \n                # Remove unsupported beta headers\n                content = content.replace('context-1m-2025-08-07', '')\n                \n                # Add comment about beta header\n                if 'context-1m-2025-08-07' in content:\n                    content += \"\\n# Note: 1M context beta not yet supported with Opus 4.5\"\n                \n                with open(filepath, 'w') as f:\n                    f.write(content)\n                \n                migration_report.append(f\"Migrated: {filepath}\")\n    \n    return migration_report\n\n# Execute migration\nservices_path = '/path/to/your/microservices'\nreport = migrate_microservices(services_path)\nprint(\"\\n\".join(report))\n```\n\n5. Migration Recommendations\n- Manually review the changes after running the migration script\n- Test each microservice thoroughly after migration\n- Pay special attention to:\n  1. Tool usage in system prompts\n  2. Code generation behaviors\n  3. Complexity of proposed solutions\n\n6. Potential Challenges to Watch\n- More aggressive tool triggering\n- Tendency to over-engineer\n- Reduced code exploration without explicit guidance\n\nShall I help you apply this migration to your specific microservices architecture? Would you like me to elaborate on any part of the migration strategy?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 1555,
+    "output": 1272,
+    "total": 2827
+  },
+  "execution_time": 20.090739011764526,
+  "error": null,
+  "timestamp": "2026-01-01T17:50:54.870436"
+}

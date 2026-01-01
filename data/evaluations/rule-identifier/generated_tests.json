@@ -1,0 +1,127 @@
+{
+  "skill_claims": [
+    "Identifies and triggers based on specific regex patterns in user input",
+    "Responds to different event types (bash, file, stop, prompt, all)",
+    "Provides contextual messages with markdown formatting when rules are triggered",
+    "Offers warnings, suggestions, and guidance based on pattern matching"
+  ],
+  "tasks": [
+    {
+      "id": "rule-identifier_easy_1",
+      "prompt": "Can you help me understand what this skill does?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Provides contextual messages with markdown formatting when rules are triggered"
+    },
+    {
+      "id": "rule-identifier_easy_2",
+      "prompt": "I need to know when this rule-identifier would activate",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Identifies and triggers based on specific regex patterns in user input"
+    },
+    {
+      "id": "rule-identifier_easy_3",
+      "prompt": "What events does this skill respond to?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Responds to different event types (bash, file, stop, prompt, all)"
+    },
+    {
+      "id": "rule-identifier_medium_1",
+      "prompt": "I'm setting up a system that needs to catch specific patterns in user commands. How would I configure the regex pattern for this rule?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Identifies and triggers based on specific regex patterns in user input"
+    },
+    {
+      "id": "rule-identifier_medium_2",
+      "prompt": "I want to create a warning system that shows formatted messages when certain conditions are met. What's the best way to structure these messages?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Provides contextual messages with markdown formatting when rules are triggered"
+    },
+    {
+      "id": "rule-identifier_medium_3",
+      "prompt": "My application needs to handle different types of events like file operations and bash commands. How should I configure event handling?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Responds to different event types (bash, file, stop, prompt, all)"
+    },
+    {
+      "id": "rule-identifier_hard_1",
+      "prompt": "I'm building a complex monitoring system that needs to identify dangerous bash commands, file operations that might cause issues, and user prompts that could be problematic. I need a comprehensive rule system with appropriate warnings and suggestions for each scenario.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Offers warnings, suggestions, and guidance based on pattern matching"
+    },
+    {
+      "id": "rule-identifier_hard_2",
+      "prompt": "Create a sophisticated pattern matching configuration that can handle multiple regex patterns simultaneously, with different message formats and severity levels based on what gets triggered.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Identifies and triggers based on specific regex patterns in user input"
+    },
+    {
+      "id": "rule-identifier_hard_3",
+      "prompt": "I need to implement a rule system that can dynamically enable/disable based on context, handle all event types appropriately, and provide rich markdown-formatted guidance with code examples, warnings, and actionable suggestions.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Responds to different event types (bash, file, stop, prompt, all)"
+    }
+  ],
+  "quality_prompts": [
+    "Help me set up a rule that triggers when users try to run potentially dangerous commands",
+    "I need to create a pattern matching system for my application that can handle different types of user input",
+    "What's the best way to provide contextual warnings and suggestions to users based on their actions?",
+    "I want to build a monitoring system that can identify and respond to specific patterns in user behavior",
+    "How can I create a flexible rule system that handles multiple event types with appropriate messaging?"
+  ],
+  "generated_at": "2026-01-01T19:18:20.745065",
+  "model": "claude-sonnet-4-20250514"
+}

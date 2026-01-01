@@ -1,0 +1,169 @@
+{
+  "skill_name": "mcp-integration",
+  "skill_description": null,
+  "overall_score": 84.0,
+  "grade": "B",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "mcp-integration_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 32.34,
+        "tokens": 5914
+      },
+      {
+        "id": "mcp-integration_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 12.84,
+        "tokens": 4348
+      },
+      {
+        "id": "mcp-integration_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 11.56,
+        "tokens": 4315
+      },
+      {
+        "id": "mcp-integration_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 18.64,
+        "tokens": 4720
+      },
+      {
+        "id": "mcp-integration_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 16.29,
+        "tokens": 4570
+      },
+      {
+        "id": "mcp-integration_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 19.66,
+        "tokens": 4769
+      },
+      {
+        "id": "mcp-integration_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 29.08,
+        "tokens": 5625
+      },
+      {
+        "id": "mcp-integration_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 33.45,
+        "tokens": 5945
+      },
+      {
+        "id": "mcp-integration_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 32.8,
+        "tokens": 6019
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 3,
+    "losses": 2,
+    "ties": 0,
+    "win_rate": 60.0,
+    "details": [
+      {
+        "prompt": "I want to connect my plugin to external APIs and databases. What's the best way to do this?",
+        "verdict": "without_skill",
+        "reasoning": "Response B provides practical, actionable code examples for connecting plugins to external APIs and databases using standard web technologies like fetch(), proper error handling, authentication, caching, and security practices. Response A assumes the user is working with Claude Code plugins and MCP (Model Context Protocol), which may not match the user's actual needs. Response B is more universally applicable and gives concrete implementation guidance that most developers can use regardless of their specific plugin platform.",
+        "tokens_with_skill": 4938,
+        "tokens_without_skill": 864
+      },
+      {
+        "prompt": "How can I add OAuth authentication to my Claude plugin for connecting to third-party services?",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides specific, actionable guidance for Claude plugins using MCP (Model Context Protocol) with concrete JSON configurations, environment setup, and Claude-specific implementation details. Response B offers generic OAuth implementation patterns that aren't tailored to Claude plugins specifically. Response A is more complete, thorough, and directly addresses the user's specific use case with ready-to-use code examples.",
+        "tokens_with_skill": 4773,
+        "tokens_without_skill": 435
+      },
+      {
+        "prompt": "I need my plugin to access file systems and external tools. What are my options?",
+        "verdict": "with_skill",
+        "reasoning": "Response A correctly identifies the context as Claude Code plugin development and provides specific, relevant solutions using MCP (Model Context Protocol) integration with detailed configuration examples. Response B assumes WordPress plugin development, which is completely off-topic. Response A is more accurate, complete, and useful for the actual task at hand.",
+        "tokens_with_skill": 4096,
+        "tokens_without_skill": 498
+      },
+      {
+        "prompt": "What's the proper way to handle authentication and security when connecting plugins to external serv...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides a more comprehensive and structured approach specifically tailored to MCP (Model Context Protocol) integration with clear JSON configuration examples, security best practices, and actionable checklists. Response B offers good general programming examples but is incomplete (cuts off mid-code) and lacks the specific context and completeness that makes Response A more useful for the actual task of handling plugin authentication and security.",
+        "tokens_with_skill": 4580,
+        "tokens_without_skill": 1701
+      },
+      {
+        "prompt": "I want to create a plugin that can work with multiple external services simultaneously. How should I...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a complete, working code implementation with proper architecture patterns (abstract base classes, dependency injection, async/await), error handling, and extensible design. Response B appears incomplete (cuts off mid-sentence) and focuses on MCP-specific configuration without providing actual implementation code or architectural guidance for handling multiple services simultaneously.",
+        "tokens_with_skill": 5005,
+        "tokens_without_skill": 1791
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 3679,
+    "avg_output_tokens": 1293,
+    "avg_total_tokens": 4973,
+    "estimated_per_use": "$0.03"
+  },
+  "evaluated_at": "2026-01-01T19:05:50.340064",
+  "model_used": "claude-sonnet-4-20250514"
+}

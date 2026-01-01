@@ -1,0 +1,31 @@
+{
+  "task_id": "hook-development_easy_3",
+  "prompt": "I need a basic hook configuration that prevents Claude from stopping until I explicitly say the task is complete.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a hook configuration that prevents Claude from stopping until you explicitly confirm the task is complete. I'll write a Python script to save the hooks configuration to the specified temporary directory.\n\n```python\nimport os\nimport json\n\n# Use the provided OUTPUT_DIR \nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_7p50axvk\"\n\n# Create the hooks configuration\nhooks_config = {\n    \"description\": \"Prevent automatic stopping until task is explicitly completed\",\n    \"hooks\": {\n        \"Stop\": [\n            {\n                \"matcher\": \"*\",\n                \"hooks\": [\n                    {\n                        \"type\": \"prompt\",\n                        \"prompt\": \"Check if the task is truly complete. If the user has not explicitly confirmed task completion, block stopping and request further confirmation. Return 'block' unless the user has clearly stated the task is done.\"\n                    }\n                ]\n            }\n        ]\n    }\n}\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Path for the hooks configuration file\nhooks_file_path = os.path.join(OUTPUT_DIR, \"hooks.json\")\n\n# Write the hooks configuration to the file\nwith open(hooks_file_path, 'w') as f:\n    json.dump(hooks_config, f, indent=2)\n\nprint(f\"Hooks configuration saved to {hooks_file_path}\")\n```\n\nThis script does the following:\n\n1. Creates a hook configuration for the \"Stop\" event that uses a prompt-based hook\n2. The hook will:\n   - Match all events (using \"*\")\n   - Use a prompt to check if the task is truly complete\n   - Block stopping unless the user explicitly confirms task completion\n3. Saves the configuration to a `hooks.json` file in the specified `OUTPUT_DIR`\n4. Uses `json.dump()` with indentation for readability\n\nThe hook's prompt logic ensures that Claude won't stop automatically. Instead, it will:\n- Check if the task is complete\n- Block stopping if no explicit completion confirmation is given\n- Request the user to confirm when they believe the task is done\n\nThis approach provides a flexible way to maintain context and prevent premature session termination.\n\nTo use this hook:\n- When you want to stop, you'll need to explicitly say something like \"The task is complete\" or \"Yes, I confirm we're done\"\n- Claude will then allow the session to stop\n\nWould you like me to explain the hook configuration further or modify it in any way?",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 3,
+    "total": 3
+  },
+  "passed": true,
+  "tokens": {
+    "input": 4834,
+    "output": 607,
+    "total": 5441
+  },
+  "execution_time": 11.65215277671814,
+  "error": null,
+  "timestamp": "2026-01-01T18:54:38.190768"
+}

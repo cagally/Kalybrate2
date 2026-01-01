@@ -1,0 +1,29 @@
+{
+  "task_id": "pdf_medium_1",
+  "prompt": "I have a financial report PDF with several data tables that I need to convert to Excel for analysis. Can you help me extract the tables?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you extract tables from a PDF financial report using pdfplumber and pandas. Here's a comprehensive script that will extract tables and save them to an Excel file:\n\n```python\nimport pdfplumber\nimport pandas as pd\nimport os\n\ndef extract_tables_from_pdf(pdf_path, output_excel_path=None):\n    \"\"\"\n    Extract tables from a PDF and convert to Excel\n    \n    Args:\n        pdf_path (str): Path to the input PDF file\n        output_excel_path (str, optional): Path to save the Excel file. \n                                           If None, will use input filename with .xlsx extension\n    \n    Returns:\n        list of pandas DataFrames containing extracted tables\n    \"\"\"\n    # If no output path specified, create one based on input file\n    if output_excel_path is None:\n        output_excel_path = os.path.splitext(pdf_path)[0] + '_tables.xlsx'\n    \n    # List to store all extracted tables\n    all_tables = []\n    \n    try:\n        # Open the PDF\n        with pdfplumber.open(pdf_path) as pdf:\n            # Iterate through all pages\n            for page_num, page in enumerate(pdf.pages, 1):\n                # Extract tables from the page\n                page_tables = page.extract_tables()\n                \n                # Process each table on the page\n                for table_num, table in enumerate(page_tables, 1):\n                    if table and len(table) > 0:\n                        # Convert to DataFrame\n                        # Assume first row is header, rest are data\n                        if len(table) > 1:\n                            df = pd.DataFrame(table[1:], columns=table[0])\n                            \n                            # Add metadata to help track source\n                            df['_source_page'] = page_num\n                            df['_table_number'] = table_num\n                            \n                            all_tables.append(df)\n                            print(f\"Extracted table from page {page_num}, table {table_num}\")\n        \n        # If tables found, save to Excel\n        if all_tables:\n            # Option 1: Multiple sheets (one per table)\n            with pd.ExcelWriter(output_excel_path) as writer:\n                for i, df in enumerate(all_tables, 1):\n                    df.to_excel(writer, sheet_name=f'Table_{i}', index=False)\n            \n            print(f\"Tables extracted and saved to {output_excel_path}\")\n            return all_tables\n        \n        else:\n            print(\"No tables found in the PDF.\")\n            return []\n    \n    except Exception as e:\n        print(f\"An error occurred: {e}\")\n        return []\n\n# Example usage\nif __name__ == \"__main__\":\n    # Replace with your PDF path\n    pdf_path = \"financial_report.pdf\"\n    \n    # Extract tables\n    extracted_tables = extract_tables_from_pdf(pdf_path)\n    \n    # Optional: Print first few rows of each table\n    for i, table in enumerate(extracted_tables, 1):\n        print(f\"\\nTable {i} Preview:\")\n        print(table.head())\n```\n\nKey Features:\n- Extracts tables from all pages of a PDF\n- Converts tables to pandas DataFrames\n- Saves tables to Excel with multiple sheets\n- Adds metadata about source page and table number\n- Error handling and informative print statements\n- Flexible output path handling\n\nUsage Tips:\n1. Install required libraries:\n```bash\npip install pdfplumber pandas\n```\n\n2. Replace `\"financial_report.pdf\"` with your actual PDF path\n\n3. The script will:\n   - Extract all tables from the PDF\n   - Save tables to an Excel file\n   - Print preview of extracted tables\n   - Create a new Excel file with `_tables.xlsx` suffix\n\nPotential Improvements:\n- Add option to clean/format data\n- Handle more complex table structures\n- Add logging instead of print statements\n\nWould you like me to elaborate on any part of the script or discuss how to handle specific PDF table extraction challenges?",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2298,
+    "output": 974,
+    "total": 3272
+  },
+  "execution_time": 16.311830043792725,
+  "error": null,
+  "timestamp": "2026-01-01T19:16:10.590967"
+}

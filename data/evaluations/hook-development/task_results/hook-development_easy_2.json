@@ -1,0 +1,31 @@
+{
+  "task_id": "hook-development_easy_2",
+  "prompt": "Create a simple hook that shows a message whenever Claude finishes using any tool.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a simple hook that outputs a message whenever any tool is used. I'll save the hook script in the appropriate location using the provided OUTPUT_DIR.\n\n```python\nimport os\nimport json\n\n# Ensure the hooks directory exists\nhooks_dir = os.path.join(OUTPUT_DIR, 'hooks')\nos.makedirs(hooks_dir, exist_ok=True)\n\n# Create hooks.json configuration file\nhooks_config = {\n    \"PostToolUse\": [\n        {\n            \"matcher\": \"*\",\n            \"hooks\": [\n                {\n                    \"type\": \"prompt\",\n                    \"prompt\": \"Provide a brief, friendly acknowledgment that a tool has been used. Keep it concise and positive.\"\n                }\n            ]\n        }\n    ]\n}\n\n# Write hooks.json\nwith open(os.path.join(hooks_dir, 'hooks.json'), 'w') as f:\n    json.dump(hooks_config, f, indent=2)\n\nprint(f\"Hook configuration saved to {os.path.join(hooks_dir, 'hooks.json')}\")\n```\n\nThis script does the following:\n1. Creates a `hooks` directory in the OUTPUT_DIR\n2. Defines a hooks configuration for the PostToolUse event\n3. The hook uses a prompt-based approach to generate a friendly acknowledgment message\n4. The \"*\" matcher means it will trigger for any tool use\n5. Saves the configuration as `hooks.json` in the hooks directory\n\nThe hook will cause Claude to generate a brief, positive message after any tool is used, providing a friendly acknowledgment of the completed action. The prompt is intentionally kept general to allow for flexible, context-aware responses.\n\nThe configuration follows the recommended hook development guidelines, using a prompt-based hook for a more natural, adaptable interaction. When this hook is loaded, it will trigger a system message after any tool use, adding a conversational touch to the workflow.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified - no file created",
+    "file_has_content": "verified - no file created"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 0,
+    "total": 1
+  },
+  "passed": false,
+  "tokens": {
+    "input": 4831,
+    "output": 443,
+    "total": 5274
+  },
+  "execution_time": 9.208065032958984,
+  "error": null,
+  "timestamp": "2026-01-01T18:54:38.190625"
+}

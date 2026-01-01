@@ -1,0 +1,130 @@
+{
+  "skill_claims": [
+    "Migrate prompts and code from Claude Sonnet 4.0, Sonnet 4.5, or Opus 4.1 to Opus 4.5",
+    "Update model strings to correct Opus 4.5 format for different platforms (Anthropic API, AWS Bedrock, Google Vertex AI, Azure AI Foundry)",
+    "Remove unsupported beta headers like context-1m-2025-08-07",
+    "Add effort parameter set to 'high'",
+    "Apply prompt adjustments for known Opus 4.5 behavioral differences (tool overtriggering, over-engineering, code exploration, frontend design, thinking sensitivity)",
+    "Search codebase for model strings and API calls",
+    "Provide migration summary and follow-up guidance"
+  ],
+  "tasks": [
+    {
+      "id": "claude-opus-4-5-migration_easy_1",
+      "prompt": "I have a Python script that uses claude-sonnet-4-20250514 for the Anthropic API. Can you help me update it to use the latest Opus model?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Update model strings to correct Opus 4.5 format for different platforms"
+    },
+    {
+      "id": "claude-opus-4-5-migration_easy_2",
+      "prompt": "My AWS Bedrock integration is using claude-opus-4-1-20250422-v1:0 and I want to upgrade to Opus 4.5. What changes do I need to make?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Update model strings to correct Opus 4.5 format for different platforms"
+    },
+    {
+      "id": "claude-opus-4-5-migration_easy_3",
+      "prompt": "I'm using claude-sonnet-4-5-20250929 on Google Vertex AI. How do I switch to the new Opus 4.5 model?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Update model strings to correct Opus 4.5 format for different platforms"
+    },
+    {
+      "id": "claude-opus-4-5-migration_medium_1",
+      "prompt": "My chatbot code has the context-1m-2025-08-07 beta header and uses claude-sonnet-4-5-20250929. I need to migrate everything to Opus 4.5 for production. Here's my code: [code with beta headers and old model string]",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Remove unsupported beta headers like context-1m-2025-08-07"
+    },
+    {
+      "id": "claude-opus-4-5-migration_medium_2",
+      "prompt": "I have a multi-file Python project using various Claude models across different platforms. Can you help me migrate all the Sonnet and old Opus references to Opus 4.5? I'm using Anthropic API, AWS Bedrock, and Google Vertex AI in different parts.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Search codebase for model strings and API calls"
+    },
+    {
+      "id": "claude-opus-4-5-migration_medium_3",
+      "prompt": "After upgrading to Opus 4.5, my AI assistant is calling tools way too often, even for simple questions that don't need them. My system prompt has lots of 'CRITICAL' and 'MUST' language. Can you help fix this?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Apply prompt adjustments for known Opus 4.5 behavioral differences (tool overtriggering)"
+    },
+    {
+      "id": "claude-opus-4-5-migration_hard_1",
+      "prompt": "I'm migrating a complex enterprise application from Opus 4.1 to Opus 4.5. It uses AWS Bedrock, has the 1M context beta header, and I'm getting issues where the AI creates too many unnecessary files and suggests fixes without actually reading my code first. I need a complete migration with all the behavioral adjustments.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Provide migration summary and follow-up guidance"
+    },
+    {
+      "id": "claude-opus-4-5-migration_hard_2",
+      "prompt": "My React development assistant uses claude-sonnet-4-20250514 and keeps saying 'I think we should...' in responses, but after upgrading to Opus 4.5 it's acting weird with that phrasing. Also, the frontend designs it creates look really generic now. I need help with the full migration and fixing these issues.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Apply prompt adjustments for known Opus 4.5 behavioral differences (thinking sensitivity, frontend design)"
+    },
+    {
+      "id": "claude-opus-4-5-migration_hard_3",
+      "prompt": "I have a microservices architecture with different Claude models across services - some use Sonnet 4.0 on Anthropic API, others use Opus 4.1 on Bedrock, and one uses Sonnet 4.5 on Vertex AI. I need to standardize everything on Opus 4.5 while keeping platform-specific configurations. Also need to add the effort parameter and handle any behavioral changes.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Add effort parameter set to 'high'"
+    }
+  ],
+  "quality_prompts": [
+    "I need to update my Python script from claude-sonnet-4-20250514 to the latest Opus model. What's the correct model string?",
+    "My AI coding assistant upgraded to Opus 4.5 is creating way too many files and abstractions I didn't ask for. How can I fix this?",
+    "After switching to Opus 4.5, my chatbot calls tools for every single question, even simple ones. The system prompt has 'CRITICAL: You MUST use tools' - what's wrong?",
+    "I'm migrating from claude-opus-4-1-20250422-v1:0 on AWS Bedrock to Opus 4.5. What changes do I need to make?",
+    "My development assistant on Opus 4.5 keeps suggesting code fixes without actually looking at my files first. How do I make it explore the codebase properly?"
+  ],
+  "generated_at": "2026-01-01T17:49:00.674275",
+  "model": "claude-sonnet-4-20250514"
+}

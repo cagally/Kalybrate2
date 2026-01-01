@@ -1,0 +1,27 @@
+{
+  "task_id": "rule-identifier_hard_2",
+  "prompt": "Create a sophisticated pattern matching configuration that can handle multiple regex patterns simultaneously, with different message formats and severity levels based on what gets triggered.",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a comprehensive `rule-identifier` skill configuration that demonstrates sophisticated pattern matching with multiple regex patterns, varying severity levels, and dynamic messaging. I'll break this down into several rule types:\n\n```markdown\n---\nname: rule-identifier\nenabled: true\nevent: all\npatterns:\n  - name: security_warning\n    regex: \n      - \"(?i)(password|secret|credentials).*=.*['\\\"](plain)?text['\\\"]\\)\"\n      - \"(?i)os\\\\.environ\\\\.get\\(['\\\"].*?(PASSWORD|SECRET|API_KEY)\"\n    severity: critical\n    message: |\n      \ud83d\udea8 SECURITY RISK DETECTED \ud83d\udea8\n      \n      **Potential Sensitive Data Exposure:**\n      - Detected hardcoded credentials or unsafe environment variable access\n      - Recommended Actions:\n        1. Use secure credential management\n        2. Implement environment-based configuration\n        3. Never embed secrets directly in code\n      \n      Severity: CRITICAL \u26a0\ufe0f\n\n  - name: performance_antipattern\n    regex:\n      - \"\\s*for\\s+.*\\s+in\\s+range\\(len\\(\"\n      - \"\\.append\\(\\)\\s*inside\\s*loop\"\n    severity: warning\n    message: |\n      \ud83d\udc22 PERFORMANCE OPTIMIZATION SUGGESTION \ud83d\udc22\n      \n      **Potential Performance Anti-Pattern:**\n      - Detected inefficient iteration or list manipulation\n      - Recommended Improvements:\n        * Use enumerate() instead of range(len())\n        * Prefer list comprehensions\n        * Consider generator expressions\n      \n      Severity: WARNING \u26a0\ufe0f\n\n  - name: dependency_risk\n    regex:\n      - \"import\\s+(requests|urllib)\\s+#\\s*unverified\"\n      - \"verify=False\"\n    severity: high\n    message: |\n      \ud83d\udd12 DEPENDENCY SECURITY RISK \ud83d\udd12\n      \n      **Potential Network Security Vulnerability:**\n      - Detected unverified network requests\n      - Risks include:\n        * Man-in-the-middle attacks\n        * SSL/TLS certificate bypass\n      \n      Recommended Actions:\n      - Always use proper SSL verification\n      - Implement proper certificate validation\n      \n      Severity: HIGH \u26a0\ufe0f\n\n  - name: code_complexity\n    regex:\n      - \"def\\s+\\w+\\s*\\(.*\\):\\s*(?:.*\\n){10,}\"\n      - \"if\\s+.*:\\s*(?:.*\\n){5,}\\s*elif\"\n    severity: info\n    message: |\n      \ud83d\udcca CODE COMPLEXITY INSIGHT \ud83d\udcca\n      \n      **Potential Code Complexity Detection:**\n      - Large function or complex conditional block\n      - Suggestions:\n        * Consider breaking into smaller functions\n        * Implement clear, modular design\n        * Use early returns or guard clauses\n      \n      Severity: INFORMATIONAL \u2139\ufe0f\n\n  - name: error_handling\n    regex:\n      - \"try:\\s*pass\"\n      - \"except:\\s*pass\"\n      - \"except\\s+Exception\\s*:\"\n    severity: warning\n    message: |\n      \u26a0\ufe0f WEAK ERROR HANDLING DETECTED \u26a0\ufe0f\n      \n      **Problematic Error Management:**\n      - Detected generic or suppressed exception handling\n      - Best Practices:\n        * Catch specific exceptions\n        * Log or handle errors meaningfully\n        * Avoid silent error suppression\n      \n      Severity: WARNING \u26a0\ufe0f\n```\n\nThis configuration provides:\n\n1. Multiple Regex Pattern Categories:\n   - Security Warnings\n   - Performance Anti-Patterns\n   - Dependency Risks\n   - Code Complexity Insights\n   - Error Handling Detection\n\n2. Severity Levels:\n   - Critical\n   - High\n   - Warning\n   - Informational\n\n3. Detailed, Actionable Messages:\n   - Emoji-enhanced visual indicators\n   - Specific detection details\n   - Recommended actions\n   - Severity classification\n\n4. Flexible Matching:\n   - Case-insensitive patterns\n   - Multiple regex patterns per category\n   - Comprehensive code analysis hints\n\nThe configuration can be easily extended or modified to cover more specific code quality, security, and performance patterns.\n\nUse cases include:\n- Static code analysis\n- Pre-commit hooks\n- Continuous integration checks\n- Developer guidance and best practices enforcement\n\nWould you like me to elaborate on any specific aspect of this pattern matching configuration?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 132,
+    "output": 1061,
+    "total": 1193
+  },
+  "execution_time": 20.049882173538208,
+  "error": null,
+  "timestamp": "2026-01-01T19:20:31.664201"
+}

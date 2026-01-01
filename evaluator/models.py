@@ -66,6 +66,13 @@ class TokenUsage(BaseModel):
         return self.input_tokens + self.output_tokens
 
 
+class VerificationLevel(str, Enum):
+    """How thoroughly criteria were verified"""
+    FULL = "full"  # All criteria were actually verified
+    PARTIAL = "partial"  # Some criteria were unverified (no compiler available)
+    UNVERIFIED = "unverified"  # No criteria could be verified
+
+
 class TaskResult(BaseModel):
     """Result of running a single task"""
     task_id: str
@@ -73,6 +80,22 @@ class TaskResult(BaseModel):
     criteria_results: Dict[str, bool] = Field(
         ...,
         description="Pass/fail for each criterion"
+    )
+    verification_notes: Dict[str, str] = Field(
+        default_factory=dict,
+        description="Verification status for each criterion ('verified' or reason for unverified)"
+    )
+    verification_level: VerificationLevel = Field(
+        default=VerificationLevel.FULL,
+        description="Overall verification level for this task"
+    )
+    verified_criteria_passed: int = Field(
+        default=0,
+        description="Number of verified criteria that passed"
+    )
+    verified_criteria_total: int = Field(
+        default=0,
+        description="Total number of criteria that were actually verified"
     )
     error: Optional[str] = None
     execution_time: float = Field(..., description="Time in seconds")

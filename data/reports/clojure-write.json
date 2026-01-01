@@ -1,0 +1,184 @@
+{
+  "skill_name": "clojure-write",
+  "skill_description": null,
+  "overall_score": 68.0,
+  "grade": "D",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "clojure-write_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true
+        },
+        "execution_time": 6.2,
+        "tokens": 1231
+      },
+      {
+        "id": "clojure-write_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true
+        },
+        "execution_time": 9.34,
+        "tokens": 1450
+      },
+      {
+        "id": "clojure-write_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true
+        },
+        "execution_time": 6.85,
+        "tokens": 1302
+      },
+      {
+        "id": "clojure-write_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true
+        },
+        "execution_time": 14.36,
+        "tokens": 1859
+      },
+      {
+        "id": "clojure-write_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true,
+          "code_compiles": true
+        },
+        "execution_time": 18.7,
+        "tokens": 2230
+      },
+      {
+        "id": "clojure-write_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true
+        },
+        "execution_time": 19.85,
+        "tokens": 2189
+      },
+      {
+        "id": "clojure-write_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true,
+          "code_compiles": true
+        },
+        "execution_time": 22.48,
+        "tokens": 2439
+      },
+      {
+        "id": "clojure-write_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true,
+          "code_compiles": true
+        },
+        "execution_time": 33.99,
+        "tokens": 3512
+      },
+      {
+        "id": "clojure-write_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true
+        },
+        "execution_time": 25.95,
+        "tokens": 2662
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 1,
+    "losses": 4,
+    "ties": 0,
+    "win_rate": 20.0,
+    "details": [
+      {
+        "prompt": "Write a Clojure function that processes a list of maps representing employees and calculates their t...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides a complete, working solution with clear documentation, example data, and REPL-driven testing approach. It includes two well-structured functions that handle both individual and team compensation calculations. Response B appears incomplete (cuts off mid-function) and while it shows some sophisticated logic for performance-based bonuses, it doesn't provide a finished, usable solution. Response A is more practical and immediately useful to the user.",
+        "tokens_with_skill": 1845,
+        "tokens_without_skill": 1434
+      },
+      {
+        "prompt": "Create a ClojureScript component for a todo list application with add, edit, delete, and filter func...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a more complete implementation with better structure. It includes proper edit functionality with an edit-todo state management, uses filterv for better performance, and has a more comprehensive todo-input component with proper key handling for Enter and Escape keys. Response B is incomplete (cuts off mid-implementation) and uses less efficient filter operations. Response A also has better separation of concerns and more robust state management.",
+        "tokens_with_skill": 2512,
+        "tokens_without_skill": 1919
+      },
+      {
+        "prompt": "Build a Clojure service that reads CSV files, validates the data against a schema, and outputs JSON ...",
+        "verdict": "without_skill",
+        "reasoning": "Response B is more complete and higher quality. It uses Malli for better schema validation with proper error messages, includes email regex validation, handles CSV headers dynamically with zipmap, provides more comprehensive error reporting with row indexing, and has better separation of concerns. Response A is incomplete (cuts off mid-function) and uses basic Prismatic Schema with less detailed error handling.",
+        "tokens_with_skill": 1958,
+        "tokens_without_skill": 1651
+      },
+      {
+        "prompt": "Implement a simple caching mechanism in Clojure with TTL support and automatic cleanup of expired en...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a more complete and robust implementation with proper Java interop using ConcurrentHashMap for thread safety, includes all required protocol methods, and has a more sophisticated cleanup mechanism using ScheduledExecutorService. Response B is incomplete (cuts off mid-implementation), uses less thread-safe atom operations, and relies on core.async which adds unnecessary complexity for this use case. Response A also includes better error handling and a more professional structure.",
+        "tokens_with_skill": 2068,
+        "tokens_without_skill": 1960
+      },
+      {
+        "prompt": "Design a Clojure API for a library management system with book checkout, return, and inventory track...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a more complete and practical API design with concrete implementations for all three required features (checkout, return, inventory tracking). It includes proper data structures, protocols, and implementation details for book management, member management, and checkout operations. Response B, while showing good architectural thinking with separate namespaces and protocols, is incomplete and cuts off mid-implementation, failing to demonstrate the checkout and return functionality that are core requirements of the task.",
+        "tokens_with_skill": 2804,
+        "tokens_without_skill": 2099
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 928,
+    "avg_output_tokens": 1219,
+    "avg_total_tokens": 2147,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T17:58:59.410687",
+  "model_used": "claude-sonnet-4-20250514"
+}

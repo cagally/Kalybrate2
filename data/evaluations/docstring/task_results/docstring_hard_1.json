@@ -1,0 +1,29 @@
+{
+  "task_id": "docstring_hard_1",
+  "prompt": "I'm contributing to PyTorch and need to document a C-bound function using add_docstr. The function performs 2D batch normalization with running statistics. I need complete documentation including mathematical formulas, proper parameter documentation, shape specifications, cross-references, examples, and notes about training vs eval mode. The function signature is: batch_norm2d(input, weight, bias, running_mean, running_var, training=True, momentum=0.1, eps=1e-5)",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll use the docstring skill to create a comprehensive docstring for the `batch_norm2d` function using PyTorch's documentation conventions. Here's a complete implementation:\n\n```python\nbatch_norm2d = torch._C._add_docstr(\n    torch.batch_norm,\n    r\"\"\"batch_norm2d(input, weight, bias, running_mean, running_var, training=True, momentum=0.1, eps=1e-5) -> Tensor\n\nApplies Batch Normalization for 2D inputs (over mini-batch of 2D inputs with optional channel dimension).\n\nTracks running mean and variance during training and uses them for normalization during evaluation.\n\n.. math::\n    y = \\frac{x - \\text{E}[x]}{\\sqrt{\\text{Var}[x] + \\epsilon}} * \\gamma + \\beta\n\nArgs:\n    input (Tensor): Input of shape :math:`(\\text{batch}, \\text{channel}, \\text{height}, \\text{width})`\n    weight (Tensor, optional): Scale parameter of shape :math:`(\\text{channel})`. Default: ``None``\n    bias (Tensor, optional): Shift parameter of shape :math:`(\\text{channel})`. Default: ``None``\n    running_mean (Tensor): Running mean tensor of shape :math:`(\\text{channel})`\n    running_var (Tensor): Running variance tensor of shape :math:`(\\text{channel})`\n    training (bool, optional): If ``True``, computes and uses training statistics. \n        If ``False``, uses running statistics. Default: ``True``\n    momentum (float, optional): Momentum for updating running statistics. Default: ``0.1``\n    eps (float, optional): Small value added to denominator for numerical stability. Default: ``1e-5``\n\nReturns:\n    Tensor: Normalized tensor with same shape as input\n\n.. note::\n    This implementation follows the batch normalization algorithm described in the \n    `Batch Normalization paper <https://arxiv.org/abs/1502.03167>`_.\n\n.. warning::\n    Running statistics are updated in-place during training. Use :meth:`~torch.nn.Module.eval()`\n    to switch to evaluation mode where running statistics are used.\n\nExamples::\n    >>> # In training mode\n    >>> input = torch.randn(20, 100, 35, 45)\n    >>> weight = torch.randn(100)\n    >>> bias = torch.randn(100)\n    >>> running_mean = torch.zeros(100)\n    >>> running_var = torch.ones(100)\n    >>> output = torch.batch_norm2d(input, weight, bias, running_mean, running_var)\n\n    >>> # In evaluation mode\n    >>> input = torch.randn(1, 100, 35, 45)\n    >>> output = torch.batch_norm2d(input, weight, bias, running_mean, running_var, training=False)\n\nSee Also:\n    :class:`~torch.nn.BatchNorm2d`\n    :func:`~torch.nn.functional.batch_norm`\n\"\"\")\n```\n\nThis docstring follows PyTorch's conventions by:\n\n1. Providing a complete function signature\n2. Giving a brief description of the function\n3. Including a mathematical formula using LaTeX math notation\n4. Documenting all parameters with types, shapes, and defaults\n5. Specifying the return value\n6. Adding a note about the original paper\n7. Warning about running statistics\n8. Providing multiple usage examples\n9. Cross-referencing related classes and functions\n10. Using raw string (`r\"\"\"`) to handle backslashes\n11. Following Sphinx/reStructuredText formatting\n\nThe examples demonstrate both training and evaluation modes, showing how the `training` parameter affects the normalization process.\n\nThe function uses `torch._C._add_docstr` which is typically used for C-bound functions in PyTorch, and assumes the implementation is already defined in the C++ backend.\n\nThis docstring provides comprehensive documentation that explains the function's behavior, parameters, mathematical foundations, and provides practical usage examples.",
+  "criteria_results": {
+    "code_extracted": true,
+    "has_docstrings": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "has_docstrings": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3157,
+    "output": 955,
+    "total": 4112
+  },
+  "execution_time": 16.023231983184814,
+  "error": null,
+  "timestamp": "2026-01-01T18:42:48.556272"
+}

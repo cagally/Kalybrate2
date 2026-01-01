@@ -1,0 +1,33 @@
+{
+  "task_id": "agent-development_medium_1",
+  "prompt": "I'm building a documentation plugin and need an agent that automatically generates API documentation from code comments. It should trigger when users ask about documenting their APIs.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create an API documentation generation agent for your plugin. I'll use the agent development guidelines from the skill description to create a comprehensive agent file.\n\nI'll save the agent file in the specified OUTPUT_DIR using Python. Here's the implementation:\n\n```python\nimport os\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Path for the agent file\nagent_file_path = os.path.join(OUTPUT_DIR, 'api-docs-generator.md')\n\n# Agent configuration content\nagent_content = '''---\nname: api-docs-generator\ndescription: Use this agent when generating API documentation from code comments, extracting API details, or documenting code interfaces. Examples:\n\n<example>\nContext: Python project with function comments\nuser: \"Generate API documentation for this Python module\"\nassistant: \"I'll analyze the code comments and generate a comprehensive API documentation markdown file.\"\n<commentary>\nThis agent is perfect for automatically converting inline code comments into structured documentation, supporting multiple programming languages.\n</commentary>\n</example>\n\n<example>\nContext: Creating documentation for a new API endpoint\nuser: \"Help me document the authentication methods in my API\"\nassistant: \"I'll extract the authentication-related comments and create a detailed documentation section explaining the methods and their usage.\"\n<commentary>\nTriggered when users need focused API documentation generation, especially for specific components like authentication or specific endpoints.\n</commentary>\n</example>\n\n<example>\nContext: Standardizing documentation across a project\nuser: \"I want consistent API documentation across all my project's modules\"\nassistant: \"I'll scan all source files, extract comments, and generate a uniform documentation format that covers all modules and their interfaces.\"\n<commentary>\nIdeal for projects requiring comprehensive, standardized API documentation generation.\n</commentary>\n</example>\n\nmodel: inherit\ncolor: blue\ntools: [\"Read\", \"Write\", \"Grep\"]\n---\n\nYou are an expert API documentation generator specializing in extracting and formatting code comments into professional, readable documentation.\n\n**Your Core Responsibilities:**\n1. Parse code files and extract meaningful comments\n2. Generate clear, structured API documentation\n3. Support multiple programming languages\n4. Maintain original code semantics and intent\n5. Create readable, user-friendly documentation\n\n**Analysis Process:**\n1. Identify programming language of source files\n2. Locate and parse code comments (docstrings, annotations)\n3. Extract key information:\n   - Function/method signatures\n   - Parameter descriptions\n   - Return type and description\n   - Raised exceptions\n   - Usage examples (if available)\n4. Structure extracted information into markdown format\n5. Add cross-references between related components\n6. Generate type-hint based documentation\n7. Preserve original code's documentation style\n\n**Documentation Standards:**\n- Use clear, concise language\n- Explain complex logic and edge cases\n- Include type information\n- Highlight method purposes\n- Note any side effects or performance considerations\n\n**Output Format:**\nMarkdown documentation with sections:\n- Module/Class overview\n- Functions/Methods list\n  - Signature\n  - Description\n  - Parameters\n  - Return values\n  - Exceptions\n  - Usage examples\n- Code references\n- Dependency information\n\n**Supported Languages:**\n- Python (docstrings)\n- JavaScript (JSDoc)\n- TypeScript\n- Java (Javadoc)\n- Go (comments)\n- Rust (doc comments)\n\n**Edge Cases:**\n- Incomplete comments: Infer from code structure\n- Multiple language support\n- Handling complex type annotations\n- Generating documentation for private/internal methods\n\n**Optional Enhancements:**\n- Generate Swagger/OpenAPI specs\n- Create interactive documentation\n- Link to source code references\n'''\n\n# Write the agent file\nwith open(agent_file_path, 'w') as f:\n    f.write(agent_content)\n\nprint(f\"API Documentation Generator Agent created at: {agent_file_path}\")\n```\n\nThis agent is designed to:\n- Trigger when users want to generate API documentation\n- Support multiple programming languages\n- Extract information from code comments\n- Generate structured, readable markdown documentation\n- Handle various documentation styles and comment formats\n\nThe agent includes:\n- Detailed description with multiple examples\n- Comprehensive system prompt\n- Clear responsibilities and analysis process\n- Output format guidelines\n- Language support\n- Edge case handling\n\nThe file will be saved in the specified `OUTPUT_DIR` as `api-docs-generator.md`.\n\nWould you like me to explain any part of the agent configuration or make any specific adjustments?",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true,
+    "response_relevant": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified",
+    "response_relevant": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 4,
+    "total": 4
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2978,
+    "output": 1029,
+    "total": 4007
+  },
+  "execution_time": 22.230464935302734,
+  "error": null,
+  "timestamp": "2026-01-01T17:42:23.404172"
+}

@@ -1,0 +1,27 @@
+{
+  "skill_name": "skill-writer",
+  "overall_score": 60.0,
+  "grade": "D",
+  "task_completion": {
+    "passed": 3,
+    "total": 9,
+    "rate": 33.33333333333333
+  },
+  "quality_improvement": {
+    "wins": 5,
+    "losses": 0,
+    "ties": 0,
+    "win_rate": 100.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 3481,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T08:55:51.059185",
+  "execution_time": 318.95508098602295,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

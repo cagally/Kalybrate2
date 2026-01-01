@@ -1,0 +1,141 @@
+{
+  "skill_claims": [
+    "Convert AT_DISPATCH macros to AT_DISPATCH_V2 format",
+    "Add proper includes for Dispatch_v2.h",
+    "Transform macro argument order (scalar_type, name, lambda, types)",
+    "Wrap lambdas with AT_WRAP to handle internal commas",
+    "Convert type groups using AT_EXPAND",
+    "Handle individual types after expanded groups",
+    "Work with various dispatch patterns (ALL_TYPES_AND*, FLOATING_TYPES_AND*, etc.)",
+    "Handle multi-line lambdas with complex expressions",
+    "Convert combined type patterns to multiple AT_EXPAND entries"
+  ],
+  "tasks": [
+    {
+      "id": "at-dispatch-v2_easy_1",
+      "prompt": "I have this PyTorch C++ code that uses the old AT_DISPATCH_ALL_TYPES_AND2 macro. Can you convert it to the new v2 format?\n\n```cpp\nAT_DISPATCH_ALL_TYPES_AND2(kHalf, kBFloat16, dtype, \"simple_op\", [&]() {\n  kernel<scalar_t>(data);\n});\n```",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Convert AT_DISPATCH macros to AT_DISPATCH_V2 format"
+    },
+    {
+      "id": "at-dispatch-v2_easy_2",
+      "prompt": "I need to update this ATen kernel code to use the new dispatch API. What includes do I need and how should I change this?\n\n```cpp\n#include <ATen/Dispatch.h>\n\nAT_DISPATCH_FLOATING_TYPES_AND2(kHalf, kBFloat16, tensor.scalar_type(), \"float_kernel\", [&] {\n  process<scalar_t>(tensor);\n});\n```",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Add proper includes for Dispatch_v2.h"
+    },
+    {
+      "id": "at-dispatch-v2_easy_3",
+      "prompt": "This old dispatch macro isn't working with the new PyTorch version. Can you help me convert it?\n\n```cpp\nAT_DISPATCH_ALL_TYPES_AND3(kBFloat16, kHalf, kBool, iter.dtype(), \"min_values\", [&]() {\n  min_kernel<scalar_t>(iter);\n});\n```",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle individual types after expanded groups"
+    },
+    {
+      "id": "at-dispatch-v2_medium_1",
+      "prompt": "I'm porting some CUDA kernels and this dispatch macro has a complex lambda with multiple function calls. How do I convert this to v2?\n\n```cpp\nAT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND2(\n    kComplexHalf, kHalf,\n    self.scalar_type(),\n    \"complex_reduce\",\n    [&] {\n      gpu_reduce_kernel<scalar_t, scalar_t>(\n        iter,\n        MinOps<scalar_t>{},\n        thrust::pair<scalar_t, int64_t>(upper_bound(), 0)\n      );\n    }\n);\n```",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle multi-line lambdas with complex expressions"
+    },
+    {
+      "id": "at-dispatch-v2_medium_2",
+      "prompt": "I have several dispatch macros in my ATen native implementation that need updating. Can you convert this one that combines floating and complex types?\n\n```cpp\nAT_DISPATCH_FLOATING_AND_COMPLEX_TYPES_AND3(\n    kHalf, kBFloat16, kFloat8_e4m3fn,\n    input.scalar_type(),\n    \"mixed_precision_op\",\n    [&]() {\n      result = compute_mixed<scalar_t>(input, weight);\n      if (bias.defined()) {\n        result.add_(bias.to<scalar_t>());\n      }\n    }\n);\n```",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Work with various dispatch patterns (ALL_TYPES_AND*, FLOATING_TYPES_AND*, etc.)"
+    },
+    {
+      "id": "at-dispatch-v2_medium_3",
+      "prompt": "I'm getting compilation errors with this dispatch macro after updating PyTorch. The lambda has template parameters and multiple statements:\n\n```cpp\nAT_DISPATCH_INTEGRAL_TYPES_AND2(kBool, kHalf, dtype, \"index_op\", [&]() {\n  auto result_data = result.data_ptr<scalar_t>();\n  auto input_data = input.data_ptr<scalar_t>();\n  index_kernel_impl<scalar_t, index_t>(result_data, input_data, indices, numel);\n});\n```",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Wrap lambdas with AT_WRAP to handle internal commas"
+    },
+    {
+      "id": "at-dispatch-v2_hard_1",
+      "prompt": "I need to convert this complex dispatch pattern that uses AND4 with multiple type categories. The lambda also captures several variables and has nested template calls:\n\n```cpp\nAT_DISPATCH_FLOATING_TYPES_AND4(\n    kHalf, kBFloat16, kFloat8_e4m3fn, kFloat8_e5m2,\n    input.scalar_type(),\n    \"advanced_float8_kernel\",\n    [&]() {\n      const auto input_ptr = input.data_ptr<scalar_t>();\n      const auto weight_ptr = weight.data_ptr<scalar_t>();\n      auto output_ptr = output.data_ptr<scalar_t>();\n      \n      launch_kernel<scalar_t, 256>(\n        input_ptr, weight_ptr, output_ptr,\n        make_tuple(input.size(0), input.size(1)),\n        stream\n      );\n    }\n);\n```",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Convert combined type patterns to multiple AT_EXPAND entries"
+    },
+    {
+      "id": "at-dispatch-v2_hard_2",
+      "prompt": "I'm working on a custom ATen operator and need to convert multiple dispatch macros in the same file. This one is particularly tricky because it has ALL_TYPES_AND_COMPLEX with additional types:\n\n```cpp\n#include <ATen/Dispatch.h>\n#include <ATen/native/TensorIterator.h>\n\nnamespace at { namespace native {\n\nTensor custom_op_impl(const Tensor& self, const Tensor& other) {\n  auto iter = TensorIterator::binary_op(self, other);\n  \n  AT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND3(\n      kBFloat16, kHalf, kBool,\n      iter.dtype(),\n      \"custom_op_cuda\",\n      [&]() {\n        gpu_kernel_with_scalars(iter, []GPU_LAMBDA(scalar_t a, scalar_t b) -> scalar_t {\n          return static_cast<scalar_t>(std::max(static_cast<double>(a), static_cast<double>(b)));\n        });\n      }\n  );\n  \n  return iter.output();\n}\n\n}} // namespace at::native\n```",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Transform macro argument order (scalar_type, name, lambda, types)"
+    },
+    {
+      "id": "at-dispatch-v2_hard_3",
+      "prompt": "I have a performance-critical kernel that uses nested dispatch macros and I need to convert the outer one to v2. The inner lambda has complex template instantiations:\n\n```cpp\nAT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND2(\n    kHalf, kBFloat16,\n    input.scalar_type(),\n    \"nested_dispatch_kernel\",\n    [&]() {\n      using input_t = scalar_t;\n      AT_DISPATCH_FLOATING_TYPES(weight.scalar_type(), \"inner_dispatch\", [&]() {\n        using weight_t = scalar_t;\n        \n        constexpr bool is_same_type = std::is_same_v<input_t, weight_t>;\n        if constexpr (is_same_type) {\n          fast_path_kernel<input_t>(input, weight, output, stream);\n        } else {\n          mixed_type_kernel<input_t, weight_t>(input, weight, output, stream);\n        }\n      });\n    }\n);\n```",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Convert type groups using AT_EXPAND"
+    }
+  ],
+  "quality_prompts": [
+    "Convert this AT_DISPATCH_ALL_TYPES_AND2(kHalf, kBFloat16, dtype, \"op\", [&]() { kernel<scalar_t>(data); }); to the new v2 format",
+    "I need to update this PyTorch dispatch macro: AT_DISPATCH_FLOATING_TYPES_AND3(kHalf, kBFloat16, kFloat8_e4m3fn, tensor.scalar_type(), \"float_op\", [&] { process<scalar_t>(tensor); });",
+    "Help me convert this complex dispatch pattern: AT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND2(kComplexHalf, kHalf, self.scalar_type(), \"complex_op\", [&] { result = compute<scalar_t>(self); });",
+    "My ATen kernel uses AT_DISPATCH_INTEGRAL_TYPES_AND2(kBool, kByte, input.dtype(), \"index_kernel\", [&]() { index_impl<scalar_t>(input, indices); }); and I need to port it to v2",
+    "Convert this dispatch macro with a multi-line lambda: AT_DISPATCH_FLOATING_TYPES_AND2(kHalf, kBFloat16, dtype, \"reduce_op\", [&]() { auto ptr = data.data_ptr<scalar_t>(); reduce_kernel<scalar_t>(ptr, size, stream); });"
+  ],
+  "generated_at": "2026-01-01T17:46:42.627798",
+  "model": "claude-sonnet-4-20250514"
+}

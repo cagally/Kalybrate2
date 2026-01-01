@@ -1,0 +1,130 @@
+{
+  "skill_claims": [
+    "Review TypeScript and JavaScript code changes for compliance with Metabase coding standards",
+    "Identify style violations in TypeScript/JavaScript code",
+    "Assess code quality issues in TypeScript/JavaScript",
+    "Review pull requests containing TypeScript/JavaScript code",
+    "Check JSDoc comments for clarity and correctness",
+    "Evaluate type safety and proper TypeScript usage",
+    "Review React best practices when applicable"
+  ],
+  "tasks": [
+    {
+      "id": "typescript-review_easy_1",
+      "prompt": "I have a simple TypeScript function that calculates the area of a rectangle. Can you review it and tell me if there are any issues with the code quality or style?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Assess code quality issues in TypeScript/JavaScript"
+    },
+    {
+      "id": "typescript-review_easy_2",
+      "prompt": "I wrote a JavaScript utility function but I'm not sure if my JSDoc comments are correct. Could you take a look and give me feedback?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Check JSDoc comments for clarity and correctness"
+    },
+    {
+      "id": "typescript-review_easy_3",
+      "prompt": "I have a basic TypeScript interface definition. Can you check if I'm using proper TypeScript conventions and type safety?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Evaluate type safety and proper TypeScript usage"
+    },
+    {
+      "id": "typescript-review_medium_1",
+      "prompt": "I'm submitting a pull request with changes to our React component that handles user authentication. The component uses TypeScript and has about 150 lines of code. Can you review it for any coding standard violations or best practice issues?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Review React best practices when applicable"
+    },
+    {
+      "id": "typescript-review_medium_2",
+      "prompt": "Our team is working on a TypeScript service class for handling API requests. I need someone to review the code diff before we merge it to ensure it follows our project's coding standards and has proper error handling.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Review TypeScript and JavaScript code changes for compliance with Metabase coding standards"
+    },
+    {
+      "id": "typescript-review_medium_3",
+      "prompt": "I've made several changes to our TypeScript data models and utility functions. The changes span multiple files and include new type definitions. Can you review these changes for style consistency and type safety issues?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Identify style violations in TypeScript/JavaScript code"
+    },
+    {
+      "id": "typescript-review_hard_1",
+      "prompt": "I'm preparing a large pull request that refactors our entire dashboard component system. It includes TypeScript interfaces, React hooks, custom components, and utility functions across 12 files. The changes involve complex state management and API integration. Can you do a comprehensive code review focusing on maintainability, performance, and adherence to our coding standards?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Review pull requests containing TypeScript/JavaScript code"
+    },
+    {
+      "id": "typescript-review_hard_2",
+      "prompt": "Our team has implemented a new TypeScript module for real-time data processing with WebSocket connections, including custom event handlers, type guards, and error boundaries. The code uses advanced TypeScript features like conditional types and mapped types. I need a thorough review to ensure we're following best practices and maintaining type safety throughout the complex data flow.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Evaluate type safety and proper TypeScript usage"
+    },
+    {
+      "id": "typescript-review_hard_3",
+      "prompt": "I've been working on a major feature that adds a new charting library integration to our analytics dashboard. The implementation includes TypeScript decorators, generic constraints, React context providers, and custom hooks. The code also has extensive JSDoc documentation. Can you review everything for code quality, documentation accuracy, and compliance with our project standards?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Assess code quality issues in TypeScript/JavaScript"
+    }
+  ],
+  "quality_prompts": [
+    "Review this TypeScript React component for coding standards compliance and suggest improvements for better maintainability.",
+    "I have a pull request with TypeScript changes to our data layer. Can you identify any style violations or type safety issues?",
+    "Check this JavaScript utility module for proper JSDoc documentation and adherence to best practices.",
+    "Review these TypeScript interface definitions and tell me if they follow proper naming conventions and type safety guidelines.",
+    "I need feedback on this React hook implementation written in TypeScript - are there any code quality issues or best practice violations?"
+  ],
+  "generated_at": "2026-01-01T08:56:16.772299",
+  "model": "claude-sonnet-4-20250514"
+}

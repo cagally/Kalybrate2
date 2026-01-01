@@ -1,0 +1,27 @@
+{
+  "task_id": "claude-opus-4-5-migration_hard_1",
+  "prompt": "I'm migrating a complex enterprise application from Opus 4.1 to Opus 4.5. It uses AWS Bedrock, has the 1M context beta header, and I'm getting issues where the AI creates too many unnecessary files and suggests fixes without actually reading my code first. I need a complete migration with all the behavioral adjustments.",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you migrate your enterprise application from Opus 4.1 to Opus 4.5, addressing the specific issues you're experiencing. I'll follow the migration guide and apply the relevant behavioral adjustments.\n\nLet's break this down into steps:\n\n1. Model String Update\nFirst, I'll update the AWS Bedrock model string from Opus 4.1 to Opus 4.5:\n\n```python\n# Before:\nmodel_id = \"anthropic.claude-opus-4-1-20250422-v1:0\"\n\n# After:\nmodel_id = \"anthropic.claude-opus-4-5-20251101-v1:0\"\n```\n\n2. Remove Beta Header\n```python\n# Note: 1M context beta (context-1m-2025-08-07) not yet supported with Opus 4.5\n# Remove any existing beta context headers\n```\n\n3. Prompt Adjustments\nI'll create a comprehensive system prompt snippet to address the specific issues you mentioned:\n\n```python\nsystem_prompt = \"\"\"\n<code_exploration_guidelines>\nIMPORTANT: Before proposing any changes or fixes:\n1. Thoroughly read and understand ALL relevant code files\n2. Do NOT generate solutions without explicit file inspection\n3. If multiple files are involved, systematically review each one\n4. Ask for clarification if code context is unclear\n5. Only propose changes after comprehensive code understanding\n</code_exploration_guidelines>\n\n<file_generation_constraints>\nConstraints for file creation:\n- Create files ONLY when absolutely necessary\n- Minimize unnecessary abstractions\n- Prioritize existing project structure\n- Do not introduce complexity without clear benefit\n- If unsure about file creation, ask for confirmation\n</file_generation_constraints>\n\n<problem_solving_approach>\nProblem-Solving Protocol:\n- Start with minimal, targeted solutions\n- Avoid over-engineering\n- Respect existing architectural patterns\n- Provide clear rationale for any proposed changes\n</problem_solving_approach>\n\"\"\"\n\n# Integration example\nclient.messages.create(\n    model=\"anthropic.claude-opus-4-5-20251101-v1:0\",\n    system=system_prompt,\n    # ... other parameters\n)\n```\n\n4. Optional: Effort Parameter\nSince this is a complex enterprise application, I recommend setting the effort parameter:\n\n```python\n# Add to API call\nmessages_params = {\n    \"model\": \"anthropic.claude-opus-4-5-20251101-v1:0\",\n    \"system\": system_prompt,\n    \"effort\": \"high\"  # Ensures thorough, careful analysis\n}\n```\n\n5. Thinking Sensitivity Mitigation\nReplace \"think\" with alternative phrasing in prompts:\n- \"Consider\" instead of \"think\"\n- \"Evaluate\" instead of \"think about\"\n- \"Analyze\" instead of \"think through\"\n\n6. Migration Summary\nHere's a summary of changes:\n- Updated AWS Bedrock model string to Opus 4.5\n- Removed 1M context beta header\n- Added system prompt guidelines to prevent:\n  * Unnecessary file creation\n  * Solutions without code inspection\n- Set effort parameter to \"high\"\n- Mitigated thinking-related sensitivity\n\nRecommendations:\n1. Gradually roll out the migration\n2. Test thoroughly in a staging environment\n3. Have a rollback plan\n4. Monitor AI's behavior closely during initial deployment\n\nWould you like me to help you apply these changes to specific files in your project? I can assist in systematically updating your codebase to work optimally with Opus 4.5.\n\nIf you encounter any issues during or after migration, please provide specific examples, and I can help you fine-tune the approach.",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 1536,
+    "output": 852,
+    "total": 2388
+  },
+  "execution_time": 16.846455097198486,
+  "error": null,
+  "timestamp": "2026-01-01T17:50:54.868130"
+}

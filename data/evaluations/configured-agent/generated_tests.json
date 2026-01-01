@@ -1,0 +1,130 @@
+{
+  "skill_claims": [
+    "Check if settings exist at a specific file path",
+    "Read configuration files using Read tool",
+    "Parse YAML frontmatter to extract settings",
+    "Apply extracted settings to processing logic",
+    "Execute processing with configured behavior"
+  ],
+  "tasks": [
+    {
+      "id": "configured-agent_easy_1",
+      "prompt": "I have a configuration file that might exist at .claude/my-plugin.local.md. Can you check if it's there and tell me what settings are configured?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Check if settings exist at a specific file path"
+    },
+    {
+      "id": "configured-agent_easy_2",
+      "prompt": "I need to read the configuration from my plugin settings file and show me what's in the YAML frontmatter section.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Read configuration files using Read tool"
+    },
+    {
+      "id": "configured-agent_easy_3",
+      "prompt": "There should be some YAML configuration at the top of my plugin file. Can you extract and parse those settings for me?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Parse YAML frontmatter to extract settings"
+    },
+    {
+      "id": "configured-agent_medium_1",
+      "prompt": "I have a data processing task that needs to use the settings from my plugin configuration file. Can you read the config and apply those settings to process my data accordingly?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Apply extracted settings to processing logic"
+    },
+    {
+      "id": "configured-agent_medium_2",
+      "prompt": "I need to run a processing job using the configuration parameters stored in .claude/my-plugin.local.md. Please read the settings and execute the processing with those specific configurations.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Execute processing with configured behavior"
+    },
+    {
+      "id": "configured-agent_medium_3",
+      "prompt": "My plugin has custom settings that control how data should be processed. Can you check for the config file, read it, and then process some sample data using those settings?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Apply extracted settings to processing logic"
+    },
+    {
+      "id": "configured-agent_hard_1",
+      "prompt": "I have a complex data pipeline that needs to be configured dynamically based on YAML settings in my plugin file. The settings control processing parameters, output formats, and execution behavior. Can you implement the full workflow?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Execute processing with configured behavior"
+    },
+    {
+      "id": "configured-agent_hard_2",
+      "prompt": "I need to build an automated system that checks for plugin configuration changes, parses any YAML frontmatter updates, and re-executes processing jobs with the new settings. Can you set this up?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Parse YAML frontmatter to extract settings"
+    },
+    {
+      "id": "configured-agent_hard_3",
+      "prompt": "I have multiple processing modules that each need different configuration parameters from the same YAML frontmatter file. Can you create a system that reads the config once and distributes the appropriate settings to each processing module?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Apply extracted settings to processing logic"
+    }
+  ],
+  "quality_prompts": [
+    "I need to process a large dataset with specific formatting rules that are stored in my configuration file. Can you handle this end-to-end?",
+    "My data processing workflow has custom parameters defined in YAML frontmatter. Can you read those settings and execute the processing accordingly?",
+    "I have configuration settings that control how my plugin processes different types of data. Can you check the config and run a processing job?",
+    "There's a plugin configuration file that defines processing behavior. Can you read it and apply those settings to process some sample data?",
+    "I need to run a data transformation job using the parameters specified in my plugin's YAML configuration. Can you set this up?"
+  ],
+  "generated_at": "2026-01-01T18:07:06.162750",
+  "model": "claude-sonnet-4-20250514"
+}

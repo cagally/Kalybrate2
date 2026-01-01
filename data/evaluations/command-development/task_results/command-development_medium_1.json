@@ -1,0 +1,31 @@
+{
+  "task_id": "command-development_medium_1",
+  "prompt": "Build a deployment command that takes an environment name and service name, then checks git status before proceeding",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a deployment command that checks git status before proceeding with deployment. I'll save the command in the specified output directory.\n\n```python\nimport os\n\n# Use the provided OUTPUT_DIR\nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_5r5nqjyl\"\n\n# Ensure the directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Path for the deployment command\ndeployment_command_path = os.path.join(OUTPUT_DIR, \"deploy.md\")\n\n# Write the deployment command\nwith open(deployment_command_path, 'w') as f:\n    f.write('''---\nname: deploy\ndescription: Deploy a service to a specific environment after git status check\nargument-hint: [environment] [service]\nallowed-tools: Bash(git:*), Read\n---\n\n# Validate git working directory is clean\nGit Status Check: !`git status --porcelain`\n\n$IF($BASH_OUTPUT,\n    # If there are uncommitted changes, halt deployment\n    Deployment Blocked: Uncommitted changes exist in repository.\n    \n    Uncommitted changes detected:\n    $BASH_OUTPUT\n    \n    Please commit or stash changes before deploying.\n    \n    Suggested actions:\n    1. Commit changes: git commit -m \"Description of changes\"\n    2. Stash changes: git stash\n    3. Discard changes: git reset --hard\n\n,\n    # No uncommitted changes, proceed with deployment\n    Deploying $2 to $1 environment:\n\n    1. Confirm deployment target:\n       - Environment: $1\n       - Service: $2\n\n    2. Pull latest changes\n       !`git pull origin main`\n\n    3. Deploy steps:\n       !`./deploy.sh $1 $2`\n\n    4. Verify deployment\n       Checking deployment status...\n       !`./check-deployment.sh $1 $2`\n\n    Deployment Summary:\n    - Target Environment: $1\n    - Service Deployed: $2\n    - Timestamp: !`date`\n)\n''')\n\nprint(f\"Deployment command created at: {deployment_command_path}\")\n```\n\nThis command does several important things:\n1. Checks git status to ensure no uncommitted changes\n2. Blocks deployment if uncommitted changes exist\n3. Provides actionable guidance if deployment is blocked\n4. If no uncommitted changes:\n   - Pulls latest changes\n   - Deploys using a hypothetical `deploy.sh` script\n   - Verifies deployment with a `check-deployment.sh` script\n5. Captures and displays deployment timestamp\n\n**Key Features:**\n- Git status validation\n- Environment and service name arguments\n- Deployment blocking with helpful instructions\n- Placeholder for actual deployment scripts\n- Timestamp logging\n\n**Usage Example:**\n```\n/deploy staging user-service\n```\n\nThe command provides a robust, safe deployment workflow that prevents accidental deployments with uncommitted changes.\n\nNote: The actual `deploy.sh` and `check-deployment.sh` scripts would need to be implemented separately based on your specific deployment infrastructure.",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 3,
+    "total": 3
+  },
+  "passed": true,
+  "tokens": {
+    "input": 5053,
+    "output": 748,
+    "total": 5801
+  },
+  "execution_time": 14.535406112670898,
+  "error": null,
+  "timestamp": "2026-01-01T18:01:28.856373"
+}

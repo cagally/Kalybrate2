@@ -1,0 +1,169 @@
+{
+  "skill_name": "claude-opus-4-5-migration",
+  "skill_description": null,
+  "overall_score": 68.0,
+  "grade": "D",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "claude-opus-4-5-migration_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 10.08,
+        "tokens": 2064
+      },
+      {
+        "id": "claude-opus-4-5-migration_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 8.18,
+        "tokens": 1929
+      },
+      {
+        "id": "claude-opus-4-5-migration_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 4.54,
+        "tokens": 1686
+      },
+      {
+        "id": "claude-opus-4-5-migration_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 8.53,
+        "tokens": 2021
+      },
+      {
+        "id": "claude-opus-4-5-migration_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 22.01,
+        "tokens": 2841
+      },
+      {
+        "id": "claude-opus-4-5-migration_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 7.33,
+        "tokens": 1820
+      },
+      {
+        "id": "claude-opus-4-5-migration_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 16.85,
+        "tokens": 2388
+      },
+      {
+        "id": "claude-opus-4-5-migration_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 16.57,
+        "tokens": 2400
+      },
+      {
+        "id": "claude-opus-4-5-migration_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 20.09,
+        "tokens": 2827
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 1,
+    "losses": 4,
+    "ties": 0,
+    "win_rate": 20.0,
+    "details": [
+      {
+        "prompt": "I need to update my Python script from claude-sonnet-4-20250514 to the latest Opus model. What's the...",
+        "verdict": "without_skill",
+        "reasoning": "Response B correctly identifies that the original model string appears to be fictional and provides the actual current Claude Opus model name. Response A fabricates additional fake model strings and presents them as factual, which could mislead the user. Response B's honesty about uncertainty and recommendation to check official documentation is more helpful and accurate.",
+        "tokens_with_skill": 1628,
+        "tokens_without_skill": 116
+      },
+      {
+        "prompt": "My AI coding assistant upgraded to Opus 4.5 is creating way too many files and abstractions I didn't...",
+        "verdict": "without_skill",
+        "reasoning": "Response B is more honest and accurate. The user's question is based on a false premise - there is no 'Opus 4.5' AI system or migration guide. Response A fabricates detailed technical information about a non-existent system, which is misleading and unhelpful. Response B correctly identifies the misconception while still offering genuine assistance with the underlying coding concern. Honesty and accuracy are more valuable than playing along with incorrect assumptions.",
+        "tokens_with_skill": 1727,
+        "tokens_without_skill": 118
+      },
+      {
+        "prompt": "After switching to Opus 4.5, my chatbot calls tools for every single question, even simple ones. The...",
+        "verdict": "with_skill",
+        "reasoning": "Response A is more comprehensive and actionable. It provides specific before/after examples, explains the underlying cause (Opus 4.5's increased responsiveness to system instructions), offers concrete revision strategies, and includes a helpful checklist of problematic words to avoid. Response B covers similar ground but is less detailed and doesn't provide the concrete examples that make A immediately useful for implementation.",
+        "tokens_with_skill": 1783,
+        "tokens_without_skill": 199
+      },
+      {
+        "prompt": "I'm migrating from claude-opus-4-1-20250422-v1:0 on AWS Bedrock to Opus 4.5. What changes do I need ...",
+        "verdict": "without_skill",
+        "reasoning": "Response B is more accurate and honest. The model version 'claude-opus-4-1-20250422-v1:0' mentioned in the task appears to be fictional or incorrect, as it references future dates and non-existent version numbers. Response A provides detailed but potentially incorrect information about migrating to another non-existent version, which could mislead the user. Response B correctly identifies that the version doesn't match known Claude models and provides appropriate guidance for finding accurate migration information, making it more helpful and trustworthy.",
+        "tokens_with_skill": 1848,
+        "tokens_without_skill": 211
+      },
+      {
+        "prompt": "My development assistant on Opus 4.5 keeps suggesting code fixes without actually looking at my file...",
+        "verdict": "without_skill",
+        "reasoning": "Response A correctly identifies that the user is mistaken about the AI's capabilities and provides an honest, accurate explanation that the AI cannot actually access local files. Response B incorrectly assumes the user has a legitimate technical issue and provides elaborate but irrelevant solutions based on a misunderstanding. Response A is more helpful by clarifying the actual limitations and offering appropriate alternative assistance.",
+        "tokens_with_skill": 1798,
+        "tokens_without_skill": 129
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 1510,
+    "avg_output_tokens": 544,
+    "avg_total_tokens": 2054,
+    "estimated_per_use": "$0.01"
+  },
+  "evaluated_at": "2026-01-01T17:52:06.921502",
+  "model_used": "claude-sonnet-4-20250514"
+}

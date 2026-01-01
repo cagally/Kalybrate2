@@ -1,0 +1,27 @@
+{
+  "task_id": "payload_easy_3",
+  "prompt": "I want to automatically generate slugs from the title field in my Payload collection. What's the easiest way to set this up?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll show you two common approaches for automatically generating slugs in a Payload collection: using a `beforeChange` hook and using a `hooks` configuration.\n\n### Approach 1: `beforeChange` Hook (Recommended)\n\n```typescript\nimport { CollectionConfig } from 'payload/types'\nimport slugify from 'slugify'\n\nexport const Posts: CollectionConfig = {\n  slug: 'posts',\n  fields: [\n    {\n      name: 'title',\n      type: 'text',\n      required: true\n    },\n    {\n      name: 'slug',\n      type: 'text',\n      unique: true,\n      index: true\n    }\n  ],\n  hooks: {\n    beforeChange: [\n      (args) => {\n        const { data, operation } = args\n        \n        // Only generate slug during create or update when title is present\n        if (\n          (operation === 'create' || operation === 'update') && \n          data.title\n        ) {\n          // Convert title to URL-friendly slug\n          data.slug = slugify(data.title, {\n            lower: true,      // convert to lowercase\n            strict: true,     // strip special characters\n            trim: true        // trim leading/trailing whitespace\n          })\n        }\n        \n        return data\n      }\n    ]\n  }\n}\n```\n\n### Approach 2: Payload's `slugField()` Helper\n\n```typescript\nimport { CollectionConfig } from 'payload/types'\nimport { slugField } from 'payload/components/fields/slugField'\n\nexport const Posts: CollectionConfig = {\n  slug: 'posts',\n  fields: [\n    {\n      name: 'title',\n      type: 'text',\n      required: true\n    },\n    slugField({\n      name: 'slug',\n      // Optional customization\n      options: {\n        source: 'title', // Field to generate slug from\n        unique: true\n      }\n    })\n  ]\n}\n```\n\n### Key Considerations:\n\n1. **Install `slugify`**:\n   ```bash\n   npm install slugify\n   ```\n\n2. **Best Practices**:\n   - Make the `slug` field `unique: true` to prevent duplicates\n   - Add an `index: true` for performance in queries\n   - Handle both `create` and `update` operations\n   - Provide fallback/manual override ability\n\n### Advanced Example with Fallback\n\n```typescript\nimport { CollectionConfig } from 'payload/types'\nimport slugify from 'slugify'\n\nexport const Posts: CollectionConfig = {\n  slug: 'posts',\n  fields: [\n    {\n      name: 'title',\n      type: 'text',\n      required: true\n    },\n    {\n      name: 'slug',\n      type: 'text',\n      unique: true,\n      index: true,\n      admin: {\n        description: 'Auto-generated from title, can be manually overridden'\n      }\n    }\n  ],\n  hooks: {\n    beforeChange: [\n      (args) => {\n        const { data, operation } = args\n        \n        // Only generate if no manual slug provided\n        if (\n          (operation === 'create' || operation === 'update') && \n          data.title && \n          !data.slug\n        ) {\n          data.slug = slugify(data.title, {\n            lower: true,\n            strict: true,\n            trim: true\n          })\n        }\n        \n        return data\n      }\n    ]\n  }\n}\n```\n\n### Recommendations:\n\n1. Choose `slugField()` for simpler cases\n2. Use custom `beforeChange` hook for more complex slug generation logic\n3. Always handle edge cases (special characters, duplicates)\n4. Consider adding unique suffix if slug already exists\n\nBoth methods achieve automatic slug generation with slight trade-offs in complexity and control. The manual `beforeChange` hook offers more customization, while `slugField()` provides a quick out-of-the-box solution.",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 4272,
+    "output": 966,
+    "total": 5238
+  },
+  "execution_time": 15.914620876312256,
+  "error": null,
+  "timestamp": "2026-01-01T19:09:08.295428"
+}

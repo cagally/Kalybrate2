@@ -1,0 +1,27 @@
+{
+  "task_id": "claude-opus-4-5-migration_medium_1",
+  "prompt": "My chatbot code has the context-1m-2025-08-07 beta header and uses claude-sonnet-4-5-20250929. I need to migrate everything to Opus 4.5 for production. Here's my code: [code with beta headers and old model string]",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you migrate your code to Opus 4.5. However, you didn't actually include the specific code in your message. Without seeing the exact code, I'll provide a general migration example that covers the key points from the migration guide.\n\nHere's a typical Python migration example:\n\n```python\n# Before (Old Code)\nfrom anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"your-api-key\",\n    # Note: 1M context beta (context-1m-2025-08-07) not yet supported with Opus 4.5\n    headers={\n        \"context-1m-2025-08-07\": \"beta\"\n    }\n)\n\nresponse = client.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",  # Old model string\n    max_tokens=4000,\n    messages=[\n        {\"role\": \"user\", \"content\": \"Your prompt here\"}\n    ]\n)\n```\n\nMigrated Code:\n```python\nfrom anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"your-api-key\"\n    # Removed beta headers\n)\n\nresponse = client.messages.create(\n    model=\"claude-opus-4-5-20251101\",  # Updated to Opus 4.5\n    max_tokens=4000,\n    messages=[\n        {\"role\": \"user\", \"content\": \"Your prompt here\"}\n    ],\n    effort=\"high\"  # Added recommended effort parameter\n)\n```\n\nKey Changes:\n1. Removed the `context-1m-2025-08-07` beta header\n2. Updated model string from `claude-sonnet-4-5-20250929` to `claude-opus-4-5-20251101`\n3. Added `effort=\"high\"` parameter\n4. Cleaned up unnecessary configuration\n\nIf you'd like me to help with your specific code, please share the exact code snippet, and I can provide a precise migration path tailored to your implementation.\n\nWould you like me to elaborate on any part of the migration?",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 1538,
+    "output": 483,
+    "total": 2021
+  },
+  "execution_time": 8.533384323120117,
+  "error": null,
+  "timestamp": "2026-01-01T17:50:54.865613"
+}

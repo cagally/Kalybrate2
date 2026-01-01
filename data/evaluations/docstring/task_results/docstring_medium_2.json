@@ -1,0 +1,29 @@
+{
+  "task_id": "docstring_medium_2",
+  "prompt": "I wrote a PyTorch function that performs 1D convolution with custom padding. I need documentation that follows PyTorch standards, including proper tensor shape notation and examples. The function is: def conv1d_custom(input, kernel, stride=1, padding=0): return F.conv1d(input, kernel, stride=stride, padding=padding)",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you document the `conv1d_custom` function following PyTorch docstring conventions. Here's a comprehensive implementation:\n\n```python\nimport torch\nimport torch.nn.functional as F\n\ndef conv1d_custom(input, kernel, stride=1, padding=0):\n    r\"\"\"Perform 1D convolution with custom padding configuration.\n\n    Applies a 1D convolution over an input signal composed of several input\n    planes, with flexible padding options.\n\n    .. note::\n        This function is a wrapper around :func:`torch.nn.functional.conv1d` \n        with customizable padding parameters.\n\n    Args:\n        input (Tensor): Input tensor of shape :math:`(\\text{batch}, \\text{in\\_channels}, \\text{input\\_length})`\n        kernel (Tensor): Convolution kernel/weights of shape \n            :math:`(\\text{out\\_channels}, \\text{in\\_channels}/\\text{groups}, \\text{kernel\\_length})`\n        stride (int or tuple, optional): Stride of the convolution. Default: 1\n        padding (int or tuple, optional): Implicit zero-padding on both sides of input. Default: 0\n\n    Returns:\n        Tensor: Convolved output tensor of shape \n        :math:`(\\text{batch}, \\text{out\\_channels}, \\text{output\\_length})`\n\n    Examples::\n        >>> # Basic 1D convolution\n        >>> input = torch.randn(1, 3, 32)  # batch_size=1, in_channels=3, input_length=32\n        >>> kernel = torch.randn(16, 3, 3)  # out_channels=16, in_channels=3, kernel_length=3\n        >>> output = conv1d_custom(input, kernel, stride=1, padding=1)\n        >>> print(output.shape)\n        torch.Size([1, 16, 32])\n\n        >>> # Custom stride and padding\n        >>> input = torch.randn(4, 8, 64)  # batch_size=4, in_channels=8, input_length=64\n        >>> kernel = torch.randn(32, 8, 5)  # out_channels=32, in_channels=8, kernel_length=5\n        >>> output = conv1d_custom(input, kernel, stride=2, padding=2)\n        >>> print(output.shape)\n        torch.Size([4, 32, 32])\n    \"\"\"\n    return F.conv1d(input, kernel, stride=stride, padding=padding)\n```\n\nKey points about this documentation:\n\n1. Uses raw string (`r\"\"\"`) for docstring\n2. Provides a brief description of the function\n3. Includes a `:note:` section referencing the original function\n4. Detailed `Args` section with precise tensor shape descriptions using LaTeX math\n5. Describes return tensor shape \n6. Includes two comprehensive examples demonstrating different use cases\n7. Uses PyTorch conventional docstring structure\n8. Shows input/output tensor shapes in comments and print statements\n\nThe docstring follows PyTorch conventions by:\n- Using `:math:` for tensor shape notation\n- Providing clear parameter descriptions\n- Including practical examples\n- Referencing the original function (:func:`torch.nn.functional.conv1d`)\n\nYou can use this function just like the standard `F.conv1d()`, but with a more explicit name and documented behavior.",
+  "criteria_results": {
+    "code_extracted": true,
+    "has_docstrings": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "has_docstrings": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3128,
+    "output": 804,
+    "total": 3932
+  },
+  "execution_time": 12.89971923828125,
+  "error": null,
+  "timestamp": "2026-01-01T18:42:48.554679"
+}

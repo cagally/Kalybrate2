@@ -1,0 +1,180 @@
+{
+  "skill_name": "agent-development",
+  "skill_description": null,
+  "overall_score": 40.0,
+  "grade": "F",
+  "task_completion": {
+    "total": 9,
+    "passed": 5,
+    "pass_rate": 66.7,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 2
+      },
+      "medium": {
+        "total": 3,
+        "passed": 2
+      },
+      "hard": {
+        "total": 3,
+        "passed": 1
+      }
+    },
+    "details": [
+      {
+        "id": "agent-development_easy_1",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_has_content": false,
+          "response_relevant": false
+        },
+        "execution_time": 21.69,
+        "tokens": 4039
+      },
+      {
+        "id": "agent-development_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 4.93,
+        "tokens": 3054
+      },
+      {
+        "id": "agent-development_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 21.92,
+        "tokens": 3926
+      },
+      {
+        "id": "agent-development_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true,
+          "response_relevant": true
+        },
+        "execution_time": 22.23,
+        "tokens": 4007
+      },
+      {
+        "id": "agent-development_medium_2",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_has_content": false,
+          "response_relevant": false
+        },
+        "execution_time": 19.2,
+        "tokens": 3966
+      },
+      {
+        "id": "agent-development_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 23.56,
+        "tokens": 4237
+      },
+      {
+        "id": "agent-development_hard_1",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_has_content": false,
+          "response_relevant": false
+        },
+        "execution_time": 25.04,
+        "tokens": 4197
+      },
+      {
+        "id": "agent-development_hard_2",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_has_content": false,
+          "response_relevant": false
+        },
+        "execution_time": 23.91,
+        "tokens": 4213
+      },
+      {
+        "id": "agent-development_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 16.17,
+        "tokens": 3728
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 0,
+    "losses": 5,
+    "ties": 0,
+    "win_rate": 0.0,
+    "details": [
+      {
+        "prompt": "Create an agent that helps with database schema design and optimization",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a complete, functional Python implementation of a database schema design agent with concrete methods for validation, data type recommendations, and relationship analysis. Response B only shows the beginning of an agent configuration file and cuts off before providing any actual implementation. While B's approach using agent templates may be valid, A delivers a working solution that users can immediately use and extend.",
+        "tokens_with_skill": 3947,
+        "tokens_without_skill": 1806
+      },
+      {
+        "prompt": "I want to build an agent for my testing framework that automatically generates integration tests",
+        "verdict": "without_skill",
+        "reasoning": "Response B provides a concrete, functional implementation with actual Python code that can be used immediately, while Response A only shows a partial configuration template that cuts off mid-sentence. Response B demonstrates a working class structure with methods for extracting classes/functions and generating test cases, making it more complete and practically useful for building an integration test generator.",
+        "tokens_with_skill": 3977,
+        "tokens_without_skill": 1773
+      },
+      {
+        "prompt": "Help me create an agent that reviews pull requests and suggests improvements",
+        "verdict": "without_skill",
+        "reasoning": "Response B provides a complete, actionable solution with working code for a GitHub Action that reviews pull requests, while Response A appears to be an incomplete agent configuration that cuts off mid-sentence. Response B includes the full workflow file, Python script structure, and practical implementation details that the user can immediately use.",
+        "tokens_with_skill": 3937,
+        "tokens_without_skill": 1428
+      },
+      {
+        "prompt": "I need an agent for my monitoring plugin that analyzes system logs and alerts on anomalies",
+        "verdict": "without_skill",
+        "reasoning": "Response B provides a complete, functional Python implementation with actual code that can be used immediately for log monitoring and anomaly detection. It includes proper class structure, configuration loading, logging setup, and alert handling mechanisms. Response A only provides an agent configuration template without any executable code or implementation details, making it less useful for someone who needs a working monitoring plugin agent.",
+        "tokens_with_skill": 3785,
+        "tokens_without_skill": 1581
+      },
+      {
+        "prompt": "Build an agent that can migrate code between different programming languages while preserving functi...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a concrete, implementable code migration agent with actual Python code, parser implementations, translation rules, and a clear architecture. Response B only provides a markdown specification/template without any actual implementation code. For the task of 'building an agent', Response A delivers functional code while Response B only provides documentation format.",
+        "tokens_with_skill": 3985,
+        "tokens_without_skill": 1870
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 2911,
+    "avg_output_tokens": 1017,
+    "avg_total_tokens": 3928,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T17:46:42.623888",
+  "model_used": "claude-sonnet-4-20250514"
+}

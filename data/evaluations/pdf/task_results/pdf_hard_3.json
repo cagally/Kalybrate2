@@ -1,0 +1,29 @@
+{
+  "task_id": "pdf_hard_3",
+  "prompt": "I have a PDF form that needs to be filled out with data from a CSV file - about 200 records. I need to programmatically fill the form fields and generate individual PDFs for each record.",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll provide a comprehensive solution using Python with the `PyPDF2` library for form filling and `pandas` for reading the CSV. Here's a step-by-step script:\n\n```python\nimport os\nimport pandas as pd\nfrom PyPDF2 import PdfReader, PdfWriter\n\ndef fill_pdf_form(input_pdf_path, output_pdf_path, form_data):\n    \"\"\"\n    Fill a PDF form with provided data and save as a new PDF\n    \n    :param input_pdf_path: Path to the original PDF form template\n    :param output_pdf_path: Path where the filled PDF will be saved\n    :param form_data: Dictionary of form field names and values\n    \"\"\"\n    # Open the PDF form template\n    reader = PdfReader(input_pdf_path)\n    writer = PdfWriter()\n\n    # Get the first page of the PDF\n    page = reader.pages[0]\n    writer.add_page(page)\n\n    # Fill form fields\n    if writer.get_fields():\n        writer.update_page_form_field_values(\n            writer.pages[0], form_data\n        )\n\n    # Write the output to a new PDF\n    with open(output_pdf_path, 'wb') as output_file:\n        writer.write(output_file)\n\ndef process_csv_to_pdfs(csv_path, input_pdf_path, output_dir):\n    \"\"\"\n    Process CSV data and generate filled PDFs for each record\n    \n    :param csv_path: Path to the CSV file with form data\n    :param input_pdf_path: Path to the PDF form template\n    :param output_dir: Directory to save generated PDFs\n    \"\"\"\n    # Ensure output directory exists\n    os.makedirs(output_dir, exist_ok=True)\n\n    # Read the CSV file\n    df = pd.read_csv(csv_path)\n\n    # Iterate through each row in the CSV\n    for index, row in df.iterrows():\n        # Create a dictionary of form fields\n        # IMPORTANT: Adjust these keys to match your PDF form's actual field names\n        form_data = {\n            'FirstName': str(row['FirstName']),\n            'LastName': str(row['LastName']),\n            'Email': str(row['Email']),\n            'Phone': str(row['Phone']),\n            # Add more fields as needed to match your specific form\n        }\n\n        # Generate output filename (e.g., record_001.pdf, record_002.pdf)\n        output_filename = f'record_{index+1:03d}.pdf'\n        output_path = os.path.join(output_dir, output_filename)\n\n        # Fill the PDF form for this record\n        fill_pdf_form(input_pdf_path, output_path, form_data)\n        print(f'Generated PDF for {row[\"FirstName\"]} {row[\"LastName\"]}: {output_filename}')\n\n# Example usage\ndef main():\n    # Paths - adjust these to your specific files and directories\n    CSV_PATH = 'input_data.csv'\n    PDF_FORM_TEMPLATE = 'form_template.pdf'\n    OUTPUT_DIRECTORY = 'filled_forms'\n\n    # Process the CSV and generate PDFs\n    process_csv_to_pdfs(CSV_PATH, PDF_FORM_TEMPLATE, OUTPUT_DIRECTORY)\n\nif __name__ == '__main__':\n    main()\n```\n\n### Prerequisites and Setup\n\n1. Install required libraries:\n```bash\npip install pandas PyPDF2\n```\n\n2. Prepare your input files:\n- `input_data.csv`: A CSV file with columns matching the form fields\n- `form_template.pdf`: Your blank PDF form template\n\n### CSV Example (input_data.csv)\n```csv\nFirstName,LastName,Email,Phone\nJohn,Doe,john.doe@example.com,555-1234\nJane,Smith,jane.smith@example.com,555-5678\n```\n\n### Important Notes\n\n1. **Field Names**: The most critical part is matching the exact field names in your PDF form. \n   - Open your PDF form in a PDF editor\n   - Inspect the form field names\n   - Update the `form_data` dictionary in the script to match these names exactly\n\n2. **Error Handling**: This script provides basic functionality. For production use, add:\n   - Error handling for missing CSV columns\n   - Validation of input data\n   - Logging of errors/skipped records\n\n3. **Performance**: For very large CSVs (1000+ records), consider:\n   - Adding multiprocessing\n   - Implementing batch processing\n   - Adding progress bars (e.g., `tqdm`)\n\n### Troubleshooting\n\n- If form fields aren't filling:\n  - Verify exact field names in the PDF\n  - Ensure PDF is form-fillable\n  - Check for any PDF protection/restrictions\n\n### Advanced Customization\n\nFor more complex form filling, you might need:\n- Handle radio buttons/checkboxes\n- Deal with multiple pages\n- Add more sophisticated data transformation\n\nWould you like me to elaborate on any part of the solution or discuss advanced customization options?",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2313,
+    "output": 1213,
+    "total": 3526
+  },
+  "execution_time": 20.472435235977173,
+  "error": null,
+  "timestamp": "2026-01-01T19:16:10.594295"
+}

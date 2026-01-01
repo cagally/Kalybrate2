@@ -1,0 +1,21 @@
+{
+  "task_id": "writing-rules_hard_2",
+  "prompt": "I need a hookify rule that triggers when I mention 'deploy to production' in my prompts and shows me a comprehensive pre-deployment checklist with security, testing, and monitoring considerations.",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll use the skill guidance to create a comprehensive pre-deployment hookify rule that triggers when 'deploy to production' is mentioned. I'll save the file in the specified OUTPUT_DIR.\n\n```python\nimport os\n\n# Ensure OUTPUT_DIR exists\nos.makedirs(os.path.join(OUTPUT_DIR, '.claude'), exist_ok=True)\n\n# Full path for the hookify rule\nrule_path = os.path.join(OUTPUT_DIR, '.claude/hookify.pre-deployment-checklist.local.md')\n\n# Rule content with comprehensive pre-deployment checklist\nrule_content = '''---\nname: pre-deployment-checklist\nenabled: true\nevent: prompt\nconditions:\n  - field: user_prompt\n    operator: contains\n    pattern: deploy to production\n---\n\n## \ud83d\ude80 Pre-Deployment Production Checklist\n\n### \ud83d\udee1 Security Checks\n- [ ] All known security vulnerabilities patched\n- [ ] Latest dependency updates reviewed\n- [ ] API keys and secrets rotated\n- [ ] No hardcoded credentials in code\n- [ ] Verified input validation and sanitization\n- [ ] HTTPS/TLS configurations checked\n- [ ] Authentication and authorization mechanisms validated\n\n### \ud83e\uddea Testing Requirements\n- [ ] Unit tests coverage > 80%\n- [ ] Integration tests completed\n- [ ] End-to-end tests passed\n- [ ] Performance benchmark tests run\n- [ ] Load testing completed\n- [ ] All critical paths tested\n- [ ] Regression test suite passed\n- [ ] Tested on all supported environments/browsers\n\n### \ud83d\udcca Monitoring & Observability\n- [ ] Logging infrastructure configured\n- [ ] Error tracking set up (e.g., Sentry)\n- [ ] Performance monitoring enabled\n- [ ] Alerts and notifications configured\n- [ ] Dashboards created for key metrics\n- [ ] Rollback plan prepared\n\n### \ud83d\udd0d Code & Infrastructure Review\n- [ ] Peer code review completed\n- [ ] Architecture diagram updated\n- [ ] Documentation reflects current state\n- [ ] Database migration scripts validated\n- [ ] Capacity planning considerations addressed\n- [ ] Compliance requirements met\n\n### \ud83d\udca1 Release Readiness\n- [ ] Staging environment deployment successful\n- [ ] Feature flags configured\n- [ ] Communication plan for stakeholders\n- [ ] Scheduled maintenance window identified\n- [ ] Backup and disaster recovery verified\n\n### \ud83d\udea8 Final Checklist\n- [ ] Team consensus on deployment\n- [ ] Executive/Product Owner approval\n- [ ] On-call support prepared\n- [ ] Downtime communicated (if applicable)\n\n**\u26a0\ufe0f Reminder:** Carefully review each item before proceeding with production deployment.\n'''\n\n# Write the file\nwith open(rule_path, 'w') as f:\n    f.write(rule_content)\n\nprint(f\"Pre-deployment checklist hookify rule created at: {rule_path}\")\n```\n\nThis script does the following:\n\n1. Creates a comprehensive pre-deployment checklist as a Hookify rule\n2. Triggers when \"deploy to production\" is mentioned in a prompt\n3. Provides a detailed, structured checklist covering:\n   - Security considerations\n   - Testing requirements\n   - Monitoring and observability\n   - Code and infrastructure review\n   - Release readiness\n   - Final pre-deployment checks\n\nThe rule is saved in `.claude/hookify.pre-deployment-checklist.local.md` within the specified OUTPUT_DIR.\n\nWhen you mention \"deploy to production\" in a prompt, Claude will display this comprehensive checklist to ensure a thorough and safe deployment process.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2755,
+    "output": 827,
+    "total": 3582
+  },
+  "execution_time": 15.994081020355225,
+  "error": null,
+  "timestamp": "2026-01-01T09:07:00.105558"
+}

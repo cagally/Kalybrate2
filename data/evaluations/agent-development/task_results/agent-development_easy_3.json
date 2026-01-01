@@ -1,0 +1,27 @@
+{
+  "task_id": "agent-development_easy_3",
+  "prompt": "Can you explain when I should use an agent versus a regular command in my Claude plugin?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you understand the key differences between agents and commands in a Claude plugin, drawing from the Agent Development skill documentation.\n\n**Agents vs Commands: Core Differences**\n\n\ud83e\udd16 **Agents**\n- **Purpose:** Autonomous, multi-step task handling\n- **Trigger:** Automatically based on description conditions\n- **Behavior:** Proactive, can work independently\n- **Complexity:** Suitable for complex, multi-step processes\n- **Examples:**\n  - Code review agent\n  - Test generation agent\n  - Security analyzer\n  - Documentation generator\n\n**Key Agent Characteristics:**\n- Runs without direct user command\n- Has a predefined system prompt defining its role\n- Can recognize and initiate tasks based on context\n- Follows a structured analysis process\n- Typically handles broader, more complex tasks\n\n\ud83d\udda5\ufe0f **Commands**\n- **Purpose:** Direct, user-initiated actions\n- **Trigger:** Explicit user request or direct invocation\n- **Behavior:** Reactive, immediate execution\n- **Complexity:** Simpler, focused tasks\n- **Examples:**\n  - `generate-test`\n  - `create-documentation`\n  - `lint-code`\n  - `format-file`\n\n**Key Command Characteristics:**\n- Requires explicit user invocation\n- Performs a specific, immediate task\n- Typically has a more straightforward input-output relationship\n- Handles discrete, well-defined operations\n\n### When to Use an Agent\n\n**Choose an Agent When:**\n1. **Complex, Multi-Step Processes**\n   - Task requires multiple stages of analysis\n   - Needs adaptive, context-aware processing\n   - Example: Code review that involves multiple checks\n\n2. **Proactive Task Identification**\n   - Want system to recognize and initiate tasks automatically\n   - Need context-driven task triggering\n   - Example: Automatically detecting potential security vulnerabilities\n\n3. **Consistent Workflow Enforcement**\n   - Require a standardized approach to a type of task\n   - Need built-in quality standards and process\n   - Example: Generating test cases with specific coverage criteria\n\n4. **Domain-Specific Expertise**\n   - Task requires deep, specialized knowledge\n   - Benefit from a predefined expert persona\n   - Example: API documentation generation with domain-specific insights\n\n### When to Use a Command\n\n**Choose a Command When:**\n1. **Straightforward, Single-Action Tasks**\n   - Clear, immediate operation needed\n   - Simple input-output transformation\n   - Example: Formatting a single file\n\n2. **User-Initiated Specific Actions**\n   - User wants direct control\n   - Needs immediate, predictable result\n   - Example: Running a specific lint check\n\n3. **Low-Complexity Operations**\n   - Task doesn't require complex reasoning\n   - Minimal contextual understanding needed\n   - Example: Converting file format\n\n### Example Comparison\n\n**Code Review Scenario**\n\n\ud83e\udd16 **Agent Approach:**\n```markdown\n---\nname: code-reviewer\ndescription: Automatically review code for quality, security, and best practices...\n---\nYou are a comprehensive code reviewer that:\n1. Analyzes code structure\n2. Checks for potential security issues\n3. Evaluates coding standards\n4. Provides detailed, constructive feedback\n```\n\n\ud83d\udda5\ufe0f **Command Approach:**\n```python\ndef lint_code(file_path):\n    \"\"\"Run specific linting checks on a file\"\"\"\n    return run_linter(file_path)\n```\n\n### Decision Flowchart\n\n```\nIs task complex or multi-step? \n\u251c\u2500\u2500 Yes \u2192 Consider an Agent\n\u2502   \u2514\u2500\u2500 Needs autonomous detection?\n\u2502       \u251c\u2500\u2500 Yes \u2192 Definitely use Agent\n\u2502       \u2514\u2500\u2500 No \u2192 Could be Command or Agent\n\u2514\u2500\u2500 No \u2192 Use a Command\n    \u2514\u2500\u2500 Needs user control?\n        \u251c\u2500\u2500 Yes \u2192 Definitely use Command\n        \u2514\u2500\u2500 Simple transformation \u2192 Command\n```\n\n### Best Practices\n\n\u2705 **Agent Best Practices:**\n- Write clear, comprehensive system prompts\n- Define precise triggering conditions\n- Include multiple example scenarios\n- Set clear quality standards\n\n\u2705 **Command Best Practices:**\n- Keep functions focused and simple\n- Use clear, descriptive names\n- Handle basic error cases\n- Provide straightforward input/output\n\n### Recommendation\n\nStart with commands for simple tasks, and evolve to agents when you need more sophisticated, autonomous behavior. Agents shine in scenarios requiring complex reasoning, proactive task identification, and consistent workflow enforcement.\n\nWould you like me to elaborate on any part of this explanation or provide a concrete example of converting a command to an agent?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2879,
+    "output": 1047,
+    "total": 3926
+  },
+  "execution_time": 21.921663999557495,
+  "error": null,
+  "timestamp": "2026-01-01T17:42:23.403702"
+}

@@ -1,0 +1,21 @@
+{
+  "task_id": "writing-rules_easy_1",
+  "prompt": "I keep accidentally running dangerous rm commands. Can you help me set up a warning when I try to use rm -rf?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a Hookify rule to warn about dangerous `rm -rf` commands. I'll create a file in the specified output directory that will help prevent accidental data deletion.\n\nHere's the complete file I'll create:\n\n```python\nimport os\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Full path for the hookify rule file\nrule_file_path = os.path.join(OUTPUT_DIR, '.claude', 'hookify.dangerous-rm.local.md')\n\n# Ensure the .claude directory exists\nos.makedirs(os.path.dirname(rule_file_path), exist_ok=True)\n\n# Rule content\nrule_content = '''---\nname: warn-dangerous-rm\nenabled: true\nevent: bash\npattern: rm\\\\s+-rf\naction: warn\n---\n\n\u26a0\ufe0f **DANGEROUS COMMAND DETECTED!**\n\nYou are attempting to use `rm -rf`, which can delete files and directories recursively without confirmation.\n\n**Potential Risks:**\n- Unintended deletion of important files\n- Possible system-wide data loss\n- Irreversible file removal\n\n**Safer Alternatives:**\n- Use `rm -i` for interactive confirmation\n- Specify exact paths carefully\n- Use `trash` or `move to trash` commands\n- Double-check your command before executing\n\n**Recommended Safety Steps:**\n1. Verify the exact path you want to delete\n2. Use tab completion to avoid typos\n3. Consider using `-i` flag for interactive mode\n4. Create backups before major deletions\n'''\n\n# Write the file\nwith open(rule_file_path, 'w') as f:\n    f.write(rule_content)\n\nprint(f\"Hookify rule for dangerous rm commands created at: {rule_file_path}\")\n```\n\nThis script does the following:\n1. Creates a Hookify rule in the `.claude` directory\n2. Sets up a rule to warn when `rm -rf` is detected\n3. Provides a detailed warning message with risks and alternatives\n4. Uses the provided `OUTPUT_DIR` to ensure correct file placement\n\nThe rule will:\n- Trigger on any command containing `rm -rf`\n- Show a warning message explaining the risks\n- Allow the command to proceed (with `action: warn`)\n\nWould you like me to explain the rule or help you implement any additional safety measures?",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2741,
+    "output": 555,
+    "total": 3296
+  },
+  "execution_time": 11.699111938476562,
+  "error": null,
+  "timestamp": "2026-01-01T09:07:00.103942"
+}

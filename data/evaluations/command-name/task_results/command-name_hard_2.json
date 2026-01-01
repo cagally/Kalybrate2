@@ -1,0 +1,27 @@
+{
+  "task_id": "command-name_hard_2",
+  "prompt": "Cannot generate meaningful test tasks without actual skill description",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "You're right. I need more context about the specific skill or command to generate meaningful test tasks. Could you provide more details about the skill named \"command-name\"? Specifically, I'd like to know:\n\n1. What is the purpose of this skill/command?\n2. What inputs does it expect?\n3. What outputs or actions does it perform?\n4. Are there any specific requirements or constraints?\n\nWithout those details, I can't create meaningful test scenarios or test cases. If you'd like me to help develop test tasks, please share more information about the skill's functionality.",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 78,
+    "output": 128,
+    "total": 206
+  },
+  "execution_time": 3.262031078338623,
+  "error": null,
+  "timestamp": "2026-01-01T18:06:13.699000"
+}

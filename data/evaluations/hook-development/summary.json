@@ -1,0 +1,36 @@
+{
+  "skill_name": "hook-development",
+  "overall_score": 68.0,
+  "grade": "D",
+  "task_completion": {
+    "passed": 3,
+    "total": 9,
+    "rate": 60.0,
+    "verified_criteria": {
+      "passed": 9,
+      "total": 15
+    },
+    "verification_levels": {
+      "full": 9,
+      "partial": 0,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 4,
+    "losses": 1,
+    "ties": 0,
+    "win_rate": 80.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 6268,
+    "estimated_per_use": "$0.04"
+  },
+  "evaluated_at": "2026-01-01T18:59:04.685671",
+  "execution_time": 468.7697002887726,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

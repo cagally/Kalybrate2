@@ -1,0 +1,137 @@
+{
+  "skill_claims": [
+    "Configure Payload CMS projects with collections, fields, and hooks",
+    "Implement access control and security for Payload applications",
+    "Handle relationship queries and database operations",
+    "Debug validation errors and hook behavior",
+    "Set up authentication and file storage",
+    "Create custom API endpoints and plugins",
+    "Implement localization and versioning features",
+    "Handle transactions and background jobs"
+  ],
+  "tasks": [
+    {
+      "id": "payload_easy_1",
+      "prompt": "I'm starting a blog project and need a basic Payload CMS setup with a Posts collection that has title, content, and author fields. Can you help me create the configuration?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "has_type_annotations": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Configure Payload CMS projects with collections, fields, and hooks"
+    },
+    {
+      "id": "payload_easy_2",
+      "prompt": "My Payload CMS form keeps showing validation errors for required fields. How do I add proper validation to a text field that must be at least 10 characters long?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Debug validation errors and hook behavior"
+    },
+    {
+      "id": "payload_easy_3",
+      "prompt": "I want to automatically generate slugs from the title field in my Payload collection. What's the easiest way to set this up?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Configure Payload CMS projects with collections, fields, and hooks"
+    },
+    {
+      "id": "payload_medium_1",
+      "prompt": "I need to restrict blog posts so users can only see and edit their own posts, but admins can see everything. How do I implement this access control in Payload?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_type_annotations": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Implement access control and security for Payload applications"
+    },
+    {
+      "id": "payload_medium_2",
+      "prompt": "I'm building an e-commerce site and need to query products by category and also get the category details in the same request. The relationship isn't populating correctly - what am I doing wrong?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle relationship queries and database operations"
+    },
+    {
+      "id": "payload_medium_3",
+      "prompt": "I want to automatically set the author field to the current user and update the modifiedBy field whenever a post is saved. How do I create hooks for this?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_type_annotations": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Configure Payload CMS projects with collections, fields, and hooks"
+    },
+    {
+      "id": "payload_hard_1",
+      "prompt": "I'm building a multi-tenant SaaS application where each organization should only see their own data. I need complex access control that filters by organization membership and handles different user roles. Can you help me implement this securely?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_type_annotations": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Implement access control and security for Payload applications"
+    },
+    {
+      "id": "payload_hard_2",
+      "prompt": "I need to create a Payload plugin that adds audit logging to any collection. It should track all changes, store them in a separate audit collection, and provide a way to view the audit trail. The plugin should be reusable across projects.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_type_annotations": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Create custom API endpoints and plugins"
+    },
+    {
+      "id": "payload_hard_3",
+      "prompt": "I'm having issues with my Payload hooks creating infinite loops when updating related records, and I also need to handle database transactions properly when creating orders with multiple line items. How do I prevent the loops and ensure data consistency?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "has_type_annotations": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle transactions and background jobs"
+    }
+  ],
+  "quality_prompts": [
+    "Create a Payload CMS collection for a recipe website with ingredients, cooking time, difficulty level, and user ratings",
+    "I need to implement role-based permissions where editors can create drafts but only publishers can make content live",
+    "Set up file upload handling for a portfolio site where users can upload images with automatic resizing and cloud storage",
+    "Build a custom API endpoint that aggregates data from multiple collections and returns analytics for a dashboard",
+    "Configure a multilingual content management system where each post can have translations in multiple languages"
+  ],
+  "generated_at": "2026-01-01T19:05:50.348725",
+  "model": "claude-sonnet-4-20250514"
+}

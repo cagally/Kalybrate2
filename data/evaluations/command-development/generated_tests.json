@@ -1,0 +1,138 @@
+{
+  "skill_claims": [
+    "Create slash commands with YAML frontmatter configuration",
+    "Use dynamic arguments ($ARGUMENTS, $1, $2, etc.) in commands",
+    "Include file references using @ syntax in commands",
+    "Execute bash commands inline within commands for dynamic context",
+    "Organize commands with proper directory structure and namespacing",
+    "Configure command-specific settings (models, tools, descriptions)",
+    "Create interactive commands with user input patterns",
+    "Write commands as instructions FOR Claude rather than messages to users"
+  ],
+  "tasks": [
+    {
+      "id": "command-development_easy_1",
+      "prompt": "I need a simple slash command that reviews code for basic issues like syntax errors and style problems",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Create slash commands with YAML frontmatter configuration"
+    },
+    {
+      "id": "command-development_easy_2",
+      "prompt": "Create a command that takes a file path as an argument and analyzes that specific file",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Use dynamic arguments ($ARGUMENTS, $1, $2, etc.) in commands"
+    },
+    {
+      "id": "command-development_easy_3",
+      "prompt": "I want a slash command that automatically reads my package.json file and suggests dependency updates",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Include file references using @ syntax in commands"
+    },
+    {
+      "id": "command-development_medium_1",
+      "prompt": "Build a deployment command that takes an environment name and service name, then checks git status before proceeding",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Execute bash commands inline within commands for dynamic context"
+    },
+    {
+      "id": "command-development_medium_2",
+      "prompt": "Create a command structure for a team project with separate commands for frontend, backend, and database operations",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Organize commands with proper directory structure and namespacing"
+    },
+    {
+      "id": "command-development_medium_3",
+      "prompt": "I need a pull request review command that uses the fast model for quick checks but allows specific tools for reading and git operations",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Configure command-specific settings (models, tools, descriptions)"
+    },
+    {
+      "id": "command-development_hard_1",
+      "prompt": "Design a comprehensive testing command that takes a test type, target files, and coverage threshold, then runs git status and environment checks before executing",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Use dynamic arguments ($ARGUMENTS, $1, $2, etc.) in commands and Execute bash commands inline within commands for dynamic context"
+    },
+    {
+      "id": "command-development_hard_2",
+      "prompt": "Create a complete command organization system for a microservices project with commands for each service, shared utilities, and deployment workflows",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Organize commands with proper directory structure and namespacing"
+    },
+    {
+      "id": "command-development_hard_3",
+      "prompt": "Build a security audit command that dynamically reads multiple config files, checks current git branch and status, and provides different analysis based on the environment argument passed",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Include file references using @ syntax in commands and Execute bash commands inline within commands for dynamic context"
+    }
+  ],
+  "quality_prompts": [
+    "Create a slash command that reviews TypeScript code for type safety issues and takes a file path as an argument",
+    "I need a command that automatically reads my Docker configuration files and suggests optimizations",
+    "Build a command that takes a branch name and environment, then checks git status before suggesting deployment steps",
+    "Create a testing command structure for a React project with separate commands for unit tests, integration tests, and e2e tests",
+    "Design a code review command that uses different AI models based on the complexity of the review requested"
+  ],
+  "generated_at": "2026-01-01T17:58:59.415355",
+  "model": "claude-sonnet-4-20250514"
+}

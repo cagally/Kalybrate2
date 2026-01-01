@@ -1,0 +1,29 @@
+{
+  "task_id": "typescript-write_easy_2",
+  "prompt": "Create a JavaScript utility function that checks if an email address is valid using a regular expression.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a TypeScript/JavaScript function to validate email addresses using a robust regular expression. I'll provide a comprehensive implementation with validation and comments.\n\n```typescript\n/**\n * Validates an email address using a comprehensive regular expression.\n * \n * @param {string} email - The email address to validate\n * @returns {boolean} - True if the email is valid, false otherwise\n */\nexport function isValidEmail(email: string): boolean {\n  // Regular expression for email validation\n  // This regex covers most common email formats:\n  // - Allows alphanumeric characters, some special chars in local part\n  // - Requires @ symbol\n  // - Supports multiple domain levels\n  // - Allows common TLDs\n  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$/;\n\n  // Check if email is undefined, null, or empty\n  if (!email) return false;\n\n  // Trim whitespace and convert to lowercase for consistent checking\n  const trimmedEmail = email.trim().toLowerCase();\n\n  // Test against the regex pattern\n  return emailRegex.test(trimmedEmail);\n}\n\n// Example usage and testing\nfunction demonstrateEmailValidation() {\n  const validEmails = [\n    'user@example.com',\n    'firstname.lastname@domain.co.uk',\n    'user+tag@example.org',\n    'user123@domain-name.com'\n  ];\n\n  const invalidEmails = [\n    'invalid-email',\n    '@missinglocal.com',\n    'missing-domain@',\n    'spaces not allowed@example.com'\n  ];\n\n  console.log('Valid Email Tests:');\n  validEmails.forEach(email => {\n    console.log(`${email}: ${isValidEmail(email)}`);\n  });\n\n  console.log('\\nInvalid Email Tests:');\n  invalidEmails.forEach(email => {\n    console.log(`${email}: ${isValidEmail(email)}`);\n  });\n}\n\n// Uncomment to run demonstration\n// demonstrateEmailValidation();\n```\n\nThis implementation offers several key features:\n\n1. TypeScript type safety with a `string` input and `boolean` return type\n2. Comprehensive regular expression for email validation\n3. Handling of edge cases like `null`, `undefined`, and whitespace\n4. Case-insensitive validation\n5. Demonstration function to show usage\n\nKey regex components:\n- `^` and `$` ensure the entire string matches\n- Allows most common characters in email local part\n- Requires `@` symbol\n- Supports multiple domain levels\n- Flexible TLD support\n\nUsage example:\n```typescript\nconsole.log(isValidEmail('user@example.com')); // true\nconsole.log(isValidEmail('invalid-email'));    // false\n```\n\nNote: While this regex covers most common email formats, 100% email validation requires more complex logic. For critical applications, consider using dedicated email validation libraries or server-side validation.\n\nWould you like me to elaborate on any part of the implementation?",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 154,
+    "output": 756,
+    "total": 910
+  },
+  "execution_time": 13.196916103363037,
+  "error": null,
+  "timestamp": "2026-01-01T17:10:16.064344"
+}

@@ -1,0 +1,21 @@
+{
+  "task_id": "writing-rules_medium_2",
+  "prompt": "Set up a completion checklist that reminds me to run tests and update documentation whenever I finish working on a task.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a Hookify rule for a completion checklist. I'll write the rule and save it using the specified OUTPUT_DIR.\n\n```python\nimport os\n\n# Ensure the .claude directory exists\nclaude_dir = os.path.join(OUTPUT_DIR, '.claude')\nos.makedirs(claude_dir, exist_ok=True)\n\n# Create the hookify rule file for stop events\nrule_content = '''---\nname: task-completion-checklist\nenabled: true\nevent: stop\npattern: .*\n---\n\n## Task Completion Checklist\n\nBefore concluding this task, please verify:\n\n### Code Quality\n- [ ] All tests have been run and passed\n  - Unit tests\n  - Integration tests\n  - Any relevant end-to-end tests\n\n### Documentation\n- [ ] Code comments are up-to-date\n- [ ] README.md has been updated if necessary\n- [ ] Inline documentation reflects current implementation\n- [ ] API documentation (if applicable) is current\n\n### Code Review\n- [ ] Code has been self-reviewed\n- [ ] Potentially complex sections are well-explained\n- [ ] Code follows project's style guidelines\n\n### Version Control\n- [ ] Commits are atomic and well-described\n- [ ] No unnecessary debug code remains\n- [ ] Sensitive information is not accidentally committed\n\n### Performance & Security\n- [ ] Performance implications considered\n- [ ] Basic security checks performed\n- [ ] No obvious security anti-patterns present\n\n**Recommendation:** Use this checklist as a final review before declaring the task complete.\n'''\n\n# Save the rule file\nrule_path = os.path.join(claude_dir, 'hookify.task-completion.local.md')\nwith open(rule_path, 'w') as f:\n    f.write(rule_content)\n\nprint(f\"Completion checklist rule created at: {rule_path}\")\n```\n\nThis script does the following:\n\n1. Creates a `.claude` directory in the specified OUTPUT_DIR\n2. Writes a comprehensive task completion checklist as a Hookify rule\n3. Saves the rule as `hookify.task-completion.local.md`\n4. Uses the `stop` event to trigger the checklist whenever a task is about to conclude\n5. Includes checklists for:\n   - Code quality and testing\n   - Documentation updates\n   - Code review\n   - Version control best practices\n   - Performance and security considerations\n\nThe checklist is designed to be a gentle reminder of important steps to take before finishing a task, helping maintain code quality and consistency.\n\nWhen you're about to finish a task, this rule will display the checklist, prompting you to review and confirm these important aspects.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2740,
+    "output": 609,
+    "total": 3349
+  },
+  "execution_time": 11.571503162384033,
+  "error": null,
+  "timestamp": "2026-01-01T09:07:00.104884"
+}

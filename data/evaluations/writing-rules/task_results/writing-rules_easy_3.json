@@ -1,0 +1,21 @@
+{
+  "task_id": "writing-rules_easy_3",
+  "prompt": "Create a simple hookify rule that warns me when I use console.log in my JavaScript files.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a Hookify rule that warns about console.log in JavaScript files and save it using the specified OUTPUT_DIR.\n\nHere's the Python code to create the Hookify rule:\n\n```python\nimport os\n\n# Ensure the .claude directory exists\nclaude_dir = os.path.join(OUTPUT_DIR, '.claude')\nos.makedirs(claude_dir, exist_ok=True)\n\n# Full path for the Hookify rule file\nrule_path = os.path.join(claude_dir, 'hookify.console-log-warning.local.md')\n\n# Rule content\nrule_content = '''---\nname: console-log-warning\nenabled: true\nevent: file\nconditions:\n  - field: file_path\n    operator: ends_with\n    pattern: .js\n  - field: new_text\n    operator: contains\n    pattern: console.log(\n---\n\n\u26a0\ufe0f **Console.log Detected in JavaScript File**\n\nYou are adding a `console.log()` statement to your code. \n\n**Best Practices:**\n- Remove or comment out debug logs before committing\n- Use proper logging libraries for production\n- Consider using environment-based logging\n\n**Suggested Alternatives:**\n- Use `debug` or `winston` for structured logging\n- Add conditional logging with environment checks\n- Remove or comment out before pushing to production\n'''\n\n# Write the rule file\nwith open(rule_path, 'w') as f:\n    f.write(rule_content)\n\nprint(f\"Hookify rule created at {rule_path}\")\n```\n\nThis script does the following:\n1. Creates a `.claude` directory in the specified OUTPUT_DIR\n2. Creates a Hookify rule file named `hookify.console-log-warning.local.md`\n3. Writes a rule that:\n   - Triggers on JavaScript files\n   - Checks for `console.log(` in the new text\n   - Provides a helpful warning message with best practices\n\nThe rule will warn you whenever you add a `console.log()` statement to a JavaScript file, helping maintain clean code practices.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2736,
+    "output": 483,
+    "total": 3219
+  },
+  "execution_time": 9.110193252563477,
+  "error": null,
+  "timestamp": "2026-01-01T09:07:00.104483"
+}

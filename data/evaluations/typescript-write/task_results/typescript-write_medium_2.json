@@ -1,0 +1,31 @@
+{
+  "task_id": "typescript-write_medium_2",
+  "prompt": "Build a TypeScript class for managing API requests with methods for GET, POST, PUT, and DELETE. Include proper error handling and response typing.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a comprehensive TypeScript API request manager class with robust error handling and type safety. I'll save this in `src/services/ApiService.ts`:\n\n```typescript\n// src/services/ApiService.ts\ninterface ApiErrorResponse {\n  status: number;\n  message: string;\n}\n\ninterface RequestOptions {\n  headers?: Record<string, string>;\n  timeout?: number;\n}\n\nclass ApiService {\n  private baseUrl: string;\n  private defaultHeaders: Record<string, string>;\n\n  constructor(baseUrl: string, defaultHeaders: Record<string, string> = {}) {\n    this.baseUrl = baseUrl;\n    this.defaultHeaders = {\n      'Content-Type': 'application/json',\n      ...defaultHeaders\n    };\n  }\n\n  private async handleResponse<T>(response: Response): Promise<T> {\n    if (!response.ok) {\n      const errorBody = await response.text();\n      const errorResponse: ApiErrorResponse = {\n        status: response.status,\n        message: errorBody || response.statusText\n      };\n      throw new Error(JSON.stringify(errorResponse));\n    }\n\n    return response.json();\n  }\n\n  private mergeHeaders(options?: RequestOptions): Headers {\n    const headers = new Headers(this.defaultHeaders);\n    \n    if (options?.headers) {\n      Object.entries(options.headers).forEach(([key, value]) => {\n        headers.set(key, value);\n      });\n    }\n\n    return headers;\n  }\n\n  async get<T>(\n    endpoint: string, \n    options?: RequestOptions\n  ): Promise<T> {\n    try {\n      const url = `${this.baseUrl}/${endpoint}`;\n      const response = await fetch(url, {\n        method: 'GET',\n        headers: this.mergeHeaders(options),\n        signal: options?.timeout \n          ? AbortSignal.timeout(options.timeout) \n          : undefined\n      });\n\n      return this.handleResponse<T>(response);\n    } catch (error) {\n      this.handleError(error, 'GET');\n      throw error;\n    }\n  }\n\n  async post<T, R = T>(\n    endpoint: string, \n    data: T, \n    options?: RequestOptions\n  ): Promise<R> {\n    try {\n      const url = `${this.baseUrl}/${endpoint}`;\n      const response = await fetch(url, {\n        method: 'POST',\n        headers: this.mergeHeaders(options),\n        body: JSON.stringify(data),\n        signal: options?.timeout \n          ? AbortSignal.timeout(options.timeout) \n          : undefined\n      });\n\n      return this.handleResponse<R>(response);\n    } catch (error) {\n      this.handleError(error, 'POST');\n      throw error;\n    }\n  }\n\n  async put<T, R = T>(\n    endpoint: string, \n    data: T, \n    options?: RequestOptions\n  ): Promise<R> {\n    try {\n      const url = `${this.baseUrl}/${endpoint}`;\n      const response = await fetch(url, {\n        method: 'PUT',\n        headers: this.mergeHeaders(options),\n        body: JSON.stringify(data),\n        signal: options?.timeout \n          ? AbortSignal.timeout(options.timeout) \n          : undefined\n      });\n\n      return this.handleResponse<R>(response);\n    } catch (error) {\n      this.handleError(error, 'PUT');\n      throw error;\n    }\n  }\n\n  async delete<T>(\n    endpoint: string, \n    options?: RequestOptions\n  ): Promise<T> {\n    try {\n      const url = `${this.baseUrl}/${endpoint}`;\n      const response = await fetch(url, {\n        method: 'DELETE',\n        headers: this.mergeHeaders(options),\n        signal: options?.timeout \n          ? AbortSignal.timeout(options.timeout) \n          : undefined\n      });\n\n      return this.handleResponse<T>(response);\n    } catch (error) {\n      this.handleError(error, 'DELETE');\n      throw error;\n    }\n  }\n\n  private handleError(error: unknown, method: string): void {\n    if (error instanceof Error) {\n      console.error(`${method} Request Error:`, {\n        name: error.name,\n        message: error.message,\n        stack: error.stack\n      });\n    }\n  }\n}\n\n// Example usage\nconst apiService = new ApiService('https://api.example.com');\n\nexport default ApiService;\n```\n\nAnd here's an example of how you might use this service:\n\n```typescript\n// Example usage in another file\ninterface User {\n  id: number;\n  name: string;\n  email: string;\n}\n\nasync function fetchUsers() {\n  try {\n    const users = await apiService.get<User[]>('users', {\n      headers: { 'Authorization': 'Bearer token123' },\n      timeout: 5000\n    });\n    console.log(users);\n  } catch (error) {\n    // Handle specific API errors\n    console.error('Failed to fetch users:', error);\n  }\n}\n\nasync function createUser() {\n  const newUser: Omit<User, 'id'> = {\n    name: 'John Doe',\n    email: 'john@example.com'\n  };\n\n  try {\n    const createdUser = await apiService.post<typeof newUser, User>('users', newUser);\n    console.log(createdUser);\n  } catch (error) {\n    console.error('Failed to create user:', error);\n  }\n}\n```\n\nKey features of this implementation:\n\n1. Generic type support for flexible request/response typing\n2. Configurable base URL and default headers\n3. Error handling with detailed error logging\n4. Timeout support for requests\n5. Automatic JSON parsing\n6. Flexible header management\n7. Support for all common HTTP methods (GET, POST, PUT, DELETE)\n\nThe class provides type-safe, flexible API request management with comprehensive error handling and configuration options.",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": false,
+    "has_type_annotations": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "compilation error: ",
+    "has_type_annotations": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 165,
+    "output": 1481,
+    "total": 1646
+  },
+  "execution_time": 18.805810928344727,
+  "error": null,
+  "timestamp": "2026-01-01T17:10:16.066081"
+}

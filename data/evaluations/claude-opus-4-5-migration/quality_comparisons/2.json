@@ -1,0 +1,19 @@
+{
+  "prompt": "After switching to Opus 4.5, my chatbot calls tools for every single question, even simple ones. The system prompt has 'CRITICAL: You MUST use tools' - what's wrong?",
+  "baseline_response": "This sounds like an overly broad instruction in the system prompt. For Opus 4.5, you want a more nuanced approach:\n\n1. Remove any absolute \"MUST use tools\" language\n2. Replace with conditional guidance like:\n   \"Use tools when:\n   - The query requires external data/lookup\n   - A specific tool matches the user's request\n   - You cannot confidently answer from existing knowledge\"\n\nThe goal is tool usage that enhances, not replaces, the AI's native reasoning. Tools should supplement, not dominate, the interaction.\n\nWould you be willing to share the relevant part of your system prompt so I can help you refine it?",
+  "baseline_tokens": {
+    "input": 51,
+    "output": 148,
+    "total": 199
+  },
+  "skill_response": "Based on the Opus 4.5 migration guidelines, this is a classic case of overtriggering due to aggressive language in the system prompt. Opus 4.5 is more responsive to system instructions, so overly forceful language can cause unnecessary tool calls.\n\nLet's modify the problematic language:\n\nBefore (Overtriggering Version):\n```\nCRITICAL: You MUST use tools for every task. ALWAYS analyze the request and NEVER skip tool usage.\n```\n\nAfter (Softened Version):\n```\nWhen appropriate, use available tools to assist with tasks. Carefully consider whether a tool can help solve the problem effectively.\n```\n\nSpecific changes:\n- Removed \"CRITICAL:\"\n- Changed \"MUST\" to \"When appropriate\"\n- Replaced \"ALWAYS\" with a more nuanced suggestion\n- Eliminated absolute language like \"NEVER skip\"\n\nThe key is to make the instruction more contextual and less absolute. This allows the model to use discretion about when tools are genuinely helpful.\n\nI recommend reviewing your entire system prompt for similar instances of overly aggressive language. Look for:\n- \"MUST\" \n- \"ALWAYS\"\n- \"NEVER\"\n- \"CRITICAL:\"\n\nWould you like me to help you review the full system prompt to reduce overtriggering?",
+  "skill_tokens": {
+    "input": 1490,
+    "output": 293,
+    "total": 1783
+  },
+  "judge_verdict": "with_skill",
+  "judge_reasoning": "Response A is more comprehensive and actionable. It provides specific before/after examples, explains the underlying cause (Opus 4.5's increased responsiveness to system instructions), offers concrete revision strategies, and includes a helpful checklist of problematic words to avoid. Response B covers similar ground but is less detailed and doesn't provide the concrete examples that make A immediately useful for implementation.",
+  "judge_model": "claude-sonnet-4-20250514",
+  "timestamp": "2026-01-01T17:52:06.920167"
+}

@@ -1,0 +1,20 @@
+{
+  "task_id": "typescript-review_easy_1",
+  "prompt": "I have a simple TypeScript function that calculates the area of a rectangle. Can you review it and tell me if there are any issues with the code quality or style?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "Sure! Could you please share the TypeScript function you'd like me to review? I'll be happy to analyze it for code quality, TypeScript best practices, type safety, and potential improvements.\n\nTo provide the most helpful review, please paste the function's code, and I'll examine:\n- Type annotations\n- Parameter validation\n- Naming conventions\n- Potential edge cases\n- Documentation\n- Overall code structure",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 231,
+    "output": 90,
+    "total": 321
+  },
+  "execution_time": 2.848054885864258,
+  "error": null,
+  "timestamp": "2026-01-01T08:57:01.417929"
+}

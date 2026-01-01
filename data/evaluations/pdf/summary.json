@@ -1,0 +1,36 @@
+{
+  "skill_name": "pdf",
+  "overall_score": 92.0,
+  "grade": "A",
+  "task_completion": {
+    "passed": 9,
+    "total": 9,
+    "rate": 100.0,
+    "verified_criteria": {
+      "passed": 18,
+      "total": 18
+    },
+    "verification_levels": {
+      "full": 9,
+      "partial": 0,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 4,
+    "losses": 1,
+    "ties": 0,
+    "win_rate": 80.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 3298,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T19:18:20.739252",
+  "execution_time": 274.2285270690918,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

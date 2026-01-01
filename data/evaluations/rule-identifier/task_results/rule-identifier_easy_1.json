@@ -1,0 +1,27 @@
+{
+  "task_id": "rule-identifier_easy_1",
+  "prompt": "Can you help me understand what this skill does?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "Let me break down the structure of the skill definition:\n\n1. `name: rule-identifier`\n   - This is the name of the skill/rule\n\n2. `enabled: true`\n   - Indicates the skill is active and can be used\n\n3. `event: bash|file|stop|prompt|all`\n   - Specifies when the skill should be triggered:\n     - `bash`: Triggered during bash/shell command interactions\n     - `file`: Triggered when files are being created or modified\n     - `stop`: Triggered when a process or operation is stopping\n     - `prompt`: Triggered during user prompts\n     - `all`: Triggered in all scenarios\n\n4. `pattern: regex-pattern-here`\n   - A regular expression pattern that determines when the skill is activated\n   - When the pattern matches the current context, the skill triggers\n\n5. The text after the last `---` is a message or instruction that will be shown or followed when the skill is triggered\n\nIn essence, this is a flexible skill/rule system that allows for context-specific actions or warnings based on regex pattern matching across different types of events.\n\nWould you like me to provide a concrete example of how such a skill might be used?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 115,
+    "output": 271,
+    "total": 386
+  },
+  "execution_time": 5.856119155883789,
+  "error": null,
+  "timestamp": "2026-01-01T19:20:31.656905"
+}

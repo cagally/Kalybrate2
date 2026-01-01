@@ -1,0 +1,27 @@
+{
+  "task_id": "configured-agent_easy_3",
+  "prompt": "There should be some YAML configuration at the top of my plugin file. Can you extract and parse those settings for me?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll demonstrate how to extract and parse YAML frontmatter from a markdown file. Here's an example of how I would approach this:\n\n```python\nimport yaml\n\ndef parse_frontmatter(file_path):\n    try:\n        # Read the entire file content\n        with open(file_path, 'r') as file:\n            content = file.read()\n        \n        # Split the content to extract frontmatter\n        parts = content.split('---')\n        \n        # Check if frontmatter exists (should be between first two '---')\n        if len(parts) >= 3:\n            # Parse the YAML frontmatter\n            frontmatter = yaml.safe_load(parts[1])\n            return frontmatter\n        \n        return {}\n    \n    except Exception as e:\n        print(f\"Error parsing frontmatter: {e}\")\n        return {}\n\n# Example usage\nfile_path = '.claude/my-plugin.local.md'\nsettings = parse_frontmatter(file_path)\nprint(settings)\n```\n\nThis script does several key things:\n1. Uses PyYAML to safely parse YAML\n2. Splits the file content around '---' delimiters\n3. Extracts and parses the YAML frontmatter\n4. Handles potential errors\n5. Returns the parsed settings as a dictionary\n\nWould you like me to elaborate on any part of this approach?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 158,
+    "output": 328,
+    "total": 486
+  },
+  "execution_time": 6.129401922225952,
+  "error": null,
+  "timestamp": "2026-01-01T18:08:49.983495"
+}

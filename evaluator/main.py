@@ -256,6 +256,10 @@ def run_evaluation(
                 model=task_runner.model,
                 response=result.response_text,
                 criteria_results=result.criteria_results,
+                verification_notes=result.verification_notes,
+                verification_level=result.verification_level.value,
+                verified_criteria_passed=result.verified_criteria_passed,
+                verified_criteria_total=result.verified_criteria_total,
                 passed=result.passed,
                 input_tokens=result.input_tokens,
                 output_tokens=result.output_tokens,
@@ -348,6 +352,15 @@ def run_evaluation(
 
     # Save results
     if save_results:
+        # Calculate verification stats for summary
+        verified_passed = sum(r.verified_criteria_passed for r in task_results)
+        verified_total = sum(r.verified_criteria_total for r in task_results)
+        verification_summary = {
+            "full": sum(1 for r in task_results if r.verification_level.value == "full"),
+            "partial": sum(1 for r in task_results if r.verification_level.value == "partial"),
+            "unverified": sum(1 for r in task_results if r.verification_level.value == "unverified")
+        }
+
         # Save summary and update leaderboard
         summary = data_logger.save_summary(
             skill_name=skill_name,
@@ -356,6 +369,9 @@ def run_evaluation(
             tasks_passed=skill_score.tasks_passed,
             tasks_total=skill_score.total_tasks,
             task_pass_rate=skill_score.task_pass_rate,
+            verified_criteria_passed=verified_passed,
+            verified_criteria_total=verified_total,
+            verification_summary=verification_summary,
             quality_wins=skill_score.quality_wins,
             quality_losses=skill_score.quality_losses,
             quality_ties=skill_score.quality_ties,

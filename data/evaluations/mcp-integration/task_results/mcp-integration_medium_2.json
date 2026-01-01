@@ -1,0 +1,27 @@
+{
+  "task_id": "mcp-integration_medium_2",
+  "prompt": "I need to set up a WebSocket MCP server connection for real-time data streaming in my plugin. Can you show me the configuration?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you set up a WebSocket MCP server connection for real-time data streaming. I'll provide a comprehensive example that demonstrates WebSocket MCP server configuration.\n\nI'll create two files:\n1. `.mcp.json` for WebSocket server configuration\n2. A sample README to document the configuration\n\nLet's start with the `.mcp.json`:\n\n```json\n{\n  \"realtime_streaming\": {\n    \"type\": \"ws\",\n    \"url\": \"wss://streaming.example.com/mcp\",\n    \"headers\": {\n      \"Authorization\": \"Bearer ${STREAMING_API_TOKEN}\",\n      \"X-Plugin-Version\": \"1.0.0\"\n    },\n    \"reconnect\": {\n      \"maxAttempts\": 5,\n      \"initialDelay\": 1000,\n      \"backoff\": \"exponential\"\n    }\n  }\n}\n```\n\nAnd here's a comprehensive README to accompany the configuration:\n\n```markdown\n# Real-Time Data Streaming Plugin\n\n## MCP WebSocket Integration\n\nThis plugin uses a WebSocket-based MCP server for real-time data streaming.\n\n### Configuration Requirements\n\n#### Environment Variables\n\nYou must set the following environment variable:\n- `STREAMING_API_TOKEN`: Authentication token for the streaming service\n\n#### Example Setup\n\n```bash\nexport STREAMING_API_TOKEN=\"your-secret-token-here\"\n```\n\n### WebSocket Connection Details\n\n- **Server URL**: `wss://streaming.example.com/mcp`\n- **Authentication**: Bearer token\n- **Reconnection Strategy**: \n  - Max retry attempts: 5\n  - Initial reconnect delay: 1 second\n  - Backoff type: Exponential\n\n### Supported Tools\n\nThe WebSocket MCP server provides the following tools:\n\n- `mcp__plugin_realtime_streaming__subscribe_channel`\n- `mcp__plugin_realtime_streaming__unsubscribe_channel`\n- `mcp__plugin_realtime_streaming__get_recent_messages`\n\n### Debugging\n\nTo troubleshoot connection issues:\n1. Verify `STREAMING_API_TOKEN` is correctly set\n2. Check network connectivity\n3. Run Claude with debug mode: `claude --debug`\n\n### Security Considerations\n\n- Always use WSS (WebSocket Secure)\n- Never commit tokens to version control\n- Rotate API tokens periodically\n```\n\nAdditionally, I'll provide a sample command that might use this MCP WebSocket server:\n\n```markdown\n# stream-data.md\n---\nallowed-tools: [\n  \"mcp__plugin_realtime_streaming__subscribe_channel\",\n  \"mcp__plugin_realtime_streaming__get_recent_messages\"\n]\n---\n\n# Real-Time Data Stream Analyzer\n\n## Process\n1. Subscribe to data channel\n2. Retrieve recent messages\n3. Analyze streaming data\n```\n\nKey aspects of this WebSocket MCP configuration:\n\n1. **Secure Connection**: Uses `wss://` for encrypted WebSocket\n2. **Authentication**: Uses bearer token via environment variable\n3. **Reconnection Strategy**: Configurable retry mechanism\n4. **Flexible Headers**: Allows custom headers (e.g., version tracking)\n5. **Comprehensive Documentation**: README explains setup and usage\n\nBest Practices Demonstrated:\n- \u2705 Secure connection (WSS)\n- \u2705 Token via environment variable\n- \u2705 Explicit reconnection configuration\n- \u2705 Detailed documentation\n- \u2705 Pre-allowed specific tools\n\nRecommendations:\n- Replace `wss://streaming.example.com/mcp` with your actual WebSocket endpoint\n- Set `STREAMING_API_TOKEN` securely\n- Test connection thoroughly before deployment\n\nWould you like me to elaborate on any part of the WebSocket MCP server configuration?",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3694,
+    "output": 876,
+    "total": 4570
+  },
+  "execution_time": 16.28523015975952,
+  "error": null,
+  "timestamp": "2026-01-01T19:02:31.382576"
+}

@@ -1,0 +1,27 @@
+{
+  "task_id": "mcp-integration_easy_2",
+  "prompt": "What's the difference between using .mcp.json versus putting MCP configuration directly in plugin.json?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "Great question! Let me break down the key differences between using `.mcp.json` and embedding MCP configuration directly in `plugin.json`:\n\n### .mcp.json Approach (Recommended)\n\n**Advantages:**\n- Better separation of concerns\n- More modular and maintainable\n- Easier to manage complex MCP configurations\n- Allows multiple MCP server configurations\n- Can be version controlled separately\n- Cleaner plugin.json file\n\n**Example .mcp.json:**\n```json\n{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  },\n  \"api-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n    \"type\": \"http\",\n    \"url\": \"https://api.example.com\"\n  }\n}\n```\n\n### plugin.json Approach\n\n**Advantages:**\n- All configuration in one file\n- Simpler for very basic plugins\n- Slightly less file management\n- Good for plugins with a single MCP server\n\n**Example plugin.json:**\n```json\n{\n  \"name\": \"my-plugin\",\n  \"version\": \"1.0.0\",\n  \"mcpServers\": {\n    \"plugin-api\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n      \"args\": [\"--port\", \"8080\"]\n    }\n  }\n}\n```\n\n### Recommended Usage\n\n**Use .mcp.json When:**\n- Multiple MCP servers are needed\n- Complex server configurations\n- Separating configuration is helpful\n- Plugin has extensive external service integrations\n\n**Use plugin.json When:**\n- Single, simple MCP server\n- Minimal configuration required\n- Prefer all config in one place\n- Plugin is lightweight\n\n### Practical Recommendations\n\n1. For most plugins, prefer `.mcp.json`\n2. Keep configurations clean and well-documented\n3. Use environment variable substitution\n4. Always use `${CLAUDE_PLUGIN_ROOT}` for paths\n5. Document required environment variables\n\n### Comparison Table\n\n| Feature | .mcp.json | plugin.json |\n|---------|-----------|-------------|\n| Multiple Servers | \u2705 Easy | \u274c Limited |\n| Complexity Support | High | Low |\n| File Separation | \u2705 Good | \u274c Mixed |\n| Maintainability | High | Moderate |\n| Recommended For | Complex Plugins | Simple Plugins |\n\nThe key is choosing the approach that makes your plugin's configuration most clear and maintainable. For most non-trivial plugins, `.mcp.json` provides more flexibility and cleaner organization.",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3676,
+    "output": 672,
+    "total": 4348
+  },
+  "execution_time": 12.843410968780518,
+  "error": null,
+  "timestamp": "2026-01-01T19:02:31.380463"
+}

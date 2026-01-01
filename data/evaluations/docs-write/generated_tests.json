@@ -1,0 +1,157 @@
+{
+  "skill_claims": [
+    "Write documentation following Metabase's conversational, clear, and user-focused style",
+    "Create or edit documentation files (markdown, MDX, etc.)",
+    "Match complexity to audience and get users to answers fast",
+    "Use proper formatting with headings that state points clearly",
+    "Apply consistent style guidelines (American spelling, serial commas, proper link formatting)",
+    "Structure content with clear instructions and common patterns",
+    "Format files with prettier for consistency"
+  ],
+  "tasks": [
+    {
+      "id": "docs-write_easy_1",
+      "prompt": "I need a quick README file for our new API endpoint that lets users get customer data. Just the basics - what it does and how to call it.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "min_paragraphs": 2
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Create or edit documentation files (markdown, MDX, etc.)"
+    },
+    {
+      "id": "docs-write_easy_2",
+      "prompt": "Can you write a simple installation guide for our dashboard tool? Users just need to know how to install it via npm and run the basic setup command.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "code_extracted": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Structure content with clear instructions and common patterns"
+    },
+    {
+      "id": "docs-write_easy_3",
+      "prompt": "I need documentation for our new 'Export Data' button in the UI. Just explain what it does and where users can find their exported files.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Write documentation following Metabase's conversational, clear, and user-focused style"
+    },
+    {
+      "id": "docs-write_medium_1",
+      "prompt": "We're launching a new authentication system that supports both SAML and OAuth. I need comprehensive documentation that covers setup for both methods, including common troubleshooting steps.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "min_paragraphs": 8,
+        "code_extracted": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Match complexity to audience and get users to answers fast"
+    },
+    {
+      "id": "docs-write_medium_2",
+      "prompt": "Create an API reference guide for our analytics endpoints. We have 5 different endpoints for retrieving metrics, filtering data, and generating reports. Include request/response examples and error codes.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "has_table": true,
+        "code_extracted": true,
+        "min_paragraphs": 10
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Use proper formatting with headings that state points clearly"
+    },
+    {
+      "id": "docs-write_medium_3",
+      "prompt": "I need a migration guide for users upgrading from version 2.x to 3.x of our platform. Cover database changes, config file updates, and new environment variables they need to set.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "code_extracted": true,
+        "min_paragraphs": 6
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Structure content with clear instructions and common patterns"
+    },
+    {
+      "id": "docs-write_hard_1",
+      "prompt": "We need complete developer documentation for our new plugin architecture. Cover the plugin API, lifecycle hooks, configuration options, testing strategies, and include a full tutorial for building a sample plugin from scratch.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "code_extracted": true,
+        "has_table": true,
+        "min_paragraphs": 15
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Write documentation following Metabase's conversational, clear, and user-focused style"
+    },
+    {
+      "id": "docs-write_hard_2",
+      "prompt": "Create comprehensive admin documentation for our enterprise deployment options. Cover Docker, Kubernetes, bare metal installations, load balancing, SSL configuration, backup strategies, monitoring setup, and security hardening guidelines.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "code_extracted": true,
+        "has_table": true,
+        "min_paragraphs": 20
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Match complexity to audience and get users to answers fast"
+    },
+    {
+      "id": "docs-write_hard_3",
+      "prompt": "I need a complete troubleshooting guide for our analytics platform. Include sections for connection issues, performance problems, data sync failures, permission errors, and integration problems. Each section should have diagnostic steps and solutions.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "has_table": true,
+        "min_paragraphs": 12
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Apply consistent style guidelines (American spelling, serial commas, proper link formatting)"
+    }
+  ],
+  "quality_prompts": [
+    "Write a getting started guide for new users of our dashboard application. Cover account setup, creating their first dashboard, and adding basic charts.",
+    "Create documentation for our REST API authentication methods. We support API keys, OAuth 2.0, and JWT tokens.",
+    "I need a configuration guide for our email notification system. Include SMTP setup, template customization, and delivery troubleshooting.",
+    "Write a user guide for our data export features. Cover different export formats, scheduling exports, and managing large datasets.",
+    "Create documentation for integrating our analytics tool with popular databases like PostgreSQL, MySQL, and MongoDB."
+  ],
+  "generated_at": "2026-01-01T18:34:48.902965",
+  "model": "claude-sonnet-4-20250514"
+}

@@ -1,0 +1,16 @@
+{
+  "description": "Code Quality Hooks for Automated Linting and Static Analysis",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command", 
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/code_quality_check.py"
+          }
+        ]
+      }
+    ]
+  }
+}

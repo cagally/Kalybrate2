@@ -1,0 +1,27 @@
+{
+  "task_id": "at-dispatch-v2_easy_2",
+  "prompt": "I need to update this ATen kernel code to use the new dispatch API. What includes do I need and how should I change this?\n\n```cpp\n#include <ATen/Dispatch.h>\n\nAT_DISPATCH_FLOATING_TYPES_AND2(kHalf, kBFloat16, tensor.scalar_type(), \"float_kernel\", [&] {\n  process<scalar_t>(tensor);\n});\n```",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you convert this code to use the new AT_DISPATCH_V2 API. Here's the updated version:\n\n```cpp\n#include <ATen/Dispatch.h>\n#include <ATen/Dispatch_v2.h>\n\nAT_DISPATCH_V2(\n    tensor.scalar_type(), \n    \"float_kernel\", \n    AT_WRAP([&] {\n        process<scalar_t>(tensor);\n    }), \n    AT_EXPAND(AT_FLOATING_TYPES), \n    kHalf, \n    kBFloat16\n);\n```\n\nKey changes:\n1. Added `#include <ATen/Dispatch_v2.h>`\n2. Converted to AT_DISPATCH_V2 format\n3. Wrapped lambda with `AT_WRAP()`\n4. Used `AT_EXPAND(AT_FLOATING_TYPES)` for the base floating-point type group\n5. Kept the individual types (kHalf, kBFloat16) as separate arguments\n6. Maintained the original argument order and lambda logic\n\nThe conversion follows the AT_DISPATCH_V2 pattern:\n- First argument: scalar type\n- Second argument: kernel/operation name\n- Third argument: wrapped lambda\n- Fourth argument: expanded type group\n- Remaining arguments: individual types",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3376,
+    "output": 310,
+    "total": 3686
+  },
+  "execution_time": 6.85917592048645,
+  "error": null,
+  "timestamp": "2026-01-01T17:47:42.503857"
+}

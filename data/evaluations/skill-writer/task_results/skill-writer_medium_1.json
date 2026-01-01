@@ -1,0 +1,20 @@
+{
+  "task_id": "skill-writer_medium_1",
+  "prompt": "I created a skill but Claude never uses it when I ask about database queries. The skill is supposed to help with SQL optimization. What's wrong?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "Let me help you troubleshoot why your SQL optimization skill might not be activating. I'll ask some diagnostic questions and provide specific recommendations:\n\n1. First, can you show me the contents of your SKILL.md file, particularly the frontmatter and description?\n\nThe most common reasons a Skill doesn't activate are:\n- Vague or overly broad description\n- Missing trigger words\n- Unclear context for when the Skill should be used\n\nHere's a template for an effective SQL optimization Skill description:\n\n```yaml\n---\nname: sql-optimizer\ndescription: Analyze and optimize SQL queries for performance, identifying bottlenecks, suggesting indexing strategies, and improving database query efficiency. Use when discussing slow queries, database performance, query optimization, index recommendations, or when working with complex SQL statements across MySQL, PostgreSQL, or other relational databases.\n---\n```\n\nKey improvements to make:\n1. Specific technology mentions (MySQL, PostgreSQL)\n2. Clear trigger phrases (\"query optimization\", \"database performance\")\n3. Concrete use cases\n4. Relevant file types or contexts\n\nCould you share:\n- The exact text of your current description\n- What specific types of database queries you want to help with\n- Which database systems you're targeting\n\nI can then help you refine the Skill to ensure Claude recognizes and uses it appropriately.\n\nCommon debugging steps:\n1. Make description more explicit\n2. Add more context about when to use the Skill\n3. Include specific technologies and use cases\n4. Verify file location and naming conventions\n\nWould you like me to help you revise the Skill to improve its discoverability?",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2619,
+    "output": 362,
+    "total": 2981
+  },
+  "execution_time": 9.004976034164429,
+  "error": null,
+  "timestamp": "2026-01-01T08:53:51.056420"
+}

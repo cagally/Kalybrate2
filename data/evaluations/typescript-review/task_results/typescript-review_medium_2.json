@@ -1,0 +1,20 @@
+{
+  "task_id": "typescript-review_medium_2",
+  "prompt": "Our team is working on a TypeScript service class for handling API requests. I need someone to review the code diff before we merge it to ensure it follows our project's coding standards and has proper error handling.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll be happy to help review the TypeScript service class. However, I noticed that you haven't actually shared the code diff with me yet. Could you please provide:\n\n1. The full code diff or the updated service class code\n2. Any specific areas of concern you'd like me to pay special attention to\n3. Information about the specific API requests this service class is handling\n\nWhen reviewing TypeScript code, I'll typically look for:\n- Proper type annotations\n- Error handling mechanisms\n- Consistent coding style\n- Appropriate use of async/await\n- Proper error propagation\n- Type safety\n- Adherence to project-specific coding standards\n\nWould you like to share the code so I can provide a detailed review?",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 238,
+    "output": 159,
+    "total": 397
+  },
+  "execution_time": 3.8847360610961914,
+  "error": null,
+  "timestamp": "2026-01-01T08:57:01.421612"
+}

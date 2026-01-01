@@ -1,0 +1,16 @@
+{
+  "description": "Prevent automatic stopping until task is explicitly completed",
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check if the task is truly complete. If the user has not explicitly confirmed task completion, block stopping and request further confirmation. Return 'block' unless the user has clearly stated the task is done."
+          }
+        ]
+      }
+    ]
+  }
+}

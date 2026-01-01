@@ -1,0 +1,20 @@
+{
+  "task_id": "skill-writer_medium_3",
+  "prompt": "Should I create one big skill for all my data processing needs or separate skills? I work with CSV files, JSON APIs, and database exports regularly.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "Great question! Based on the Skill Writing best practices, I recommend creating multiple focused Skills instead of one large, general \"data processing\" Skill. Here's a suggested approach:\n\n### Recommended Skill Structure\n\n1. **csv-processor**\n```yaml\n---\nname: csv-processor\ndescription: Analyze, transform, and process CSV files using Python pandas. Use when working with comma-separated value files, need data cleaning, filtering, or basic analytics.\n---\n# Detailed CSV processing instructions\n```\n\n2. **json-api-handler**\n```yaml\n---\nname: json-api-handler\ndescription: Interact with JSON-based REST APIs, parse responses, and handle data retrieval and transformation. Use when connecting to web APIs, extracting data from JSON endpoints, or processing API responses.\n---\n# API interaction and JSON processing details\n```\n\n3. **database-export-parser**\n```yaml\n---\nname: database-export-parser\ndescription: Process and analyze database export files from various formats like SQL dumps, CSV exports, or JSON database backups. Use when working with database exports, needing to clean or transform extracted data.\n---\n# Database export processing instructions\n```\n\n### Why Separate Skills?\n\n\u2705 **Benefits of Focused Skills**:\n- More precise descriptions for Claude to understand\n- Easier to maintain and update individually\n- Clearer activation triggers\n- Allows for specific tool and library recommendations\n- More modular and reusable\n\n### Shared Components (Optional)\n\nYou could create a shared `data-utils` folder with common helper scripts:\n```\n.claude/skills/\n\u251c\u2500\u2500 csv-processor/\n\u251c\u2500\u2500 json-api-handler/\n\u251c\u2500\u2500 database-export-parser/\n\u2514\u2500\u2500 data-utils/\n    \u251c\u2500\u2500 common_transformations.py\n    \u2514\u2500\u2500 validation_helpers.py\n```\n\n### Skill Design Considerations\n\n1. **CSV Processor** might use:\n   - Pandas\n   - CSV module\n   - Data cleaning techniques\n\n2. **JSON API Handler** might include:\n   - Requests library\n   - Authentication handling\n   - Response parsing\n   - Error management\n\n3. **Database Export Parser** could support:\n   - Multiple input formats\n   - Conversion between formats\n   - Basic data validation\n\n### Recommendation\n\nCreate these as separate Skills with clear, specific purposes. This approach provides:\n- Clarity for Claude\n- Flexibility in usage\n- Easy maintenance\n- Precise tool selection\n\nWould you like me to help you draft the initial SKILL.md files for these data processing Skills?",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2619,
+    "output": 574,
+    "total": 3193
+  },
+  "execution_time": 12.988317251205444,
+  "error": null,
+  "timestamp": "2026-01-01T08:53:51.057989"
+}

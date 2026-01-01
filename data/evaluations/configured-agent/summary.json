@@ -1,0 +1,36 @@
+{
+  "skill_name": "configured-agent",
+  "overall_score": 76.0,
+  "grade": "C",
+  "task_completion": {
+    "passed": 9,
+    "total": 9,
+    "rate": 100.0,
+    "verified_criteria": {
+      "passed": 9,
+      "total": 9
+    },
+    "verification_levels": {
+      "full": 9,
+      "partial": 0,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 2,
+    "losses": 3,
+    "ties": 0,
+    "win_rate": 40.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 692,
+    "estimated_per_use": "$0.0084"
+  },
+  "evaluated_at": "2026-01-01T18:34:48.896670",
+  "execution_time": 1662.7347371578217,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "skill_claims": [
+    "Create autonomous agents with proper file structure and YAML frontmatter",
+    "Design effective triggering conditions with examples in agent descriptions",
+    "Write comprehensive system prompts with clear responsibilities and processes",
+    "Validate agent identifiers, descriptions, and system prompts according to rules",
+    "Organize agents within plugin directory structures",
+    "Configure agent models, colors, and tool restrictions",
+    "Generate agents using AI-assisted methods with structured prompts"
+  ],
+  "tasks": [
+    {
+      "id": "agent-development_easy_1",
+      "prompt": "I want to create a simple agent that reviews code for basic syntax errors. Can you help me set this up?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_has_content": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Create autonomous agents with proper file structure and YAML frontmatter"
+    },
+    {
+      "id": "agent-development_easy_2",
+      "prompt": "I need an agent that generates unit tests for Python functions. What would be a good name for this agent?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Validate agent identifiers, descriptions, and system prompts according to rules"
+    },
+    {
+      "id": "agent-development_easy_3",
+      "prompt": "Can you explain when I should use an agent versus a regular command in my Claude plugin?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Design effective triggering conditions with examples in agent descriptions"
+    },
+    {
+      "id": "agent-development_medium_1",
+      "prompt": "I'm building a documentation plugin and need an agent that automatically generates API documentation from code comments. It should trigger when users ask about documenting their APIs.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_has_content": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Design effective triggering conditions with examples in agent descriptions"
+    },
+    {
+      "id": "agent-development_medium_2",
+      "prompt": "Create an agent for my security plugin that analyzes code for vulnerabilities. It should only have read access to files and use a red color theme.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_has_content": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Configure agent models, colors, and tool restrictions"
+    },
+    {
+      "id": "agent-development_medium_3",
+      "prompt": "I have three agents in my plugin but they're not organized well. How should I structure my agent files and what naming conventions should I follow?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Organize agents within plugin directory structures"
+    },
+    {
+      "id": "agent-development_hard_1",
+      "prompt": "I need a sophisticated agent for my DevOps plugin that can analyze deployment configurations, suggest optimizations, and handle edge cases like missing dependencies or conflicting versions. It should work autonomously and provide detailed reports.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_has_content": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Write comprehensive system prompts with clear responsibilities and processes"
+    },
+    {
+      "id": "agent-development_hard_2",
+      "prompt": "Build me a complete agent using the AI-assisted generation method that can refactor legacy JavaScript code to modern TypeScript, including proper type annotations and error handling.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_has_content": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Generate agents using AI-assisted methods with structured prompts"
+    },
+    {
+      "id": "agent-development_hard_3",
+      "prompt": "I'm getting validation errors on my agent configuration. The identifier is 'my_test_agent_v2.1' and the description is just 'helps with testing'. Can you fix these issues and explain what was wrong?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Validate agent identifiers, descriptions, and system prompts according to rules"
+    }
+  ],
+  "quality_prompts": [
+    "Create an agent that helps with database schema design and optimization",
+    "I want to build an agent for my testing framework that automatically generates integration tests",
+    "Help me create an agent that reviews pull requests and suggests improvements",
+    "I need an agent for my monitoring plugin that analyzes system logs and alerts on anomalies",
+    "Build an agent that can migrate code between different programming languages while preserving functionality"
+  ],
+  "generated_at": "2026-01-01T17:39:24.728218",
+  "model": "claude-sonnet-4-20250514"
+}

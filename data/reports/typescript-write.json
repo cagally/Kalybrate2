@@ -1,0 +1,185 @@
+{
+  "skill_name": "typescript-write",
+  "skill_description": null,
+  "overall_score": 70.0,
+  "grade": "C",
+  "task_completion": {
+    "total": 9,
+    "passed": 7,
+    "pass_rate": 90.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 1
+      }
+    },
+    "details": [
+      {
+        "id": "typescript-write_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "has_type_annotations": true
+        },
+        "execution_time": 6.09,
+        "tokens": 490
+      },
+      {
+        "id": "typescript-write_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true
+        },
+        "execution_time": 13.2,
+        "tokens": 910
+      },
+      {
+        "id": "typescript-write_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "has_type_annotations": true
+        },
+        "execution_time": 5.42,
+        "tokens": 448
+      },
+      {
+        "id": "typescript-write_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": false,
+          "has_type_annotations": true
+        },
+        "execution_time": 16.77,
+        "tokens": 1387
+      },
+      {
+        "id": "typescript-write_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": false,
+          "has_type_annotations": true
+        },
+        "execution_time": 18.81,
+        "tokens": 1646
+      },
+      {
+        "id": "typescript-write_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true
+        },
+        "execution_time": 18.3,
+        "tokens": 1436
+      },
+      {
+        "id": "typescript-write_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": false,
+          "has_type_annotations": true
+        },
+        "execution_time": 19.84,
+        "tokens": 1527
+      },
+      {
+        "id": "typescript-write_hard_2",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "has_type_annotations": false
+        },
+        "execution_time": 28.34,
+        "tokens": 2472
+      },
+      {
+        "id": "typescript-write_hard_3",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true,
+          "code_compiles": true,
+          "has_type_annotations": false
+        },
+        "execution_time": 32.95,
+        "tokens": 2665
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 2,
+    "losses": 3,
+    "ties": 0,
+    "win_rate": 40.0,
+    "details": [
+      {
+        "prompt": "Write a TypeScript function that calculates the average of an array of numbers with proper error han...",
+        "verdict": "with_skill",
+        "reasoning": "Response A is more complete and thorough. It provides a more flexible design by returning null for empty arrays instead of throwing an error, which is often more practical. It includes comprehensive JSDoc documentation, demonstrates both valid and error cases in the example usage, and has a complete implementation. Response B appears to be cut off and incomplete, missing the full demonstration code. Response A also provides better error handling flexibility by distinguishing between different types of invalid inputs.",
+        "tokens_with_skill": 865,
+        "tokens_without_skill": 1434
+      },
+      {
+        "prompt": "Create a JavaScript class for managing shopping cart operations including add, remove, update quanti...",
+        "verdict": "without_skill",
+        "reasoning": "Response B better accomplishes the task because it provides JavaScript as requested, while Response A provides TypeScript. Response B is more complete with additional useful methods like isEmpty() and getItem(), includes better error handling with Math.max() for quantity validation, and has consistent return values. Although Response A has good TypeScript practices, it doesn't match the specific JavaScript requirement and appears to be cut off at the end.",
+        "tokens_with_skill": 1310,
+        "tokens_without_skill": 1290
+      },
+      {
+        "prompt": "Build a TypeScript interface and implementation for a notification system that supports different me...",
+        "verdict": "without_skill",
+        "reasoning": "Response B provides a more complete and functional implementation. While Response A shows good modular structure with separate files, it's incomplete (cuts off mid-implementation). Response B delivers a fully working notification system with comprehensive interfaces, complete implementation including subscription management with filtering, notification storage, and proper method signatures. Response B also includes useful features like metadata support and filtering capabilities that make it more practical for real-world use.",
+        "tokens_with_skill": 1576,
+        "tokens_without_skill": 1707
+      },
+      {
+        "prompt": "Refactor this callback-heavy JavaScript code to use async/await and add TypeScript types for better ...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a comprehensive example with actual TypeScript interfaces, async/await implementation, error handling, and demonstrates best practices like Promise.all for concurrent operations. While both responses correctly identify that the original code is missing, Response A goes further by providing a practical template that the user can immediately learn from and adapt, making it significantly more useful and complete.",
+        "tokens_with_skill": 300,
+        "tokens_without_skill": 850
+      },
+      {
+        "prompt": "Design a TypeScript utility for form validation that can handle different field types and custom val...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides better TypeScript practices with proper generic typing (ValidationRule<T>), more structured code organization with separate files, and better type safety. While Response B has a more complete implementation visible, Response A demonstrates superior architecture with generic types that ensure type safety across different field types, which is crucial for a TypeScript utility. Response A's approach with ValidationSchema<T> and generic validation rules is more robust and maintainable than Response B's use of 'any' types.",
+        "tokens_with_skill": 1618,
+        "tokens_without_skill": 1684
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 154,
+    "avg_output_tokens": 1178,
+    "avg_total_tokens": 1332,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T17:13:28.393356",
+  "model_used": "claude-sonnet-4-20250514"
+}

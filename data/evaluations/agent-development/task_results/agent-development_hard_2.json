@@ -1,0 +1,31 @@
+{
+  "task_id": "agent-development_hard_2",
+  "prompt": "Build me a complete agent using the AI-assisted generation method that can refactor legacy JavaScript code to modern TypeScript, including proper type annotations and error handling.",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a complete agent for refactoring legacy JavaScript to TypeScript using the AI-assisted generation method. I'll write a Python script to generate the agent configuration file.\n\n```python\nimport os\nimport json\n\n# Use the provided OUTPUT_DIR\nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_4zarw2qd\"\n\n# Ensure the agents directory exists\nos.makedirs(os.path.join(OUTPUT_DIR, 'agents'), exist_ok=True)\n\n# Agent configuration\nagent_config = {\n    \"identifier\": \"js-to-typescript-refactorer\",\n    \"whenToUse\": \"\"\"Use this agent when you need to:\n- Migrate legacy JavaScript code to TypeScript\n- Add type annotations to existing JavaScript files\n- Improve code quality by introducing type safety\n- Refactor complex JavaScript functions with proper typing\n\nExamples:\n\n<example>\nContext: Legacy JavaScript function without type safety\nuser: \"Can you help me convert this JavaScript function to TypeScript with proper type annotations?\"\nassistant: \"I'll refactor the code, add TypeScript type definitions, and improve type safety.\"\n<commentary>\nThis agent is perfect for transforming untyped JavaScript into strongly-typed TypeScript, reducing potential runtime errors.\n</commentary>\n</example>\n\n<example>\nContext: Large JavaScript codebase needing modernization\nuser: \"I have a complex JavaScript project that needs to be migrated to TypeScript. Can you help refactor the code?\"\nassistant: \"I'll systematically convert the JavaScript files to TypeScript, adding comprehensive type annotations and improving code structure.\"\n<commentary>\nThe agent can handle large-scale JavaScript to TypeScript migrations, ensuring type safety and code quality.\n</commentary>\n</example>\"\"\",\n    \"systemPrompt\": \"\"\"You are a TypeScript Refactoring Specialist, focused on converting legacy JavaScript to modern, type-safe TypeScript.\n\n**Your Core Responsibilities:**\n1. Analyze existing JavaScript code for type conversion opportunities\n2. Add appropriate TypeScript type annotations\n3. Introduce interfaces and type definitions\n4. Improve error handling and type safety\n5. Modernize code syntax and structure\n\n**Analysis Process:**\n1. Parse the input JavaScript code\n2. Identify variables, function parameters, and return types\n3. Infer and add TypeScript type annotations\n4. Create interfaces for complex objects\n5. Update function signatures with type definitions\n6. Replace `var` and `function` with modern TypeScript syntax\n7. Add type guards and error handling\n\n**Type Annotation Guidelines:**\n- Use explicit types where possible\n- Leverage TypeScript's type inference\n- Create custom interfaces for complex objects\n- Use union types for flexible typing\n- Implement generics for reusable, type-safe code\n\n**Error Handling Enhancements:**\n- Add type checks and runtime validation\n- Use optional chaining and nullish coalescing\n- Implement proper error type definitions\n- Create custom error classes when appropriate\n\n**Refactoring Principles:**\n- Preserve original code logic\n- Minimize changes to existing functionality\n- Make gradual, incremental improvements\n- Provide clear comments explaining type changes\n- Ensure backward compatibility\n\n**Output Format:**\n- Fully converted TypeScript code\n- Detailed comments explaining type decisions\n- Suggested improvements and modernization notes\n\n**Edge Cases:**\n- Dynamic JavaScript: Use `any` or `unknown` types carefully\n- Complex object structures: Create detailed interfaces\n- Callback-heavy code: Use function type annotations\n- Legacy browser compatibility: Include appropriate type definitions\n\n**Quality Standards:**\n- 100% type coverage\n- No `any` type usage without explicit reasoning\n- Clear, readable type annotations\n- Minimal runtime overhead\n- Improved code maintainability\"\"\"\n}\n\n# Path for the agent file\nagent_file_path = os.path.join(OUTPUT_DIR, 'agents', 'js-to-typescript-refactorer.md')\n\n# Write the agent file\nwith open(agent_file_path, 'w') as f:\n    f.write(f\"\"\"---\nname: js-to-typescript-refactorer\ndescription: {json.dumps(agent_config['whenToUse'])}\nmodel: inherit\ncolor: blue\ntools: [\"Read\", \"Write\", \"Grep\"]\n---\n\n{agent_config['systemPrompt']}\n\"\"\")\n\nprint(f\"Agent configuration file created at: {agent_file_path}\")\n```\n\nThis script does the following:\n\n1. Creates an agent for JavaScript to TypeScript refactoring\n2. Defines a comprehensive description with triggering examples\n3. Writes a detailed system prompt covering:\n   - Core responsibilities\n   - Analysis process\n   - Type annotation guidelines\n   - Error handling enhancements\n   - Refactoring principles\n   - Output format\n   - Edge cases\n   - Quality standards\n4. Saves the agent configuration as a Markdown file in the `agents` directory\n\nThe agent is designed to:\n- Systematically convert JavaScript to TypeScript\n- Add comprehensive type annotations\n- Improve error handling\n- Modernize code structure\n- Preserve original logic\n\nWhen you run this script, it will generate a complete agent configuration file for TypeScript refactoring in the specified output directory.\n\nWould you like me to explain any part of the agent configuration or demonstrate how it might work in practice?",
+  "criteria_results": {
+    "file_created": false,
+    "file_has_content": false,
+    "response_relevant": false
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_has_content": "verified - no file created",
+    "response_relevant": "verified - no file created"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 0,
+    "total": 1
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2979,
+    "output": 1234,
+    "total": 4213
+  },
+  "execution_time": 23.91475009918213,
+  "error": null,
+  "timestamp": "2026-01-01T17:42:23.406363"
+}

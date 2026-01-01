@@ -1,0 +1,31 @@
+{
+  "task_id": "payload_easy_1",
+  "prompt": "I'm starting a blog project and need a basic Payload CMS setup with a Posts collection that has title, content, and author fields. Can you help me create the configuration?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you set up a basic Payload CMS configuration for a blog project. I'll create several files to establish a complete, working setup.\n\nFirst, let's create the project structure:\n\n```bash\nmkdir -p my-blog/src/collections\ncd my-blog\nnpm init -y\nnpm install payload @payloadcms/db-mongodb @payloadcms/richtext-lexical\n```\n\nNow, I'll create the necessary configuration files:\n\n1. `src/collections/Users.ts`:\n```typescript\nimport { CollectionConfig } from 'payload/types'\n\nconst Users: CollectionConfig = {\n  slug: 'users',\n  auth: {\n    verify: {\n      generateEmailHTML: () => `Verify your account`,\n    },\n  },\n  admin: {\n    useAsTitle: 'email',\n  },\n  fields: [\n    {\n      name: 'role',\n      type: 'select',\n      options: [\n        { label: 'Admin', value: 'admin' },\n        { label: 'Editor', value: 'editor' },\n        { label: 'Author', value: 'author' },\n      ],\n      defaultValue: 'author',\n    },\n  ],\n}\n\nexport default Users\n```\n\n2. `src/collections/Posts.ts`:\n```typescript\nimport { CollectionConfig } from 'payload/types'\n\nconst Posts: CollectionConfig = {\n  slug: 'posts',\n  admin: {\n    useAsTitle: 'title',\n    defaultColumns: ['title', 'author', 'createdAt'],\n  },\n  access: {\n    read: () => true, // Public read access\n  },\n  fields: [\n    {\n      name: 'title',\n      type: 'text',\n      required: true,\n    },\n    {\n      name: 'content',\n      type: 'richText',\n      required: true,\n    },\n    {\n      name: 'author',\n      type: 'relationship',\n      relationTo: 'users',\n      required: true,\n    },\n    {\n      name: 'slug',\n      type: 'text',\n      unique: true,\n      index: true,\n      hooks: {\n        beforeValidate: [\n          ({ data, operation }) => {\n            if (operation === 'create' && data?.title) {\n              // Generate slug from title\n              return data.slug = data.title\n                .toLowerCase()\n                .replace(/[^a-z0-9]+/g, '-')\n                .replace(/^-|-$/g, '')\n            }\n          }\n        ]\n      }\n    },\n    {\n      name: 'publishedAt',\n      type: 'date',\n      admin: {\n        position: 'sidebar',\n      },\n      defaultValue: () => new Date(),\n    },\n    {\n      name: 'status',\n      type: 'select',\n      options: [\n        { label: 'Draft', value: 'draft' },\n        { label: 'Published', value: 'published' },\n      ],\n      defaultValue: 'draft',\n      admin: {\n        position: 'sidebar',\n      },\n    },\n  ],\n  timestamps: true,\n}\n\nexport default Posts\n```\n\n3. `src/payload.config.ts`:\n```typescript\nimport { buildConfig } from 'payload'\nimport { mongooseAdapter } from '@payloadcms/db-mongodb'\nimport { lexicalEditor } from '@payloadcms/richtext-lexical'\nimport path from 'path'\nimport Users from './collections/Users'\nimport Posts from './collections/Posts'\n\nexport default buildConfig({\n  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',\n  admin: {\n    user: 'users',\n    meta: {\n      titleSuffix: '- My Blog',\n      favicon: '/favicon.ico',\n    },\n  },\n  collections: [Users, Posts],\n  typescript: {\n    outputFile: path.resolve(__dirname, 'payload-types.ts'),\n  },\n  db: mongooseAdapter({\n    url: process.env.MONGODB_URI || 'mongodb://localhost:27017/my-blog',\n  }),\n  editor: lexicalEditor(),\n  secret: process.env.PAYLOAD_SECRET || 'your-secret-key',\n})\n```\n\n4. Create a `.env` file:\n```bash\n# MongoDB Connection\nMONGODB_URI=mongodb://localhost:27017/my-blog\n\n# Payload Secret (use a long, random string)\nPAYLOAD_SECRET=your-very-long-and-secure-secret-key\n\n# Server URL\nPAYLOAD_PUBLIC_SERVER_URL=http://localhost:3000\n```\n\n5. Update `package.json` with scripts:\n```json\n{\n  \"scripts\": {\n    \"dev\": \"payload dev\",\n    \"build\": \"payload build\",\n    \"start\": \"payload start\",\n    \"generate:types\": \"payload generate:types\"\n  }\n}\n```\n\n6. Install additional dependencies:\n```bash\nnpm install dotenv\n```\n\nRecommendations for next steps:\n1. Install MongoDB locally or use a cloud service like MongoDB Atlas\n2. Run `npm run dev` to start the development server\n3. Create your first admin user when prompted\n4. Use the admin panel to create posts and users\n\nKey Features of this Configuration:\n- Public read access for posts\n- User roles (admin, editor, author)\n- Automatic slug generation\n- Draft/published status\n- Rich text content\n- Relationship to users as author\n- Timestamps\n- TypeScript types generation\n\nWould you like me to elaborate on any part of the configuration or explain any specific aspect of the setup?",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": false,
+    "has_type_annotations": false
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "compilation error: ",
+    "has_type_annotations": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 2
+  },
+  "passed": false,
+  "tokens": {
+    "input": 4281,
+    "output": 1380,
+    "total": 5661
+  },
+  "execution_time": 21.61043906211853,
+  "error": null,
+  "timestamp": "2026-01-01T19:09:08.290916"
+}

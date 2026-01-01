@@ -1,0 +1,143 @@
+{
+  "skill_claims": [
+    "Guide Clojure and ClojureScript development using REPL-driven workflow",
+    "Use clojure-mcp tools for direct REPL integration when available",
+    "Follow bottom-up development loop with namespace evaluation",
+    "Write small, fundamental functions and test them in REPL before integration",
+    "Apply Clojure coding conventions and best practices",
+    "Ensure proper parentheses handling and code readability",
+    "Compose smaller functions into more complex components gradually",
+    "Use functional programming principles with immutability and higher-order functions"
+  ],
+  "tasks": [
+    {
+      "id": "clojure-write_easy_1",
+      "prompt": "I need a simple Clojure function that takes a list of numbers and returns their sum. Can you write and test it for me?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Write small, fundamental functions and test them in REPL before integration"
+    },
+    {
+      "id": "clojure-write_easy_2",
+      "prompt": "Create a basic Clojure function that checks if a string is a palindrome, ignoring case and spaces.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Apply Clojure coding conventions and best practices"
+    },
+    {
+      "id": "clojure-write_easy_3",
+      "prompt": "I want to learn Clojure - can you show me how to create a simple function that filters even numbers from a vector?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Use functional programming principles with immutability and higher-order functions"
+    },
+    {
+      "id": "clojure-write_medium_1",
+      "prompt": "I'm building a shopping cart system in Clojure. I need functions to add items, remove items, and calculate the total price with tax. Can you help me develop this step by step?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Follow bottom-up development loop with namespace evaluation"
+    },
+    {
+      "id": "clojure-write_medium_2",
+      "prompt": "Create a Clojure namespace for handling user authentication with functions for password hashing, validation, and session management. I want to make sure it follows proper conventions.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "code_compiles": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".clj",
+      "tests_claim": "Compose smaller functions into more complex components gradually"
+    },
+    {
+      "id": "clojure-write_medium_3",
+      "prompt": "I have a data processing pipeline that needs to transform JSON data, validate it, and store results. Can you build this in Clojure using a functional approach?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Guide Clojure and ClojureScript development using REPL-driven workflow"
+    },
+    {
+      "id": "clojure-write_hard_1",
+      "prompt": "I'm building a real-time web application with ClojureScript frontend and Clojure backend. I need a complete module for handling WebSocket connections, message routing, and state synchronization between client and server.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "code_compiles": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".clj",
+      "tests_claim": "Guide Clojure and ClojureScript development using REPL-driven workflow"
+    },
+    {
+      "id": "clojure-write_hard_2",
+      "prompt": "Create a comprehensive Clojure library for parsing and manipulating complex nested data structures with support for schema validation, transformation pipelines, and error handling. I need it to be production-ready with proper testing.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true,
+        "code_compiles": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".clj",
+      "tests_claim": "Use clojure-mcp tools for direct REPL integration when available"
+    },
+    {
+      "id": "clojure-write_hard_3",
+      "prompt": "I need to refactor a large legacy Clojure codebase that has grown organically. The main issues are deeply nested functions, poor separation of concerns, and lack of proper error handling. Can you help me restructure it following best practices?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Ensure proper parentheses handling and code readability"
+    }
+  ],
+  "quality_prompts": [
+    "Write a Clojure function that processes a list of maps representing employees and calculates their total compensation including bonuses and benefits.",
+    "Create a ClojureScript component for a todo list application with add, edit, delete, and filter functionality.",
+    "Build a Clojure service that reads CSV files, validates the data against a schema, and outputs JSON with error reporting.",
+    "Implement a simple caching mechanism in Clojure with TTL support and automatic cleanup of expired entries.",
+    "Design a Clojure API for a library management system with book checkout, return, and inventory tracking features."
+  ],
+  "generated_at": "2026-01-01T17:52:06.927147",
+  "model": "claude-sonnet-4-20250514"
+}

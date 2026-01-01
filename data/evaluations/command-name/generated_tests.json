@@ -1,0 +1,115 @@
+{
+  "skill_claims": [
+    "Unable to determine capabilities - SKILL.md contains only template placeholders"
+  ],
+  "tasks": [
+    {
+      "id": "command-name_easy_1",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    },
+    {
+      "id": "command-name_easy_2",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    },
+    {
+      "id": "command-name_easy_3",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    },
+    {
+      "id": "command-name_medium_1",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    },
+    {
+      "id": "command-name_medium_2",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    },
+    {
+      "id": "command-name_medium_3",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    },
+    {
+      "id": "command-name_hard_1",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    },
+    {
+      "id": "command-name_hard_2",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    },
+    {
+      "id": "command-name_hard_3",
+      "prompt": "Cannot generate meaningful test tasks without actual skill description",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "No claims to test"
+    }
+  ],
+  "quality_prompts": [
+    "Cannot generate quality comparison prompts without knowing what the skill does",
+    "Cannot generate quality comparison prompts without knowing what the skill does",
+    "Cannot generate quality comparison prompts without knowing what the skill does",
+    "Cannot generate quality comparison prompts without knowing what the skill does",
+    "Cannot generate quality comparison prompts without knowing what the skill does"
+  ],
+  "generated_at": "2026-01-01T18:05:41.633943",
+  "model": "claude-sonnet-4-20250514"
+}

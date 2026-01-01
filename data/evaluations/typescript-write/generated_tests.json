@@ -1,0 +1,134 @@
+{
+  "skill_claims": [
+    "Write TypeScript code following Metabase coding standards and best practices",
+    "Write JavaScript code following Metabase coding standards and best practices",
+    "Develop new TypeScript/JavaScript code",
+    "Refactor existing TypeScript/JavaScript code"
+  ],
+  "tasks": [
+    {
+      "id": "typescript-write_easy_1",
+      "prompt": "I need a simple TypeScript function that takes a user's name and age and returns a greeting message. Make sure it has proper types.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "has_type_annotations": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Write TypeScript code following Metabase coding standards and best practices"
+    },
+    {
+      "id": "typescript-write_easy_2",
+      "prompt": "Create a JavaScript utility function that checks if an email address is valid using a regular expression.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Write JavaScript code following Metabase coding standards and best practices"
+    },
+    {
+      "id": "typescript-write_easy_3",
+      "prompt": "Write a TypeScript interface for a basic user profile with id, name, email, and optional avatar URL properties.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "has_type_annotations": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Write TypeScript code following Metabase coding standards and best practices"
+    },
+    {
+      "id": "typescript-write_medium_1",
+      "prompt": "I have a React component that's getting messy. Can you help me refactor this user dashboard component to use TypeScript and separate the data fetching logic from the UI rendering?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "has_type_annotations": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Refactor existing TypeScript/JavaScript code"
+    },
+    {
+      "id": "typescript-write_medium_2",
+      "prompt": "Build a TypeScript class for managing API requests with methods for GET, POST, PUT, and DELETE. Include proper error handling and response typing.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "has_type_annotations": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Develop new TypeScript/JavaScript code"
+    },
+    {
+      "id": "typescript-write_medium_3",
+      "prompt": "Create a JavaScript module for handling local storage operations with functions to save, retrieve, and delete data. Include JSON serialization support.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Write JavaScript code following Metabase coding standards and best practices"
+    },
+    {
+      "id": "typescript-write_hard_1",
+      "prompt": "I need to refactor our legacy JavaScript data processing pipeline to TypeScript. It currently handles CSV parsing, data validation, and transformation for analytics. The code is about 200 lines and needs better type safety.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "has_type_annotations": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Refactor existing TypeScript/JavaScript code"
+    },
+    {
+      "id": "typescript-write_hard_2",
+      "prompt": "Build a TypeScript service layer for a dashboard application that handles real-time data subscriptions, caching, and state management. It should work with WebSocket connections and include proper typing for all data models.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "has_type_annotations": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Develop new TypeScript/JavaScript code"
+    },
+    {
+      "id": "typescript-write_hard_3",
+      "prompt": "Create a comprehensive TypeScript testing utility that can mock API responses, simulate user interactions, and validate component behavior. Include generic types for flexible test data creation.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "has_type_annotations": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Write TypeScript code following Metabase coding standards and best practices"
+    }
+  ],
+  "quality_prompts": [
+    "Write a TypeScript function that calculates the average of an array of numbers with proper error handling for edge cases.",
+    "Create a JavaScript class for managing shopping cart operations including add, remove, update quantity, and calculate total.",
+    "Build a TypeScript interface and implementation for a notification system that supports different message types and priorities.",
+    "Refactor this callback-heavy JavaScript code to use async/await and add TypeScript types for better maintainability.",
+    "Design a TypeScript utility for form validation that can handle different field types and custom validation rules."
+  ],
+  "generated_at": "2026-01-01T17:07:36.323830",
+  "model": "claude-sonnet-4-20250514"
+}

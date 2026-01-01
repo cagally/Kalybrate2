@@ -1,0 +1,29 @@
+{
+  "task_id": "typescript-write_medium_3",
+  "prompt": "Create a JavaScript module for handling local storage operations with functions to save, retrieve, and delete data. Include JSON serialization support.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a comprehensive JavaScript module for local storage operations with robust error handling and JSON serialization support.\n\n`localStorage.js`:\n```javascript\n/**\n * Local Storage Utility Module\n * Provides easy-to-use methods for storing, retrieving, and managing data in localStorage\n */\nclass LocalStorageManager {\n  /**\n   * Save data to localStorage with JSON serialization\n   * @param {string} key - The key under which to store the data\n   * @param {*} value - The value to be stored (can be any serializable data)\n   * @throws {Error} If storage is full or serialization fails\n   */\n  static save(key, value) {\n    try {\n      // Validate input\n      if (!key || typeof key !== 'string') {\n        throw new Error('Invalid key: must be a non-empty string');\n      }\n\n      // Serialize the value to JSON\n      const serializedValue = JSON.stringify(value);\n\n      // Attempt to save to localStorage\n      window.localStorage.setItem(key, serializedValue);\n    } catch (error) {\n      console.error(`Error saving to localStorage: ${error.message}`);\n      \n      // Check for specific storage errors\n      if (error instanceof DOMException && error.name === 'QuotaExceededError') {\n        throw new Error('Local storage is full. Cannot save data.');\n      }\n      \n      throw error;\n    }\n  }\n\n  /**\n   * Retrieve data from localStorage with JSON parsing\n   * @param {string} key - The key of the data to retrieve\n   * @returns {*} The parsed data or null if not found\n   * @throws {Error} If parsing fails\n   */\n  static get(key) {\n    try {\n      // Validate input\n      if (!key || typeof key !== 'string') {\n        throw new Error('Invalid key: must be a non-empty string');\n      }\n\n      // Retrieve the serialized value\n      const serializedValue = window.localStorage.getItem(key);\n\n      // Return null if no value found\n      if (serializedValue === null) {\n        return null;\n      }\n\n      // Parse the JSON and return the value\n      return JSON.parse(serializedValue);\n    } catch (error) {\n      console.error(`Error retrieving from localStorage: ${error.message}`);\n      \n      // Handle JSON parsing errors\n      if (error instanceof SyntaxError) {\n        // Optional: Remove corrupt data\n        this.delete(key);\n        throw new Error('Stored data is corrupted and has been removed');\n      }\n      \n      throw error;\n    }\n  }\n\n  /**\n   * Delete data from localStorage\n   * @param {string} key - The key of the data to delete\n   */\n  static delete(key) {\n    try {\n      // Validate input\n      if (!key || typeof key !== 'string') {\n        throw new Error('Invalid key: must be a non-empty string');\n      }\n\n      window.localStorage.removeItem(key);\n    } catch (error) {\n      console.error(`Error deleting from localStorage: ${error.message}`);\n      throw error;\n    }\n  }\n\n  /**\n   * Clear all data from localStorage\n   */\n  static clear() {\n    try {\n      window.localStorage.clear();\n    } catch (error) {\n      console.error(`Error clearing localStorage: ${error.message}`);\n      throw error;\n    }\n  }\n\n  /**\n   * Check if a key exists in localStorage\n   * @param {string} key - The key to check\n   * @returns {boolean} Whether the key exists\n   */\n  static has(key) {\n    return window.localStorage.getItem(key) !== null;\n  }\n\n  /**\n   * Get the number of items in localStorage\n   * @returns {number} Number of items in localStorage\n   */\n  static get length() {\n    return window.localStorage.length;\n  }\n}\n\n// Export the LocalStorageManager for use in other modules\nexport default LocalStorageManager;\n```\n\nUsage Example:\n```javascript\nimport LocalStorageManager from './localStorage.js';\n\n// Saving data\nLocalStorageManager.save('user', { \n  name: 'John Doe', \n  age: 30, \n  isActive: true \n});\n\n// Retrieving data\nconst user = LocalStorageManager.get('user');\nconsole.log(user); // { name: 'John Doe', age: 30, isActive: true }\n\n// Checking if data exists\nconsole.log(LocalStorageManager.has('user')); // true\n\n// Deleting specific data\nLocalStorageManager.delete('user');\n\n// Clearing all localStorage\nLocalStorageManager.clear();\n```\n\nKey Features:\n- JSON serialization and parsing\n- Error handling for various scenarios\n- Input validation\n- Supports storing any JSON-serializable data\n- Static methods for easy use\n- Detailed error logging\n- Handles storage quota exceeded errors\n- Checks for data corruption\n\nRecommended Practices:\n1. Always wrap localStorage interactions in try-catch blocks\n2. Handle potential errors gracefully\n3. Validate input before storage operations\n4. Use JSON for serialization to support complex data types\n\nNote: This module assumes a browser environment with `window.localStorage` support. For server-side JavaScript (Node.js), you'd need to use an alternative storage mechanism.",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 162,
+    "output": 1274,
+    "total": 1436
+  },
+  "execution_time": 18.297996997833252,
+  "error": null,
+  "timestamp": "2026-01-01T17:10:16.066543"
+}

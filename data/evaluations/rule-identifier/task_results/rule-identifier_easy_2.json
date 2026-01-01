@@ -1,0 +1,27 @@
+{
+  "task_id": "rule-identifier_easy_2",
+  "prompt": "I need to know when this rule-identifier would activate",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "To help you understand when the rule-identifier skill would activate, I'll explain the key components:\n\n1. `event`: This specifies when the skill can be triggered. The options are:\n   - `bash`: Activates during bash command interactions\n   - `file`: Activates during file-related operations\n   - `stop`: Activates at a stopping point\n   - `prompt`: Activates during prompt interactions\n   - `all`: Activates in all scenarios\n\n2. `pattern`: This is a regex (regular expression) pattern that must match for the skill to trigger.\n\nHowever, in the example you've shared, the specific details are placeholders:\n- `regex-pattern-here` needs to be replaced with an actual regex pattern\n- The message is currently generic\n\nTo give a concrete example, here's how it might look in practice:\n\n```markdown\n---\nname: rule-identifier\nenabled: true\nevent: file\npattern: .*\\.py$\n---\n\nWarning: Python file detected. Ensure proper coding standards are followed.\n```\n\nIn this example, the skill would:\n- Activate during file-related events\n- Trigger when a filename ends with `.py`\n- Display a warning message about Python coding standards\n\nWould you like me to help you define a specific rule-identifier with a precise use case?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 116,
+    "output": 295,
+    "total": 411
+  },
+  "execution_time": 6.166923999786377,
+  "error": null,
+  "timestamp": "2026-01-01T19:20:31.658885"
+}

@@ -1,0 +1,27 @@
+{
+  "task_id": "rule-identifier_easy_3",
+  "prompt": "What events does this skill respond to?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "Based on the provided SKILL.md template, the skill can respond to the following events:\n\n1. bash - Triggered during bash command execution\n2. file - Triggered during file operations\n3. stop - Triggered when a process or operation stops\n4. prompt - Triggered during user prompts\n5. all - Triggered for any/all of the above events\n\nThe event is specified in the \"event:\" field, and you can choose one of these options to determine when the skill's rule-identifier pattern and associated message will be activated.",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 113,
+    "output": 119,
+    "total": 232
+  },
+  "execution_time": 2.90087890625,
+  "error": null,
+  "timestamp": "2026-01-01T19:20:31.659752"
+}

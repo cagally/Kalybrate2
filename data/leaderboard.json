@@ -1,0 +1,237 @@
+{
+  "updated_at": "2026-01-01T19:23:16.912831",
+  "skills": [
+    {
+      "skill_name": "docstring",
+      "overall_score": 92.0,
+      "grade": "A",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 80.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T18:44:40.955504",
+      "rank": 1
+    },
+    {
+      "skill_name": "pdf",
+      "overall_score": 92.0,
+      "grade": "A",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 80.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T19:18:20.739252",
+      "rank": 2
+    },
+    {
+      "skill_name": "typescript-review",
+      "overall_score": 90.0,
+      "grade": "A",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 75.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.0035",
+      "evaluated_at": "2026-01-01T08:58:14.836692",
+      "rank": 3
+    },
+    {
+      "skill_name": "command-name",
+      "overall_score": 90.0,
+      "grade": "A",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 75.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.0022",
+      "evaluated_at": "2026-01-01T18:07:06.157511",
+      "rank": 4
+    },
+    {
+      "skill_name": "skill-development",
+      "overall_score": 84.0,
+      "grade": "B",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 60.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.03",
+      "evaluated_at": "2026-01-01T08:50:32.096831",
+      "rank": 5
+    },
+    {
+      "skill_name": "add-uint-support",
+      "overall_score": 84.0,
+      "grade": "B",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 60.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T17:39:24.716591",
+      "rank": 6
+    },
+    {
+      "skill_name": "frontend-design",
+      "overall_score": 84.0,
+      "grade": "B",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 60.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.03",
+      "evaluated_at": "2026-01-01T18:51:15.912087",
+      "rank": 7
+    },
+    {
+      "skill_name": "mcp-integration",
+      "overall_score": 84.0,
+      "grade": "B",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 60.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.03",
+      "evaluated_at": "2026-01-01T19:05:50.340372",
+      "rank": 8
+    },
+    {
+      "skill_name": "configured-agent",
+      "overall_score": 76.0,
+      "grade": "C",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 40.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.0084",
+      "evaluated_at": "2026-01-01T18:34:48.896670",
+      "rank": 9
+    },
+    {
+      "skill_name": "typescript-write",
+      "overall_score": 70.0,
+      "grade": "C",
+      "task_pass_rate": 90.0,
+      "quality_win_rate": 40.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T17:13:28.393455",
+      "rank": 10
+    },
+    {
+      "skill_name": "command-development",
+      "overall_score": 69.6842105263158,
+      "grade": "D",
+      "task_pass_rate": 89.47368421052632,
+      "quality_win_rate": 40.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.03",
+      "evaluated_at": "2026-01-01T18:05:30.442849",
+      "rank": 11
+    },
+    {
+      "skill_name": "at-dispatch-v2",
+      "overall_score": 68.0,
+      "grade": "D",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 20.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T17:49:00.665965",
+      "rank": 12
+    },
+    {
+      "skill_name": "claude-opus-4-5-migration",
+      "overall_score": 68.0,
+      "grade": "D",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 20.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.01",
+      "evaluated_at": "2026-01-01T17:52:06.921633",
+      "rank": 13
+    },
+    {
+      "skill_name": "clojure-write",
+      "overall_score": 68.0,
+      "grade": "D",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 20.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T17:58:59.410861",
+      "rank": 14
+    },
+    {
+      "skill_name": "hook-development",
+      "overall_score": 68.0,
+      "grade": "D",
+      "task_pass_rate": 60.0,
+      "quality_win_rate": 80.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.04",
+      "evaluated_at": "2026-01-01T18:59:04.685671",
+      "rank": 15
+    },
+    {
+      "skill_name": "payload",
+      "overall_score": 68.0,
+      "grade": "D",
+      "task_pass_rate": 86.66666666666667,
+      "quality_win_rate": 40.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.04",
+      "evaluated_at": "2026-01-01T19:13:46.505893",
+      "rank": 16
+    },
+    {
+      "skill_name": "skill-writer",
+      "overall_score": 60.0,
+      "grade": "D",
+      "task_pass_rate": 33.33333333333333,
+      "quality_win_rate": 100.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T08:55:51.059185",
+      "rank": 17
+    },
+    {
+      "skill_name": "rule-identifier",
+      "overall_score": 60.0,
+      "grade": "D",
+      "task_pass_rate": 100.0,
+      "quality_win_rate": 0.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.01",
+      "evaluated_at": "2026-01-01T19:23:16.911616",
+      "rank": 18
+    },
+    {
+      "skill_name": "docs-write",
+      "overall_score": 41.75,
+      "grade": "F",
+      "task_pass_rate": 56.25,
+      "quality_win_rate": 20.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T18:40:38.825581",
+      "rank": 19
+    },
+    {
+      "skill_name": "agent-development",
+      "overall_score": 40.0,
+      "grade": "F",
+      "task_pass_rate": 66.66666666666666,
+      "quality_win_rate": 0.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T17:46:42.623995",
+      "rank": 20
+    },
+    {
+      "skill_name": "writing-rules",
+      "overall_score": 0.0,
+      "grade": "F",
+      "task_pass_rate": 0.0,
+      "quality_win_rate": 0.0,
+      "quality_tested": true,
+      "estimated_cost": "$0.02",
+      "evaluated_at": "2026-01-01T09:09:36.217002",
+      "rank": 21
+    }
+  ],
+  "total_skills": 21
+}

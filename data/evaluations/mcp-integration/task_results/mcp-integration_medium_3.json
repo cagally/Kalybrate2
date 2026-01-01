@@ -1,0 +1,27 @@
+{
+  "task_id": "mcp-integration_medium_3",
+  "prompt": "How do I use MCP tools in my plugin commands? I want to create a command that uses database tools from an MCP server.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll provide a comprehensive example of using MCP tools in a plugin command, focusing on database integration. I'll create a multi-file example that demonstrates best practices.\n\n1. First, let's create the MCP configuration (`.mcp.json`):\n\n```json\n{\n  \"database\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/db-config.json\"],\n    \"env\": {\n      \"DB_CONNECTION_STRING\": \"${DATABASE_URL}\"\n    }\n  }\n}\n```\n\n2. Create a sample command file (`list-users.md`):\n\n```markdown\n---\nname: List Database Users\ndescription: Retrieve and display users from the database\nallowed-tools: [\n  \"mcp__plugin_database_database__list_users\",\n  \"mcp__plugin_database_database__get_user_count\"\n]\n---\n\n# List Database Users\n\n## Steps:\n1. Get total user count\n2. List users with basic details\n\n## Command Execution\n\n- First, check the total number of users\n- Then retrieve the user list\n- Display results in a formatted table\n```\n\n3. Create the Python command implementation (`list-users.py`):\n\n```python\ndef execute_command(claude_context):\n    \"\"\"\n    List users from the database using MCP tools\n    \"\"\"\n    # Get user count tool\n    user_count_tool = claude_context.get_tool('mcp__plugin_database_database__get_user_count')\n    \n    # Get list users tool\n    list_users_tool = claude_context.get_tool('mcp__plugin_database_database__list_users')\n    \n    try:\n        # Call tool to get user count\n        user_count_result = user_count_tool.call()\n        total_users = user_count_result.get('count', 0)\n        \n        # Call tool to list users (with optional pagination)\n        users_result = list_users_tool.call({\n            'limit': 50,  # Optional: limit results\n            'offset': 0   # Optional: pagination\n        })\n        \n        # Format and display results\n        output = f\"Total Users: {total_users}\\n\\n\"\n        output += \"User List:\\n\"\n        output += \"-------------------\\n\"\n        \n        for user in users_result.get('users', []):\n            output += f\"ID: {user.get('id')}\\n\"\n            output += f\"Name: {user.get('name')}\\n\"\n            output += f\"Email: {user.get('email')}\\n\"\n            output += \"-------------------\\n\"\n        \n        return {\n            'status': 'success',\n            'output': output\n        }\n    \n    except Exception as e:\n        return {\n            'status': 'error',\n            'output': f\"Error retrieving users: {str(e)}\"\n        }\n```\n\n4. README section for database integration:\n\n```markdown\n## Database Integration\n\n### Prerequisites\n\n1. Set the `DATABASE_URL` environment variable with your database connection string:\n   ```bash\n   export DATABASE_URL=\"postgresql://user:password@localhost/mydb\"\n   ```\n\n2. Ensure the database MCP server is configured and running.\n\n### Supported Tools\n\n- `list_users`: Retrieve list of users\n- `get_user_count`: Get total number of users\n\n### Usage\n\nRun the command to list database users:\n```bash\nclaude database:list-users\n```\n```\n\n5. Plugin Configuration (`plugin.json`):\n\n```json\n{\n  \"name\": \"database-plugin\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Database management plugin using MCP\",\n  \"commands\": {\n    \"list-users\": {\n      \"file\": \"list-users.py\",\n      \"description\": \"List users from the database\"\n    }\n  }\n}\n```\n\nKey Best Practices Demonstrated:\n- Use of environment variables for connection\n- Pre-allowed specific MCP tools\n- Error handling\n- Formatted output\n- Separation of configuration and implementation\n- Optional pagination and limits\n\nRecommendations:\n- Always validate and sanitize inputs\n- Handle potential connection or permission errors\n- Use environment variables for sensitive information\n- Document required setup steps\n\nThis example shows a complete, secure way to integrate MCP database tools into a Claude Code plugin command. The approach is flexible, allowing different database backends while maintaining a consistent interface.\n\nWould you like me to elaborate on any part of the MCP tool integration?",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3693,
+    "output": 1076,
+    "total": 4769
+  },
+  "execution_time": 19.65729522705078,
+  "error": null,
+  "timestamp": "2026-01-01T19:02:31.383200"
+}

@@ -1,0 +1,35 @@
+{
+  "task_id": "docs-write_medium_1",
+  "prompt": "We're launching a new authentication system that supports both SAML and OAuth. I need comprehensive documentation that covers setup for both methods, including common troubleshooting steps.",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create comprehensive documentation for the new authentication system supporting SAML and OAuth. I'll create a markdown file that covers setup, configuration, and troubleshooting steps.\n\n```python\nimport os\n\nOUTPUT_DIR = \"/var/folders/2w/xl3jf3j148n2fy4gkgrx_ymh0000gn/T/kalybrate_task_bcn7sqc4\"\nFILE_PATH = os.path.join(OUTPUT_DIR, \"authentication-setup.md\")\n\ndocumentation_content = '''# Authentication Setup Guide: SAML and OAuth\n\n## Overview\n\nMetabase supports two robust authentication methods: SAML (Security Assertion Markup Language) and OAuth. This guide will walk you through setting up and configuring these authentication systems.\n\n## Prerequisites\n\n- Metabase Enterprise or Pro edition\n- Administrative access to your Metabase instance\n- Credentials for your identity provider (IdP)\n\n## SAML Authentication Setup\n\n### Step 1: Configure Identity Provider\n\n1. Obtain the following details from your SAML Identity Provider:\n   - IdP SSO URL\n   - IdP Entity ID\n   - Public X.509 certificate\n\n2. Prepare Metabase Service Provider (SP) Details:\n   - SP Entity ID: `https://your-metabase-domain.com/saml`\n   - ACS (Assertion Consumer Service) URL: `https://your-metabase-domain.com/saml/callback`\n\n### Step 2: Metabase SAML Configuration\n\nNavigate to **Admin** > **Authentication** > **SAML**:\n\n1. **Enable SAML Authentication**: Toggle the switch\n2. **IdP URL**: Paste your Identity Provider's SSO URL\n3. **IdP Certificate**: Upload the X.509 certificate\n4. **Attribute Mapping**:\n   - First Name: `first_name`\n   - Last Name: `last_name`\n   - Email: `email`\n\n### SAML Troubleshooting\n\n**Common Issues:**\n\n- **Certificate Errors**\n  - Ensure certificate is valid and not expired\n  - Check certificate is in correct format (Base64 encoded)\n\n- **Login Failures**\n  - Verify IdP and SP entity IDs match exactly\n  - Check clock synchronization between systems\n\n## OAuth Authentication Setup\n\n### Step 1: Register Application\n\n1. Create an OAuth application with your provider (Google, Azure AD, etc.)\n2. Obtain:\n   - Client ID\n   - Client Secret\n   - Authorization endpoints\n\n### Step 2: Metabase OAuth Configuration\n\nNavigate to **Admin** > **Authentication** > **OAuth**:\n\n1. Select OAuth Provider (Google, Azure, etc.)\n2. Enter **Client ID** and **Client Secret**\n3. Configure **Authorized Redirect URIs**:\n   - `https://your-metabase-domain.com/oauth/callback`\n\n### OAuth Troubleshooting\n\n**Common Challenges:**\n\n- **Authorization Errors**\n  - Confirm redirect URI matches exactly\n  - Check client credentials\n  - Verify OAuth scopes include required permissions\n\n- **Email Mapping**\n  - Ensure OAuth provider returns email address\n  - Check email domain restrictions\n\n## Security Recommendations\n\n- Use HTTPS for all authentication endpoints\n- Implement Multi-Factor Authentication (MFA)\n- Regularly rotate credentials\n- Limit authentication attempts\n\n## Advanced Configuration\n\n### Group Synchronization\n\nBoth SAML and OAuth support automatic group assignment based on user attributes.\n\n**Configuration:**\n- Map external groups to Metabase groups\n- Control access based on group membership\n\n## Debugging Authentication\n\n1. Enable verbose logging in Metabase\n2. Check system logs\n3. Use browser developer tools to inspect authentication flow\n\n## Support\n\nIf you encounter persistent issues:\n- Review configuration\n- Check Metabase support documentation\n- Contact Metabase support with detailed logs\n\n---\n\n**Note:** Authentication configurations vary by organization. Always test in a staging environment first.\n'''\n\n# Ensure output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Write the documentation file\nwith open(FILE_PATH, 'w') as f:\n    f.write(documentation_content)\n\nprint(f\"Documentation created at: {FILE_PATH}\")\n```\n\nThis script does the following:\n\n1. Creates a comprehensive markdown file covering SAML and OAuth authentication\n2. Includes setup instructions, troubleshooting steps, and best practices\n3. Uses the specified OUTPUT_DIR for file creation\n4. Follows Metabase's documentation style guide\n   - Conversational tone\n   - Clear, actionable instructions\n   - Anticipates common user questions\n   - Provides context and explanations\n\nThe documentation covers:\n- Setup process for both SAML and OAuth\n- Configuration steps\n- Troubleshooting guidance\n- Security recommendations\n- Advanced configuration options\n\nWould you like me to modify anything in the documentation?",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true,
+    "min_paragraphs": true,
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified",
+    "min_paragraphs": "verified",
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 5,
+    "total": 5
+  },
+  "passed": true,
+  "tokens": {
+    "input": 932,
+    "output": 1137,
+    "total": 2069
+  },
+  "execution_time": 20.829955101013184,
+  "error": null,
+  "timestamp": "2026-01-01T18:37:33.747838"
+}

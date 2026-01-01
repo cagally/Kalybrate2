@@ -1,0 +1,27 @@
+{
+  "task_id": "mcp-integration_medium_1",
+  "prompt": "I want to connect my plugin to GitHub's MCP server using OAuth. How do I configure this properly with environment variables?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you configure a GitHub MCP server integration using OAuth with best practices from the MCP Integration skill. I'll provide a comprehensive example that covers the configuration, environment setup, and documentation.\n\n1. First, create a `.mcp.json` file in your plugin root:\n\n```json\n{\n  \"github\": {\n    \"type\": \"sse\",\n    \"url\": \"https://mcp.github.com/sse\",\n    \"oauth\": {\n      \"provider\": \"github\",\n      \"scopes\": [\"repo\", \"read:user\", \"workflow\"]\n    }\n  }\n}\n```\n\n2. Create a `README.md` for environment variable documentation:\n\n```markdown\n# GitHub Plugin\n\n## MCP Integration Setup\n\n### Required Environment Variables\n\n- `GITHUB_CLIENT_ID`: OAuth application client ID\n- `GITHUB_CLIENT_SECRET`: OAuth application client secret\n\n### Setup Instructions\n\n1. Create a GitHub OAuth App:\n   - Go to GitHub Developer Settings\n   - Create a new OAuth App\n   - Set callback URL to `https://claude.ai/oauth/github`\n\n2. Set environment variables:\n   ```bash\n   export GITHUB_CLIENT_ID=your_client_id\n   export GITHUB_CLIENT_SECRET=your_client_secret\n   ```\n```\n\n3. Create a `plugin.json` with MCP configuration:\n\n```json\n{\n  \"name\": \"github-integration\",\n  \"version\": \"1.0.0\",\n  \"description\": \"GitHub integration via MCP\",\n  \"mcpServers\": {\n    \"github\": {\n      \"type\": \"sse\",\n      \"url\": \"https://mcp.github.com/sse\"\n    }\n  }\n}\n```\n\n4. Example command that uses GitHub MCP tools:\n\n```markdown\n# list-repos.md\n---\nallowed-tools: [\n  \"mcp__plugin_github_github__list_repositories\",\n  \"mcp__plugin_github_github__get_repository_details\"\n]\n---\n\n# List GitHub Repositories\n\nWorkflow:\n1. List user's repositories\n2. Get details for selected repositories\n```\n\n5. Python script to manage the configuration (optional, but shows programmatic setup):\n\n```python\nimport json\nimport os\n\ndef create_mcp_config():\n    mcp_config = {\n        \"github\": {\n            \"type\": \"sse\",\n            \"url\": \"https://mcp.github.com/sse\",\n            \"oauth\": {\n                \"provider\": \"github\",\n                \"scopes\": [\"repo\", \"read:user\", \"workflow\"]\n            }\n        }\n    }\n    \n    # Ensure plugin root exists\n    plugin_root = os.path.join(os.getcwd(), '.claude-plugin')\n    os.makedirs(plugin_root, exist_ok=True)\n    \n    # Write .mcp.json\n    with open(os.path.join(plugin_root, '.mcp.json'), 'w') as f:\n        json.dump(mcp_config, f, indent=2)\n    \n    print(\"MCP configuration for GitHub created successfully!\")\n\nif __name__ == \"__main__\":\n    create_mcp_config()\n```\n\n## Key Security and Best Practice Notes:\n\n1. OAuth flow is handled automatically by Claude Code\n2. User will be prompted to authenticate on first use\n3. Scopes are explicitly defined for least-privilege access\n4. Environment variables used for sensitive credentials\n5. HTTPS used for secure connection\n6. Tools are pre-allowed with specific names\n\n## Typical Authentication Flow:\n\n1. User runs a command using GitHub MCP tools\n2. If no valid token exists, OAuth flow triggers\n3. User directed to GitHub for authentication\n4. GitHub redirects back to Claude with access token\n5. Token securely stored for future use\n\n## Debugging and Verification\n\nTo verify MCP integration:\n1. Run `/mcp` in Claude to see available servers\n2. Use `claude --debug` for detailed connection logs\n3. Check that GitHub tools are available\n\n### Potential Tools Available\n- `mcp__plugin_github_github__list_repositories`\n- `mcp__plugin_github_github__create_issue`\n- `mcp__plugin_github_github__get_repository_details`\n- `mcp__plugin_github_github__search_code`\n\nWould you like me to elaborate on any part of the GitHub MCP integration configuration?",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3690,
+    "output": 1030,
+    "total": 4720
+  },
+  "execution_time": 18.642194032669067,
+  "error": null,
+  "timestamp": "2026-01-01T19:02:31.381732"
+}

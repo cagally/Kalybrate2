@@ -1,0 +1,20 @@
+{
+  "task_id": "skill-writer_easy_3",
+  "prompt": "I have a prompt I use for code reviews. How do I turn this into a skill that Claude can use automatically?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you transform your code review prompt into a structured Claude Skill. First, I'll need some details about your existing code review process.\n\nCould you share:\n1. What does your current code review prompt look like?\n2. What types of code do you typically review?\n3. Are there any specific aspects you always check (e.g., best practices, security, performance)?\n4. Do you have any preference for the Skill to be personal or project-specific?\n\nI'll guide you through converting this into a well-structured Skill that Claude can automatically trigger when you want a code review. The goal is to create a reusable, focused Skill that captures your specific review approach.\n\nSome initial questions to help me understand the scope:\n- Do you review specific programming languages?\n- Are there any tools or static analysis you typically use?\n- Do you want the Skill to provide a detailed report or summary?\n\nWould you mind sharing those details so I can help you craft the most effective Code Review Skill?",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2613,
+    "output": 223,
+    "total": 2836
+  },
+  "execution_time": 5.839179039001465,
+  "error": null,
+  "timestamp": "2026-01-01T08:53:51.055853"
+}

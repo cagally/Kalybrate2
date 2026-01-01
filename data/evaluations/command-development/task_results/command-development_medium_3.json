@@ -1,0 +1,31 @@
+{
+  "task_id": "command-development_medium_3",
+  "prompt": "I need a pull request review command that uses the fast model for quick checks but allows specific tools for reading and git operations",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a pull request review command with the specifications you mentioned. I'll use Python to save the command file in the specified output directory.\n\n```python\nimport os\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Full path for the command file\ncommand_path = os.path.join(OUTPUT_DIR, 'review-pr.md')\n\n# Command content with YAML frontmatter and detailed review instructions\ncommand_content = '''---\ndescription: Quick pull request code review\nmodel: haiku\nallowed-tools: Read, Bash(git:*)\nargument-hint: [pr-number]\n---\n\nPerform a quick review of pull request #$1:\n\n1. Fetch PR details: !`gh pr view $1`\n\n2. List changed files: !`gh pr diff $1 --name-only`\n\n3. Rapid code review checks:\n   - Basic syntax and style\n   - Obvious logical errors\n   - Potential security quick wins\n   - Code complexity red flags\n\n4. Summarize key findings:\n   - Highlight critical issues\n   - Suggest immediate improvements\n   - Recommend areas for deeper review\n\nProvide a concise report focusing on high-impact observations.\n'''\n\n# Write the command file\nwith open(command_path, 'w') as f:\n    f.write(command_content)\n\nprint(f\"Pull request review command created at {command_path}\")\n```\n\nThis command does the following:\n\n1. Uses the `haiku` model for fast processing\n2. Allows `Read` and `git` Bash operations\n3. Expects a PR number as an argument\n4. Uses GitHub CLI (`gh`) to fetch PR details and diff\n5. Performs a quick, lightweight code review\n6. Generates a concise summary of key findings\n\nThe command is designed for rapid initial review, focusing on quick insights rather than comprehensive analysis. It leverages the fast `haiku` model and limited tools to provide a swift overview of the pull request.\n\nWould you like me to explain any part of the command or make any modifications?",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 3,
+    "total": 3
+  },
+  "passed": true,
+  "tokens": {
+    "input": 5054,
+    "output": 479,
+    "total": 5533
+  },
+  "execution_time": 11.187255144119263,
+  "error": null,
+  "timestamp": "2026-01-01T18:01:28.856970"
+}

@@ -1,0 +1,36 @@
+{
+  "skill_name": "mcp-integration",
+  "overall_score": 84.0,
+  "grade": "B",
+  "task_completion": {
+    "passed": 9,
+    "total": 9,
+    "rate": 100.0,
+    "verified_criteria": {
+      "passed": 9,
+      "total": 9
+    },
+    "verification_levels": {
+      "full": 9,
+      "partial": 0,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 3,
+    "losses": 2,
+    "ties": 0,
+    "win_rate": 60.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 4973,
+    "estimated_per_use": "$0.03"
+  },
+  "evaluated_at": "2026-01-01T19:05:50.340372",
+  "execution_time": 405.6503551006317,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

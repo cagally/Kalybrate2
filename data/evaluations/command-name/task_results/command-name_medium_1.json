@@ -1,0 +1,27 @@
+{
+  "task_id": "command-name_medium_1",
+  "prompt": "Cannot generate meaningful test tasks without actual skill description",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "You're right. I apologize for the placeholder. Could you please provide more details about the specific skill you'd like me to help you with? A meaningful skill description should include:\n\n1. The purpose of the skill\n2. What specific task or problem it solves\n3. Any key inputs, outputs, or parameters\n4. Any special requirements or constraints\n\nFor example, a skill description might look like:\n- Name: Weather Forecast Retriever\n- Description: Fetches current weather and 5-day forecast for a given city using a weather API\n- Inputs: City name, optional country code\n- Outputs: Temperature, humidity, wind speed, forecast details\n- Requirements: Uses OpenWeatherMap API, handles API errors gracefully\n\nOr:\n- Name: PDF Text Extractor\n- Description: Extracts plain text from PDF files, handling different PDF formats\n- Inputs: Path to PDF file\n- Outputs: Extracted text as a string\n- Requirements: Works with encrypted and scanned PDFs, preserves text formatting\n\nCould you provide more context about the skill you want to create?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 78,
+    "output": 243,
+    "total": 321
+  },
+  "execution_time": 5.209336042404175,
+  "error": null,
+  "timestamp": "2026-01-01T18:06:13.697256"
+}

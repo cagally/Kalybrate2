@@ -1,0 +1,20 @@
+{
+  "task_id": "typescript-review_hard_2",
+  "prompt": "Our team has implemented a new TypeScript module for real-time data processing with WebSocket connections, including custom event handlers, type guards, and error boundaries. The code uses advanced TypeScript features like conditional types and mapped types. I need a thorough review to ensure we're following best practices and maintaining type safety throughout the complex data flow.",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you review the TypeScript module for real-time data processing. I'll break down the review into several key areas:\n\n1. Type Safety and Type System Design\n2. WebSocket Connection Handling\n3. Event Handlers and Type Guards\n4. Error Handling and Boundaries\n5. Performance and Best Practices\n\nCould you please share the specific TypeScript code you'd like me to review? I'll examine:\n- Type definitions\n- Interface structures\n- Generic type usage\n- Error handling mechanisms\n- WebSocket connection logic\n- Event handling patterns\n\nWithout seeing the actual code, I can provide some general best practices for TypeScript modules dealing with real-time data processing:\n\n```typescript\n// Example of a robust WebSocket connection type pattern\ntype WebSocketConnectionStatus = \n  | 'connecting' \n  | 'open' \n  | 'closing' \n  | 'closed';\n\ninterface WebSocketConfig<T> {\n  url: string;\n  protocols?: string | string[];\n  reconnectTimeout?: number;\n  onMessage: (data: T) => void;\n  onError?: (error: Error) => void;\n}\n\n// Type guard for WebSocket message validation\nfunction isValidMessage<T>(message: unknown): message is T {\n  // Implement type-safe message validation logic\n  return true;\n}\n\nclass RealTimeDataProcessor<T> {\n  private socket: WebSocket | null = null;\n  private status: WebSocketConnectionStatus = 'closed';\n\n  constructor(private config: WebSocketConfig<T>) {}\n\n  // Advanced connection management with type safety\n  connect(): void {\n    try {\n      this.socket = new WebSocket(this.config.url, this.config.protocols);\n      \n      this.socket.onopen = () => {\n        this.status = 'open';\n        console.log('WebSocket connection established');\n      };\n\n      this.socket.onmessage = (event: MessageEvent) => {\n        try {\n          const parsedData = JSON.parse(event.data);\n          if (isValidMessage<T>(parsedData)) {\n            this.config.onMessage(parsedData);\n          }\n        } catch (error) {\n          this.config.onError?.(new Error('Invalid message format'));\n        }\n      };\n\n      this.socket.onerror = (error) => {\n        this.status = 'closed';\n        this.config.onError?.(new Error('WebSocket connection error'));\n      };\n    } catch (error) {\n      this.config.onError?.(error as Error);\n    }\n  }\n}\n```\n\nKey review points I'd look for:\n1. Proper type parameterization\n2. Comprehensive error handling\n3. Clear connection state management\n4. Type guards for message validation\n5. Flexible configuration options\n\nTo provide a more detailed review, I would need to see:\n- The specific module implementation\n- Custom type definitions\n- Event handler structures\n- Error boundary implementations\n\nWould you like to share the specific code for a comprehensive review? I can then provide:\n- Specific improvement suggestions\n- Type safety recommendations\n- Performance optimization insights\n- Best practice alignments",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 265,
+    "output": 735,
+    "total": 1000
+  },
+  "execution_time": 12.595618963241577,
+  "error": null,
+  "timestamp": "2026-01-01T08:57:01.424043"
+}

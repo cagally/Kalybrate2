@@ -1,0 +1,27 @@
+{
+  "task_id": "payload_medium_2",
+  "prompt": "I'm building an e-commerce site and need to query products by category and also get the category details in the same request. The relationship isn't populating correctly - what am I doing wrong?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you set up a Payload CMS e-commerce solution with Products and Categories collections, demonstrating how to properly query and populate relationships.\n\nHere's a comprehensive example:\n\n```typescript\n// src/collections/Categories.ts\nimport { CollectionConfig } from 'payload/types'\n\nexport const Categories: CollectionConfig = {\n  slug: 'categories',\n  admin: {\n    useAsTitle: 'name',\n  },\n  fields: [\n    {\n      name: 'name',\n      type: 'text',\n      required: true,\n    },\n    {\n      name: 'description',\n      type: 'textarea',\n    },\n  ],\n}\n\n// src/collections/Products.ts\nimport { CollectionConfig } from 'payload/types'\n\nexport const Products: CollectionConfig = {\n  slug: 'products',\n  admin: {\n    useAsTitle: 'name',\n  },\n  fields: [\n    {\n      name: 'name',\n      type: 'text',\n      required: true,\n    },\n    {\n      name: 'description',\n      type: 'textarea',\n    },\n    {\n      name: 'price',\n      type: 'number',\n      required: true,\n    },\n    {\n      name: 'category',\n      type: 'relationship',\n      relationTo: 'categories',\n      required: true,\n    },\n    {\n      name: 'inStock',\n      type: 'checkbox',\n      defaultValue: true,\n    },\n  ],\n}\n\n// Example query with proper relationship population\nasync function getProductsInCategory(categoryId: string) {\n  try {\n    const payload = await getPayload({\n      config: await import('../payload.config'),\n    })\n\n    const products = await payload.find({\n      collection: 'products',\n      where: {\n        category: {\n          equals: categoryId,\n        },\n      },\n      depth: 2, // CRITICAL: Set depth to populate relationship\n      limit: 50, // Adjust as needed\n      populate: ['category'], // Explicitly specify relationship to populate\n    })\n\n    return products\n  } catch (error) {\n    console.error('Error fetching products:', error)\n    throw error\n  }\n}\n\n// Example Next.js API Route\nexport async function GET(request: Request) {\n  const { searchParams } = new URL(request.url)\n  const categoryId = searchParams.get('categoryId')\n\n  if (!categoryId) {\n    return Response.json(\n      { error: 'Category ID is required' },\n      { status: 400 }\n    )\n  }\n\n  try {\n    const productsResult = await getProductsInCategory(categoryId)\n    return Response.json(productsResult)\n  } catch (error) {\n    return Response.json(\n      { error: 'Failed to fetch products' },\n      { status: 500 }\n    )\n  }\n}\n```\n\nKey Points to Ensure Relationship Population:\n\n1. **Set `depth`**: \n   - Use `depth: 2` to populate relationships\n   - Default is `0`, which returns only IDs\n   - `depth: 2` typically populates one level deep\n\n2. **Use `populate`**:\n   - Explicitly specify which relationships to populate\n   - In this case, `populate: ['category']`\n\n3. **Relationship Field Configuration**:\n   - Ensure the relationship field is correctly set up\n   - Use `type: 'relationship'`\n   - Set `relationTo` to the target collection\n\n4. **Error Handling**:\n   - Wrap queries in try/catch\n   - Handle potential errors gracefully\n\n### Payload Config Update\n\nUpdate your `payload.config.ts` to include these collections:\n\n```typescript\nimport { buildConfig } from 'payload/config'\nimport { Products } from './collections/Products'\nimport { Categories } from './collections/Categories'\n\nexport default buildConfig({\n  collections: [\n    Products,\n    Categories,\n    // other collections...\n  ],\n  // other config options...\n})\n```\n\n### Example Frontend Usage\n\n```typescript\n// In a React/Next.js component\nasync function ProductList({ categoryId }) {\n  const response = await fetch(`/api/products?categoryId=${categoryId}`)\n  const { docs } = await response.json()\n\n  return (\n    <div>\n      {docs.map(product => (\n        <div key={product.id}>\n          <h2>{product.name}</h2>\n          <p>Category: {product.category.name}</p>\n          <p>Price: ${product.price}</p>\n        </div>\n      ))}\n    </div>\n  )\n}\n```\n\n### Troubleshooting Tips\n\n1. Always check the `depth` parameter\n2. Use `populate` explicitly\n3. Verify relationship field configuration\n4. Check your Payload configuration\n5. Use TypeScript for type safety\n\n### Performance Considerations\n\n- For large datasets, consider:\n  - Pagination\n  - Selective population\n  - Indexed fields\n  - Caching strategies\n\nBy following these patterns, you'll create a robust, type-safe way to query and populate relationships in your Payload CMS e-commerce application.",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 4284,
+    "output": 1257,
+    "total": 5541
+  },
+  "execution_time": 19.8127019405365,
+  "error": null,
+  "timestamp": "2026-01-01T19:09:08.297297"
+}

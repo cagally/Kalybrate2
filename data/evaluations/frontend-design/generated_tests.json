@@ -1,0 +1,142 @@
+{
+  "skill_claims": [
+    "Create distinctive, production-grade frontend interfaces with high design quality",
+    "Generate creative, polished code that avoids generic AI aesthetics",
+    "Implement real working code with exceptional attention to aesthetic details",
+    "Choose bold aesthetic directions with intentional design choices",
+    "Create visually striking and memorable interfaces",
+    "Use distinctive typography choices beyond generic fonts",
+    "Implement cohesive color schemes and themes with CSS variables",
+    "Add animations and micro-interactions for enhanced user experience",
+    "Create unexpected layouts with asymmetry and creative spatial composition",
+    "Add atmospheric backgrounds and visual details like gradients, textures, and effects"
+  ],
+  "tasks": [
+    {
+      "id": "frontend-design_easy_1",
+      "prompt": "I need a simple landing page for my coffee shop called 'Brew & Bean'. Just something clean with our hours and contact info.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Create distinctive, production-grade frontend interfaces with high design quality"
+    },
+    {
+      "id": "frontend-design_easy_2",
+      "prompt": "Can you build me a contact form component for my portfolio website? I'm a graphic designer so it should look professional.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Generate creative, polished code that avoids generic AI aesthetics"
+    },
+    {
+      "id": "frontend-design_easy_3",
+      "prompt": "I want to create a simple pricing table for my SaaS product with three tiers. Make it look modern and trustworthy.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Use distinctive typography choices beyond generic fonts"
+    },
+    {
+      "id": "frontend-design_medium_1",
+      "prompt": "Build me a dashboard for my fitness app that shows workout stats, progress charts, and upcoming sessions. The target audience is young professionals who care about aesthetics.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Create visually striking and memorable interfaces"
+    },
+    {
+      "id": "frontend-design_medium_2",
+      "prompt": "I'm launching a luxury watch brand and need a product showcase page. It should feel premium and sophisticated, highlighting our craftsmanship.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Choose bold aesthetic directions with intentional design choices"
+    },
+    {
+      "id": "frontend-design_medium_3",
+      "prompt": "Create a music player interface for my indie music streaming app. The vibe should be artistic and unconventional, appealing to creative types.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Add animations and micro-interactions for enhanced user experience"
+    },
+    {
+      "id": "frontend-design_hard_1",
+      "prompt": "I need a complete e-commerce homepage for my avant-garde fashion brand. We're targeting fashion-forward millennials who appreciate bold, experimental design. Include hero section, featured products, and newsletter signup.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Create unexpected layouts with asymmetry and creative spatial composition"
+    },
+    {
+      "id": "frontend-design_hard_2",
+      "prompt": "Build a portfolio website for a contemporary artist who works with digital installations. The site should be immersive and experimental, breaking conventional web design rules while remaining functional.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Add atmospheric backgrounds and visual details like gradients, textures, and effects"
+    },
+    {
+      "id": "frontend-design_hard_3",
+      "prompt": "Create a data visualization dashboard for a cryptocurrency trading platform. It needs to handle real-time data display, multiple chart types, and appeal to both novice and expert traders. The design should feel cutting-edge and trustworthy.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Implement real working code with exceptional attention to aesthetic details"
+    }
+  ],
+  "quality_prompts": [
+    "Design a homepage for a boutique hotel in Tokyo. The target audience is design-conscious travelers who appreciate minimalist luxury.",
+    "Create a mobile app interface for a meditation app targeting busy professionals. It should feel calming but not boring.",
+    "Build a product page for a high-end skincare brand. The aesthetic should convey science-backed luxury and appeal to discerning customers.",
+    "Design a booking interface for a co-working space that caters to creative freelancers and startups. Make it feel inspiring and community-focused.",
+    "Create a restaurant menu interface for an upscale farm-to-table restaurant. The design should reflect sustainability and artisanal quality."
+  ],
+  "generated_at": "2026-01-01T18:44:40.976334",
+  "model": "claude-sonnet-4-20250514"
+}

@@ -1,0 +1,36 @@
+{
+  "skill_name": "typescript-write",
+  "overall_score": 70.0,
+  "grade": "C",
+  "task_completion": {
+    "passed": 7,
+    "total": 9,
+    "rate": 90.0,
+    "verified_criteria": {
+      "passed": 18,
+      "total": 20
+    },
+    "verification_levels": {
+      "full": 7,
+      "partial": 2,
+      "unverified": 0
+    }
+  },
+  "quality_improvement": {
+    "wins": 2,
+    "losses": 3,
+    "ties": 0,
+    "win_rate": 40.0,
+    "tested": true
+  },
+  "cost": {
+    "avg_tokens": 1332,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T17:13:28.393455",
+  "execution_time": 352.07201313972473,
+  "models_used": {
+    "task_execution": "claude-3-5-haiku-20241022",
+    "quality_judge": "claude-sonnet-4-20250514"
+  }
+}

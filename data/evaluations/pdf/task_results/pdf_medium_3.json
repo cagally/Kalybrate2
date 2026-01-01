@@ -1,0 +1,29 @@
+{
+  "task_id": "pdf_medium_3",
+  "prompt": "I have some confidential documents that I need to password protect before sending to clients. How can I add password protection to my PDFs?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll show you how to password protect a PDF using the `pypdf` library in Python. Here's a comprehensive solution with error handling and flexibility:\n\n```python\nfrom pypdf import PdfReader, PdfWriter\n\ndef password_protect_pdf(input_path, output_path, user_password, owner_password=None):\n    \"\"\"\n    Add password protection to a PDF file.\n    \n    :param input_path: Path to the input PDF file\n    :param output_path: Path to save the password-protected PDF\n    :param user_password: Password required to open the PDF\n    :param owner_password: Password to modify the PDF (optional)\n    \"\"\"\n    try:\n        # Read the input PDF\n        reader = PdfReader(input_path)\n        \n        # Create a PDF writer\n        writer = PdfWriter()\n        \n        # Add all pages from the input PDF to the writer\n        for page in reader.pages:\n            writer.add_page(page)\n        \n        # Encrypt the PDF\n        # If no owner password is provided, use the user password for both\n        if owner_password is None:\n            owner_password = user_password\n        \n        # Encrypt with specified permissions\n        writer.encrypt(\n            user_password,  # Password to open the document\n            owner_password,  # Password to modify the document\n            # Optional permission settings (customize as needed)\n            permissions_flag=(\n                # Allow printing\n                pypdf.constants.PermissionsFlag.PRINT |\n                # Allow text/graphics extraction\n                pypdf.constants.PermissionsFlag.EXTRACT\n            )\n        )\n        \n        # Write the encrypted PDF to the output file\n        with open(output_path, 'wb') as output_file:\n            writer.write(output_file)\n        \n        print(f\"PDF successfully password protected: {output_path}\")\n    \n    except Exception as e:\n        print(f\"Error protecting PDF: {e}\")\n\n# Example usage\ndef main():\n    # Basic usage with just a user password\n    password_protect_pdf(\n        input_path='confidential_document.pdf', \n        output_path='confidential_document_protected.pdf', \n        user_password='client2023'\n    )\n    \n    # Advanced usage with separate user and owner passwords\n    password_protect_pdf(\n        input_path='sensitive_report.pdf', \n        output_path='sensitive_report_protected.pdf', \n        user_password='view2023',  # Password to open the PDF\n        owner_password='edit2023'   # Password to modify the PDF\n    )\n\n# Run the main function\nif __name__ == '__main__':\n    main()\n```\n\nKey features of this solution:\n\n1. **Flexibility**: \n   - Can set both user and owner passwords\n   - Optional permission settings\n   - Error handling\n\n2. **Security Levels**:\n   - User password: Required to open the PDF\n   - Owner password: Required to modify the PDF\n   - Can set specific permissions (printing, copying, etc.)\n\n3. **Error Handling**:\n   - Catches and reports any issues during PDF protection\n\nRecommendations for password protection:\n\n- Use strong, unique passwords\n- Communicate passwords securely (not via email)\n- Consider using a secure file-sharing service\n- Avoid using easily guessable passwords\n\nImportant Notes:\n- Install required library: `pip install pypdf`\n- Ensure you have the latest version of `pypdf`\n- Test thoroughly before sending to clients\n\nVariations you might want:\n- Fully restrict printing/copying\n- Add watermarks\n- Set different permission levels\n\nWould you like me to elaborate on any part of the PDF password protection process?",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2298,
+    "output": 866,
+    "total": 3164
+  },
+  "execution_time": 14.9724862575531,
+  "error": null,
+  "timestamp": "2026-01-01T19:16:10.592654"
+}

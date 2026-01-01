@@ -1,0 +1,20 @@
+{
+  "task_id": "skill-development_easy_3",
+  "prompt": "What's the difference between putting something in scripts vs references vs assets in a skill?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "Let me break down the key differences between scripts, references, and assets in a skill:\n\n### scripts/\n- **Purpose**: Executable code and utility tools\n- **When to use**: \n  - Automation scripts\n  - Validation utilities\n  - Parsing or transformation tools\n  - Repeatable, deterministic operations\n- **Characteristics**:\n  - Meant to be run/executed\n  - Solve specific, technical tasks\n  - Typically short, focused utilities\n- **Examples**:\n  - `validate-hook-schema.sh`\n  - `parse_config.py`\n  - `generate_template.py`\n  - Linters, formatters, test runners\n\n### references/\n- **Purpose**: Detailed documentation and knowledge base\n- **When to use**:\n  - Comprehensive guides\n  - Detailed explanations\n  - Domain-specific knowledge\n  - API documentation\n  - Extensive patterns and best practices\n- **Characteristics**:\n  - Informational content\n  - Meant to be read and referenced\n  - Can be quite long (2,000-5,000 words)\n  - Provides context and deep understanding\n- **Examples**:\n  - `hook-patterns.md`\n  - `api-reference.md`\n  - `advanced-techniques.md`\n  - Comprehensive guides and documentation\n\n### assets/\n- **Purpose**: Files to be used in output or as templates\n- **When to use**:\n  - Boilerplate code templates\n  - Design assets (logos, icons)\n  - Configuration file templates\n  - Sample documents\n  - Files that will be copied or modified\n- **Characteristics**:\n  - Not meant to be read into context\n  - Used as source material for generation\n  - Typically complete files or templates\n  - Often binary or structured files\n- **Examples**:\n  - `project-template/`\n  - `logo.png`\n  - `default-config.yaml`\n  - `frontend-boilerplate/`\n  - Slide templates, document templates\n\n### Comparative Example\n\nLet's illustrate with a hypothetical `web-app-generator` skill:\n\n```\nweb-app-generator/\n\u251c\u2500\u2500 SKILL.md\n\u251c\u2500\u2500 scripts/\n\u2502   \u251c\u2500\u2500 validate_project.sh     # Script to validate project structure\n\u2502   \u2514\u2500\u2500 generate_files.py       # Script to generate app files\n\u251c\u2500\u2500 references/\n\u2502   \u251c\u2500\u2500 project-architecture.md # Detailed guide on app structure\n\u2502   \u2514\u2500\u2500 best-practices.md       # Comprehensive design guidelines\n\u2514\u2500\u2500 assets/\n    \u251c\u2500\u2500 react-template/         # Complete React project template\n    \u251c\u2500\u2500 vue-template/           # Complete Vue project template\n    \u2514\u2500\u2500 logo-templates/         # Various logo files\n```\n\n### Key Differences in Context\n\n1. **scripts/**: Would contain the actual code to generate or validate the web app\n2. **references/**: Would provide detailed explanations about app architecture and best practices\n3. **assets/**: Would provide complete template projects that can be copied and modified\n\n### Progressive Loading\n\n- **scripts/**: Can be executed without loading into context\n- **references/**: Loaded only when Claude needs detailed information\n- **assets/**: Used as source material for generation, not typically loaded into context\n\n### When to Choose\n\n- Use **scripts/** for repeatable, executable tasks\n- Use **references/** for comprehensive documentation\n- Use **assets/** for complete files or templates to be used in output\n\nThis separation allows for efficient context management and clear organization of skill resources.",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": true,
+  "tokens": {
+    "input": 5601,
+    "output": 809,
+    "total": 6410
+  },
+  "execution_time": 17.40412712097168,
+  "error": null,
+  "timestamp": "2026-01-01T08:48:35.044711"
+}

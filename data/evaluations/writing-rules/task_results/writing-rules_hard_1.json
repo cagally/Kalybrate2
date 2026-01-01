@@ -1,0 +1,21 @@
+{
+  "task_id": "writing-rules_hard_1",
+  "prompt": "Create a comprehensive hookify rule that detects when I'm editing sensitive files (like .pem, .key, credentials.json) and adding what looks like API keys or passwords. It should check multiple file extensions and multiple patterns.",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a comprehensive hookify rule for detecting sensitive file edits with potential security risks. I'll use Python to save the file in the specified OUTPUT_DIR.\n\n```python\nimport os\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Path to the hookify rule file\nrule_path = os.path.join(OUTPUT_DIR, '.claude', 'hookify.sensitive-files-security.local.md')\n\n# Ensure .claude directory exists\nos.makedirs(os.path.dirname(rule_path), exist_ok=True)\n\n# Rule content\nrule_content = '''---\nname: sensitive-files-security\nenabled: true\nevent: file\nconditions:\n  - field: file_path\n    operator: regex_match\n    pattern: (\\\\.pem$|\\\\.key$|credentials\\\\.json$|\\\\.p12$|\\\\.pfx$|\\\\.crt$|\\\\.cer$|\\\\.private_key$|\\\\.secret$)\n  - field: new_text\n    operator: regex_match\n    pattern: (-----BEGIN.+PRIVATE KEY-----|\"(api_key|password|secret|token)\":\\\\s*\"[^\"]{10,}\"|AKIA[A-Z0-9]{16}|Bearer\\\\s+[A-Za-z0-9\\\\-\\\\._~\\\\+/]+|sk_[a-z]{2}_[A-Za-z0-9]{24})\n---\n\n\u26a0\ufe0f **SECURITY ALERT: Sensitive File Modification Detected!** \u26a0\ufe0f\n\nYou are editing a file that appears to contain sensitive credentials or security-related information. This could potentially expose:\n- API Keys\n- Private Keys\n- Certificates\n- Access Tokens\n- Passwords\n\n**Recommended Actions:**\n1. Ensure you are NOT adding actual credentials to version control\n2. Use environment variables or secure secret management\n3. Immediately rotate any exposed credentials\n4. Add this file to .gitignore\n\n**Best Practices:**\n- Store secrets in environment variables\n- Use secret management tools (AWS Secrets Manager, HashiCorp Vault)\n- Never commit secrets to source control\n- Use `.env` files (and add to .gitignore)\n- Implement credential rotation policies\n\n**If this is a false positive:**\n- Modify the rule in `.claude/hookify.sensitive-files-security.local.md`\n- Consider adding more specific exclusions\n'''\n\n# Write the file\nwith open(rule_path, 'w') as f:\n    f.write(rule_content)\n\nprint(f\"Hookify rule created at {rule_path}\")\n```\n\nThis rule does several important things:\n\n1. **File Extension Check**:\n   - Matches sensitive file extensions like .pem, .key, credentials.json, .p12, .pfx, .crt, .cer, .private_key, .secret\n   \n2. **Content Pattern Check**:\n   - Detects various types of sensitive information:\n     - PEM-formatted private keys\n     - JSON-style key/secret declarations\n     - AWS Access Key IDs\n     - Bearer tokens\n     - Stripe-style secret keys\n\n3. **Comprehensive Warning**:\n   - Provides a detailed explanation of risks\n   - Offers actionable recommendations\n   - Suggests best practices for secret management\n\n4. **Flexibility**:\n   - Can be easily modified or disabled\n   - Covers multiple types of sensitive files and credentials\n\nThe rule is designed to be a strong first line of defense against accidentally exposing sensitive information during file edits.\n\nWould you like me to explain any part of the rule in more detail?",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2765,
+    "output": 851,
+    "total": 3616
+  },
+  "execution_time": 16.48418426513672,
+  "error": null,
+  "timestamp": "2026-01-01T09:07:00.105378"
+}

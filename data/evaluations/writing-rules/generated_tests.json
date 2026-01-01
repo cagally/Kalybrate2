@@ -1,0 +1,139 @@
+{
+  "skill_claims": [
+    "Create hookify rules with proper YAML frontmatter and markdown structure",
+    "Write regex patterns to match bash commands, file operations, and other events",
+    "Configure different event types (bash, file, stop, prompt, all)",
+    "Set up conditions with multiple fields and operators",
+    "Generate appropriate warning/blocking messages for detected patterns",
+    "Organize rules with proper file naming and directory structure",
+    "Handle complex multi-condition rules with logical operators"
+  ],
+  "tasks": [
+    {
+      "id": "writing-rules_easy_1",
+      "prompt": "I keep accidentally running dangerous rm commands. Can you help me set up a warning when I try to use rm -rf?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Create hookify rules with proper YAML frontmatter and markdown structure"
+    },
+    {
+      "id": "writing-rules_easy_2",
+      "prompt": "I want to get a reminder whenever I'm about to edit any .env file to make sure I don't commit secrets. How do I set this up?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Configure different event types (bash, file, stop, prompt, all)"
+    },
+    {
+      "id": "writing-rules_easy_3",
+      "prompt": "Create a simple hookify rule that warns me when I use console.log in my JavaScript files.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Write regex patterns to match bash commands, file operations, and other events"
+    },
+    {
+      "id": "writing-rules_medium_1",
+      "prompt": "I need a hookify rule that only triggers when I'm editing TypeScript files AND adding console.log statements. It should warn me but not block the operation.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Set up conditions with multiple fields and operators"
+    },
+    {
+      "id": "writing-rules_medium_2",
+      "prompt": "Set up a completion checklist that reminds me to run tests and update documentation whenever I finish working on a task.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Configure different event types (bash, file, stop, prompt, all)"
+    },
+    {
+      "id": "writing-rules_medium_3",
+      "prompt": "I want to prevent myself from accidentally running chmod 777 or any other dangerous permission commands. This should completely block the operation.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Generate appropriate warning/blocking messages for detected patterns"
+    },
+    {
+      "id": "writing-rules_hard_1",
+      "prompt": "Create a comprehensive hookify rule that detects when I'm editing sensitive files (like .pem, .key, credentials.json) and adding what looks like API keys or passwords. It should check multiple file extensions and multiple patterns.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Handle complex multi-condition rules with logical operators"
+    },
+    {
+      "id": "writing-rules_hard_2",
+      "prompt": "I need a hookify rule that triggers when I mention 'deploy to production' in my prompts and shows me a comprehensive pre-deployment checklist with security, testing, and monitoring considerations.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Configure different event types (bash, file, stop, prompt, all)"
+    },
+    {
+      "id": "writing-rules_hard_3",
+      "prompt": "Set up a complete hookify rule system for a React project that warns about console.log in .tsx files, blocks dangerous bash commands, prevents editing node_modules, and shows a completion checklist. Organize everything properly.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_valid": true,
+        "file_has_content": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Organize rules with proper file naming and directory structure"
+    }
+  ],
+  "quality_prompts": [
+    "Help me create a rule that prevents me from accidentally deleting important files with rm commands.",
+    "I want to set up warnings when I'm about to commit sensitive information like API keys.",
+    "Create a system that reminds me to run tests before I finish working on code changes.",
+    "I need protection against running dangerous system commands that could break my development environment.",
+    "Set up automated reminders for code review checklist items when I'm working on production code."
+  ],
+  "generated_at": "2026-01-01T09:05:01.372560",
+  "model": "claude-sonnet-4-20250514"
+}

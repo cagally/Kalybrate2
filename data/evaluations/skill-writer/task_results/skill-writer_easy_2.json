@@ -1,0 +1,20 @@
+{
+  "task_id": "skill-writer_easy_2",
+  "prompt": "What should I put in the frontmatter of my SKILL.md file? I'm making a skill for analyzing log files.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create an effective SKILL.md frontmatter for a log file analysis skill. I'll ask a few clarifying questions first to make sure we craft a precise description.\n\n1. What types of log files will this skill handle? (e.g., system logs, application logs, web server logs)\n2. What specific analyses can the skill perform? (e.g., error detection, performance metrics, pattern recognition)\n3. Are there any specific file formats or log types you're focusing on?\n\nBased on your responses, I'll help you create a well-structured frontmatter. Here's a preliminary example:\n\n```yaml\n---\nname: log-analyzer\ndescription: Analyze log files to extract insights, detect errors, and generate performance reports. Use when working with system logs, application logs, or when you need to parse and interpret log data from various sources like web servers, applications, or system events.\n```\n\nI've used a template that includes:\n- A lowercase, hyphen-separated name\n- A description that explains:\n  - What the skill does\n  - What types of logs it handles\n  - When to use it\n\nWould you like to refine this further based on your specific log analysis requirements?",
+  "criteria_results": {
+    "response_exists": true,
+    "response_relevant": true
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2616,
+    "output": 268,
+    "total": 2884
+  },
+  "execution_time": 6.448991060256958,
+  "error": null,
+  "timestamp": "2026-01-01T08:53:51.055163"
+}

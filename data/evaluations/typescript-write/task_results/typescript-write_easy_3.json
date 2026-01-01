@@ -1,0 +1,31 @@
+{
+  "task_id": "typescript-write_easy_3",
+  "prompt": "Write a TypeScript interface for a basic user profile with id, name, email, and optional avatar URL properties.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll write a TypeScript interface for a basic user profile that includes the specified properties:\n\n```typescript\ninterface UserProfile {\n  id: string;\n  name: string;\n  email: string;\n  avatarUrl?: string;\n}\n```\n\nLet me break down the interface:\n- `id`: A required string identifier for the user\n- `name`: A required string for the user's name\n- `email`: A required string for the user's email address\n- `avatarUrl`: An optional string (denoted by `?`) for the user's profile picture URL\n\nExample usage:\n\n```typescript\n// Valid user profile with all required fields\nconst validUser: UserProfile = {\n  id: '123',\n  name: 'John Doe',\n  email: 'john.doe@example.com'\n};\n\n// User profile with optional avatar\nconst userWithAvatar: UserProfile = {\n  id: '456', \n  name: 'Jane Smith',\n  email: 'jane.smith@example.com',\n  avatarUrl: 'https://example.com/avatar.jpg'\n};\n```\n\nThis interface provides a clean, type-safe way to define user profile structures in TypeScript, with clear requirements and flexibility for the avatar URL.",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true,
+    "has_type_annotations": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified",
+    "has_type_annotations": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 3,
+    "total": 3
+  },
+  "passed": true,
+  "tokens": {
+    "input": 159,
+    "output": 289,
+    "total": 448
+  },
+  "execution_time": 5.423932075500488,
+  "error": null,
+  "timestamp": "2026-01-01T17:10:16.064908"
+}

@@ -1,0 +1,27 @@
+{
+  "task_id": "configured-agent_medium_3",
+  "prompt": "My plugin has custom settings that control how data should be processed. Can you check for the config file, read it, and then process some sample data using those settings?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you demonstrate the process of checking for a configuration file, reading its contents, and then using those settings to process data. I'll break this down step by step:\n\n1. First, I'll check for the configuration file at `.claude/my-plugin.local.md`\n2. Read the configuration file\n3. Parse its contents \n4. Show how to apply the configuration to data processing\n\nHere's an example implementation:\n\n```python\nimport os\nimport yaml\n\ndef load_plugin_config():\n    config_path = '.claude/my-plugin.local.md'\n    \n    # Check if config file exists\n    if not os.path.exists(config_path):\n        print(f\"No configuration found at {config_path}\")\n        return None\n    \n    # Read the configuration file\n    with open(config_path, 'r') as config_file:\n        # Read the entire file content\n        file_content = config_file.read()\n        \n        # Extract YAML frontmatter (between ---)\n        try:\n            # Split the file content by '---'\n            parts = file_content.split('---')\n            \n            # Parse the YAML frontmatter (second part)\n            if len(parts) >= 3:\n                config = yaml.safe_load(parts[1])\n                return config\n        except Exception as e:\n            print(f\"Error parsing configuration: {e}\")\n            return None\n\ndef process_data(data, config):\n    # Example processing based on configuration\n    if not config:\n        print(\"No configuration available. Using default processing.\")\n        return data\n    \n    # Apply custom processing based on config settings\n    processed_data = []\n    for item in data:\n        # Example: Apply filtering based on config\n        if config.get('filter_key'):\n            filter_value = config['filter_key']\n            if item.get(filter_value['field']) == filter_value['value']:\n                processed_data.append(item)\n        else:\n            processed_data.append(item)\n    \n    # Example: Apply sorting if specified in config\n    if config.get('sort_by'):\n        processed_data.sort(key=lambda x: x.get(config['sort_by'], 0))\n    \n    return processed_data\n\n# Sample usage\ndef main():\n    # Load configuration\n    config = load_plugin_config()\n    \n    # Sample data to process\n    sample_data = [\n        {'name': 'Alice', 'age': 30, 'category': 'A'},\n        {'name': 'Bob', 'age': 25, 'category': 'B'},\n        {'name': 'Charlie', 'age': 35, 'category': 'A'}\n    ]\n    \n    # Process data using configuration\n    processed_data = process_data(sample_data, config)\n    \n    # Print processed data\n    print(\"Processed Data:\")\n    for item in processed_data:\n        print(item)\n\n# Run the main function\nif __name__ == '__main__':\n    main()\n```\n\nExample configuration file (`.claude/my-plugin.local.md`):\n```markdown\n---\nfilter_key:\n  field: category\n  value: A\nsort_by: age\n---\n\n# Plugin Configuration\n\nThis file contains custom processing settings for the data plugin.\n```\n\nIn this example:\n- The script checks for a configuration file\n- Reads and parses the YAML frontmatter\n- Applies custom processing logic based on the configuration\n  - Filters data by a specific category\n  - Sorts the data by age\n\nThe script demonstrates a flexible approach to:\n1. Checking for a configuration file\n2. Reading its contents\n3. Applying custom processing based on the configuration\n\nYou can modify the `process_data()` function to add more sophisticated processing logic based on your specific requirements.\n\nWould you like me to elaborate on any part of this implementation or discuss how to customize it further?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 167,
+    "output": 924,
+    "total": 1091
+  },
+  "execution_time": 15.312427043914795,
+  "error": null,
+  "timestamp": "2026-01-01T18:08:49.984473"
+}

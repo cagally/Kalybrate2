@@ -1,0 +1,29 @@
+{
+  "task_id": "docstring_easy_1",
+  "prompt": "I wrote a simple PyTorch function that adds two tensors together. Can you write a proper docstring for it? Here's the function: def add_tensors(a, b): return torch.add(a, b)",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll write a comprehensive docstring for the `add_tensors` function following the PyTorch docstring conventions. Here's the improved version:\n\n```python\nimport torch\n\ndef add_tensors(a: torch.Tensor, b: torch.Tensor) -> torch.Tensor:\n    r\"\"\"Adds two tensors element-wise.\n\n    Computes the element-wise sum of the input tensors. This function is a wrapper \n    around :func:`torch.add` for simple tensor addition.\n\n    Args:\n        a (Tensor): The first input tensor\n        b (Tensor): The second input tensor to be added to the first\n\n    Returns:\n        Tensor: A tensor with the same shape as the input tensors, containing \n                the element-wise sum of ``a`` and ``b``\n\n    Examples::\n        >>> x = torch.tensor([1, 2, 3])\n        >>> y = torch.tensor([4, 5, 6])\n        >>> add_tensors(x, y)\n        tensor([5, 7, 9])\n\n        >>> # Adding tensors of different shapes (broadcasting)\n        >>> a = torch.tensor([[1, 2], [3, 4]])\n        >>> b = torch.tensor([10, 20])\n        >>> add_tensors(a, b)\n        tensor([[11, 22],\n                [13, 24]])\n\n    .. note::\n        This function supports broadcasting. If the input tensors have different \n        shapes, they will be broadcast according to PyTorch's broadcasting rules.\n\n    See Also:\n        :func:`torch.add` : The underlying function used for tensor addition\n    \"\"\"\n    return torch.add(a, b)\n```\n\nThis docstring follows the PyTorch documentation conventions by:\n\n1. Providing a clear, concise first-line description\n2. Adding type hints to the function signature\n3. Using a raw string (`r\"\"\"`) for the docstring\n4. Documenting parameters with their types\n5. Explaining the return value\n6. Providing multiple informative examples\n7. Adding a note about broadcasting\n8. Including a \"See Also\" reference to the underlying `torch.add` function\n9. Using Sphinx-style cross-references\n\nThe function itself remains simple, using `torch.add()` to perform the tensor addition. The docstring provides comprehensive documentation that explains the function's behavior, usage, and potential nuances.",
+  "criteria_results": {
+    "code_extracted": true,
+    "has_docstrings": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "has_docstrings": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3099,
+    "output": 557,
+    "total": 3656
+  },
+  "execution_time": 9.4927659034729,
+  "error": null,
+  "timestamp": "2026-01-01T18:42:48.549873"
+}

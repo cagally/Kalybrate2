@@ -1,0 +1,169 @@
+{
+  "skill_name": "configured-agent",
+  "skill_description": null,
+  "overall_score": 76.0,
+  "grade": "C",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "configured-agent_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 1.51,
+        "tokens": 230
+      },
+      {
+        "id": "configured-agent_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 2.89,
+        "tokens": 257
+      },
+      {
+        "id": "configured-agent_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 6.13,
+        "tokens": 486
+      },
+      {
+        "id": "configured-agent_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 4.34,
+        "tokens": 358
+      },
+      {
+        "id": "configured-agent_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 5.84,
+        "tokens": 395
+      },
+      {
+        "id": "configured-agent_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 15.31,
+        "tokens": 1091
+      },
+      {
+        "id": "configured-agent_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 26.41,
+        "tokens": 1978
+      },
+      {
+        "id": "configured-agent_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 19.35,
+        "tokens": 1516
+      },
+      {
+        "id": "configured-agent_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 22.0,
+        "tokens": 1723
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 2,
+    "losses": 3,
+    "ties": 0,
+    "win_rate": 40.0,
+    "details": [
+      {
+        "prompt": "I need to process a large dataset with specific formatting rules that are stored in my configuration...",
+        "verdict": "without_skill",
+        "reasoning": "Response A is more practical and useful. It asks the right clarifying questions to understand the user's specific needs without making assumptions about file locations or formats. Response B makes unfounded assumptions about a specific configuration file path and format that may not exist, and attempts to execute commands without proper context. Response A's approach of gathering requirements first is the correct methodology for handling this type of request.",
+        "tokens_with_skill": 379,
+        "tokens_without_skill": 187
+      },
+      {
+        "prompt": "My data processing workflow has custom parameters defined in YAML frontmatter. Can you read those se...",
+        "verdict": "without_skill",
+        "reasoning": "Response A is more direct and practical by asking for the essential information needed (YAML frontmatter, processing steps, input data) without making assumptions. Response B makes specific assumptions about file locations (.claude/my-plugin.local.md) and references a 'skill description' that wasn't provided, which could confuse the user. Response A provides a clearer path forward for actually solving the user's problem.",
+        "tokens_with_skill": 311,
+        "tokens_without_skill": 142
+      },
+      {
+        "prompt": "I have configuration settings that control how my plugin processes different types of data. Can you ...",
+        "verdict": "with_skill",
+        "reasoning": "Response B is more proactive and helpful by attempting to locate and read a configuration file, demonstrating understanding of typical plugin workflows. While both responses appropriately ask for clarification since no config was provided, Response B shows initiative by trying to find the config file and provides a more structured approach to solving the problem, making it more useful to the user.",
+        "tokens_with_skill": 325,
+        "tokens_without_skill": 108
+      },
+      {
+        "prompt": "There's a plugin configuration file that defines processing behavior. Can you read it and apply thos...",
+        "verdict": "with_skill",
+        "reasoning": "Response A demonstrates proactive problem-solving by attempting to locate the configuration file using a specific tool and path, showing understanding of how to work with plugin configurations. It also provides a clear action plan for processing the data once the file is found. Response B simply asks for information without taking any action or showing technical knowledge of how to handle plugin configurations.",
+        "tokens_with_skill": 298,
+        "tokens_without_skill": 136
+      },
+      {
+        "prompt": "I need to run a data transformation job using the parameters specified in my plugin's YAML configura...",
+        "verdict": "without_skill",
+        "reasoning": "Response A is more appropriate and useful. It correctly identifies that the YAML configuration wasn't provided and asks for the necessary information to complete the task. Response B makes assumptions about specific file locations (.claude/my-plugin.local.md) and references a SKILL.md configuration that wasn't mentioned, which could confuse the user. Response A provides a clearer framework for what information is needed and offers more general guidance that would apply to various data transformation scenarios.",
+        "tokens_with_skill": 337,
+        "tokens_without_skill": 188
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 161,
+    "avg_output_tokens": 530,
+    "avg_total_tokens": 692,
+    "estimated_per_use": "$0.0084"
+  },
+  "evaluated_at": "2026-01-01T18:34:48.896435",
+  "model_used": "claude-sonnet-4-20250514"
+}

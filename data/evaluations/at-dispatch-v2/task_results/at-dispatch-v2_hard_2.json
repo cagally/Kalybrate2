@@ -1,0 +1,27 @@
+{
+  "task_id": "at-dispatch-v2_hard_2",
+  "prompt": "I'm working on a custom ATen operator and need to convert multiple dispatch macros in the same file. This one is particularly tricky because it has ALL_TYPES_AND_COMPLEX with additional types:\n\n```cpp\n#include <ATen/Dispatch.h>\n#include <ATen/native/TensorIterator.h>\n\nnamespace at { namespace native {\n\nTensor custom_op_impl(const Tensor& self, const Tensor& other) {\n  auto iter = TensorIterator::binary_op(self, other);\n  \n  AT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND3(\n      kBFloat16, kHalf, kBool,\n      iter.dtype(),\n      \"custom_op_cuda\",\n      [&]() {\n        gpu_kernel_with_scalars(iter, []GPU_LAMBDA(scalar_t a, scalar_t b) -> scalar_t {\n          return static_cast<scalar_t>(std::max(static_cast<double>(a), static_cast<double>(b)));\n        });\n      }\n  );\n  \n  return iter.output();\n}\n\n}} // namespace at::native\n```",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll convert this code to use AT_DISPATCH_V2, following the guidelines from the skill description. Here's the updated implementation:\n\n```cpp\n#include <ATen/Dispatch.h>\n#include <ATen/Dispatch_v2.h>  // Add v2 header\n#include <ATen/native/TensorIterator.h>\n\nnamespace at { namespace native {\n\nTensor custom_op_impl(const Tensor& self, const Tensor& other) {\n  auto iter = TensorIterator::binary_op(self, other);\n  \n  AT_DISPATCH_V2(\n      iter.dtype(),            // First: scalar type\n      \"custom_op_cuda\",        // Second: operation name \n      AT_WRAP([&]() {          // Third: Wrapped lambda with AT_WRAP\n        gpu_kernel_with_scalars(iter, []GPU_LAMBDA(scalar_t a, scalar_t b) -> scalar_t {\n          return static_cast<scalar_t>(std::max(static_cast<double>(a), static_cast<double>(b)));\n        });\n      }),\n      AT_EXPAND(AT_ALL_TYPES),     // Fourth: Base type group \n      AT_EXPAND(AT_COMPLEX_TYPES), // Fifth: Complex type group\n      kBFloat16,               // Additional individual types \n      kHalf, \n      kBool\n  );\n  \n  return iter.output();\n}\n\n}} // namespace at::native\n```\n\nKey changes:\n- Added `#include <ATen/Dispatch_v2.h>`\n- Converted `AT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND3` to `AT_DISPATCH_V2`\n- Rearranged arguments to match V2 pattern\n- Used `AT_WRAP()` for the lambda\n- Used `AT_EXPAND()` for type groups\n- Maintained the original type coverage with `AT_ALL_TYPES`, `AT_COMPLEX_TYPES`, and additional types\n\nThis implementation preserves the exact type dispatching of the original macro while using the more flexible AT_DISPATCH_V2 syntax.",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3555,
+    "output": 510,
+    "total": 4065
+  },
+  "execution_time": 8.447032928466797,
+  "error": null,
+  "timestamp": "2026-01-01T17:47:42.505657"
+}

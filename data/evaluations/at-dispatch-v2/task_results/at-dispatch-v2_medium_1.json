@@ -1,0 +1,27 @@
+{
+  "task_id": "at-dispatch-v2_medium_1",
+  "prompt": "I'm porting some CUDA kernels and this dispatch macro has a complex lambda with multiple function calls. How do I convert this to v2?\n\n```cpp\nAT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND2(\n    kComplexHalf, kHalf,\n    self.scalar_type(),\n    \"complex_reduce\",\n    [&] {\n      gpu_reduce_kernel<scalar_t, scalar_t>(\n        iter,\n        MinOps<scalar_t>{},\n        thrust::pair<scalar_t, int64_t>(upper_bound(), 0)\n      );\n    }\n);\n```",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll convert this dispatch macro to AT_DISPATCH_V2 format, carefully handling the complex lambda with multiple function calls and nested expressions. Here's the correct conversion:\n\n```cpp\nAT_DISPATCH_V2(\n    self.scalar_type(),\n    \"complex_reduce\", \n    AT_WRAP([&] {\n      gpu_reduce_kernel<scalar_t, scalar_t>(\n        iter,\n        MinOps<scalar_t>{},\n        thrust::pair<scalar_t, int64_t>(upper_bound(), 0)\n      );\n    }),\n    AT_EXPAND(AT_ALL_TYPES),\n    AT_EXPAND(AT_COMPLEX_TYPES),\n    kComplexHalf, \n    kHalf\n);\n```\n\nKey changes:\n- Wrapped lambda with `AT_WRAP()` to handle internal commas\n- Reordered arguments to match AT_DISPATCH_V2 signature\n- Used `AT_EXPAND()` for type groups\n- Kept the individual types (kComplexHalf, kHalf) as last arguments\n- Maintained the original lambda's capture and structure\n\nThe `AT_WRAP()` is crucial here because it prevents parsing issues with the lambda that contains multiple function calls and a `thrust::pair` construction.\n\nDon't forget to add the include at the top of the file:\n```cpp\n#include <ATen/Dispatch_v2.h>\n```\n\nThis conversion preserves the exact logic of the original dispatch macro while moving to the new v2 API syntax.",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3429,
+    "output": 361,
+    "total": 3790
+  },
+  "execution_time": 6.912199974060059,
+  "error": null,
+  "timestamp": "2026-01-01T17:47:42.504575"
+}

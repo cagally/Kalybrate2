@@ -1,0 +1,29 @@
+{
+  "task_id": "docstring_medium_1",
+  "prompt": "I'm implementing a custom PyTorch layer for matrix multiplication with bias. The function takes input, weight, and optional bias parameters. I need proper documentation that includes mathematical notation and cross-references to related PyTorch functions. Here's my function: def linear_transform(input, weight, bias=None): output = torch.matmul(input, weight.t()); if bias is not None: output += bias; return output",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you document the `linear_transform` function using PyTorch's docstring conventions. Here's a comprehensive implementation:\n\n```python\nimport torch\n\ndef linear_transform(input, weight, bias=None):\n    r\"\"\"Applies a linear transformation to the incoming data.\n\n    This function performs a linear transformation of the input tensor \n    using the provided weight matrix and optional bias.\n\n    .. math::\n        \\text{output} = \\text{input} \\cdot \\text{weight}^T + \\text{bias}\n\n    Args:\n        input (Tensor): Input tensor of shape :math:`(\\text{batch\\_size}, \\text{in\\_features})`\n        weight (Tensor): Weight matrix of shape :math:`(\\text{out\\_features}, \\text{in\\_features})`\n        bias (Tensor, optional): Optional bias vector of shape :math:`(\\text{out\\_features})`. \n            Default: ``None``\n\n    Returns:\n        Tensor: Output tensor after linear transformation of shape \n        :math:`(\\text{batch\\_size}, \\text{out\\_features})`\n\n    Examples::\n        >>> input = torch.randn(10, 5)\n        >>> weight = torch.randn(3, 5)\n        >>> output = linear_transform(input, weight)\n        >>> # With bias\n        >>> bias = torch.randn(3)\n        >>> output_with_bias = linear_transform(input, weight, bias)\n\n    See Also:\n        - :func:`torch.matmul`: Matrix multiplication function\n        - :class:`torch.nn.Linear`: Full linear layer implementation\n\n    .. note::\n        This is a simplified version of linear transformation. \n        For production use, consider :class:`torch.nn.Linear`.\n    \"\"\"\n    # Perform matrix multiplication\n    output = torch.matmul(input, weight.t())\n    \n    # Add bias if provided\n    if bias is not None:\n        output += bias\n    \n    return output\n```\n\nLet's break down the key elements of the docstring:\n\n1. **Function Signature**: Clearly shows the parameters and their optionality\n2. **Mathematical Notation**: Uses LaTeX math notation to describe the transformation\n3. **Args Section**: \n   - Describes each parameter\n   - Includes shape information using math notation\n   - Specifies default for optional parameters\n4. **Returns Section**: Describes the output tensor and its shape\n5. **Examples**: Shows usage with and without bias\n6. **See Also**: Cross-references related PyTorch functions and classes\n7. **Note**: Provides additional context about the implementation\n\nThe implementation follows PyTorch docstring conventions by:\n- Using a raw string (`r\"\"\"`)\n- Following Sphinx/reStructuredText formatting\n- Including mathematical notation\n- Providing clear parameter descriptions\n- Adding informative examples\n\nYou can use this function like this:\n\n```python\n# Example usage\ninput = torch.randn(10, 5)  # batch_size=10, in_features=5\nweight = torch.randn(3, 5)  # out_features=3, in_features=5\nbias = torch.randn(3)       # bias for 3 output features\n\n# Without bias\noutput = linear_transform(input, weight)\n\n# With bias\noutput_with_bias = linear_transform(input, weight, bias)\n```\n\nThis implementation provides a clean, well-documented custom linear transformation function with comprehensive documentation following PyTorch conventions.",
+  "criteria_results": {
+    "code_extracted": true,
+    "has_docstrings": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "has_docstrings": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 3141,
+    "output": 802,
+    "total": 3943
+  },
+  "execution_time": 13.297070026397705,
+  "error": null,
+  "timestamp": "2026-01-01T18:42:48.553520"
+}

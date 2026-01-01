@@ -1,0 +1,27 @@
+{
+  "task_id": "configured-agent_easy_1",
+  "prompt": "I have a configuration file that might exist at .claude/my-plugin.local.md. Can you check if it's there and tell me what settings are configured?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll use the Read tool to check if the configuration file exists and view its contents.\n\n```bash\nread .claude/my-plugin.local.md\n```\n\nIf the file exists, I'll show you its contents. If it doesn't, I'll let you know.",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 168,
+    "output": 62,
+    "total": 230
+  },
+  "execution_time": 1.5139009952545166,
+  "error": null,
+  "timestamp": "2026-01-01T18:08:49.981775"
+}

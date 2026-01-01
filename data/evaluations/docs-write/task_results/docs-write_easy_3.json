@@ -1,0 +1,33 @@
+{
+  "task_id": "docs-write_easy_3",
+  "prompt": "I need documentation for our new 'Export Data' button in the UI. Just explain what it does and where users can find their exported files.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a documentation file for the 'Export Data' button using the Metabase documentation style guidelines.\n\n```python\nimport os\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Path for the markdown file\nexport_data_doc_path = os.path.join(OUTPUT_DIR, 'export-data.md')\n\n# Content of the documentation\ndoc_content = \"\"\"# Exporting Data from Metabase\n\n## Finding the Export Data Button\n\nYou can export data from most query results and dashboard visualizations using the **Export Data** button. Look for this button in the top-right corner of your query results or dashboard card.\n\n## Export Options\n\nWhen you click the **Export Data** button, you'll typically see several export formats:\n\n- CSV\n- JSON\n- XLSX (Excel)\n\n## Where to Find Your Exported Files\n\n- **Desktop**: Files will download to your computer's default download folder\n- **Web Browser**: Check your browser's download history or download folder\n- **Mobile**: Exported files will be saved to your device's standard download location\n\n### Tips\n\n- Large datasets might take a moment to export\n- Some very large exports may be limited by your database or Metabase configuration\n- Exported files maintain the current view of your data, including any applied filters\n\n## Permissions\n\nNot seeing the export option? Check with your Metabase administrator about export permissions.\n\"\"\"\n\n# Write the file\nwith open(export_data_doc_path, 'w') as f:\n    f.write(doc_content)\n\nprint(f\"Documentation written to {export_data_doc_path}\")\n```\n\nThis script:\n1. Creates documentation following Metabase's style guide\n2. Uses conversational, clear language\n3. Provides practical information about the Export Data feature\n4. Saves the file in the specified OUTPUT_DIR\n5. Explains where to find exported files\n6. Provides context and tips for users\n\nThe documentation explains what the Export Data button does, where to find it, and provides guidance on exported files, all in a user-friendly manner.",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true,
+    "response_relevant": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified",
+    "response_relevant": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 4,
+    "total": 4
+  },
+  "passed": true,
+  "tokens": {
+    "input": 927,
+    "output": 480,
+    "total": 1407
+  },
+  "execution_time": 9.957226991653442,
+  "error": null,
+  "timestamp": "2026-01-01T18:37:33.747153"
+}

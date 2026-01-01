@@ -1,0 +1,27 @@
+{
+  "task_id": "rule-identifier_medium_1",
+  "prompt": "I'm setting up a system that needs to catch specific patterns in user commands. How would I configure the regex pattern for this rule?",
+  "difficulty": "medium",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you configure a rule-identifier skill with a regex pattern. Here's an example of how you might set up such a rule:\n\n```markdown\n---\nname: rule-identifier\nenabled: true\nevent: prompt\npattern: (\\bdelete\\b|\\bremove\\b|\\bdestroy\\b).*\\b(database|system|file|directory)\\b\n---\n\n\u26a0\ufe0f SECURITY ALERT: Potentially destructive command detected! \n- Command contains keywords that may indicate a risky operation\n- Please confirm intent and ensure you have proper authorization\n- Double-check the specific action you're about to take\n```\n\nLet me break down the components:\n\n1. `name`: A unique identifier for the rule\n\n2. `enabled`: Set to `true` to activate the rule\n\n3. `event`: \n   - `prompt`: Triggers on user input\n   - You could also use `bash` for shell commands, `file` for file operations, etc.\n\n4. `pattern`: A regex that matches potentially risky commands\n   - `(\\bdelete\\b|\\bremove\\b|\\bdestroy\\b)` matches words like delete, remove, destroy\n   - `.*\\b(database|system|file|directory)\\b` looks for potential target types\n\nThis rule would catch commands like:\n- \"delete database\"\n- \"remove system files\"\n- \"destroy directory\"\n\nThe message provides a warning and prompts for careful consideration before proceeding.\n\nWould you like me to help you customize this pattern for your specific use case?",
+  "criteria_results": {
+    "response_exists": true
+  },
+  "verification_notes": {
+    "response_exists": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 132,
+    "output": 351,
+    "total": 483
+  },
+  "execution_time": 7.766678094863892,
+  "error": null,
+  "timestamp": "2026-01-01T19:20:31.660558"
+}

@@ -1,0 +1,183 @@
+{
+  "skill_name": "command-development",
+  "skill_description": null,
+  "overall_score": 69.7,
+  "grade": "D",
+  "task_completion": {
+    "total": 9,
+    "passed": 7,
+    "pass_rate": 89.5,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 1
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "command-development_easy_1",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 9.92,
+        "tokens": 5527
+      },
+      {
+        "id": "command-development_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 13.03,
+        "tokens": 5711
+      },
+      {
+        "id": "command-development_easy_3",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 13.65,
+        "tokens": 5710
+      },
+      {
+        "id": "command-development_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 14.54,
+        "tokens": 5801
+      },
+      {
+        "id": "command-development_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 22.83,
+        "tokens": 6384
+      },
+      {
+        "id": "command-development_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 11.19,
+        "tokens": 5533
+      },
+      {
+        "id": "command-development_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 16.81,
+        "tokens": 5891
+      },
+      {
+        "id": "command-development_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 27.71,
+        "tokens": 6729
+      },
+      {
+        "id": "command-development_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": true,
+          "file_valid": true,
+          "file_has_content": true
+        },
+        "execution_time": 19.75,
+        "tokens": 6081
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 2,
+    "losses": 3,
+    "ties": 0,
+    "win_rate": 40.0,
+    "details": [
+      {
+        "prompt": "Create a slash command that reviews TypeScript code for type safety issues and takes a file path as ...",
+        "verdict": "with_skill",
+        "reasoning": "Response A correctly creates a slash command in the proper markdown format as requested, while Response B provides TypeScript code for a Discord bot command which doesn't match the task. Response A is complete, properly formatted, and includes comprehensive type safety analysis features, whereas Response B is incomplete (cuts off mid-implementation) and misinterprets the task requirements.",
+        "tokens_with_skill": 5871,
+        "tokens_without_skill": 1968
+      },
+      {
+        "prompt": "I need a command that automatically reads my Docker configuration files and suggests optimizations",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides complete, actionable solutions with specific tools (Hadolint, Docker Scan, Dockle, Dive) and working code examples that the user can immediately implement. Response B appears to be an incomplete template or framework that doesn't provide actual executable commands or tools, making it less useful for accomplishing the stated task of automatically reading and optimizing Docker configurations.",
+        "tokens_with_skill": 6001,
+        "tokens_without_skill": 848
+      },
+      {
+        "prompt": "Build a command that takes a branch name and environment, then checks git status before suggesting d...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a complete, executable Python script that fully implements the requested functionality with proper error handling, git status checking, and deployment step generation. Response B appears to be an incomplete template or configuration file that cuts off mid-implementation and uses a non-standard syntax that wouldn't actually execute as a working command.",
+        "tokens_with_skill": 6156,
+        "tokens_without_skill": 1325
+      },
+      {
+        "prompt": "Create a testing command structure for a React project with separate commands for unit tests, integr...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a complete, practical solution with actual package.json scripts, Jest configurations, and all necessary dependencies. Response B appears to be incomplete (cuts off mid-sentence) and uses an unusual markdown-based command structure that doesn't directly provide runnable testing commands for a React project. Response A gives developers everything they need to implement the testing structure immediately.",
+        "tokens_with_skill": 6111,
+        "tokens_without_skill": 1626
+      },
+      {
+        "prompt": "Design a code review command that uses different AI models based on the complexity of the review req...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides a complete, working command implementation using a command framework with proper model selection logic based on complexity detection. Response B starts a Python implementation but is incomplete and cuts off mid-function. Response A is more thorough with detailed review criteria for different complexity levels and actually accomplishes the task, while Response B is unfinished and unusable.",
+        "tokens_with_skill": 6363,
+        "tokens_without_skill": 1826
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 5005,
+    "avg_output_tokens": 986,
+    "avg_total_tokens": 5991,
+    "estimated_per_use": "$0.03"
+  },
+  "evaluated_at": "2026-01-01T18:05:30.442716",
+  "model_used": "claude-sonnet-4-20250514"
+}

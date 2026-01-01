@@ -1,0 +1,183 @@
+{
+  "skill_name": "skill-writer",
+  "skill_description": null,
+  "overall_score": 60.0,
+  "grade": "D",
+  "task_completion": {
+    "total": 9,
+    "passed": 3,
+    "pass_rate": 33.3,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 1
+      },
+      "medium": {
+        "total": 3,
+        "passed": 2
+      },
+      "hard": {
+        "total": 3,
+        "passed": 0
+      }
+    },
+    "details": [
+      {
+        "id": "skill-writer_easy_1",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_has_content": false,
+          "response_relevant": false
+        },
+        "execution_time": 16.56,
+        "tokens": 3509
+      },
+      {
+        "id": "skill-writer_easy_2",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 6.45,
+        "tokens": 2884
+      },
+      {
+        "id": "skill-writer_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 5.84,
+        "tokens": 2836
+      },
+      {
+        "id": "skill-writer_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 9.0,
+        "tokens": 2981
+      },
+      {
+        "id": "skill-writer_medium_2",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_has_content": false,
+          "response_relevant": false,
+          "code_extracted": false
+        },
+        "execution_time": 38.11,
+        "tokens": 5096
+      },
+      {
+        "id": "skill-writer_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 12.99,
+        "tokens": 3193
+      },
+      {
+        "id": "skill-writer_hard_1",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_has_content": false,
+          "code_extracted": false,
+          "response_relevant": false
+        },
+        "execution_time": 32.58,
+        "tokens": 4785
+      },
+      {
+        "id": "skill-writer_hard_2",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 28.35,
+        "tokens": 4049
+      },
+      {
+        "id": "skill-writer_hard_3",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true,
+          "response_relevant": true
+        },
+        "execution_time": 23.14,
+        "tokens": 3804
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 5,
+    "losses": 0,
+    "ties": 0,
+    "win_rate": 100.0,
+    "details": [
+      {
+        "prompt": "I want to create a skill for generating technical documentation from code comments. Help me set this...",
+        "verdict": "with_skill",
+        "reasoning": "Response A provides a more complete and structured approach with a proper skill template format, clear documentation standards, and comprehensive guidance. While Response B starts with actual code implementation, it's incomplete and cuts off mid-sentence. Response A better addresses the user's request for setting up a skill properly with clear instructions, supported formats, and examples, making it more immediately useful for the user's needs.",
+        "tokens_with_skill": 3528,
+        "tokens_without_skill": 1355
+      },
+      {
+        "prompt": "My skill for processing Excel files isn't being used automatically. What could be wrong with my desc...",
+        "verdict": "with_skill",
+        "reasoning": "Response B is significantly more useful and complete. While both responses ask for the actual description, Response B goes much further by providing concrete examples, specific improvement suggestions, common issues to check, and actionable templates. Response A only asks for information without offering any immediate help or guidance that the user could apply right away.",
+        "tokens_with_skill": 2923,
+        "tokens_without_skill": 137
+      },
+      {
+        "prompt": "How do I structure a skill that needs both Python scripts and template files?",
+        "verdict": "with_skill",
+        "reasoning": "Response A better addresses the specific context of creating a 'Skill' (with capital S) by following proper skill-writer guidelines, including the required SKILL.md file with YAML frontmatter, proper directory structure with scripts/ and templates/ folders, and comprehensive documentation. Response B provides a generic Python project structure that doesn't align with the skill framework requirements and lacks the essential SKILL.md file that defines how the skill should be used.",
+        "tokens_with_skill": 3580,
+        "tokens_without_skill": 938
+      },
+      {
+        "prompt": "Should I put my data analysis skill in the project folder or my personal skills folder?",
+        "verdict": "with_skill",
+        "reasoning": "Response B provides a more systematic decision-making framework with specific technical details about file paths and team collaboration considerations. It asks clarifying questions to help the user make an informed decision rather than just suggesting to put it in both places. Response B is more thorough and actionable, giving clear guidelines and criteria for the decision.",
+        "tokens_with_skill": 2789,
+        "tokens_without_skill": 100
+      },
+      {
+        "prompt": "I need to validate that my skill follows all the requirements before sharing it with my team.",
+        "verdict": "with_skill",
+        "reasoning": "Response A is more complete and thorough, providing a structured 5-point validation framework and specific deliverables (SKILL.md file, directory structure). It offers concrete next steps and detailed feedback categories. Response B assumes this is an Alexa skill without confirmation and provides a more generic checklist approach with less actionable guidance.",
+        "tokens_with_skill": 2782,
+        "tokens_without_skill": 147
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 2630,
+    "avg_output_tokens": 852,
+    "avg_total_tokens": 3481,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T08:55:51.058864",
+  "model_used": "claude-sonnet-4-20250514"
+}

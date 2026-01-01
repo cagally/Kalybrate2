@@ -1,0 +1,31 @@
+{
+  "task_id": "command-development_hard_1",
+  "prompt": "Design a comprehensive testing command that takes a test type, target files, and coverage threshold, then runs git status and environment checks before executing",
+  "difficulty": "hard",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a comprehensive testing command that meets the requirements. I'll save the command file in the specified output directory.\n\n```python\nimport os\n\n# Ensure the output directory exists\nos.makedirs(OUTPUT_DIR, exist_ok=True)\n\n# Path for the command file\ncommand_path = os.path.join(OUTPUT_DIR, 'test.md')\n\n# Write the command file content\nwith open(command_path, 'w') as f:\n    f.write('''---\nname: Comprehensive Test Runner\ndescription: Run tests with advanced validation and reporting\nargument-hint: [test-type] [target-files] [coverage-threshold]\nallowed-tools: Bash(git:*), Bash(npm:*), Read\n---\n\n# Validate and prepare test environment\n\n# 1. Git Status Check\nGit Repository Status: !`git status --porcelain`\n$IF(git status --porcelain | grep -q .,\n    Warn: Uncommitted changes detected. Recommend committing before testing.,\n    Proceed with clean repository.\n)\n\n# 2. Environment Checks\nNode Version: !`node --version`\nNPM Version: !`npm --version`\n\n$IF(! command -v npm &> /dev/null,\n    Error: NPM is not installed. Cannot run tests.,\n    Proceed with test setup.\n)\n\n# 3. Test Configuration Validation\nTest Type: $1\nTarget Files: $2\nCoverage Threshold: $3\n\n# Validate required arguments\n$IF($1,\n    Proceeding with test type: $1,\n    Error: Test type is required. Usage: /test [type] [files] [coverage]\n)\n\n$IF($3,\n    Validate coverage threshold is numeric,\n    Error: Coverage threshold must be provided\n)\n\n# 4. Test Execution\nTest Command: !`npm run test:$1 $2 --coverage --coverageThreshold=$3`\n\n# 5. Coverage Analysis\nTotal Coverage: !`npm run coverage:report`\n\n# 6. Reporting\nAnalyze test results:\n- Passed tests\n- Failed tests\n- Code coverage percentage\n- Comparison to threshold\n\n# 7. Recommendations\nIf coverage below threshold:\n  - Identify uncovered code areas\n  - Suggest additional test cases\n  - Provide improvement strategies\n\n# 8. Final Status\n$IF(test coverage meets $3 threshold,\n    Test Passed: All checks successful,\n    Test Failed: Review detailed report\n)\n''')\n\nprint(f\"Testing command created at {command_path}\")\n```\n\nThis comprehensive testing command includes:\n\n1. Git status validation\n2. Environment checks (Node/NPM versions)\n3. Argument validation\n4. Flexible test execution\n5. Coverage reporting\n6. Detailed analysis and recommendations\n\nKey features:\n- Takes test type, target files, and coverage threshold\n- Checks git repository state\n- Validates environment\n- Runs tests with coverage\n- Provides detailed reporting and suggestions\n\nThe command uses dynamic argument handling:\n- `$1`: Test type (e.g., 'unit', 'integration')\n- `$2`: Target files or patterns\n- `$3`: Coverage threshold percentage\n\nExample usages:\n```\n/test unit src/components 80\n/test integration api/* 90\n```\n\nThe command will:\n- Check for clean git repository\n- Verify Node/NPM are installed\n- Run specified test type\n- Generate coverage report\n- Provide pass/fail status and recommendations\n\nWould you like me to elaborate on any part of the command or discuss its potential customizations?",
+  "criteria_results": {
+    "file_created": true,
+    "file_valid": true,
+    "file_has_content": true
+  },
+  "verification_notes": {
+    "file_created": "verified",
+    "file_valid": "verified",
+    "file_has_content": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 3,
+    "total": 3
+  },
+  "passed": true,
+  "tokens": {
+    "input": 5060,
+    "output": 831,
+    "total": 5891
+  },
+  "execution_time": 16.81110119819641,
+  "error": null,
+  "timestamp": "2026-01-01T18:01:28.857185"
+}

@@ -1,0 +1,169 @@
+{
+  "skill_name": "at-dispatch-v2",
+  "skill_description": null,
+  "overall_score": 68.0,
+  "grade": "D",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "at-dispatch-v2_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 5.65,
+        "tokens": 3648
+      },
+      {
+        "id": "at-dispatch-v2_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 6.86,
+        "tokens": 3686
+      },
+      {
+        "id": "at-dispatch-v2_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 5.16,
+        "tokens": 3625
+      },
+      {
+        "id": "at-dispatch-v2_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 6.91,
+        "tokens": 3790
+      },
+      {
+        "id": "at-dispatch-v2_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 5.62,
+        "tokens": 3731
+      },
+      {
+        "id": "at-dispatch-v2_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 6.46,
+        "tokens": 3762
+      },
+      {
+        "id": "at-dispatch-v2_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 6.71,
+        "tokens": 3912
+      },
+      {
+        "id": "at-dispatch-v2_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 8.45,
+        "tokens": 4065
+      },
+      {
+        "id": "at-dispatch-v2_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "code_extracted": true
+        },
+        "execution_time": 8.04,
+        "tokens": 4022
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 1,
+    "losses": 4,
+    "ties": 0,
+    "win_rate": 20.0,
+    "details": [
+      {
+        "prompt": "Convert this AT_DISPATCH_ALL_TYPES_AND2(kHalf, kBFloat16, dtype, \"op\", [&]() { kernel<scalar_t>(data...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides the correct v2 format conversion. The AT_DISPATCH_ALL_TYPES_AND2_V2 macro is the actual v2 equivalent, using the proper lambda parameter syntax with decltype. Response B appears to use a non-standard or incorrect v2 format with AT_DISPATCH_V2, AT_WRAP, and AT_EXPAND macros that don't match the established PyTorch v2 dispatch patterns. Response A also correctly removes the string label which is no longer needed in v2.",
+        "tokens_with_skill": 3502,
+        "tokens_without_skill": 232
+      },
+      {
+        "prompt": "I need to update this PyTorch dispatch macro: AT_DISPATCH_FLOATING_TYPES_AND3(kHalf, kBFloat16, kFlo...",
+        "verdict": "with_skill",
+        "reasoning": "Response A correctly identifies that the user wants to update to AT_DISPATCH_V2 format and provides the proper conversion with accurate syntax, includes, and explanations. Response B misunderstands the task and provides an incorrect modernization that removes the operation name string and uses invalid syntax - AT_DISPATCH macros don't take lambda parameters like `[&](auto scalar_type)`. Response A is technically correct and actually accomplishes the requested update.",
+        "tokens_with_skill": 3591,
+        "tokens_without_skill": 284
+      },
+      {
+        "prompt": "Help me convert this complex dispatch pattern: AT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND2(kComplexHalf, ...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a more comprehensive and accurate answer. It offers multiple valid conversion approaches including manual switch statements and template approaches, which are real alternatives to the AT dispatch pattern. Response B appears to use fictional syntax (AT_DISPATCH_V2, AT_WRAP, AT_EXPAND) that doesn't exist in actual PyTorch/ATen codebase, making it incorrect and potentially misleading. Response A also provides better context and explanation of what the original code does.",
+        "tokens_with_skill": 3631,
+        "tokens_without_skill": 681
+      },
+      {
+        "prompt": "My ATen kernel uses AT_DISPATCH_INTEGRAL_TYPES_AND2(kBool, kByte, input.dtype(), \"index_kernel\", [&]...",
+        "verdict": "without_skill",
+        "reasoning": "Response B correctly identifies that the user wants to port from AT_DISPATCH_INTEGRAL_TYPES_AND2 to a v2 equivalent, which is AT_DISPATCH_ALL_TYPES_AND2 with updated syntax. Response A incorrectly assumes there's an AT_DISPATCH_V2 macro and provides non-existent syntax like AT_WRAP and AT_EXPAND. Response B provides the actual working solution with proper PyTorch v2 syntax, including the correct change from dtype() to scalar_type() and proper scalar type references.",
+        "tokens_with_skill": 3623,
+        "tokens_without_skill": 335
+      },
+      {
+        "prompt": "Convert this dispatch macro with a multi-line lambda: AT_DISPATCH_FLOATING_TYPES_AND2(kHalf, kBFloat...",
+        "verdict": "without_skill",
+        "reasoning": "Response A correctly interprets the task as simply reformatting the existing macro with a multi-line lambda, which is what was requested. Response B assumes the task is to convert to AT_DISPATCH_V2 format, which wasn't asked for and introduces complexity that may not be desired. Response A directly addresses the stated requirement while Response B changes the fundamental structure unnecessarily.",
+        "tokens_with_skill": 3577,
+        "tokens_without_skill": 219
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 3396,
+    "avg_output_tokens": 330,
+    "avg_total_tokens": 3726,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T17:49:00.665721",
+  "model_used": "claude-sonnet-4-20250514"
+}

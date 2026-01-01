@@ -1,0 +1,187 @@
+{
+  "skill_name": "writing-rules",
+  "skill_description": null,
+  "overall_score": 0.0,
+  "grade": "F",
+  "task_completion": {
+    "total": 9,
+    "passed": 0,
+    "pass_rate": 0.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 0
+      },
+      "medium": {
+        "total": 3,
+        "passed": 0
+      },
+      "hard": {
+        "total": 3,
+        "passed": 0
+      }
+    },
+    "details": [
+      {
+        "id": "writing-rules_easy_1",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 11.7,
+        "tokens": 3296
+      },
+      {
+        "id": "writing-rules_easy_2",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 10.44,
+        "tokens": 3266
+      },
+      {
+        "id": "writing-rules_easy_3",
+        "passed": false,
+        "difficulty": "easy",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 9.11,
+        "tokens": 3219
+      },
+      {
+        "id": "writing-rules_medium_1",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 9.21,
+        "tokens": 3263
+      },
+      {
+        "id": "writing-rules_medium_2",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 11.57,
+        "tokens": 3349
+      },
+      {
+        "id": "writing-rules_medium_3",
+        "passed": false,
+        "difficulty": "medium",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 11.37,
+        "tokens": 3294
+      },
+      {
+        "id": "writing-rules_hard_1",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 16.48,
+        "tokens": 3616
+      },
+      {
+        "id": "writing-rules_hard_2",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 15.99,
+        "tokens": 3582
+      },
+      {
+        "id": "writing-rules_hard_3",
+        "passed": false,
+        "difficulty": "hard",
+        "criteria": {
+          "file_created": false,
+          "file_valid": false,
+          "file_has_content": false
+        },
+        "execution_time": 22.82,
+        "tokens": 4061
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 0,
+    "losses": 5,
+    "ties": 0,
+    "win_rate": 0.0,
+    "details": [
+      {
+        "prompt": "Help me create a rule that prevents me from accidentally deleting important files with rm commands.",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides multiple practical, immediately usable solutions (aliases, scripts, trash-cli) that directly address the user's need to prevent accidental file deletion. Response B appears to reference a fictional 'Hookify' system and creates configuration for a tool that doesn't exist, making it unusable. Response A is more complete, thorough, and actually accomplishes the task with real, working solutions.",
+        "tokens_with_skill": 3179,
+        "tokens_without_skill": 521
+      },
+      {
+        "prompt": "I want to set up warnings when I'm about to commit sensitive information like API keys.",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides multiple practical, well-established solutions (git hooks, git-secrets, pre-commit tools) with working code examples that can be immediately implemented. Response B appears to reference a fictional 'Hookify' tool and '.claude' directory that don't exist, making it unusable despite having good warning content structure.",
+        "tokens_with_skill": 3290,
+        "tokens_without_skill": 435
+      },
+      {
+        "prompt": "Create a system that reminds me to run tests before I finish working on code changes.",
+        "verdict": "without_skill",
+        "reasoning": "Response B provides a more practical and technically sound solution using Git hooks that actually integrates with the development workflow. It includes executable code, proper error handling, and enforces the test-running requirement at commit time. Response A creates a fictional 'Hookify' system in a '.claude/' directory that doesn't exist in standard development environments, making it unusable despite being well-formatted.",
+        "tokens_with_skill": 3073,
+        "tokens_without_skill": 1054
+      },
+      {
+        "prompt": "I need protection against running dangerous system commands that could break my development environm...",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides comprehensive, practical protection methods with working Python code examples covering input validation, safe subprocess usage, Docker sandboxing, command filtering, and environment isolation. Response B assumes a specific 'Hookify' system that may not exist and provides only a single YAML-like rule without explaining how to actually implement the protection. Response A is more complete, thorough, and immediately useful for protecting a development environment.",
+        "tokens_with_skill": 3134,
+        "tokens_without_skill": 1096
+      },
+      {
+        "prompt": "Set up automated reminders for code review checklist items when I'm working on production code.",
+        "verdict": "without_skill",
+        "reasoning": "Response A provides a complete, working solution using GitHub Actions that actually automates reminders through PR comments and workflow failures. Response B appears to reference a fictional 'Hookify' system and creates a local markdown file that wouldn't actually trigger automated reminders. While B has a more comprehensive checklist, A delivers functional automation that accomplishes the core task of setting up automated reminders.",
+        "tokens_with_skill": 3270,
+        "tokens_without_skill": 1219
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 2707,
+    "avg_output_tokens": 642,
+    "avg_total_tokens": 3349,
+    "estimated_per_use": "$0.02"
+  },
+  "evaluated_at": "2026-01-01T09:09:36.216685",
+  "model_used": "claude-sonnet-4-20250514"
+}

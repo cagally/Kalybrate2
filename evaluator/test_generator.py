@@ -49,7 +49,7 @@ AVAILABLE_CRITERIA = {
 
     # Text outputs
     "response_exists": "A non-empty response was generated",
-    "response_relevant": "Response addresses the prompt (LLM judge)",
+    # response_relevant removed - was just a length check, not meaningful
 }
 
 

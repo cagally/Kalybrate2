@@ -1,0 +1,29 @@
+{
+  "task_id": "frontend-design_easy_1",
+  "prompt": "I need a simple landing page for my coffee shop called 'Brew & Bean'. Just something clean with our hours and contact info.",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll create a distinctive landing page for 'Brew & Bean' with a refined, minimalist aesthetic that feels both contemporary and welcoming. I'll use modern CSS and a clean, typography-focused approach.\n\nI'll generate multiple files:\n1. index.html\n2. styles.css\n3. script.js (light interaction)\n\nHere's the implementation:\n\n`index.html`:\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Brew & Bean - Artisan Coffee</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;600&display=swap\" rel=\"stylesheet\">\n</head>\n<body>\n    <div class=\"container\">\n        <header>\n            <h1 class=\"logo\">Brew & Bean</h1>\n            <p class=\"tagline\">Crafting exceptional coffee experiences</p>\n        </header>\n\n        <main>\n            <section class=\"hours\">\n                <h2>Our Hours</h2>\n                <div class=\"hours-grid\">\n                    <span>Monday - Friday</span>\n                    <span>6:30 AM - 7:00 PM</span>\n                    <span>Saturday</span>\n                    <span>8:00 AM - 5:00 PM</span>\n                    <span>Sunday</span>\n                    <span>Closed</span>\n                </div>\n            </section>\n\n            <section class=\"contact\">\n                <h2>Contact Us</h2>\n                <div class=\"contact-details\">\n                    <p>\ud83d\udccd 123 Coffee Lane, Roastville</p>\n                    <p>\u260e\ufe0f (555) 123-BREW</p>\n                    <p>\u2709\ufe0f hello@brewandbean.com</p>\n                </div>\n            </section>\n        </main>\n\n        <footer>\n            <p>&copy; 2023 Brew & Bean. All rights reserved.</p>\n        </footer>\n    </div>\n    <script src=\"script.js\"></script>\n</body>\n</html>\n```\n\n`styles.css`:\n```css\n:root {\n    --bg-color: #f4f0ec;\n    --text-color: #2c2a28;\n    --accent-color: #8b4513;\n    --soft-shadow: rgba(0,0,0,0.1);\n}\n\n* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\nbody {\n    font-family: 'Work Sans', sans-serif;\n    background-color: var(--bg-color);\n    color: var(--text-color);\n    line-height: 1.6;\n}\n\n.container {\n    max-width: 600px;\n    margin: 0 auto;\n    padding: 2rem;\n    text-align: center;\n}\n\n.logo {\n    font-family: 'Instrument Serif', serif;\n    font-size: 3.5rem;\n    color: var(--accent-color);\n    margin-bottom: 0.5rem;\n    letter-spacing: -1px;\n}\n\n.tagline {\n    font-style: italic;\n    color: #666;\n    margin-bottom: 2rem;\n}\n\nh2 {\n    font-family: 'Instrument Serif', serif;\n    border-bottom: 2px solid var(--accent-color);\n    padding-bottom: 0.5rem;\n    margin-bottom: 1rem;\n}\n\n.hours-grid, .contact-details {\n    display: grid;\n    gap: 0.5rem;\n    background-color: white;\n    padding: 1.5rem;\n    border-radius: 8px;\n    box-shadow: 0 4px 6px var(--soft-shadow);\n}\n\n.hours-grid {\n    grid-template-columns: 1fr 1fr;\n    text-align: left;\n}\n\nfooter {\n    margin-top: 2rem;\n    font-size: 0.8rem;\n    color: #777;\n}\n```\n\n`script.js`:\n```javascript\ndocument.addEventListener('DOMContentLoaded', () => {\n    const logo = document.querySelector('.logo');\n    logo.addEventListener('mouseenter', () => {\n        logo.style.transform = 'scale(1.05)';\n        logo.style.transition = 'transform 0.3s ease';\n    });\n    logo.addEventListener('mouseleave', () => {\n        logo.style.transform = 'scale(1)';\n    });\n});\n```\n\nThis design offers:\n\u2705 Clean, minimalist layout\n\u2705 Distinctive typography (Instrument Serif for headings)\n\u2705 Warm, coffee-inspired color palette\n\u2705 Subtle hover interaction on logo\n\u2705 Responsive design\n\u2705 Easy-to-read contact and hours sections\n\nThe aesthetic feels intentional and crafted, avoiding generic design tropes while maintaining clarity and usability.\n\nWould you like me to elaborate on any aspect of the design or implementation?",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 1006,
+    "output": 1318,
+    "total": 2324
+  },
+  "execution_time": 19.096318006515503,
+  "error": null,
+  "timestamp": "2026-01-01T18:48:18.029168"
+}

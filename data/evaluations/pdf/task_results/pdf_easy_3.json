@@ -1,0 +1,29 @@
+{
+  "task_id": "pdf_easy_3",
+  "prompt": "I have three separate PDF files that I need to combine into one document. How can I merge them together?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll provide a solution using the `pypdf` library, which is recommended in the PDF processing guide. Here's a complete script to merge multiple PDF files:\n\n```python\nfrom pypdf import PdfReader, PdfWriter\n\ndef merge_pdfs(input_files, output_file):\n    \"\"\"\n    Merge multiple PDF files into a single PDF document.\n    \n    :param input_files: List of input PDF file paths\n    :param output_file: Path for the merged PDF file\n    \"\"\"\n    # Create a PDF writer object\n    writer = PdfWriter()\n    \n    # Iterate through each PDF file\n    for pdf_file in input_files:\n        # Read the current PDF\n        reader = PdfReader(pdf_file)\n        \n        # Add all pages from the current PDF to the writer\n        for page in reader.pages:\n            writer.add_page(page)\n    \n    # Write the merged PDF to the output file\n    with open(output_file, \"wb\") as output:\n        writer.write(output)\n    \n    print(f\"PDFs merged successfully into {output_file}\")\n\n# Example usage\ninput_files = [\n    \"document1.pdf\", \n    \"document2.pdf\", \n    \"document3.pdf\"\n]\noutput_file = \"merged_document.pdf\"\n\n# Call the merge function\nmerge_pdfs(input_files, output_file)\n```\n\nThis script does the following:\n\n1. Import the necessary classes from `pypdf`\n2. Define a `merge_pdfs()` function that:\n   - Creates a `PdfWriter` object\n   - Reads each input PDF file\n   - Adds all pages from each PDF to the writer\n   - Writes the merged PDF to the output file\n3. Specify the input PDF files in a list\n4. Specify the output file path\n5. Call the merge function\n\nA few important notes:\n- Make sure the PDF files exist in the same directory as the script\n- Replace `\"document1.pdf\"`, `\"document2.pdf\"`, `\"document3.pdf\"` with your actual PDF filenames\n- Ensure you have `pypdf` installed (`pip install pypdf`)\n\nThe script will combine the PDFs in the order they are listed in the `input_files` list. The resulting `merged_document.pdf` will contain all pages from the input files, in sequence.",
+  "criteria_results": {
+    "code_extracted": true,
+    "code_compiles": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified",
+    "code_compiles": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 2,
+    "total": 2
+  },
+  "passed": true,
+  "tokens": {
+    "input": 2292,
+    "output": 554,
+    "total": 2846
+  },
+  "execution_time": 8.900177955627441,
+  "error": null,
+  "timestamp": "2026-01-01T19:16:10.590588"
+}

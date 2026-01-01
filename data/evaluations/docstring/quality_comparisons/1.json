@@ -1,0 +1,19 @@
+{
+  "prompt": "I need a docstring for my PyTorch function that applies dropout: def apply_dropout(x, p=0.5, training=True): return F.dropout(x, p=p, training=training)",
+  "baseline_response": "Here's a comprehensive docstring for your PyTorch dropout function:\n\n```python\ndef apply_dropout(x, p=0.5, training=True):\n    \"\"\"\n    Apply dropout to the input tensor during training.\n\n    Dropout randomly sets input tensor elements to zero with probability p,\n    which helps prevent overfitting by reducing interdependent learning between neurons.\n\n    Args:\n        x (torch.Tensor): Input tensor to apply dropout to.\n        p (float, optional): Probability of dropping out an element. Defaults to 0.5.\n        training (bool, optional): Whether to apply dropout. If False, returns input unchanged.\n                                   Typically set to model.training. Defaults to True.\n\n    Returns:\n        torch.Tensor: Tensor after applying dropout, with same shape as input.\n\n    Example:\n        >>> input_tensor = torch.randn(3, 4)\n        >>> output_tensor = apply_dropout(input_tensor, p=0.3)\n    \"\"\"\n    return F.dropout(x, p=p, training=training)\n```\n\nThis docstring includes:\n- A brief description of what the function does\n- Explanation of dropout's purpose\n- Detailed parameter descriptions\n- Return value description\n- A simple usage example",
+  "baseline_tokens": {
+    "input": 54,
+    "output": 293,
+    "total": 347
+  },
+  "skill_response": "I'll help you write a comprehensive docstring for your `apply_dropout` function following PyTorch docstring conventions:\n\n```python\ndef apply_dropout(x, p=0.5, training=True):\n    r\"\"\"Applies dropout to the input tensor.\n\n    Randomly zeros some of the elements of the input tensor with probability ``p``\n    using samples from a Bernoulli distribution. Each channel will be zeroed out \n    independently on every forward call.\n\n    Args:\n        x (Tensor): Input tensor\n        p (float, optional): Probability of an element to be zeroed. Default: ``0.5``\n        training (bool, optional): If ``True``, applies dropout. If ``False``, \n            performs no operation. Default: ``True``\n\n    Returns:\n        Tensor: Result after applying dropout, with same shape and dtype as input\n\n    Example::\n        >>> input = torch.randn(20, 16)\n        >>> output = apply_dropout(input, p=0.2)\n        >>> output.shape\n        torch.Size([20, 16])\n\n    See Also:\n        :func:`torch.nn.functional.dropout`\n    \"\"\"\n    return F.dropout(x, p=p, training=training)\n```\n\nKey points in this docstring:\n- Raw string (`r\"\"\"`) for docstring\n- Brief description of function's purpose\n- Detailed Args section with types and defaults\n- Returns section describing output\n- Example showing basic usage\n- Cross-reference to related PyTorch function\n- Follows PyTorch docstring conventions",
+  "skill_tokens": {
+    "input": 3071,
+    "output": 362,
+    "total": 3433
+  },
+  "judge_verdict": "with_skill",
+  "judge_reasoning": "Response B is superior because it follows PyTorch's official docstring conventions more closely, uses proper reStructuredText formatting (raw string, double backticks for code, :: for examples), includes more technical precision (mentions Bernoulli distribution, channel independence), provides a more complete example with shape verification, adds a helpful 'See Also' section linking to the underlying PyTorch function, and overall demonstrates better attention to PyTorch ecosystem standards.",
+  "judge_model": "claude-sonnet-4-20250514",
+  "timestamp": "2026-01-01T18:44:40.950712"
+}

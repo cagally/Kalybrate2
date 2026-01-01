@@ -1,0 +1,21 @@
+{
+  "task_id": "writing-rules_easy_2",
+  "prompt": "I want to get a reminder whenever I'm about to edit any .env file to make sure I don't commit secrets. How do I set this up?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you create a Hookify rule that warns you when editing .env files to prevent accidentally committing secrets. I'll write the rule file exactly as specified, using the provided OUTPUT_DIR.\n\n```python\nimport os\n\n# Ensure the .claude directory exists\nclaude_dir = os.path.join(OUTPUT_DIR, '.claude')\nos.makedirs(claude_dir, exist_ok=True)\n\n# Full path for the hookify rule file\nrule_path = os.path.join(claude_dir, 'hookify.env-file-warning.local.md')\n\n# Rule content\nrule_content = '''---\nname: warn-env-file-edits\nenabled: true\nevent: file\nconditions:\n  - field: file_path\n    operator: regex_match\n    pattern: \\.env$\n---\n\n\u26a0\ufe0f **Sensitive File Alert: .env File Editing**\n\nYou are about to modify a .env file, which typically contains sensitive credentials and secrets.\n\n**Important Security Reminders:**\n- Never commit .env files to version control\n- Ensure .env is listed in your .gitignore\n- Use environment-specific .env.example files for template\n- Consider using secure secret management tools\n\n**Recommended Actions:**\n- Double-check that no actual secrets are being committed\n- Verify .env is in .gitignore\n- Use environment variable injection for production\n'''\n\n# Write the rule file\nwith open(rule_path, 'w') as f:\n    f.write(rule_content)\n\nprint(f\"Hookify rule created at: {rule_path}\")\n```\n\nThis script does the following:\n1. Creates a `.claude` directory in the specified output location\n2. Creates a Hookify rule file `hookify.env-file-warning.local.md`\n3. Writes a comprehensive warning rule for .env file edits\n4. Includes conditions to match only .env file paths\n5. Provides a detailed warning message with security best practices\n\nThe rule will trigger:\n- When any file ending in `.env` is about to be edited\n- Shows a warning about potential secret exposure\n- Provides guidance on handling sensitive files\n\nYou can now use this rule to get a reminder whenever you're about to edit .env files.",
+  "criteria_results": {
+    "file_created": false,
+    "file_valid": false,
+    "file_has_content": false
+  },
+  "passed": false,
+  "tokens": {
+    "input": 2748,
+    "output": 518,
+    "total": 3266
+  },
+  "execution_time": 10.440824031829834,
+  "error": null,
+  "timestamp": "2026-01-01T09:07:00.104305"
+}

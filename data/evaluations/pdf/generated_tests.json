@@ -1,0 +1,144 @@
+{
+  "skill_claims": [
+    "Extract text from PDF documents",
+    "Extract tables from PDF documents",
+    "Create new PDF documents from scratch",
+    "Merge multiple PDF files into one",
+    "Split PDF files into separate pages",
+    "Handle PDF forms and form filling",
+    "Extract metadata from PDFs",
+    "Rotate PDF pages",
+    "Add watermarks to PDFs",
+    "Password protect PDFs",
+    "Extract images from PDFs",
+    "OCR text from scanned PDFs"
+  ],
+  "tasks": [
+    {
+      "id": "pdf_easy_1",
+      "prompt": "I have a PDF report and need to get all the text out of it so I can copy it into an email. Can you help me extract the text?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Extract text from PDF documents"
+    },
+    {
+      "id": "pdf_easy_2",
+      "prompt": "I need to create a simple PDF with just a title and a few paragraphs of text for a basic company memo.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Create new PDF documents from scratch"
+    },
+    {
+      "id": "pdf_easy_3",
+      "prompt": "I have three separate PDF files that I need to combine into one document. How can I merge them together?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Merge multiple PDF files into one"
+    },
+    {
+      "id": "pdf_medium_1",
+      "prompt": "I have a financial report PDF with several data tables that I need to convert to Excel for analysis. Can you help me extract the tables?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Extract tables from PDF documents"
+    },
+    {
+      "id": "pdf_medium_2",
+      "prompt": "I need to take a 50-page PDF manual and split it so each chapter becomes its own separate PDF file. Each chapter is about 5-8 pages.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Split PDF files into separate pages"
+    },
+    {
+      "id": "pdf_medium_3",
+      "prompt": "I have some confidential documents that I need to password protect before sending to clients. How can I add password protection to my PDFs?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Password protect PDFs"
+    },
+    {
+      "id": "pdf_hard_1",
+      "prompt": "I have a bunch of scanned invoices that are just images in PDF format. I need to extract all the text from them to build a database of invoice data.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "OCR text from scanned PDFs"
+    },
+    {
+      "id": "pdf_hard_2",
+      "prompt": "I need to create a multi-page PDF report with our company logo as a watermark on every page, plus extract all the images from an existing PDF to use in the new document.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Add watermarks to PDFs"
+    },
+    {
+      "id": "pdf_hard_3",
+      "prompt": "I have a PDF form that needs to be filled out with data from a CSV file - about 200 records. I need to programmatically fill the form fields and generate individual PDFs for each record.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "code_extracted": true,
+        "code_compiles": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "code",
+      "expected_file_type": null,
+      "tests_claim": "Handle PDF forms and form filling"
+    }
+  ],
+  "quality_prompts": [
+    "I need to extract data tables from a PDF financial report and convert them to Excel format for analysis.",
+    "Help me merge 5 different PDF contracts into one master document while preserving all formatting.",
+    "I have a 100-page PDF that needs to be split into individual chapters, with each chapter being 8-12 pages.",
+    "Create a professional PDF invoice template with our company logo and customer information fields.",
+    "I need to add password protection to sensitive PDF documents before sharing them with external partners."
+  ],
+  "generated_at": "2026-01-01T19:13:46.514694",
+  "model": "claude-sonnet-4-20250514"
+}

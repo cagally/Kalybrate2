@@ -1,0 +1,139 @@
+{
+  "skill_claims": [
+    "Guide users through creating Agent Skills for Claude Code",
+    "Help with SKILL.md files and frontmatter structure",
+    "Assist with skill discovery and troubleshooting",
+    "Convert existing prompts or workflows into Skills",
+    "Provide validation and best practices for skill creation",
+    "Help determine appropriate skill scope and location",
+    "Generate proper YAML frontmatter with required fields",
+    "Structure skill content with clear instructions and examples"
+  ],
+  "tasks": [
+    {
+      "id": "skill-writer_easy_1",
+      "prompt": "I want to create a simple skill that helps me write commit messages. Can you help me set it up?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "file_created": true,
+        "file_has_content": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Guide users through creating Agent Skills for Claude Code"
+    },
+    {
+      "id": "skill-writer_easy_2",
+      "prompt": "What should I put in the frontmatter of my SKILL.md file? I'm making a skill for analyzing log files.",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true,
+        "code_extracted": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Help with SKILL.md files and frontmatter structure"
+    },
+    {
+      "id": "skill-writer_easy_3",
+      "prompt": "I have a prompt I use for code reviews. How do I turn this into a skill that Claude can use automatically?",
+      "difficulty": "easy",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Convert existing prompts or workflows into Skills"
+    },
+    {
+      "id": "skill-writer_medium_1",
+      "prompt": "I created a skill but Claude never uses it when I ask about database queries. The skill is supposed to help with SQL optimization. What's wrong?",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Assist with skill discovery and troubleshooting"
+    },
+    {
+      "id": "skill-writer_medium_2",
+      "prompt": "I need to create a comprehensive skill for my team that handles API documentation generation. It should work with OpenAPI specs and include examples. Walk me through the complete setup.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "file_created": true,
+        "file_has_content": true,
+        "response_relevant": true,
+        "code_extracted": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Structure skill content with clear instructions and examples"
+    },
+    {
+      "id": "skill-writer_medium_3",
+      "prompt": "Should I create one big skill for all my data processing needs or separate skills? I work with CSV files, JSON APIs, and database exports regularly.",
+      "difficulty": "medium",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Help determine appropriate skill scope and location"
+    },
+    {
+      "id": "skill-writer_hard_1",
+      "prompt": "I'm building a skill that needs to be read-only for security reasons, should work with multiple file types, and needs helper scripts. The skill analyzes codebases for security vulnerabilities. Create the complete skill structure with all files.",
+      "difficulty": "hard",
+      "success_criteria": {
+        "file_created": true,
+        "file_has_content": true,
+        "code_extracted": true,
+        "response_relevant": true
+      },
+      "expected_output_type": "file",
+      "expected_file_type": ".md",
+      "tests_claim": "Generate proper YAML frontmatter with required fields"
+    },
+    {
+      "id": "skill-writer_hard_2",
+      "prompt": "My team has inconsistent skill creation practices. Some skills work great, others never get discovered. Can you audit our approach and provide a complete validation checklist with examples of good vs bad implementations?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true,
+        "code_extracted": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Provide validation and best practices for skill creation"
+    },
+    {
+      "id": "skill-writer_hard_3",
+      "prompt": "I have a complex workflow that involves reading configuration files, running tests, generating reports, and updating documentation. This spans multiple tools and has conditional logic. How should I structure this as skills?",
+      "difficulty": "hard",
+      "success_criteria": {
+        "response_exists": true,
+        "response_relevant": true,
+        "code_extracted": true
+      },
+      "expected_output_type": "text",
+      "expected_file_type": null,
+      "tests_claim": "Convert existing prompts or workflows into Skills"
+    }
+  ],
+  "quality_prompts": [
+    "I want to create a skill for generating technical documentation from code comments. Help me set this up properly.",
+    "My skill for processing Excel files isn't being used automatically. What could be wrong with my description?",
+    "How do I structure a skill that needs both Python scripts and template files?",
+    "Should I put my data analysis skill in the project folder or my personal skills folder?",
+    "I need to validate that my skill follows all the requirements before sharing it with my team."
+  ],
+  "generated_at": "2026-01-01T08:50:57.995699",
+  "model": "claude-sonnet-4-20250514"
+}

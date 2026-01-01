@@ -67,6 +67,10 @@ class DataLogger:
         model: str,
         response: str,
         criteria_results: Dict[str, bool],
+        verification_notes: Dict[str, str],
+        verification_level: str,
+        verified_criteria_passed: int,
+        verified_criteria_total: int,
         passed: bool,
         input_tokens: int,
         output_tokens: int,
@@ -84,6 +88,12 @@ class DataLogger:
             "model": model,
             "response": response,  # Full response - don't truncate
             "criteria_results": criteria_results,
+            "verification_notes": verification_notes,
+            "verification_level": verification_level,
+            "verified_criteria": {
+                "passed": verified_criteria_passed,
+                "total": verified_criteria_total
+            },
             "passed": passed,
             "tokens": {
                 "input": input_tokens,
@@ -148,6 +158,9 @@ class DataLogger:
         tasks_passed: int,
         tasks_total: int,
         task_pass_rate: float,
+        verified_criteria_passed: int,
+        verified_criteria_total: int,
+        verification_summary: Dict[str, int],
         quality_wins: int,
         quality_losses: int,
         quality_ties: int,
@@ -169,7 +182,12 @@ class DataLogger:
             "task_completion": {
                 "passed": tasks_passed,
                 "total": tasks_total,
-                "rate": task_pass_rate * 100
+                "rate": task_pass_rate * 100,
+                "verified_criteria": {
+                    "passed": verified_criteria_passed,
+                    "total": verified_criteria_total
+                },
+                "verification_levels": verification_summary
             },
             "quality_improvement": {
                 "wins": quality_wins,

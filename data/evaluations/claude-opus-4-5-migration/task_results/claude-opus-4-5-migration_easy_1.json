@@ -1,0 +1,27 @@
+{
+  "task_id": "claude-opus-4-5-migration_easy_1",
+  "prompt": "I have a Python script that uses claude-sonnet-4-20250514 for the Anthropic API. Can you help me update it to use the latest Opus model?",
+  "difficulty": "easy",
+  "model": "claude-3-5-haiku-20241022",
+  "response": "I'll help you migrate your Python script from Claude Sonnet 4.0 to Opus 4.5 for the Anthropic API. I'll use the latest model string and make some standard best practice updates.\n\n```python\nimport anthropic  # Ensure you have the latest anthropic library version\n\n# Updated to Opus 4.5 model string\nclient = anthropic.Anthropic(\n    api_key=\"your_api_key_here\"  # Replace with your actual API key\n)\n\ndef generate_response(prompt):\n    try:\n        response = client.messages.create(\n            model=\"claude-opus-4-5-20251101\",  # Updated model string\n            max_tokens=4096,  # Standard max token setting\n            messages=[\n                {\n                    \"role\": \"user\", \n                    \"content\": prompt\n                }\n            ],\n            temperature=0.7,  # Typical default temperature\n            system=\"You are a helpful AI assistant.\", # Optional system prompt\n            \n            # Optional: Add effort parameter for more refined responses\n            effort=\"high\"  # Recommended for Opus 4.5\n        )\n        return response.content[0].text\n    \n    except anthropic.APIError as e:\n        print(f\"Anthropic API Error: {e}\")\n        return None\n    except Exception as e:\n        print(f\"Unexpected error: {e}\")\n        return None\n\n# Example usage\nif __name__ == \"__main__\":\n    test_prompt = \"Explain quantum computing in simple terms.\"\n    result = generate_response(test_prompt)\n    \n    if result:\n        print(result)\n    else:\n        print(\"Failed to generate response.\")\n```\n\nKey Migration Changes:\n1. Updated model string to `claude-opus-4-5-20251101`\n2. Added `effort=\"high\"` parameter\n3. Included error handling\n4. Used latest Anthropic library syntax for `messages.create()`\n\nRecommendations:\n- Ensure you have the latest `anthropic` library installed (`pip install --upgrade anthropic`)\n- Replace `\"your_api_key_here\"` with your actual Anthropic API key\n- The `effort=\"high\"` parameter is optional but recommended for Opus 4.5\n\nWould you like me to elaborate on any part of the migration or discuss any specific requirements you have?",
+  "criteria_results": {
+    "code_extracted": true
+  },
+  "verification_notes": {
+    "code_extracted": "verified"
+  },
+  "verification_level": "full",
+  "verified_criteria": {
+    "passed": 1,
+    "total": 1
+  },
+  "passed": true,
+  "tokens": {
+    "input": 1511,
+    "output": 553,
+    "total": 2064
+  },
+  "execution_time": 10.076113939285278,
+  "error": null,
+  "timestamp": "2026-01-01T17:50:54.863492"
+}

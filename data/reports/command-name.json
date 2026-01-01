@@ -1,0 +1,169 @@
+{
+  "skill_name": "command-name",
+  "skill_description": null,
+  "overall_score": 90.0,
+  "grade": "A",
+  "task_completion": {
+    "total": 9,
+    "passed": 9,
+    "pass_rate": 100.0,
+    "by_difficulty": {
+      "easy": {
+        "total": 3,
+        "passed": 3
+      },
+      "medium": {
+        "total": 3,
+        "passed": 3
+      },
+      "hard": {
+        "total": 3,
+        "passed": 3
+      }
+    },
+    "details": [
+      {
+        "id": "command-name_easy_1",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 4.04,
+        "tokens": 218
+      },
+      {
+        "id": "command-name_easy_2",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 3.33,
+        "tokens": 197
+      },
+      {
+        "id": "command-name_easy_3",
+        "passed": true,
+        "difficulty": "easy",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 3.97,
+        "tokens": 180
+      },
+      {
+        "id": "command-name_medium_1",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 5.21,
+        "tokens": 321
+      },
+      {
+        "id": "command-name_medium_2",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 2.95,
+        "tokens": 198
+      },
+      {
+        "id": "command-name_medium_3",
+        "passed": true,
+        "difficulty": "medium",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 2.82,
+        "tokens": 186
+      },
+      {
+        "id": "command-name_hard_1",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 2.66,
+        "tokens": 175
+      },
+      {
+        "id": "command-name_hard_2",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 3.26,
+        "tokens": 206
+      },
+      {
+        "id": "command-name_hard_3",
+        "passed": true,
+        "difficulty": "hard",
+        "criteria": {
+          "response_exists": true
+        },
+        "execution_time": 3.8,
+        "tokens": 229
+      }
+    ]
+  },
+  "quality_improvement": {
+    "total_comparisons": 5,
+    "wins": 3,
+    "losses": 1,
+    "ties": 1,
+    "win_rate": 75.0,
+    "details": [
+      {
+        "prompt": "Cannot generate quality comparison prompts without knowing what the skill does",
+        "verdict": "tie",
+        "reasoning": "Both responses correctly identify that they cannot complete the task without more information about the skill. They both ask for similar clarifying details (functionality, context, purpose) and offer to help once more information is provided. Response B mentions 'command-name' specifically and uses slightly different phrasing, but both are equally appropriate, complete, and useful for this situation.",
+        "tokens_with_skill": 191,
+        "tokens_without_skill": 117
+      },
+      {
+        "prompt": "Cannot generate quality comparison prompts without knowing what the skill does",
+        "verdict": "with_skill",
+        "reasoning": "Response B is more thorough and useful. While both correctly identify the need for more information, Response B provides specific context about a SKILL.md file and template, offers structured guidance with numbered points for what information is needed, and demonstrates better understanding of the technical context. Response A is adequate but generic, while Response B shows more engagement with the specific situation and provides actionable next steps.",
+        "tokens_with_skill": 211,
+        "tokens_without_skill": 84
+      },
+      {
+        "prompt": "Cannot generate quality comparison prompts without knowing what the skill does",
+        "verdict": "without_skill",
+        "reasoning": "Response A is more general and adaptable, asking for the essential information needed to create comparison prompts without making assumptions about file formats or specific documentation. Response B assumes there's a SKILL.md file that wasn't mentioned in the task, making it less accurate and potentially confusing. Response A's structured approach with numbered points is also clearer and more actionable.",
+        "tokens_with_skill": 169,
+        "tokens_without_skill": 123
+      },
+      {
+        "prompt": "Cannot generate quality comparison prompts without knowing what the skill does",
+        "verdict": "with_skill",
+        "reasoning": "Response A is more thorough and useful. It specifically mentions the SKILL.md file referenced in the task, shows better understanding of the context, and provides more detailed guidance about what information is needed. It also gives a clearer commitment to help once the information is provided, making it more actionable for the user.",
+        "tokens_with_skill": 163,
+        "tokens_without_skill": 80
+      },
+      {
+        "prompt": "Cannot generate quality comparison prompts without knowing what the skill does",
+        "verdict": "with_skill",
+        "reasoning": "Response A better addresses the task by acknowledging the specific mention of 'command-name' skill from the original prompt and asks more targeted, technical questions about functionality, purpose, inputs, and outputs. Response B is more generic and doesn't reference the specific context provided, making it less useful for understanding what appears to be a technical skill or command.",
+        "tokens_with_skill": 194,
+        "tokens_without_skill": 139
+      }
+    ]
+  },
+  "cost": {
+    "avg_input_tokens": 74,
+    "avg_output_tokens": 129,
+    "avg_total_tokens": 203,
+    "estimated_per_use": "$0.0022"
+  },
+  "evaluated_at": "2026-01-01T18:07:06.157378",
+  "model_used": "claude-sonnet-4-20250514"
+}
